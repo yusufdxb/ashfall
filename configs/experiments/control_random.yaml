@@ -1,0 +1,32 @@
+# Ashfall experiment: Control — random fine-tuning (no failure curriculum)
+# Same training budget as adapted, but without failure-seeded resets.
+
+name: "control_random"
+condition: "control_random"
+description: >
+  Fine-tune baseline on slippery terrain with same budget as adapted,
+  but without failure curriculum. Tests whether improvement comes from
+  the failure data or just from more slippery-terrain training.
+
+training:
+  env_config: "configs/env/slippery.yaml"
+  adapt_config: "configs/train/adaptation.yaml"
+  num_envs: 4096
+  max_iterations: 200
+  device: "cuda:0"
+  seed: 42
+
+curriculum:
+  failure_dir: "data/failures"
+  failure_fraction: 0.0
+  failure_modes: []
+  num_variations: 0
+
+evaluation:
+  num_episodes: 128
+  num_envs: 32
+  eval_envs: ["rough", "slippery", "flat"]
+  record_video: true
+
+phoenix_root: "../../workspace/go2-phoenix"
+tags: ["control", "no-curriculum"]

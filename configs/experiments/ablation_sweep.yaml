@@ -1,0 +1,36 @@
+# Ashfall ablation sweep configuration
+# Varies failure_fraction to measure curriculum impact.
+
+name: "ablation_failure_fraction"
+condition: "adapted"
+description: >
+  Sweep over failure_fraction [0.0, 0.1, 0.25, 0.5, 0.75, 1.0] to measure
+  the marginal value of failure curriculum density.
+
+training:
+  env_config: "configs/env/slippery.yaml"
+  adapt_config: "configs/train/adaptation.yaml"
+  num_envs: 4096
+  max_iterations: 200
+  device: "cuda:0"
+  seed: 42
+
+curriculum:
+  failure_dir: "data/failures"
+  failure_fraction: 0.25  # base value, swept by ablation
+  failure_modes: []
+  num_variations: 16
+
+evaluation:
+  num_episodes: 128
+  num_envs: 32
+  eval_envs: ["rough", "slippery", "flat"]
+  record_video: false
+
+ablations:
+  - name: "failure_fraction"
+    param_path: "curriculum.failure_fraction"
+    values: [0.0, 0.1, 0.25, 0.5, 0.75, 1.0]
+
+phoenix_root: "../../workspace/go2-phoenix"
+tags: ["ablation", "failure-fraction-sweep"]

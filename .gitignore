@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+*.egg
+.ruff_cache/
+.mypy_cache/
+
+# Results are generated, not committed (except sample)
+results/*/
+!results/REPORT.md
+!results/*.png
+
+# Large data files
+data/failures/*.parquet
+
+# IDE
+.vscode/
+.idea/

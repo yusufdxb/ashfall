@@ -1,0 +1,32 @@
+# Ashfall experiment: Failure-adapted policy
+# Fine-tunes baseline with failure-seeded curriculum on slippery terrain.
+
+name: "adapted"
+condition: "adapted"
+description: >
+  Warm-start from baseline checkpoint. Fine-tune on slippery terrain with
+  failure-seeded curriculum (25% of envs reset from recorded failures).
+  This is the primary experimental condition.
+
+training:
+  env_config: "configs/env/slippery.yaml"
+  adapt_config: "configs/train/adaptation.yaml"
+  num_envs: 4096
+  max_iterations: 200
+  device: "cuda:0"
+  seed: 42
+
+curriculum:
+  failure_dir: "data/failures"
+  failure_fraction: 0.25
+  failure_modes: []  # all modes
+  num_variations: 16
+
+evaluation:
+  num_episodes: 128
+  num_envs: 32
+  eval_envs: ["rough", "slippery", "flat"]
+  record_video: true
+
+phoenix_root: "../../workspace/go2-phoenix"
+tags: ["adapted", "failure-curriculum"]

@@ -1,0 +1,31 @@
+# Ashfall experiment: Baseline policy (no failure adaptation)
+# Trains from scratch on rough terrain — the reference condition.
+
+name: "baseline"
+condition: "baseline"
+description: >
+  Standard PPO training on rough terrain. No failure curriculum.
+  This is the reference condition against which adapted policies are compared.
+
+training:
+  env_config: "configs/env/rough.yaml"
+  train_config: "configs/train/ppo.yaml"
+  num_envs: 4096
+  max_iterations: 500
+  device: "cuda:0"
+  seed: 42
+
+curriculum:
+  failure_dir: "data/failures"
+  failure_fraction: 0.0
+  failure_modes: []
+  num_variations: 0
+
+evaluation:
+  num_episodes: 128
+  num_envs: 32
+  eval_envs: ["rough", "slippery", "flat"]
+  record_video: true
+
+phoenix_root: "../../workspace/go2-phoenix"
+tags: ["baseline", "reference"]
