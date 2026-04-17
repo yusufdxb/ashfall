@@ -194,7 +194,7 @@ export PHOENIX_ROOT=$HOME/workspace/go2-phoenix
 ## Hardware
 
 - **Robot:** Unitree GO2 EDU
-- **Onboard compute:** Jetson Orin Nano (8 GB)
+- **Onboard compute:** Jetson Orin NX (16 GB)
 - **Training GPU:** NVIDIA RTX 5070 (mewtwo)
 - **Sim:** NVIDIA Isaac Lab (Isaac Sim 4.5+)
 - **Middleware:** ROS 2 Humble
