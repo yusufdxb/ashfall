@@ -54,9 +54,11 @@ class ExperimentRunner:
         run_dir.mkdir(parents=True, exist_ok=True)
         (run_dir / "metrics").mkdir(exist_ok=True)
 
-        # Freeze config
+        # Freeze config (round-trip through JSON so enums/Paths become primitives
+        # and safe_load on the read side doesn't choke on python-object tags)
         with open(run_dir / "config.yaml", "w") as f:
-            yaml.dump(asdict(config), f, default_flow_style=False, sort_keys=False)
+            plain = json.loads(json.dumps(asdict(config), default=str))
+            yaml.safe_dump(plain, f, default_flow_style=False, sort_keys=False)
 
         # Generate commands
         commands = self._generate_commands(config, run_dir)
