@@ -1,6 +1,6 @@
 # Ashfall Experiment Report
 
-Generated: 2026-04-15 21:55
+Generated: 2026-04-23 23:42
 
 Experiments found: 2
 
@@ -21,22 +21,21 @@ Ashfall classifies quadruped locomotion failures into 6 modes, ordered by severi
 
 | Condition | Env | Success Rate | Mean Episode Return | Failure Rate |
 |-----------|-----|--------------|---------------------|--------------|
-| adapted | flat | 100.0% | 19.20 | 0.0% |
-| adapted | rough | 96.9% | 17.56 | 3.1% |
-| adapted | slippery | 100.0% | 16.64 | 0.0% |
-| baseline | flat | 100.0% | 19.50 | 0.0% |
-| baseline | rough | 100.0% | 18.95 | 0.0% |
-| baseline | slippery | 90.6% | 15.90 | 9.4% |
+| adapted | rough | 88.4% | 8.31 | 11.6% |
+| adapted | slippery | 82.1% | 7.83 | 17.9% |
+| baseline | rough | 91.4% | 9.07 | 8.6% |
+| baseline | slippery | 77.0% | 6.57 | 23.0% |
 
 ## Key Findings
 
-- **flat**: Adapted unchanged (100.0% -> 100.0%, delta=+0.0%)
-- **rough**: Adapted regresses (100.0% -> 96.9%, delta=-3.1%)
-- **slippery**: Adapted improves (90.6% -> 100.0%, delta=+9.4%)
+- **rough**: Adapted regresses (91.4% -> 88.4%, delta=-3.0%)
+- **slippery**: Adapted improves (77.0% -> 82.1%, delta=+5.1%)
 
 ## Plots
 
-No plots generated yet. Run `python -m ashfall.analysis.plots` after experiments complete.
+![failure_distribution](failure_distribution.png)
+![return_comparison](return_comparison.png)
+![success_rate_comparison](success_rate_comparison.png)
 
 ## Limitations
 
