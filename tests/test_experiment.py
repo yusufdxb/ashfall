@@ -85,14 +85,24 @@ class TestExperimentRunner:
 
     def test_commands_contain_adapt_for_adapted(self):
         with tempfile.TemporaryDirectory() as tmpdir:
+            tmp = Path(tmpdir)
+            phoenix_root = tmp / "fake-phoenix"
+            (phoenix_root / "configs" / "train").mkdir(parents=True)
+            (phoenix_root / "configs" / "train" / "adaptation.yaml").write_text(
+                "run: {name: phoenix-adapt}\n"
+                "resume: {path: checkpoints/phoenix-base/latest.pt}\n"
+                "env: {config: configs/env/slippery.yaml}\n"
+                "curriculum: {failure_sample_fraction: 0.0, trajectory_dir: data/failures}\n"
+            )
             runner = ExperimentRunner(
-                ashfall_root=Path(tmpdir),
-                phoenix_root=Path("/tmp/fake-phoenix"),
+                ashfall_root=tmp / "ashfall",
+                phoenix_root=phoenix_root,
             )
             cfg = ExperimentConfig(
                 name="test_adapted",
                 condition=Condition.ADAPTED,
             )
+            cfg.training.adapt_config = "configs/train/adaptation.yaml"
             run_dir = runner.prepare_run(cfg)
             commands = (run_dir / "commands.sh").read_text()
             assert "fine_tune" in commands
@@ -152,6 +162,76 @@ class TestSweep:
         configs = generate_sweep(sweep)
         assert len(configs) == 1
         assert configs[0].name == "base"
+
+    def test_sweep_injects_distinct_failure_fractions(self, tmp_path):
+        """Regression: each sweep cell must produce its own adapt YAML
+        whose ``failure_sample_fraction`` matches that cell's value.
+
+        Previously the runner passed a static ``--config configs/train/adaptation.yaml``
+        for every cell, so a 6-cell ``failure_fraction`` sweep collapsed
+        into 6 identical training runs.
+        """
+        import shutil
+
+        # Stub Phoenix repo with a minimal adaptation template the runner
+        # can read and override.
+        phoenix_root = tmp_path / "fake-phoenix"
+        (phoenix_root / "configs" / "train").mkdir(parents=True)
+        template = phoenix_root / "configs" / "train" / "adaptation.yaml"
+        template.write_text(
+            "run:\n  name: phoenix-adapt\n"
+            "resume:\n  path: checkpoints/phoenix-base/latest.pt\n"
+            "env:\n  config: configs/env/slippery.yaml\n"
+            "curriculum:\n  failure_sample_fraction: 0.0\n"
+            "  trajectory_dir: data/failures\n"
+        )
+
+        ashfall_root = tmp_path / "ashfall"
+        (ashfall_root / "data" / "failures").mkdir(parents=True)
+
+        base = ExperimentConfig(
+            name="ff_sweep",
+            condition=Condition.ADAPTED,
+        )
+        base.training.adapt_config = "configs/train/adaptation.yaml"
+
+        axis = AblationAxis(
+            name="failure_fraction",
+            param_path="curriculum.failure_fraction",
+            values=[0.0, 0.25, 0.75],
+        )
+        sweep = SweepConfig(base_experiment=base, axes=[axis])
+        configs = generate_sweep(sweep)
+        assert len(configs) == 3
+
+        runner = ExperimentRunner(
+            ashfall_root=ashfall_root,
+            phoenix_root=phoenix_root,
+        )
+
+        observed = []
+        for cell_cfg in configs:
+            run_dir = runner.prepare_run(cell_cfg)
+            commands = (run_dir / "commands.sh").read_text()
+            # Each cell must reference its own generated adapt YAML.
+            assert "_generated/adapt_" in commands, (
+                "Runner is still using the static template — failure_fraction "
+                "is being ignored."
+            )
+            override_path = run_dir / "adapt_override.yaml"
+            assert override_path.exists()
+            with open(override_path) as f:
+                override = yaml.safe_load(f)
+            observed.append(override["curriculum"]["failure_sample_fraction"])
+
+        assert observed == [0.0, 0.25, 0.75], (
+            f"Expected per-cell failure fractions [0.0, 0.25, 0.75]; got {observed}"
+        )
+        # Three distinct values prove each cell got its own override.
+        assert len(set(observed)) == 3
+
+        shutil.rmtree(phoenix_root, ignore_errors=True)
+        shutil.rmtree(ashfall_root, ignore_errors=True)
 
     def test_sweep_cell_count(self):
         base = ExperimentConfig(name="base", condition=Condition.ADAPTED)

@@ -38,7 +38,18 @@ class ExperimentRunner:
     - ``metrics/`` — evaluation outputs
     """
 
-    def __init__(self, ashfall_root: Path, phoenix_root: Path | None = None) -> None:
+    # Default Isaac Sim venv python — repaired 2026-04-28 after VSCode-snap nuked
+    # the venv's symlinks. Calls into ~/IsaacLab/isaaclab.sh fall back to
+    # system Python 3.10 in non-interactive shells, so we invoke the venv
+    # python directly instead.
+    DEFAULT_PYTHON_EXE = "/home/yusuf/isaac-sim-venv/bin/python"
+
+    def __init__(
+        self,
+        ashfall_root: Path,
+        phoenix_root: Path | None = None,
+        python_exe: str | None = None,
+    ) -> None:
         self.ashfall_root = Path(ashfall_root).resolve()
         self.results_dir = self.ashfall_root / "results"
         self.phoenix_root = (
@@ -46,6 +57,7 @@ class ExperimentRunner:
             if phoenix_root
             else (self.ashfall_root.parent.parent / "workspace" / "go2-phoenix").resolve()
         )
+        self.python_exe = python_exe or self.DEFAULT_PYTHON_EXE
 
     def prepare_run(self, config: ExperimentConfig) -> Path:
         """Create a run directory with all artifacts needed for execution."""
@@ -87,6 +99,87 @@ class ExperimentRunner:
         logger.info("Prepared run at %s with %d phases", run_dir, len(commands))
         return run_dir
 
+    def _python_prefix(self) -> str:
+        """Shell prefix that invokes the Isaac Sim venv python with EULA accepted.
+
+        Phoenix and Ashfall are not pip-installed into the venv, so we set
+        PYTHONPATH to their ``src`` dirs at invocation time. We also force
+        ``OMNI_KIT_ACCEPT_EULA=YES`` to avoid the interactive prompt.
+        """
+        pythonpath = f"{self.ashfall_root / 'src'}:{self.phoenix_root / 'src'}"
+        return (
+            f"OMNI_KIT_ACCEPT_EULA=YES "
+            f"PYTHONPATH={pythonpath} "
+            f"{self.python_exe}"
+        )
+
+    def _write_adapt_override(
+        self, config: ExperimentConfig, run_dir: Path
+    ) -> Path:
+        """Write a per-cell adaptation YAML that injects failure_fraction.
+
+        We start from the template at ``t.adapt_config`` (relative to the
+        Phoenix repo) and override:
+        - ``run.name`` to ``config.name`` so checkpoints land in
+          ``checkpoints/<config.name>/`` (matches the eval lookup path).
+        - ``resume.path`` to the configured baseline checkpoint.
+        - ``curriculum.failure_sample_fraction`` to the per-cell value.
+        - ``curriculum.trajectory_dir`` to the absolute Ashfall failure dir.
+        - ``env.config`` to ``config.training.env_config``.
+
+        Without this override, every cell of a sweep would use whatever
+        ``failure_sample_fraction`` the template hard-codes (typically 0.0),
+        producing N identical runs.
+        """
+        t = config.training
+        template_rel = t.adapt_config or "configs/train/adaptation.yaml"
+        template_path = (self.phoenix_root / template_rel).resolve()
+        if not template_path.exists():
+            raise FileNotFoundError(
+                f"Adaptation template not found: {template_path}"
+            )
+        with open(template_path) as f:
+            adapt_cfg = yaml.safe_load(f)
+
+        adapt_cfg.setdefault("run", {})["name"] = config.name
+        adapt_cfg["run"]["max_iterations"] = t.max_iterations
+        adapt_cfg["run"]["device"] = t.device
+        adapt_cfg["run"]["seed"] = t.seed
+
+        adapt_cfg.setdefault("resume", {})
+        baseline_ckpt = config.curriculum.baseline_checkpoint or (
+            "checkpoints/ashfall-baseline/latest.pt"
+        )
+        adapt_cfg["resume"]["path"] = baseline_ckpt
+
+        adapt_cfg.setdefault("env", {})["config"] = t.env_config
+
+        # Resolve failure_dir against ashfall_root if relative.
+        failure_dir = Path(config.curriculum.failure_dir)
+        if not failure_dir.is_absolute():
+            failure_dir = (self.ashfall_root / failure_dir).resolve()
+
+        adapt_cfg.setdefault("curriculum", {})
+        adapt_cfg["curriculum"]["failure_sample_fraction"] = float(
+            config.curriculum.failure_fraction
+        )
+        adapt_cfg["curriculum"]["trajectory_dir"] = str(failure_dir)
+
+        # Save into Phoenix's _generated dir so the relative paths in the
+        # template (e.g. variation.config) still resolve when fine_tune
+        # reads it from the Phoenix cwd.
+        out_dir = self.phoenix_root / "configs" / "_generated"
+        out_dir.mkdir(parents=True, exist_ok=True)
+        out_path = out_dir / f"adapt_{config.name}.yaml"
+        with open(out_path, "w") as f:
+            yaml.safe_dump(adapt_cfg, f, default_flow_style=False, sort_keys=False)
+
+        # Mirror into the run dir for provenance.
+        with open(run_dir / "adapt_override.yaml", "w") as f:
+            yaml.safe_dump(adapt_cfg, f, default_flow_style=False, sort_keys=False)
+
+        return out_path
+
     def _generate_commands(
         self, config: ExperimentConfig, run_dir: Path
     ) -> list[dict[str, str]]:
@@ -94,6 +187,7 @@ class ExperimentRunner:
         phoenix = self.phoenix_root
         t = config.training
         e = config.evaluation
+        py = self._python_prefix()
 
         if config.condition == Condition.BASELINE:
             # Phase 1: Train from scratch
@@ -102,7 +196,7 @@ class ExperimentRunner:
                     "label": "train_baseline",
                     "command": (
                         f'cd "{phoenix}" && '
-                        f"$ISAACLAB_PATH/isaaclab.sh -p -m phoenix.training.ppo_runner "
+                        f"{py} -m phoenix.training.ppo_runner "
                         f"--config {t.env_config} "
                         f"--num-envs {t.num_envs} "
                         f"--max-iterations {t.max_iterations} "
@@ -113,16 +207,22 @@ class ExperimentRunner:
             )
 
         elif config.condition == Condition.ADAPTED:
-            # Phase 1: Fine-tune from baseline with failure curriculum
-            adapt_cfg = t.adapt_config or "configs/train/adaptation.yaml"
+            # Phase 1: Fine-tune from baseline with failure curriculum.
+            # Write a per-cell adapt YAML so failure_sample_fraction
+            # actually reflects this cell's value (the upstream
+            # phoenix.adaptation.fine_tune CLI has no flag for it).
+            adapt_path = self._write_adapt_override(config, run_dir)
+            try:
+                adapt_rel = adapt_path.relative_to(phoenix)
+            except ValueError:
+                adapt_rel = adapt_path
             commands.append(
                 {
                     "label": "adapt_with_failures",
                     "command": (
                         f'cd "{phoenix}" && '
-                        f"$ISAACLAB_PATH/isaaclab.sh -p -m phoenix.adaptation.fine_tune "
-                        f"--config {adapt_cfg} "
-                        f"--trajectory-dir {config.curriculum.failure_dir} "
+                        f"{py} -m phoenix.adaptation.fine_tune "
+                        f"--config {adapt_rel} "
                         f"--num-envs {t.num_envs} "
                         f"--max-iterations {t.max_iterations} "
                         f"--device {t.device}"
@@ -137,7 +237,7 @@ class ExperimentRunner:
                     "label": "finetune_random",
                     "command": (
                         f'cd "{phoenix}" && '
-                        f"$ISAACLAB_PATH/isaaclab.sh -p -m phoenix.adaptation.fine_tune "
+                        f"{py} -m phoenix.adaptation.fine_tune "
                         f"--config configs/train/adaptation.yaml "
                         f"--trajectory-dir /dev/null "
                         f"--num-envs {t.num_envs} "
@@ -154,7 +254,7 @@ class ExperimentRunner:
                     "label": "continue_training",
                     "command": (
                         f'cd "{phoenix}" && '
-                        f"$ISAACLAB_PATH/isaaclab.sh -p -m phoenix.training.ppo_runner "
+                        f"{py} -m phoenix.training.ppo_runner "
                         f"--config {t.env_config} "
                         f"--num-envs {t.num_envs} "
                         f"--max-iterations {t.max_iterations} "
@@ -178,7 +278,7 @@ class ExperimentRunner:
                     "label": f"eval_{env_name}",
                     "command": (
                         f'cd "{phoenix}" && '
-                        f"$ISAACLAB_PATH/isaaclab.sh -p -m phoenix.training.evaluate "
+                        f"{py} -m phoenix.training.evaluate "
                         f"--checkpoint checkpoints/{config.name}/latest.pt "
                         f"--env-config {env_cfg} "
                         f"--num-envs {e.num_envs} "

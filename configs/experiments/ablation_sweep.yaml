@@ -24,7 +24,10 @@ curriculum:
 evaluation:
   num_episodes: 128
   num_envs: 32
-  eval_envs: ["rough", "slippery", "flat"]
+  # Skip flat: Flat-v0 obs are not compatible with policies trained on
+  # Rough-v0 (different obs dim/order). Slippery + rough are the
+  # transfer/retention pair we care about.
+  eval_envs: ["rough", "slippery"]
   record_video: false
 
 ablations:

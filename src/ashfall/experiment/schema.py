@@ -44,6 +44,10 @@ class CurriculumSpec:
     failure_fraction: float = 0.0
     failure_modes: list[str] = field(default_factory=list)  # empty = all modes
     num_variations: int = 16
+    # Baseline checkpoint used as the warm-start for ADAPTED / CONTROL_*
+    # fine-tunes. Resolved relative to the Phoenix repo. Empty string falls
+    # back to the runner's default ("checkpoints/ashfall-baseline/latest.pt").
+    baseline_checkpoint: str = ""
 
 
 @dataclass
