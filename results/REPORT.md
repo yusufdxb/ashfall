@@ -1,45 +1,39 @@
-# Ashfall Experiment Report
+# Ashfall v0.3.0 — Failure-Fraction Sweep
 
-Generated: 2026-04-23 23:42
+Generated: 2026-04-28 09:52
+Cells discovered: 6
 
-Experiments found: 2
+## Setup
 
-## Failure Taxonomy
+Each cell warm-starts from the v0.2.0 ashfall-baseline checkpoint (500-iter PPO on rough), then fine-tunes for 200 iters on slippery with `failure_sample_fraction` set to the cell value. Failure trajectories are sampled from the synth pool at `/home/yusuf/Projects/ashfall/data/failures/`. Each adapted checkpoint is evaluated with 128 episodes × 32 envs on rough and slippery (flat is skipped because Flat-v0 obs are incompatible with the Rough-v0 trained obs).
 
-Ashfall classifies quadruped locomotion failures into 6 modes, ordered by severity:
+## Results
 
-| Mode | Severity | Detection | Sim Replay Strategy |
-|------|----------|-----------|---------------------|
-| Body Collapse | 5 | Instantaneous: base_height < 0.15 m. | Spawn from pre-failure state, vary terrain + joint stiffness. |
-| Attitude Loss | 4 | Instantaneous: |pitch| > 0.8 rad or |roll| > 0.6 rad. | Reconstruct initial pose and velocity, sweep friction + push forces. |
-| Foot Slip | 3 | Sustained: cmd_speed > 0.3 m/s and actual_speed < 0.05 m/s for 0.5 s. | Reconstruct with low-friction terrain, sweep friction coefficient. |
-| Stumble | 2 | Instantaneous: max |joint_vel| > 15 rad/s with >= 2 feet in contact. | Add terrain obstacles at swing-foot trajectory height. |
-| Contact Loss | 2 | Sustained: >= 2 feet below 5N force for >= 0.1 s. | Vary terrain slope and surface irregularity. |
-| Command Mismatch | 1 | Sustained: |cmd - actual| > 0.4 m/s for > 1.0 s (excludes slip). | Replay with same commands, sweep mass + actuator strength. |
+| failure_fraction | slippery success | slippery 95% CI | rough success | rough 95% CI | slip slew sat | rough slew sat |
+|---:|---:|:---:|---:|:---:|---:|---:|
+| 0.00 | 0.888 | [0.824, 0.931] | 0.908 | [0.846, 0.946] | 0.327 | 0.391 |
+| 0.10 | 0.902 | [0.839, 0.942] | 0.969 | [0.922, 0.988] | 0.251 | 0.317 |
+| 0.25 | 0.821 | [0.750, 0.876] | 0.884 | [0.817, 0.928] | 0.292 | 0.368 |
+| 0.50 | 0.939 | [0.884, 0.969] | 0.923 | [0.864, 0.958] | 0.298 | 0.377 |
+| 0.75 | 0.922 | [0.863, 0.957] | 0.953 | [0.902, 0.979] | 0.381 | 0.413 |
+| 1.00 | 0.900 | [0.836, 0.941] | 0.961 | [0.912, 0.983] | 0.505 | 0.500 |
 
-## Condition Comparison
+**Optimum (slippery): failure_fraction = 0.50** (slippery 0.939 [0.884, 0.969], rough 0.923 [0.864, 0.958]).
 
-| Condition | Env | Success Rate | Mean Episode Return | Failure Rate |
-|-----------|-----|--------------|---------------------|--------------|
-| adapted | rough | 88.4% | 8.31 | 11.6% |
-| adapted | slippery | 82.1% | 7.83 | 17.9% |
-| baseline | rough | 91.4% | 9.07 | 8.6% |
-| baseline | slippery | 77.0% | 6.57 | 23.0% |
+## Slippery <-> Rough Pareto
 
-## Key Findings
-
-- **rough**: Adapted regresses (91.4% -> 88.4%, delta=-3.0%)
-- **slippery**: Adapted improves (77.0% -> 82.1%, delta=+5.1%)
+Control (failure_fraction=0.0): slippery 0.888, rough 0.908.
+- ff=0.10: slippery +0.013, rough +0.061
+- ff=0.25: slippery -0.067, rough -0.024
+- ff=0.50: slippery +0.051, rough +0.015
+- ff=0.75: slippery +0.034, rough +0.046
+- ff=1.00: slippery +0.012, rough +0.053
 
 ## Plots
 
-![failure_distribution](failure_distribution.png)
-![return_comparison](return_comparison.png)
-![success_rate_comparison](success_rate_comparison.png)
+![success](sweep_success_rate.png)
+![slew](sweep_slew_saturation.png)
 
-## Limitations
-
-- Synthetic failure trajectories are physics-approximate, not sim-grade
-- Real-hardware failure collection requires a lab session with GO2
-- Bootstrap CIs require per-episode metric arrays (not yet collected)
-- Training curves require TensorBoard log parsing (planned)
+## Notes
+- 95% CIs computed via the Wilson interval over n=num_episodes; evaluate.py emits aggregate counts only, so a full per-episode bootstrap is not available without re-rolling out.
+- Flat eval skipped: Flat-v0 obs (no height_scan) are incompatible with Rough-v0 trained policies.
