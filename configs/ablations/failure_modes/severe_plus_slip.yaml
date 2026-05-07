@@ -1,0 +1,35 @@
+# Failure-mode subset ablation: attitude + collapse + slip.
+# Tests the severity-plus-friction minimal-set hypothesis.
+
+name: "ablation_failure_modes_severe_slip"
+condition: "adapted"
+description: >
+  Mode-subset ablation, ff=0.5 fixed. Curriculum restricted to
+  attitude + collapse + slip. Hypothesis: severe modes calibrate
+  the policy's risk envelope and slip teaches the friction-axis
+  dynamics; together this minimal set should reproduce v0.3.0
+  ff=0.5. If yes, the v0.4.0 recommended pool is exactly these
+  three modes.
+
+training:
+  env_config: "configs/env/slippery.yaml"
+  adapt_config: "configs/train/adaptation.yaml"
+  num_envs: 4096
+  max_iterations: 200
+  device: "cuda:0"
+  seed: 42
+
+curriculum:
+  failure_dir: "data/failures"
+  failure_fraction: 0.5
+  failure_modes: ["attitude", "collapse", "slip"]
+  num_variations: 16
+
+evaluation:
+  num_episodes: 128
+  num_envs: 32
+  eval_envs: ["rough", "slippery"]
+  record_video: false
+
+phoenix_root: "../../workspace/go2-phoenix"
+tags: ["ablation", "failure-mode-subset", "ff0p5", "severe-slip"]

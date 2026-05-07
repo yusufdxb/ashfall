@@ -1,0 +1,35 @@
+# Failure-mode subset ablation: attitude + collapse.
+# Tests whether high-severity short-event modes alone are sufficient.
+
+name: "ablation_failure_modes_severe_only"
+condition: "adapted"
+description: >
+  Mode-subset ablation, ff=0.5 fixed. Curriculum restricted to the
+  two intervention-class modes (attitude + collapse), which together
+  represent ~0.21 of active failure-flagged steps in the pool.
+  Hypothesis: if severity rather than step-count drives the lift,
+  this cell reproduces v0.3.0 ff=0.5. Otherwise (more likely),
+  this cell underperforms.
+
+training:
+  env_config: "configs/env/slippery.yaml"
+  adapt_config: "configs/train/adaptation.yaml"
+  num_envs: 4096
+  max_iterations: 200
+  device: "cuda:0"
+  seed: 42
+
+curriculum:
+  failure_dir: "data/failures"
+  failure_fraction: 0.5
+  failure_modes: ["attitude", "collapse"]
+  num_variations: 16
+
+evaluation:
+  num_episodes: 128
+  num_envs: 32
+  eval_envs: ["rough", "slippery"]
+  record_video: false
+
+phoenix_root: "../../workspace/go2-phoenix"
+tags: ["ablation", "failure-mode-subset", "ff0p5", "severe-only"]

@@ -1,0 +1,32 @@
+# Failure-mode subset ablation: slip only.
+# Tests whether slip-trajectory replay alone explains the slippery lift.
+
+name: "ablation_failure_modes_slip_only"
+condition: "adapted"
+description: >
+  Mode-subset ablation, ff=0.5 fixed. Curriculum restricted to slip
+  trajectories only. Hypothesis: if the v0.3.0 ff=0.5 lift is
+  dominated by friction-axis adaptation, this cell reproduces it.
+
+training:
+  env_config: "configs/env/slippery.yaml"
+  adapt_config: "configs/train/adaptation.yaml"
+  num_envs: 4096
+  max_iterations: 200
+  device: "cuda:0"
+  seed: 42
+
+curriculum:
+  failure_dir: "data/failures"
+  failure_fraction: 0.5
+  failure_modes: ["slip"]
+  num_variations: 16
+
+evaluation:
+  num_episodes: 128
+  num_envs: 32
+  eval_envs: ["rough", "slippery"]
+  record_video: false
+
+phoenix_root: "../../workspace/go2-phoenix"
+tags: ["ablation", "failure-mode-subset", "ff0p5", "slip-only"]

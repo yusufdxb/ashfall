@@ -165,6 +165,16 @@ class ExperimentRunner:
         )
         adapt_cfg["curriculum"]["trajectory_dir"] = str(failure_dir)
 
+        # Optional per-cell mode filter. Phoenix's curriculum loader is
+        # expected to honour ``failure_modes`` as a list of mode-name
+        # strings; an empty list means "all modes" (the existing
+        # default behaviour). Down-stream sweeps that vary the mode
+        # subset (mode-subset ablation, v0.4.0) drive this field.
+        if config.curriculum.failure_modes:
+            adapt_cfg["curriculum"]["failure_modes"] = list(
+                config.curriculum.failure_modes
+            )
+
         # Save into Phoenix's _generated dir so the relative paths in the
         # template (e.g. variation.config) still resolve when fine_tune
         # reads it from the Phoenix cwd.

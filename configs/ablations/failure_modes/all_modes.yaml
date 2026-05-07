@@ -1,0 +1,35 @@
+# Failure-mode subset ablation: all 6 modes (control / reproducer cell).
+# Holds failure_fraction=0.5 fixed (v0.3.0 slippery point-estimate optimum)
+# and verifies that re-running the sweep at this point reproduces the
+# v0.3.0 number. Provides a same-session reference for the
+# single-mode and two-mode subset cells.
+
+name: "ablation_failure_modes_all_modes"
+condition: "adapted"
+description: >
+  Mode-subset ablation, ff=0.5 fixed. All 6 failure modes included
+  (equivalent to the v0.3.0 ff=0.5 cell). Sanity check: should
+  reproduce v0.3.0 slippery 0.939 point estimate within seed noise.
+
+training:
+  env_config: "configs/env/slippery.yaml"
+  adapt_config: "configs/train/adaptation.yaml"
+  num_envs: 4096
+  max_iterations: 200
+  device: "cuda:0"
+  seed: 42
+
+curriculum:
+  failure_dir: "data/failures"
+  failure_fraction: 0.5
+  failure_modes: []  # empty = all modes
+  num_variations: 16
+
+evaluation:
+  num_episodes: 128
+  num_envs: 32
+  eval_envs: ["rough", "slippery"]
+  record_video: false
+
+phoenix_root: "../../workspace/go2-phoenix"
+tags: ["ablation", "failure-mode-subset", "ff0p5"]

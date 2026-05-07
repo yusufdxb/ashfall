@@ -1,0 +1,34 @@
+# Failure-mode subset ablation: command_mismatch only.
+# Tests the dominant-step-share channel.
+
+name: "ablation_failure_modes_cm_only"
+condition: "adapted"
+description: >
+  Mode-subset ablation, ff=0.5 fixed. Curriculum restricted to
+  command_mismatch trajectories only (the largest single share of
+  active failure-flagged steps in the pool, 0.34). Hypothesis:
+  if step-count exposure dominates, this cell reproduces v0.3.0
+  ff=0.5 lift.
+
+training:
+  env_config: "configs/env/slippery.yaml"
+  adapt_config: "configs/train/adaptation.yaml"
+  num_envs: 4096
+  max_iterations: 200
+  device: "cuda:0"
+  seed: 42
+
+curriculum:
+  failure_dir: "data/failures"
+  failure_fraction: 0.5
+  failure_modes: ["command_mismatch"]
+  num_variations: 16
+
+evaluation:
+  num_episodes: 128
+  num_envs: 32
+  eval_envs: ["rough", "slippery"]
+  record_video: false
+
+phoenix_root: "../../workspace/go2-phoenix"
+tags: ["ablation", "failure-mode-subset", "ff0p5", "command-mismatch-only"]
