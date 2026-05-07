@@ -7,6 +7,8 @@ build/
 *.egg
 .ruff_cache/
 .mypy_cache/
+.venv/
+venv/
 
 # Results are generated, not committed (except sample)
 results/*/
