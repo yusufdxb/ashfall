@@ -1,0 +1,41 @@
+# Ashfall multi-seed pilot (2026-05-07)
+# Validates whether the v0.3.0 single-seed slippery lift at ff=0.5 is
+# seed-stable. 2 ff values x 3 seeds = 6 cells. Mirrors v0.3.0
+# ablation_sweep.yaml otherwise.
+
+name: "multiseed_pilot_2026-05-07"
+condition: "adapted"
+description: >
+  2-axis pilot, ff in {0.0, 0.5} x seed in {42, 123, 7}, validates
+  seed-stability of the v0.3.0 slippery lift.
+
+training:
+  env_config: "configs/env/slippery.yaml"
+  adapt_config: "configs/train/adaptation.yaml"
+  num_envs: 4096
+  max_iterations: 200
+  device: "cuda:0"
+  seed: 42  # base; swept by ablation
+
+curriculum:
+  failure_dir: "data/failures"
+  failure_fraction: 0.0  # base; swept by ablation
+  failure_modes: []
+  num_variations: 16
+
+evaluation:
+  num_episodes: 128
+  num_envs: 32
+  eval_envs: ["rough", "slippery"]
+  record_video: false
+
+ablations:
+  - name: "failure_fraction"
+    param_path: "curriculum.failure_fraction"
+    values: [0.0, 0.5]
+  - name: "seed"
+    param_path: "training.seed"
+    values: [42, 123, 7]
+
+phoenix_root: "../../workspace/go2-phoenix"
+tags: ["multiseed-pilot", "ff-validation"]
