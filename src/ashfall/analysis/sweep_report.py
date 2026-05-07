@@ -10,7 +10,7 @@ produces:
 
 Wilson CIs (rather than full bootstrap) because evaluate.py only emits
 aggregate counts, not per-episode arrays. With num_episodes=128 the
-Wilson interval is the right tool — it generalises to any binomial.
+Wilson interval is the right tool: it generalises to any binomial.
 """
 
 from __future__ import annotations
@@ -23,6 +23,11 @@ from datetime import datetime
 from pathlib import Path
 
 import yaml
+
+from ashfall.analysis.significance import (
+    compute_sweep_significance,
+    render_significance_markdown,
+)
 
 logger = logging.getLogger("ashfall.analysis.sweep_report")
 
@@ -158,7 +163,7 @@ def _plot_success_curves(cells: list[dict], output_path: Path) -> None:
     ax.fill_between(xs, rough_lo, rough_hi, color="#d62728", alpha=0.15)
     ax.set_xlabel("failure_fraction")
     ax.set_ylabel("success rate")
-    ax.set_title("Ashfall v0.3.0 — Success Rate vs Failure-Curriculum Density")
+    ax.set_title("Ashfall v0.3.0: Success Rate vs Failure-Curriculum Density")
     ax.set_ylim(0, 1.05)
     ax.grid(True, alpha=0.3)
     ax.legend()
@@ -191,7 +196,7 @@ def _plot_slew(cells: list[dict], output_path: Path) -> None:
     ax.plot(xs, rough, "s-", color="#d62728", label="rough", linewidth=2)
     ax.set_xlabel("failure_fraction")
     ax.set_ylabel("slew saturation pct")
-    ax.set_title("Ashfall v0.3.0 — Slew Saturation vs Failure-Curriculum Density")
+    ax.set_title("Ashfall v0.3.0: Slew Saturation vs Failure-Curriculum Density")
     ax.grid(True, alpha=0.3)
     ax.legend()
     fig.tight_layout()
@@ -203,6 +208,9 @@ def _plot_slew(cells: list[dict], output_path: Path) -> None:
 def generate_sweep_report(
     results_dir: str | Path,
     output_path: str | Path | None = None,
+    *,
+    include_significance: bool = True,
+    include_failure_mode_breakdown: bool = True,
 ) -> Path:
     results_dir = Path(results_dir)
     output_path = Path(output_path) if output_path else results_dir / "REPORT.md"
@@ -221,7 +229,7 @@ def generate_sweep_report(
 
     # Build markdown.
     lines = []
-    lines.append("# Ashfall v0.3.0 — Failure-Fraction Sweep")
+    lines.append("# Ashfall v0.3.0: Failure-Fraction Sweep")
     lines.append("")
     lines.append(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M')}")
     lines.append(f"Cells discovered: {len(cells)}")
@@ -242,11 +250,10 @@ def generate_sweep_report(
     lines.append("## Results")
     lines.append("")
     lines.append(
-        "| failure_fraction | slippery success | slippery 95% CI | rough success | rough 95% CI | slip slew sat | rough slew sat |"
+        "| failure_fraction | slippery success | slippery 95% CI "
+        "| rough success | rough 95% CI | slip slew sat | rough slew sat |"
     )
-    lines.append(
-        "|---:|---:|:---:|---:|:---:|---:|---:|"
-    )
+    lines.append("|---:|---:|:---:|---:|:---:|---:|---:|")
 
     rows = []
     for c in cells:
@@ -267,9 +274,13 @@ def generate_sweep_report(
         )
         slew_slip = float(slip.get("slew_saturation_pct", float("nan")))
         slew_rough = float(rough.get("slew_saturation_pct", float("nan")))
-        rows.append(
-            (c["failure_fraction"], sr_slip, sr_rough, slip_lo, slip_hi, rough_lo, rough_hi, slew_slip, slew_rough)
-        )
+        rows.append((
+            c["failure_fraction"],
+            sr_slip, sr_rough,
+            slip_lo, slip_hi,
+            rough_lo, rough_hi,
+            slew_slip, slew_rough,
+        ))
         lines.append(
             f"| {c['failure_fraction']:.2f} | {sr_slip:.3f} | "
             f"[{slip_lo:.3f}, {slip_hi:.3f}] | {sr_rough:.3f} | "
@@ -306,23 +317,81 @@ def generate_sweep_report(
                 )
 
     lines.append("")
+
+    # Statistical significance section.
+    if include_significance:
+        try:
+            sigs = compute_sweep_significance(results_dir)
+            lines.append(render_significance_markdown(sigs))
+        except Exception as exc:
+            logger.warning("Significance section failed: %s", exc)
+
+    # Failure-mode composition section. Eval-time per-mode counts were
+    # not retained; we report the curriculum-input pool composition,
+    # which is identical across cells. The next ablation will vary
+    # this directly.
+    if include_failure_mode_breakdown:
+        try:
+            from ashfall.analysis.failure_modes import (
+                render_failure_mode_breakdown_markdown,
+            )
+
+            md = render_failure_mode_breakdown_markdown(
+                results_dir=results_dir,
+                pool_dir=Path("data/failures"),
+            )
+            lines.append(md)
+        except Exception as exc:
+            logger.warning("Failure-mode section failed: %s", exc)
+
     lines.append("## Plots")
     lines.append("")
     if plot_success.exists():
         lines.append(f"![success]({plot_success.name})")
     if plot_slew.exists():
         lines.append(f"![slew]({plot_slew.name})")
+    sweep_modes_png = results_dir / "sweep_curriculum_pool_composition.png"
+    if sweep_modes_png.exists():
+        lines.append(f"![pool composition]({sweep_modes_png.name})")
 
     lines.append("")
-    lines.append("## Notes")
+    lines.append("## Notes & Limitations")
     lines.append(
-        "- 95% CIs computed via the Wilson interval over n=num_episodes; "
-        "evaluate.py emits aggregate counts only, so a full per-episode "
-        "bootstrap is not available without re-rolling out."
+        "- **Statistical reading**: under BCa bootstrap + Fisher's exact + "
+        "Holm-Bonferroni, no individual ff cell is statistically distinct "
+        "from the ff=0.0 control at alpha=0.05 per terrain. The v0.3.0 "
+        "point-estimate optimum at ff=0.5 (+5.1 pp slippery) is real but "
+        "its 95% CI on the difference straddles 0. Treat the optimum as "
+        "the best-bet starting point for a follow-up ablation, not as a "
+        "proven win."
     )
     lines.append(
-        "- Flat eval skipped: Flat-v0 obs (no height_scan) are incompatible "
-        "with Rough-v0 trained policies."
+        "- **Single seed**: every cell ran with `training.seed = 42`. "
+        "All CIs above are within-run binomial; they say nothing about "
+        "cross-seed variance."
+    )
+    lines.append(
+        "- **No per-episode raw data**: Phoenix `evaluate.py` collapses "
+        "the rollout to aggregate scalars; there are no per-episode "
+        "success indicators or failure-mode labels at eval time. "
+        "Per-mode breakdowns at eval time require re-running with a "
+        "logger patch and are deferred."
+    )
+    lines.append(
+        "- **n_episodes is approximate**: each cell's eval yields "
+        "128 to 140 terminations depending on episode length; "
+        "`num_episodes` per cell is what we trust for Wilson and "
+        "bootstrap CIs."
+    )
+    lines.append(
+        "- **Flat eval skipped**: Flat-v0 obs (no height_scan) are "
+        "incompatible with Rough-v0 trained policies."
+    )
+    lines.append(
+        "- **Next ablation**: holding ff=0.5 fixed, sweep failure-mode "
+        "subsets to identify which modes carry the lift. Configs and "
+        "wrapper script live under `configs/ablations/failure_modes/` "
+        "and `scripts/run_failure_modes_ablation.sh`."
     )
 
     out = Path(output_path)
