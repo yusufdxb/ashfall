@@ -212,6 +212,29 @@ section 6).
    the step-count model because Phoenix's ReplayBuffer samples
    timesteps, not whole trajectories.
 
+## 5b. Multi-seed pilot, 2026-05-07 (supersedes 5.1)
+
+The single-seed limitation in section 5.1 was the load-bearing
+weakness of the v0.3.0 sweep. On 2026-05-07 we ran a 2 x 3
+pilot (ff in {0.0, 0.5} x seed in {42, 123, 7}) on the same
+warm-start checkpoint and the same 200-iter / 4096-env recipe,
+varying both the PPO seed (via `training.seed`, propagated to
+`env_cfg.seed` and seeded globally by IsaacLab's `configure_seed`)
+and the curriculum RNG seed (Phoenix-side patch on
+`audit-fixes-2026-04-16` that threads `cfg.run.seed` into
+`FailureCurriculum`). The seed-propagation audit lives at
+`notes/2026-05-07-seed-propagation-audit.md`.
+
+The exact sign-flip permutation test on n=3 paired deltas has a
+floor of p = 2/8 = 0.25 (the all-+ original and its all-flip
+mirror), so the verdict rests on effect-size CIs and per-seed
+pattern, not on the p-value alone. See
+`notes/2026-05-07-multiseed-verdict.md` for the per-cell numbers,
+per-ff cross-seed mean +/- SE, and paired-by-seed delta with the
+exact permutation p-value. The pilot supersedes the
+`Limitations -> Single seed` callout in section 5.1 with a real
+cross-seed measurement.
+
 ## 6. Next ablation: mode-subset sweep
 
 To test which failure modes carry the lift, fix `ff=0.5` (the
