@@ -223,17 +223,49 @@ varying both the PPO seed (via `training.seed`, propagated to
 and the curriculum RNG seed (Phoenix-side patch on
 `audit-fixes-2026-04-16` that threads `cfg.run.seed` into
 `FailureCurriculum`). The seed-propagation audit lives at
-`notes/2026-05-07-seed-propagation-audit.md`.
+`notes/2026-05-07-seed-propagation-audit.md`. The pilot ran in
+91 min wall on RTX 5070, all 6 cells rc=0.
 
-The exact sign-flip permutation test on n=3 paired deltas has a
-floor of p = 2/8 = 0.25 (the all-+ original and its all-flip
-mirror), so the verdict rests on effect-size CIs and per-seed
-pattern, not on the p-value alone. See
-`notes/2026-05-07-multiseed-verdict.md` for the per-cell numbers,
-per-ff cross-seed mean +/- SE, and paired-by-seed delta with the
-exact permutation p-value. The pilot supersedes the
-`Limitations -> Single seed` callout in section 5.1 with a real
-cross-seed measurement.
+### What survived
+
+Slippery: 3/3 seeds give a positive ff=0.5 vs ff=0.0 paired
+delta. Cross-seed mean delta = +2.14 pp, 95% CI [-2.43, +6.71]
+on the paired mean (n=3, t-multiplier df=2). Exact sign-flip
+permutation p = 0.250, which is the structural n=3 floor (2/8).
+The v0.3.0 single-seed +5.1 pp at seed=42 sat on the high side
+of the seed distribution; the cross-seed mean is roughly half
+that magnitude and the CI crosses zero. The lift is directionally
+seed-stable but does NOT clear an n=3 paired-mean CI.
+
+### What did NOT survive
+
+Rough: 1/3 seeds positive. Cross-seed mean delta = -3.36 pp,
+95% CI [-16.74, +10.03]. The curriculum REGRESSES rough on
+average across seeds. The v0.3.0 +1.5 pp at ff=0.5 (and the
++6.1 pp at ff=0.1) on rough were single-seed coincidences; on
+seed 7 the curriculum costs 9.2 pp of rough success. Reviewer-
+defensible reading: the v0.3.0 ff=0.5 cell trades real rough
+retention for a small, uncertain slippery gain.
+
+### Methodology delta vs v0.3.0
+
+The 2026-05-07 fine_tune.py patch threads `cfg.run.seed` into
+the `FailureCurriculum` RNG, so ff=0.5 cells are NOT bit-identical
+to the v0.3.0 ff=0.5 cell even at seed=42. The ff=0.0 control IS
+bit-identical at seed=42 (rough 0.9077, slippery 0.8881 match
+v0.3.0 exactly), which confirms the env / PPO seed chain is
+load-bearing through IsaacLab's `configure_seed` and rules out
+"ff=0.0 cell drifted" as an alternative explanation for any
+delta change.
+
+### Next gate
+
+A 5+ seed scaling pass at ff in {0, 0.5} is the next gate before
+any v0.4.0 claim that the curriculum "works" on slippery. The
+n=3 floor of p=0.25 prevents alpha=0.05 significance regardless
+of effect size; only a larger n changes that. Per-cell numbers,
+per-ff cross-seed mean +/- SE, and paired deltas with permutation
+p-values are tabulated in `notes/2026-05-07-multiseed-verdict.md`.
 
 ## 6. Next ablation: mode-subset sweep
 
