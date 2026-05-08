@@ -1,0 +1,49 @@
+# Ashfall multi-seed scale (2026-05-07)
+# Adds 4 new seeds at ff in {0.0, 0.5} to combine with the n=3
+# pilot (multiseed_pilot_2026-05-07_*) for an n=7 verdict.
+#
+# Seed choice: prime-ish values uncorrelated with default RNG states
+# in PPO/IsaacLab. {99, 314, 1729, 2718} = 99 (square-free composite),
+# 314 (~pi*100), 1729 (Hardy-Ramanujan taxicab), 2718 (e*1000). None
+# overlap with the pilot seeds {42, 123, 7}.
+#
+# At n=7 paired the exact sign-flip permutation has 2**7 = 128
+# permutations, so p-floor = 2/128 = 0.0156 and alpha=0.05 IS
+# reachable with a sufficiently consistent effect.
+
+name: "multiseed_scale_2026-05-07"
+condition: "adapted"
+description: >
+  Seed scaling pass: 4 new seeds (99, 314, 1729, 2718) at ff in
+  {0.0, 0.5}; combined with the n=3 pilot for n=7 analysis.
+
+training:
+  env_config: "configs/env/slippery.yaml"
+  adapt_config: "configs/train/adaptation.yaml"
+  num_envs: 4096
+  max_iterations: 200
+  device: "cuda:0"
+  seed: 42  # base; swept by ablation
+
+curriculum:
+  failure_dir: "data/failures"
+  failure_fraction: 0.0  # base; swept by ablation
+  failure_modes: []
+  num_variations: 16
+
+evaluation:
+  num_episodes: 128
+  num_envs: 32
+  eval_envs: ["rough", "slippery"]
+  record_video: false
+
+ablations:
+  - name: "failure_fraction"
+    param_path: "curriculum.failure_fraction"
+    values: [0.0, 0.5]
+  - name: "seed"
+    param_path: "training.seed"
+    values: [99, 314, 1729, 2718]
+
+phoenix_root: "../../workspace/go2-phoenix"
+tags: ["multiseed-scale", "ff-validation", "n7"]
