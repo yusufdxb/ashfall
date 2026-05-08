@@ -35,6 +35,46 @@ CELL_PATTERN = re.compile(
     r"multiseed_pilot_2026-05-07_failure_fraction=(?P<ff_short>[0-9p]+)_seed=(?P<seed>\d+)$"
 )
 
+# Pattern that accepts any sweep prefix ending in
+# ``..._failure_fraction=<ff>_seed=<s>``. Used by ``load_cells_flexible``
+# and the n=7 combined analysis.
+GENERIC_CELL_PATTERN = re.compile(
+    r"_failure_fraction=(?P<ff_short>[0-9p]+)_seed=(?P<seed>\d+)$"
+)
+
+# Two-sided t-multiplier table for paired-delta CI, df = n - 1.
+# Hardcoded to keep the analysis module pure-numpy (no scipy).
+# Source: standard t-tables, two-tailed alpha=0.05.
+_T_975_BY_DF: dict[int, float] = {
+    1: 12.706,
+    2: 4.303,
+    3: 3.182,
+    4: 2.776,
+    5: 2.571,
+    6: 2.447,
+    7: 2.365,
+    8: 2.306,
+    9: 2.262,
+    10: 2.228,
+    11: 2.201,
+    12: 2.179,
+    13: 2.160,
+    14: 2.145,
+    15: 2.131,
+    20: 2.086,
+    30: 2.042,
+}
+
+
+def _t_975(n: int) -> float:
+    """Two-sided 97.5 percentile of t at df=n-1, with 1.96 fallback."""
+    if n < 2:
+        return 1.96
+    df = n - 1
+    if df in _T_975_BY_DF:
+        return _T_975_BY_DF[df]
+    return 1.96
+
 
 def _short_to_float(short: str) -> float:
     return float(short.replace("p", "."))
@@ -224,11 +264,9 @@ def paired_delta(
     mean = float(arr.mean())
     std = float(arr.std(ddof=1)) if n > 1 else 0.0
     sem = std / math.sqrt(n) if n > 1 else 0.0
-    # 95% CI: with n=3 we use a t-multiplier (df=2 -> ~4.303).
-    # Hardcode the 2.5/97.5 quantiles for small df to avoid scipy
-    # circular dependence in this pure-numpy module.
-    t_975 = {1: 12.706, 2: 4.303, 3: 3.182, 4: 2.776, 5: 2.571}.get(n - 1, 1.96)
-    half_width = t_975 * sem
+    # 95% CI from the t-multiplier at df = n - 1. Looked up from
+    # the module-level _T_975_BY_DF table (pure-numpy module, no scipy).
+    half_width = _t_975(n) * sem
     ci_lo = mean - half_width
     ci_hi = mean + half_width
     p_two = _exact_sign_flip_p(deltas)
@@ -311,6 +349,154 @@ def run(results_dir: str | Path) -> tuple[
         for t in ("slippery", "rough")
     ]
     return rows, summaries, deltas
+
+
+# ---------------------------------------------------------------------------
+# n>=4 combined analysis (used by the 2026-05-07 seed-scaling pass).
+# ---------------------------------------------------------------------------
+
+
+def load_cells_with_prefix(
+    results_dir: Path,
+    prefix: str,
+) -> list[CellRaw]:
+    """Load cells under ``results_dir`` matching a custom sweep prefix.
+
+    Mirrors :func:`load_cells` but parameterized over the sweep prefix
+    (e.g. ``multiseed_scale_2026-05-07``). Cell directory names must
+    end in ``_failure_fraction=<ff>_seed=<s>``.
+    """
+    rows: list[CellRaw] = []
+    glob_pattern = f"{prefix}_failure_fraction=*_seed=*"
+    for cell_dir in sorted(Path(results_dir).glob(glob_pattern)):
+        m = GENERIC_CELL_PATTERN.search(cell_dir.name)
+        if not m:
+            continue
+        ff = _short_to_float(m.group("ff_short"))
+        seed = int(m.group("seed"))
+        stamp_dirs = sorted(
+            (d for d in cell_dir.iterdir() if d.is_dir()),
+            key=lambda d: d.name,
+            reverse=True,
+        )
+        if not stamp_dirs:
+            continue
+        chosen = None
+        for sd in stamp_dirs:
+            mdir = sd / "metrics"
+            if (
+                (mdir / "metrics_slippery.json").exists()
+                and (mdir / "metrics_rough.json").exists()
+            ):
+                chosen = sd
+                break
+        if chosen is None:
+            continue
+        for terrain in ("rough", "slippery"):
+            mf = chosen / "metrics" / f"metrics_{terrain}.json"
+            if not mf.exists():
+                continue
+            with open(mf) as f:
+                d = json.load(f)
+            rows.append(
+                CellRaw(
+                    ff=ff,
+                    seed=seed,
+                    terrain=terrain,
+                    n_episodes=int(d.get("num_episodes", 0)),
+                    success_rate=float(d.get("success_rate", 0.0)),
+                )
+            )
+    return rows
+
+
+@dataclass
+class CombinedMultiseedResult:
+    """Combined per-cell rows from one or more sweep prefixes."""
+
+    rows: list[CellRaw]
+    sources: list[str] = field(default_factory=list)
+
+    @property
+    def seeds(self) -> list[int]:
+        return sorted({r.seed for r in self.rows})
+
+
+@dataclass
+class AnalysisReport:
+    """Combined multi-seed analysis output."""
+
+    rows: list[CellRaw]
+    per_ff: list[PerFFSummary]
+    deltas: list[PairedDeltaResult]
+    n_seeds_per_terrain: dict[str, int]
+
+
+def combine_pilot_runs(
+    *run_specs: tuple[Path, str],
+) -> CombinedMultiseedResult:
+    """Combine cells from multiple sweep prefixes into one row set.
+
+    Each ``run_spec`` is a ``(results_dir, prefix)`` pair. Cells are
+    deduplicated on ``(ff, seed, terrain)``: if the same key appears in
+    two sweeps the later spec wins (caller-controlled override).
+
+    Returns a :class:`CombinedMultiseedResult` with the merged rows and
+    the list of source prefixes.
+    """
+    by_key: dict[tuple[float, int, str], CellRaw] = {}
+    sources: list[str] = []
+    for results_dir, prefix in run_specs:
+        sources.append(prefix)
+        for r in load_cells_with_prefix(Path(results_dir), prefix):
+            by_key[(r.ff, r.seed, r.terrain)] = r
+    rows = sorted(by_key.values(), key=lambda r: (r.terrain, r.ff, r.seed))
+    return CombinedMultiseedResult(rows=rows, sources=sources)
+
+
+def run_combined_analysis(
+    combined: CombinedMultiseedResult,
+    *,
+    ff_a: float = 0.0,
+    ff_b: float = 0.5,
+) -> AnalysisReport:
+    """Run per-ff summary + paired-delta on a combined row set.
+
+    The paired-by-seed delta requires that a seed appears at BOTH ff_a
+    and ff_b on a given terrain; seeds appearing at only one ff are
+    excluded from that terrain's delta but still contribute to the
+    per-ff summary.
+    """
+    summaries = per_ff_summary(combined.rows)
+    deltas = [
+        paired_delta(combined.rows, ff_a=ff_a, ff_b=ff_b, terrain=t)
+        for t in ("slippery", "rough")
+    ]
+    n_per_terrain = {d.terrain: d.n_seeds for d in deltas}
+    return AnalysisReport(
+        rows=list(combined.rows),
+        per_ff=summaries,
+        deltas=deltas,
+        n_seeds_per_terrain=n_per_terrain,
+    )
+
+
+def render_combined_markdown(
+    report: AnalysisReport,
+    *,
+    title: str = "Combined multi-seed verdict",
+) -> str:
+    """Render an AnalysisReport as a markdown report body."""
+    lines = [f"# {title}", ""]
+    n_slip = report.n_seeds_per_terrain.get("slippery", 0)
+    p_floor = (2.0 / (2 ** n_slip)) if n_slip > 0 else 1.0
+    lines.append(
+        f"n_seeds (slippery, paired) = {n_slip}; exact sign-flip "
+        f"p-floor = 2/{2**n_slip} = {p_floor:.4f}"
+    )
+    lines.append("")
+    lines.append(render_markdown(report.rows, report.per_ff, report.deltas))
+    return "\n".join(lines)
 
 
 if __name__ == "__main__":  # pragma: no cover
