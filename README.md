@@ -65,29 +65,29 @@ Ashfall classifies quadruped locomotion failures into 6 modes, ordered by severi
 
 ## Results (Simulation)
 
-Using Phoenix's baseline (500-iter PPO on rough terrain) and adapted (200-iter warm-start on slippery terrain) policies:
+Status as of 2026-05-07: the failure-fraction curriculum produces a directionally consistent slippery lift across seeds, but does not yet clear statistical significance at n=3. Seed-scaling work is in progress. Numbers below reflect the multi-seed pilot, not the earlier single-seed framing.
 
-| Condition | Environment | Success Rate | Mean Return | Failure Rate |
-|-----------|-------------|-------------|-------------|--------------|
-| baseline | flat | 100.0% | 19.50 | 0.0% |
-| baseline | rough | 100.0% | 18.95 | 0.0% |
-| baseline | slippery | 90.6% | 15.90 | 9.4% |
-| adapted | flat | 100.0% | 19.20 | 0.0% |
-| adapted | rough | 96.9% | 17.56 | 3.1% |
-| adapted | slippery | **100.0%** | 16.64 | **0.0%** |
+### 2026-05-07 multi-seed pilot (n=3, paired)
 
-The adapted policy eliminates all failures on slippery terrain (+9.4% success rate) at the cost of a minor regression on rough terrain (-3.1%).
+2 ff values (0.0, 0.5) x 3 seeds (42, 123, 7) on Phoenix `audit-fixes-2026-04-16` + commit `d42ee01` (FailureCurriculum seed-propagation fix). 200-iter PPO fine-tune from rough baseline, 128-140 eval episodes per cell per terrain.
 
-> **Rigor caveat (added 2026-05-07).** The v0.2.0 baseline-vs-adapted comparison above used a less stringent control (raw v0.2.0 checkpoint, no slippery fine-tune). The proper control is `failure_fraction=0.0` *with* slippery fine-tune; under that control the v0.3.0 sweep finds a point-estimate slippery optimum at `ff=0.5` (+5.1 pp) but the BCa 95% CI on the difference straddles 0 and the Holm-adjusted Fisher p-value is 0.76. See [`docs/methodology/2026-05-07-ff-sweep-rigor.md`](docs/methodology/2026-05-07-ff-sweep-rigor.md) for the full statistical workup, and [`results/REPORT.md`](results/REPORT.md) for the auto-generated table.
+| terrain  | ff=0.0 mean (SE) | ff=0.5 mean (SE) | paired delta | per-seed signs | exact sign-flip p |
+|----------|------------------|------------------|--------------|----------------|-------------------|
+| slippery | 0.895 (0.011)    | 0.916 (0.005)    | +0.0214      | 3/3 positive   | 0.250 (n=3 floor) |
+| rough    | 0.946 (0.020)    | 0.912 (0.014)    | -0.0336      | 1/3 positive   | 0.500             |
 
-### v0.3.0 failure-fraction sweep (2026-04-28, with 2026-05-07 rigor pass)
+Honest reading:
+- **Slippery: directionally consistent, not yet rigour-passing.** 3/3 seeds positive but the 95% CI on the paired mean delta is `[-2.43, +6.71] pp`, crossing zero. The +5.1 pp single-seed value reported in v0.3.0 was on the high side of the seed distribution; cross-seed mean is roughly half.
+- **Rough: regresses on average.** 1/3 seeds positive, mean delta -3.36 pp. v0.3.0's single-seed positive on rough was a coincidence.
+- **n=3 sign-flip floor is p=0.25 by construction.** Significance at alpha=0.05 is mathematically unreachable until n>=5; the next gate is seed scaling, not a new ablation axis.
 
-6 cells in `failure_fraction` over {0.0, 0.1, 0.25, 0.5, 0.75, 1.0}, single seed (42), 128-140 episodes per cell per terrain. Point-estimate optima:
-- Slippery: `ff=0.50` (+5.1 pp vs ff=0.0 control), CI `[-0.017, +0.118]`, Holm p=0.76.
-- Rough: `ff=0.10` (+6.1 pp vs ff=0.0 control), CI `[+0.007, +0.115]`, Holm p=0.34.
-- Joint Pareto: `ff=0.75` (slippery +3.4 pp, rough +4.6 pp; no regression on either axis).
+Full numbers: [`notes/2026-05-07-multiseed-verdict.md`](notes/2026-05-07-multiseed-verdict.md). Methodology: [`docs/methodology/2026-05-07-ff-sweep-rigor.md`](docs/methodology/2026-05-07-ff-sweep-rigor.md).
 
-No cell is significant after multiple-comparison adjustment with single-seed n~130. The next ablation (mode-subset sweep at fixed `ff=0.5`) is scaffolded under [`configs/ablations/failure_modes/`](configs/ablations/failure_modes/) and ready to run when GPU is free.
+### Earlier results (single-seed, kept for context)
+
+The v0.2.0 baseline-vs-adapted comparison and the v0.3.0 6-cell `failure_fraction` sweep (over {0.0, 0.1, 0.25, 0.5, 0.75, 1.0}) were both single-seed (42). Point estimates from those runs were not reproducible at the +5.1 pp / +6.1 pp magnitude under the multi-seed pilot, and no cell was significant after Holm-Bonferroni adjustment with single-seed n~130. The v0.3.0 framing is superseded by the multi-seed pilot above; details are in `notes/2026-05-07-sweep-verification.md` and `docs/methodology/2026-05-07-ff-sweep-rigor.md` for history.
+
+The mode-subset ablation at fixed ff=0.5 is scaffolded under [`configs/ablations/failure_modes/`](configs/ablations/failure_modes/) but is gated behind seed scaling: running it at n=3 would inherit the same p-floor.
 
 ### Taxonomy validation (2026-04-19, no GPU)
 
@@ -227,10 +227,11 @@ export PHOENIX_ROOT=$HOME/workspace/go2-phoenix
 
 ## Limitations
 
+- **n=3 multi-seed pilot is underpowered.** The exact two-sided sign-flip permutation test at n=3 has a p-floor of 0.25; alpha=0.05 is mathematically unreachable. Seed scaling to n>=5 is the gate before any positive significance claim.
 - **Real hardware failures not yet collected.** Synthetic failures are physics-approximate, not sim-grade. The first hardware session with the adapted policy will produce ground-truth failure data that closes the loop.
-- **Failure curriculum currently disabled** in go2-phoenix (failure_sample_fraction=0.0). The reset bridge is wired and tested but waiting for hardware-captured Parquets.
+- **Per-episode metric arrays not retained by Phoenix `evaluate.py`.** The current evaluation pipeline emits aggregate scalars per cell, which limits BCa bootstrap and per-mode breakdown to curriculum-input pool composition rather than eval-time failure-mode counts. A Phoenix-side patch to retain per-episode results is tracked as the prerequisite for proper failure-mode ablation.
 - **No real-robot deployment validation yet.** The ONNX policy passes parity checks but has not been exercised on the live GO2.
-- **Bootstrap CIs** require per-episode metric arrays that are not yet collected during Isaac Lab evaluation.
+- **Mode-subset ablation gated behind seed scaling.** Configs are scaffolded but running them at n=3 would inherit the same significance ceiling.
 
 ## What Makes This Different
 
