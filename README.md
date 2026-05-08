@@ -65,29 +65,36 @@ Ashfall classifies quadruped locomotion failures into 6 modes, ordered by severi
 
 ## Results (Simulation)
 
-Status as of 2026-05-07: the failure-fraction curriculum produces a directionally consistent slippery lift across seeds, but does not yet clear statistical significance at n=3. Seed-scaling work is in progress. Numbers below reflect the multi-seed pilot, not the earlier single-seed framing.
+Status as of 2026-05-08: the failure-fraction curriculum at ff=0.5 does NOT reliably improve slippery success rate across seeds. n=7 paired mean is -1.10 pp with 95% CI crossing zero. The v0.2.0 +9.4 pp and v0.3.0 +5.1 pp slippery claims were both seed=42 artifacts that did not reproduce.
 
-### 2026-05-07 multi-seed pilot (n=3, paired)
+### 2026-05-08 seed-scaling pass (n=7, paired)
 
-2 ff values (0.0, 0.5) x 3 seeds (42, 123, 7) on Phoenix `audit-fixes-2026-04-16` + commit `d42ee01` (FailureCurriculum seed-propagation fix). 200-iter PPO fine-tune from rough baseline, 128-140 eval episodes per cell per terrain.
+3 pilot seeds (42, 123, 7) plus 4 scaling seeds (99, 314, 1729, 2718) at ff in {0.0, 0.5} on Phoenix `audit-fixes-2026-04-16` + commit `d42ee01` (FailureCurriculum seed-propagation fix). 200-iter PPO fine-tune from rough baseline, 128-140 eval episodes per cell per terrain. 14 cells total, all rc=0.
 
-| terrain  | ff=0.0 mean (SE) | ff=0.5 mean (SE) | paired delta | per-seed signs | exact sign-flip p |
-|----------|------------------|------------------|--------------|----------------|-------------------|
-| slippery | 0.895 (0.011)    | 0.916 (0.005)    | +0.0214      | 3/3 positive   | 0.250 (n=3 floor) |
-| rough    | 0.946 (0.020)    | 0.912 (0.014)    | -0.0336      | 1/3 positive   | 0.500             |
+| terrain  | ff=0.0 mean (SE) | ff=0.5 mean (SE) | paired mean delta | 95% paired CI       | per-seed signs | exact sign-flip p | clears alpha=0.05 |
+|----------|------------------|------------------|-------------------|---------------------|----------------|-------------------|:------------------|
+| slippery | 0.898 (0.011)    | 0.887 (0.012)    | -1.10 pp          | [-5.20, +3.01] pp   | 4 / 7 positive |            0.5625 | no                |
+| rough    | 0.920 (0.016)    | 0.905 (0.013)    | -1.58 pp          | [-6.31, +3.15] pp   | 2 / 7 positive |            0.3906 | no                |
 
-Honest reading:
-- **Slippery: directionally consistent, not yet rigour-passing.** 3/3 seeds positive but the 95% CI on the paired mean delta is `[-2.43, +6.71] pp`, crossing zero. The +5.1 pp single-seed value reported in v0.3.0 was on the high side of the seed distribution; cross-seed mean is roughly half.
-- **Rough: regresses on average.** 1/3 seeds positive, mean delta -3.36 pp. v0.3.0's single-seed positive on rough was a coincidence.
-- **n=3 sign-flip floor is p=0.25 by construction.** Significance at alpha=0.05 is mathematically unreachable until n>=5; the next gate is seed scaling, not a new ablation axis.
+n=7 is structurally adequate (sign-flip floor 2/128 = 0.0156, so alpha=0.05 IS reachable at this sample size). Neither terrain comes close.
 
-Full numbers: [`notes/2026-05-07-multiseed-verdict.md`](notes/2026-05-07-multiseed-verdict.md). Methodology: [`docs/methodology/2026-05-07-ff-sweep-rigor.md`](docs/methodology/2026-05-07-ff-sweep-rigor.md).
+Honest verdict:
+- **Slippery: no reliable effect.** 4/7 positive is roughly a coin flip. Per-seed deltas span +3.6 pp to -8.85 pp. The pilot's "3/3 positive" framing was a small-sample artifact.
+- **Rough: regresses on average.** 2/7 positive, mean -1.58 pp. The curriculum trades rough proficiency for an unreliable slippery effect.
+
+Full numbers: [`notes/2026-05-07-multiseed-scale-verdict.md`](notes/2026-05-07-multiseed-scale-verdict.md). Methodology: [`docs/methodology/2026-05-07-ff-sweep-rigor.md`](docs/methodology/2026-05-07-ff-sweep-rigor.md) section 5c.
 
 ### Earlier results (single-seed, kept for context)
 
-The v0.2.0 baseline-vs-adapted comparison and the v0.3.0 6-cell `failure_fraction` sweep (over {0.0, 0.1, 0.25, 0.5, 0.75, 1.0}) were both single-seed (42). Point estimates from those runs were not reproducible at the +5.1 pp / +6.1 pp magnitude under the multi-seed pilot, and no cell was significant after Holm-Bonferroni adjustment with single-seed n~130. The v0.3.0 framing is superseded by the multi-seed pilot above; details are in `notes/2026-05-07-sweep-verification.md` and `docs/methodology/2026-05-07-ff-sweep-rigor.md` for history.
+The v0.2.0 baseline-vs-adapted comparison and the v0.3.0 6-cell `failure_fraction` sweep (single seed=42) reported +9.4 pp and +5.1 pp slippery lifts respectively. Neither replicates at n=7 paired analysis. The 2026-05-07 n=3 pilot looked directionally positive (3/3 seeds) but flipped under scaling. Details retained in `notes/2026-05-07-{sweep-verification,multiseed-verdict}.md` and methodology sections 5b and earlier for history.
 
-The mode-subset ablation at fixed ff=0.5 is scaffolded under [`configs/ablations/failure_modes/`](configs/ablations/failure_modes/) but is gated behind seed scaling: running it at n=3 would inherit the same p-floor.
+### What's still salvageable
+
+- The 6-mode failure taxonomy and detector are independently validated (18/18 synthetic parquets correctly classified, zero cross-fires, 2026-04-19) and remain a defensible contribution.
+- The experiment + evaluation framework (sweep generator, paired analysis, sign-flip permutation tests, BCa bootstrap) is generally useful regardless of the curriculum result.
+- The Phoenix FailureCurriculum seed-propagation patch (`d42ee01`) is a real fix that masked seed-driven variance in any prior curriculum-style ablation.
+
+Three viable directions next: (1) re-design the curriculum (research pivot, not parameter sweep), (2) mode-subset ablation at ff=0.5 anyway with exploratory framing, (3) hardware data collection (synth failures may not generalize). See methodology section 5c for tradeoffs.
 
 ### Taxonomy validation (2026-04-19, no GPU)
 
@@ -227,11 +234,11 @@ export PHOENIX_ROOT=$HOME/workspace/go2-phoenix
 
 ## Limitations
 
-- **n=3 multi-seed pilot is underpowered.** The exact two-sided sign-flip permutation test at n=3 has a p-floor of 0.25; alpha=0.05 is mathematically unreachable. Seed scaling to n>=5 is the gate before any positive significance claim.
-- **Real hardware failures not yet collected.** Synthetic failures are physics-approximate, not sim-grade. The first hardware session with the adapted policy will produce ground-truth failure data that closes the loop.
-- **Per-episode metric arrays not retained by Phoenix `evaluate.py`.** The current evaluation pipeline emits aggregate scalars per cell, which limits BCa bootstrap and per-mode breakdown to curriculum-input pool composition rather than eval-time failure-mode counts. A Phoenix-side patch to retain per-episode results is tracked as the prerequisite for proper failure-mode ablation.
+- **The v0.3.0 ff=0.5 curriculum effect did not survive n=7 paired analysis.** Slippery: 4/7 positive, mean -1.10 pp, p=0.5625. Rough: 2/7 positive, mean -1.58 pp, p=0.3906. Neither clears alpha=0.05 with margin. Any future "the curriculum works" claim needs a different curriculum design or a different sample population.
+- **Real hardware failures not yet collected.** Synthetic failures are physics-approximate, not sim-grade. Synth-only training may not generalize; real-failure replay is untested.
+- **Per-episode metric arrays not retained by Phoenix `evaluate.py`.** The current evaluation pipeline emits aggregate scalars per cell, which limits BCa bootstrap and per-mode breakdown to curriculum-input pool composition rather than eval-time failure-mode counts. A Phoenix-side patch to retain per-episode results is the prerequisite for any defensible mode-subset analysis.
 - **No real-robot deployment validation yet.** The ONNX policy passes parity checks but has not been exercised on the live GO2.
-- **Mode-subset ablation gated behind seed scaling.** Configs are scaffolded but running them at n=3 would inherit the same significance ceiling.
+- **Mode-subset ablation framing must be exploratory, not confirmatory.** With the aggregate curriculum showing near-zero effect, any positive single-mode cell would need to be reported with a "we looked at six subsets" caveat rather than as a confirmation.
 
 ## What Makes This Different
 

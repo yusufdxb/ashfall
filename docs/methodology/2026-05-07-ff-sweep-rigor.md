@@ -267,6 +267,86 @@ of effect size; only a larger n changes that. Per-cell numbers,
 per-ff cross-seed mean +/- SE, and paired deltas with permutation
 p-values are tabulated in `notes/2026-05-07-multiseed-verdict.md`.
 
+## 5c. Seed scaling, 2026-05-08 (supersedes 5b)
+
+The pilot's "directionally consistent slippery lift" claim was the
+weakest part of section 5b. On 2026-05-08 (run wall 22:48 to 00:51)
+we added 4 new seeds (99, 314, 1729, 2718) at ff in {0.0, 0.5} for
+n=7 paired analysis. Same warm-start, same recipe, same Phoenix
+patch (`d42ee01`). 8 new cells, all rc=0, total 7016 s on RTX 5070.
+
+### Headline (n=7 paired)
+
+| terrain  | mean delta | 95% paired CI       | exact sign-flip p | per-seed signs | clears alpha=0.05 |
+|----------|-----------:|:--------------------|------------------:|----------------|:------------------|
+| slippery |   -1.10 pp | [-5.20, +3.01] pp   |            0.5625 | 4 / 7 positive | no                |
+| rough    |   -1.58 pp | [-6.31, +3.15] pp   |            0.3906 | 2 / 7 positive | no                |
+
+n=7 is structurally adequate (sign-flip floor 2/128 = 0.0156, so
+alpha=0.05 IS reachable). Neither terrain comes close.
+
+### What this changes
+
+The pilot framing of "3/3 positive, directionally consistent" was
+a small-sample artifact. The 4 new seeds break the pattern: per-seed
+slippery deltas are +0.0280, +0.0356, +0.0083, +0.0006, -0.0099,
+-0.0511, -0.0885 (sorted by seed: 7, 42, 99, 123, 314, 1729, 2718;
+the first three are pilot, the last four are scaling). Seed 1729
+shows the curriculum costing 8.85 pp of slippery success on its
+own, which alone refutes the "directionally consistent" claim.
+
+### Honest verdict
+
+- The failure-fraction curriculum at ff=0.5 does NOT reliably
+  improve slippery success rate over a no-curriculum control of
+  the same fine-tune duration. n=7 paired mean is -1.10 pp with
+  95% CI crossing zero and a near-coin-flip per-seed sign pattern.
+- Rough retention is also not preserved on average (n=7 mean
+  -1.58 pp, 2/7 positive). The curriculum trades rough proficiency
+  for an unreliable slippery effect.
+- The v0.2.0 "+9.4 pp slippery" and the v0.3.0 "+5.1 pp at ff=0.5"
+  were both seed=42 single-seed artifacts. Neither survives n=7
+  paired analysis.
+
+### What's still salvageable
+
+- The 6-mode failure taxonomy and detector are independently
+  validated (18/18 synthetic parquets correctly classified, zero
+  cross-fires, 2026-04-19) and remain a defensible Ashfall
+  contribution.
+- The experiment + evaluation framework (sweep generator, paired
+  analysis, sign-flip permutation tests, BCa bootstrap) is
+  generally useful infrastructure regardless of the curriculum
+  result.
+- The Phoenix `FailureCurriculum` seed-propagation patch (d42ee01)
+  is a real fix that would have masked seed-driven variance in any
+  future curriculum-style ablation.
+
+### Where to go next
+
+Three viable directions, mutually exclusive:
+
+1. **Re-design the curriculum.** The ff=0.5 minibatch-mixing scheme
+   does not produce a reliable lift. A different curriculum
+   structure (e.g., scheduled / annealed ff over training, or
+   selective replay weighted by failure mode) might. This is a
+   research pivot, not a parameter sweep.
+2. **Mode-subset ablation at fixed ff=0.5 anyway.** The aggregate
+   curriculum has near-zero effect, but specific failure modes
+   may still help. Configs are scaffolded; cost is ~2 hr GPU per
+   subset cell. Honest framing: this is exploratory, not
+   confirmatory, and the headline of any positive cell should be
+   "mode X improves slippery, conditional on us looking at six
+   subsets".
+3. **Hardware data collection.** Synth failures are physics-
+   approximate. The curriculum may work on real failure replays
+   even if synth ones don't. CaresLab GO2 session is the next
+   ping point.
+
+Per-cell numbers, per-ff cross-seed mean +/- SE, and paired deltas
+with permutation p-values are tabulated in
+`notes/2026-05-07-multiseed-scale-verdict.md`.
+
 ## 6. Next ablation: mode-subset sweep
 
 To test which failure modes carry the lift, fix `ff=0.5` (the
