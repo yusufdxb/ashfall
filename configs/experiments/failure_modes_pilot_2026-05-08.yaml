@@ -1,0 +1,53 @@
+# Ashfall failure-mode-subset pilot (2026-05-08)
+# Stage-1 directional triage: does ANY specific failure-mode subset
+# show a 3/3 positive slippery sign at fixed ff=0.5?
+#
+# Compared seed-paired against the existing n=3 multiseed_pilot ff=0.0
+# baseline cells on disk
+# (results/multiseed_pilot_2026-05-07_failure_fraction=0p0_seed=*).
+# 6 mode subsets x 3 pilot seeds {42, 123, 7} = 18 cells, ~15 min each
+# on RTX 5070 (~4.5 hr wall total).
+
+name: "failure_modes_pilot_2026-05-08"
+condition: "adapted"
+description: >
+  6-axis mode-subset ablation at fixed ff=0.5, 3 seeds. Stage-1
+  triage: shortlists subsets with 3/3 positive slippery sign for
+  Stage-2 scaling. Honest n=3 sign-flip floor is p=0.25.
+
+training:
+  env_config: "configs/env/slippery.yaml"
+  adapt_config: "configs/train/adaptation.yaml"
+  num_envs: 4096
+  max_iterations: 200
+  device: "cuda:0"
+  seed: 42  # base; swept by ablation
+
+curriculum:
+  failure_dir: "data/failures"
+  failure_fraction: 0.5  # fixed for this sweep
+  failure_modes: []  # base; swept by ablation
+  num_variations: 16
+
+evaluation:
+  num_episodes: 128
+  num_envs: 32
+  eval_envs: ["rough", "slippery"]
+  record_video: false
+
+ablations:
+  - name: "failure_modes"
+    param_path: "curriculum.failure_modes"
+    values:
+      - []  # all_modes
+      - ["slip"]  # slip_only
+      - ["command_mismatch"]  # command_mismatch_only
+      - ["slip", "command_mismatch"]  # slip_plus_cm
+      - ["attitude", "collapse"]  # severe_only
+      - ["attitude", "collapse", "slip"]  # severe_plus_slip
+  - name: "seed"
+    param_path: "training.seed"
+    values: [42, 123, 7]
+
+phoenix_root: "../../workspace/go2-phoenix"
+tags: ["mode-subset-pilot", "ff0p5", "stage1"]
