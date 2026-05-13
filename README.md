@@ -6,48 +6,21 @@ Ashfall is a failure-driven policy adaptation system for quadruped locomotion. I
 
 ## The Ashfall Loop
 
-```
-                    +-------------------+
-                    |  Baseline Policy  |
-                    |  (PPO, Isaac Lab) |
-                    +--------+----------+
-                             |
-                             v
-                    +-------------------+
-                    |  Deploy on GO2    |
-                    |  (ONNX, ROS 2)   |
-                    +--------+----------+
-                             |
-                             v
-                    +-------------------+
-                    |  Failure Detector |
-                    |  (6-mode taxonomy)|
-                    +--------+----------+
-                             |
-                             v
-                    +-------------------+
-                    |  Trajectory Log   |
-                    |  (Parquet, 50 Hz) |
-                    +--------+----------+
-                             |
-                             v
-                    +-------------------+
-                    |  Replay in Sim    |
-                    |  (Halton DR)      |
-                    +--------+----------+
-                             |
-                             v
-                    +-------------------+
-                    |  Fine-Tune Policy |
-                    |  (Failure Curric.)|
-                    +--------+----------+
-                             |
-                             v
-                    +-------------------+
-                    |  Evaluate         |
-                    |  (Baseline vs     |
-                    |   Adapted vs Ctrl)|
-                    +-------------------+
+```mermaid
+graph TD
+    A["Baseline Policy<br/>(PPO, Isaac Lab)"]
+    B["Deploy on GO2<br/>(ONNX, ROS 2)"]
+    C["Failure Detector<br/>(6-mode taxonomy)"]
+    D["Trajectory Log<br/>(Parquet, 50 Hz)"]
+    E["Replay in Sim<br/>(Halton DR)"]
+    F["Fine-Tune Policy<br/>(Failure Curric.)"]
+    G["Evaluate<br/>(Baseline vs Adapted vs Ctrl)"]
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
 ```
 
 ## Failure Taxonomy
