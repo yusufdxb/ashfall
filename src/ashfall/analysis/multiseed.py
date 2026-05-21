@@ -67,12 +67,30 @@ _T_975_BY_DF: dict[int, float] = {
 
 
 def _t_975(n: int) -> float:
-    """Two-sided 97.5 percentile of t at df=n-1, with 1.96 fallback."""
+    """Two-sided 97.5 percentile of t at df=n-1.
+
+    Looks up the hardcoded ``_T_975_BY_DF`` table. For a df that is not
+    in the table the function falls back to the normal-approximation
+    multiplier 1.96, which is anti-conservative for small df and would
+    silently understate the CI half-width. A warning is emitted in that
+    case so the fallback is never invisible (e.g. a future n=18 run with
+    df=17 is not in the table). Extend ``_T_975_BY_DF`` to cover new
+    sample sizes rather than relying on the fallback.
+    """
     if n < 2:
         return 1.96
     df = n - 1
     if df in _T_975_BY_DF:
         return _T_975_BY_DF[df]
+    import warnings
+
+    warnings.warn(
+        f"_t_975: df={df} not in the hardcoded t-table; falling back to "
+        "the normal multiplier 1.96, which understates the CI for small "
+        f"df. Add df={df} to _T_975_BY_DF in analysis/multiseed.py.",
+        RuntimeWarning,
+        stacklevel=2,
+    )
     return 1.96
 
 

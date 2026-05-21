@@ -276,6 +276,25 @@ GENERATORS = {
     FailureMode.COMMAND_MISMATCH: generate_command_mismatch_failure,
 }
 
+# Fixed per-mode seed offsets. Replaces the previous
+# ``hash(mode.value) % 1000`` derivation, which used Python's
+# process-salted string hash (PYTHONHASHSEED) and therefore produced
+# a different dataset on every run, making the committed parquets
+# unreproducible despite the documented ``seed=42``. These offsets are
+# arbitrary but constant; any value works as long as it never changes.
+# NOTE: the 18 parquets already committed under data/failures/ predate
+# this fix and were generated under the old salted recipe; they cannot
+# be bit-reproduced. Re-running generate_all_failures now yields a
+# *stable* dataset from here forward.
+_MODE_SEED_OFFSETS: dict[FailureMode, int] = {
+    FailureMode.ATTITUDE: 0,
+    FailureMode.COLLAPSE: 100,
+    FailureMode.SLIP: 200,
+    FailureMode.STUMBLE: 300,
+    FailureMode.CONTACT_LOSS: 400,
+    FailureMode.COMMAND_MISMATCH: 500,
+}
+
 
 def generate_all_failures(
     output_dir: str | Path,
@@ -293,7 +312,7 @@ def generate_all_failures(
 
     for mode, gen_fn in GENERATORS.items():
         for v in range(n_variants):
-            variant_seed = seed + hash(mode.value) % 1000 + v
+            variant_seed = seed + _MODE_SEED_OFFSETS[mode] + v
             rows = gen_fn(seed=variant_seed)
             table = pa.Table.from_pylist(rows, schema=SCHEMA)
 

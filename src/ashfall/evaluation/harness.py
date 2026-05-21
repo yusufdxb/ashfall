@@ -2,9 +2,16 @@
 
 Wraps Phoenix's evaluation infrastructure and adds:
 - Multi-condition comparison (baseline vs adapted vs controls)
-- Statistical significance testing (bootstrap CI, paired t-test)
-- Failure recurrence analysis
-- Aggregate metric computation
+- A percentile bootstrap CI for the difference of means
+  (:func:`bootstrap_ci`)
+- Aggregate metric comparison and a directional summary
+
+Note: this module does NOT implement a paired t-test, and
+:func:`compare_conditions` does not populate ``MetricComparison.p_value``
+or ``.significant``. Significance testing on binomial success-rate data
+lives in :mod:`ashfall.evaluation.significance` (BCa bootstrap, Fisher's
+exact, Holm-Bonferroni); per-seed paired analysis lives in
+:mod:`ashfall.analysis.multiseed`.
 """
 
 from __future__ import annotations
