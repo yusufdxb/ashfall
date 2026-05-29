@@ -124,8 +124,9 @@ class TestFailureAnalyzer:
             done=True,
         )
         metrics = analyzer.compute()
-        assert metrics.total_failures >= 1
-        assert metrics.intervention_count >= 1
+        assert metrics.total_failures == 1
+        assert metrics.intervention_count == 1
+        assert metrics.intervention_rate == pytest.approx(1.0)
 
     def test_multiple_episodes_tracked(self):
         analyzer = FailureAnalyzer()
@@ -143,3 +144,26 @@ class TestFailureAnalyzer:
         metrics = analyzer.compute()
         assert metrics.total_episodes == 3
         assert metrics.total_steps == 30
+
+    def test_intervention_count_reflects_episodes_with_interventions(self):
+        # 3 episodes; episodes 0 and 2 each have a collapse, episode 1 is clean.
+        # Collapses are spaced >1s apart so the detector's min_event_gap_s does
+        # not suppress the second one. intervention_count must be 2, not 1.
+        analyzer = FailureAnalyzer()
+        for ep in range(3):
+            collapse_ep = ep in (0, 2)
+            for step in range(10):
+                analyzer.step(
+                    timestamp_s=ep * 2.0 + step * 0.02,
+                    pitch_rad=0.0,
+                    roll_rad=0.0,
+                    base_height_m=0.05 if (collapse_ep and step == 0) else 0.30,
+                    cmd_lin_vel=np.array([0.0, 0.0]),
+                    actual_lin_vel=np.array([0.0, 0.0]),
+                    done=(step == 9),
+                )
+        metrics = analyzer.compute()
+        assert metrics.total_episodes == 3
+        assert metrics.total_failures == 2
+        assert metrics.intervention_count == 2
+        assert metrics.intervention_rate == pytest.approx(2 / 3)
