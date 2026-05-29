@@ -293,3 +293,69 @@ def test_paired_delta_n7_uses_t_multiplier_2_447(tmp_path: Path) -> None:
     expected_half = 2.447 * pd.sem_delta
     actual_half = (pd.ci95_hi - pd.ci95_lo) / 2.0
     assert abs(actual_half - expected_half) < 1e-9
+
+
+# ---------------------------------------------------------------------------
+# Regression guard on the PUBLISHED n=7 headline.
+#
+# Every other test in this file runs the pipeline on synthetic fixtures in
+# tmp_path. None of them touch the committed results/ tree, so the published
+# null verdict (slippery -1.10 pp / rough -1.58 pp, both p > 0.05) had no
+# regression protection: a silently mutated result cell or a change to the
+# paired-delta / sign-flip math would not fail any test. This test pins the
+# headline to the raw metrics on disk so the central scientific claim cannot
+# drift unnoticed. The numbers below were reproduced from the committed
+# results/ tree on 2026-05-29 and match the vault verdict
+# (MULTISEED_SCALE_2026-05-08.md).
+# ---------------------------------------------------------------------------
+
+import pytest  # noqa: E402
+
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+_RESULTS_DIR = _REPO_ROOT / "results"
+
+
+def test_published_n7_headline_reproduces_from_committed_results() -> None:
+    pilot = _RESULTS_DIR / "multiseed_pilot_2026-05-07_failure_fraction=0p0_seed=42"
+    if not pilot.exists():
+        pytest.skip(
+            "committed multiseed results not present in this checkout; "
+            "headline regression guard is data-dependent"
+        )
+
+    combined = combine_pilot_runs(
+        (_RESULTS_DIR, "multiseed_pilot_2026-05-07"),
+        (_RESULTS_DIR, "multiseed_scale_2026-05-07"),
+    )
+    report = run_combined_analysis(combined)
+
+    by_terrain = {d.terrain: d for d in report.deltas}
+    slip = by_terrain["slippery"]
+    rough = by_terrain["rough"]
+
+    # Both terrains are paired across all 7 seeds.
+    assert slip.n_seeds == 7
+    assert rough.n_seeds == 7
+
+    # Slippery headline: mean -1.10 pp, 95% CI [-5.20, +3.01] pp,
+    # 4/7 positive, exact sign-flip p = 0.5625, does NOT clear alpha=0.05.
+    assert slip.mean_delta * 100 == pytest.approx(-1.10, abs=0.02)
+    assert slip.ci95_lo * 100 == pytest.approx(-5.20, abs=0.05)
+    assert slip.ci95_hi * 100 == pytest.approx(+3.01, abs=0.05)
+    assert sum(1 for x in slip.deltas if x > 0) == 4
+    assert slip.permutation_p_two_sided == pytest.approx(0.5625, abs=1e-4)
+    assert slip.permutation_p_two_sided >= 0.05  # null verdict holds
+
+    # Rough headline: mean -1.58 pp, 95% CI [-6.31, +3.15] pp,
+    # 2/7 positive, exact sign-flip p = 0.3906, does NOT clear alpha=0.05.
+    assert rough.mean_delta * 100 == pytest.approx(-1.58, abs=0.02)
+    assert rough.ci95_lo * 100 == pytest.approx(-6.31, abs=0.05)
+    assert rough.ci95_hi * 100 == pytest.approx(+3.15, abs=0.05)
+    assert sum(1 for x in rough.deltas if x > 0) == 2
+    assert rough.permutation_p_two_sided == pytest.approx(0.3906, abs=1e-4)
+    assert rough.permutation_p_two_sided >= 0.05  # null verdict holds
+
+    # The single largest negative slippery seed (1729, -8.85 pp) must still
+    # be present; its removal would be the easiest way to fake a positive
+    # result, so guard it explicitly.
+    assert min(slip.deltas) * 100 == pytest.approx(-8.85, abs=0.05)
