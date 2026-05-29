@@ -115,16 +115,26 @@ ABLATION_NUM_FAILURES = AblationAxis(
     values=[0.0, 0.1, 0.25, 0.5, 0.75, 1.0],
 )
 
+# Failure-mode subset axis. Every entry MUST have a key in
+# ``_FAILURE_MODES_LABELS`` so ``_short_value`` emits a filesystem-safe
+# label that the downstream analysis regex
+# (``mode_subsets.SUBSET_CELL_PATTERN``, which only accepts ``[A-Za-z_]+``)
+# can parse. Previously this constant listed subsets like ``["attitude"]``
+# and ``["slip", "attitude"]`` that fell through to the ``+``-joined
+# fallback label (e.g. ``slip+attitude``); those cell directory names did
+# not match the analysis pattern, so any sweep built from this constant
+# silently analyzed zero cells. Keep this list in sync with
+# ``_FAILURE_MODES_LABELS`` and ``mode_subsets.SUBSET_ORDER``.
 ABLATION_FAILURE_MODES = AblationAxis(
     name="failure_modes",
     param_path="curriculum.failure_modes",
     values=[
-        ["slip"],
-        ["attitude"],
-        ["collapse"],
-        ["slip", "attitude"],
-        ["slip", "attitude", "collapse"],
-        ["slip", "attitude", "collapse", "stumble", "contact_loss", "command_mismatch"],
+        [],  # all_modes
+        ["slip"],  # slip_only
+        ["command_mismatch"],  # command_mismatch_only
+        ["command_mismatch", "slip"],  # slip_plus_cm
+        ["attitude", "collapse"],  # severe_only
+        ["attitude", "collapse", "slip"],  # severe_plus_slip
     ],
 )
 

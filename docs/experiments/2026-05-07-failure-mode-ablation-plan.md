@@ -64,7 +64,7 @@ Phoenix, no Isaac Sim viewer).
 
 ## Required pre-flight
 
-1. Verify `~/IsaacLab/isaaclab.sh` resolves and Phoenix repo is at
+1. Verify `~/Sim/IsaacLab/isaaclab.sh` resolves and Phoenix repo is at
    `~/workspace/go2-phoenix`.
 2. Verify `data/failures/` contains the 18 synth parquets used in
    v0.3.0 (the runner does not regenerate them).

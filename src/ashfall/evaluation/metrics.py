@@ -56,6 +56,7 @@ class FailureAnalyzer:
     def __init__(self, thresholds: FailureThresholds | None = None) -> None:
         self.detector = FailureDetector(thresholds)
         self._events: list[FailureEvent] = []
+        self._event_episodes: list[int] = []  # episode index per event, aligned with _events
         self._episode_boundaries: list[int] = [0]
         self._total_steps = 0
         self._recovery_steps: list[int] = []
@@ -69,6 +70,8 @@ class FailureAnalyzer:
 
         if events:
             self._events.extend(events)
+            episode_idx = len(self._episode_boundaries) - 1
+            self._event_episodes.extend([episode_idx] * len(events))
             if self._steps_since_failure is not None and self._steps_since_failure > 0:
                 self._recovery_steps.append(self._steps_since_failure)
             self._steps_since_failure = 0
@@ -91,15 +94,12 @@ class FailureAnalyzer:
         for ev in self._events:
             mode_counts[ev.mode.value] = mode_counts.get(ev.mode.value, 0) + 1
 
-        intervention_events = [
-            ev for ev in self._events if ev.mode in self.INTERVENTION_MODES
-        ]
-        # Count episodes with at least one intervention-level failure
-        intervention_episodes = set()
-        for ev in intervention_events:
-            for i in range(len(self._episode_boundaries) - 1):
-                intervention_episodes.add(i)
-                break
+        # Count distinct episodes with at least one intervention-level failure.
+        intervention_episodes = {
+            self._event_episodes[i]
+            for i, ev in enumerate(self._events)
+            if ev.mode in self.INTERVENTION_MODES
+        }
 
         mean_recovery = (
             float(np.mean(self._recovery_steps)) if self._recovery_steps else 0.0

@@ -14,8 +14,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 ASHFALL_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 PHOENIX_ROOT="${PHOENIX_ROOT:-$HOME/workspace/go2-phoenix}"
-ISAACLAB_PATH="${ISAACLAB_PATH:-$HOME/IsaacLab}"
-ISAAC_VENV="${ISAAC_VENV:-$HOME/isaac-sim-venv}"
+ISAACLAB_PATH="${ISAACLAB_PATH:-$HOME/Sim/IsaacLab}"
+ISAAC_VENV="${ISAAC_VENV:-$HOME/Sim/isaac-sim-venv}"
 
 # Activate Isaac Sim venv
 if [[ -z "${VIRTUAL_ENV:-}" && -f "$ISAAC_VENV/bin/activate" ]]; then

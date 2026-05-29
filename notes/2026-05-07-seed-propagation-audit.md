@@ -53,7 +53,7 @@ produce genuinely different cells.
 
 6. **rsl_rl itself does NOT call `manual_seed` anywhere.**
    Verified by grepping
-   `/home/yusuf/isaac-sim-venv/lib/python3.12/site-packages/rsl_rl/`.
+   `/home/yusuf/Sim/isaac-sim-venv/lib/python3.12/site-packages/rsl_rl/`.
    `agent_cfg.py:43` sets `cfg.seed = int(run.get("seed", 42))`
    on the runner cfg, but rsl_rl reads it only as metadata.
    Reliance on IsaacLab's pre-seed is therefore load-bearing;

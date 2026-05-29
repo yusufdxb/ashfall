@@ -159,7 +159,7 @@ python3 -m pytest tests/ -v
 
 ```bash
 # Set environment
-export ISAACLAB_PATH=$HOME/IsaacLab
+export ISAACLAB_PATH=$HOME/Sim/IsaacLab
 export PHOENIX_ROOT=$HOME/workspace/go2-phoenix
 
 # Train baseline (500 iters, ~28 min on RTX 5070)

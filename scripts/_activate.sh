@@ -6,7 +6,7 @@ set -euo pipefail
 
 ASHFALL_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PHOENIX_ROOT="${PHOENIX_ROOT:-$HOME/workspace/go2-phoenix}"
-ISAACLAB_PATH="${ISAACLAB_PATH:-$HOME/IsaacLab}"
+ISAACLAB_PATH="${ISAACLAB_PATH:-$HOME/Sim/IsaacLab}"
 
 if [ ! -d "$PHOENIX_ROOT" ]; then
     echo "ERROR: Phoenix not found at $PHOENIX_ROOT" >&2

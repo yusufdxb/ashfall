@@ -39,10 +39,10 @@ class ExperimentRunner:
     """
 
     # Default Isaac Sim venv python — repaired 2026-04-28 after VSCode-snap nuked
-    # the venv's symlinks. Calls into ~/IsaacLab/isaaclab.sh fall back to
+    # the venv's symlinks. Calls into ~/Sim/IsaacLab/isaaclab.sh fall back to
     # system Python 3.10 in non-interactive shells, so we invoke the venv
     # python directly instead.
-    DEFAULT_PYTHON_EXE = "/home/yusuf/isaac-sim-venv/bin/python"
+    DEFAULT_PYTHON_EXE = "/home/yusuf/Sim/isaac-sim-venv/bin/python"
 
     def __init__(
         self,
