@@ -1,0 +1,61 @@
+# Ashfall multi-seed scale EXTENSION (2026-06-02)
+#
+# Purpose: ADD seeds beyond the published n=7 baseline to strengthen the
+# null-verdict statistics. The headline currently rests on n=7
+# (pilot seeds {42, 123, 7} + scale seeds {99, 314, 1729, 2718}). This
+# config contributes 4 NEW seeds at ff in {0.0, 0.5}, taking the paired
+# sample to n=11.
+#
+# Seed choice: 4 fresh primes/notable constants, none overlapping the
+# existing seven {42, 123, 7, 99, 314, 1729, 2718}:
+#   1618  ~= phi*1000 (golden ratio)
+#   2024  recent year, square-free
+#   4096  power of two, RNG-uncorrelated
+#   6022  ~= Avogadro*1e-20 (6.022e23)
+#
+# At n=11 paired, the exact sign-flip permutation has 2**11 = 2048
+# permutations, so the two-sided p-floor drops to 2/2048 = 9.8e-4,
+# well under alpha=0.05. More importantly for a NULL result, the wider
+# sample tightens the CI on the adapted-vs-control delta.
+#
+# This run mirrors multiseed_scale_2026-05-07.yaml exactly (same env,
+# same 4096 envs / 200 iters, same eval) so the new cells pool cleanly
+# with the existing seven. Only the seeds differ.
+
+name: "multiseed_scale_ext_2026-06-02"
+condition: "adapted"
+description: >
+  n=7 -> n=11 extension: 4 new seeds (1618, 2024, 4096, 6022) at ff in
+  {0.0, 0.5}; pools with the published n=7 sample to strengthen the
+  null verdict.
+
+training:
+  env_config: "configs/env/slippery.yaml"
+  adapt_config: "configs/train/adaptation.yaml"
+  num_envs: 4096
+  max_iterations: 200
+  device: "cuda:0"
+  seed: 42  # base; swept by ablation
+
+curriculum:
+  failure_dir: "data/failures"
+  failure_fraction: 0.0  # base; swept by ablation
+  failure_modes: []
+  num_variations: 16
+
+evaluation:
+  num_episodes: 128
+  num_envs: 32
+  eval_envs: ["rough", "slippery"]
+  record_video: false
+
+ablations:
+  - name: "failure_fraction"
+    param_path: "curriculum.failure_fraction"
+    values: [0.0, 0.5]
+  - name: "seed"
+    param_path: "training.seed"
+    values: [1618, 2024, 4096, 6022]
+
+phoenix_root: "../../workspace/go2-phoenix"
+tags: ["multiseed-scale", "ff-validation", "n11-extension", "null-strengthen"]
