@@ -1,4 +1,4 @@
-# 2026-05-08 — Phoenix failure_modes propagation audit
+# 2026-05-08: Phoenix failure_modes propagation audit
 
 ## TL;DR
 
@@ -11,17 +11,17 @@ produce 18 noisy reproductions of the v0.3.0 ff=0.5 cell.
 
 ## Pipeline trace
 
-1. `~/Projects/ashfall/src/ashfall/experiment/runner.py:173-176` —
+1. `~/Projects/ashfall/src/ashfall/experiment/runner.py:173-176`, 
    ashfall's `_write_adapt_override` injects `failure_modes` into the
    per-cell YAML at `curriculum.failure_modes`. **Honored.**
 2. `~/workspace/go2-phoenix/src/phoenix/adaptation/fine_tune.py:84-95`
-   — Phoenix's `_run` reads `cfg["curriculum"]["failure_sample_fraction"]`
+   - Phoenix's `_run` reads `cfg["curriculum"]["failure_sample_fraction"]`
    and `cfg["curriculum"]["trajectory_dir"]` only. **`failure_modes` is
    not read.** Pool is instantiated unfiltered.
-3. `~/workspace/go2-phoenix/src/phoenix/adaptation/curriculum.py` —
+3. `~/workspace/go2-phoenix/src/phoenix/adaptation/curriculum.py`, 
    `TrajectoryPool.from_directory(dir, pattern="*.parquet")` globs all
    parquets in the dir; no mode filter. `FailureCurriculum.__init__`
-   takes `pool, failure_fraction, seed` only — no mode parameter.
+   takes `pool, failure_fraction, seed` only, no mode parameter.
 4. Pool composition in `~/Projects/ashfall/data/failures/`: 18
    parquets across 6 modes (3 each). Inspected via pyarrow:
    each parquet's non-null `failure_mode` column entries are uniform

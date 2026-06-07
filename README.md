@@ -84,7 +84,7 @@ The 6-mode `FailureDetector` was exercised against 18 synth parquets (6 modes ×
 | contact_loss | 3 / 3 | 0 |
 | command_mismatch | 3 / 3 | 0 |
 
-The ablation-sweep generator (`scripts/run_ablation.sh`) produces 6 `failure_fraction` cells (0.0, 0.1, 0.25, 0.5, 0.75, 1.0) with per-cell `commands.sh` stubs ready to execute inside Isaac Lab. The analysis pipeline (`scripts/analyze.sh`) consumes the results directory and writes `results/REPORT.md` — full tables + plots — with zero experiments populated until training runs land.
+The ablation-sweep generator (`scripts/run_ablation.sh`) produces 6 `failure_fraction` cells (0.0, 0.1, 0.25, 0.5, 0.75, 1.0) with per-cell `commands.sh` stubs ready to execute inside Isaac Lab. The analysis pipeline (`scripts/analyze.sh`) consumes the results directory and writes `results/REPORT.md`: full tables + plots, with zero experiments populated until training runs land.
 
 ## Project Structure
 
