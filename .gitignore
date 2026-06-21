@@ -21,3 +21,5 @@ data/failures/*.parquet
 # IDE
 .vscode/
 .idea/
+
+FIXLIST.md
