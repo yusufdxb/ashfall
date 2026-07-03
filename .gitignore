@@ -10,8 +10,12 @@ build/
 .venv/
 venv/
 
-# Results are generated, not committed (except sample)
-results/*/
+# Results are generated, not committed. Committed exceptions: the report,
+# figures, and the tiny per-seed metrics_*.json that back the n=11 headline
+# (so the result reproduces on a fresh clone; raw logs/checkpoints stay out).
+results/*/**
+!results/*/**/
+!results/**/metrics_*.json
 !results/REPORT.md
 !results/*.png
 
@@ -21,5 +25,3 @@ data/failures/*.parquet
 # IDE
 .vscode/
 .idea/
-
-FIXLIST.md

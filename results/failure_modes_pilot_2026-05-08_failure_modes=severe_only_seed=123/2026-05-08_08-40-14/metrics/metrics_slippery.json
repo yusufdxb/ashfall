@@ -1,0 +1,22 @@
+{
+  "num_episodes": 133,
+  "mean_episode_return": 7.536111135567937,
+  "mean_episode_length_s": 18.546766917293233,
+  "success_rate": 0.8947368421052632,
+  "failure_rate": 0.10526315789473684,
+  "mean_lin_vel_error": 0.6412910114824771,
+  "mean_ang_vel_error": 0.579443070396781,
+  "per_term_rewards": {
+    "track_lin_vel_xy_exp": 0.2821304953172803,
+    "track_ang_vel_z_exp": 0.201399904217571,
+    "lin_vel_z_l2": -0.013850863523594796,
+    "ang_vel_xy_l2": -0.008675841864294853,
+    "dof_torques_l2": -0.04968906199978664,
+    "dof_acc_l2": -0.00243261547978625,
+    "action_rate_l2": -0.0023252320228775575,
+    "feet_air_time": -0.001362812669482082,
+    "flat_orientation_l2": 0.0,
+    "dof_pos_limits": 0.0
+  },
+  "slew_saturation_pct": 0.3631943142035501
+}

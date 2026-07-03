@@ -113,7 +113,7 @@ ashfall/
   scripts/             # Shell scripts for reproducible runs
   data/failures/       # Failure trajectory Parquets (synthetic + hardware)
   results/             # Experiment outputs (metrics, plots, reports)
-  tests/               # 56 unit tests
+  tests/               # 113 unit tests
 ```
 
 ## Dependencies

@@ -31,7 +31,7 @@ Control (failure_fraction=0.0): slippery 0.888, rough 0.908.
 
 ## Statistical Significance
 
-Each non-control cell tested against the ff=0.0 control on the same terrain. Method: BCa bootstrap (10k resamples) for the 95% CI on the success-rate difference; Fisher's exact two-sided test for the p-value; Holm-Bonferroni step-down adjustment across the 5 ff comparisons within each terrain.
+Each non-control cell tested against the ff=0.0 control on the same terrain. Method: approximate BCa bootstrap (10k resamples, sign-corrected two-sample acceleration term, see evaluation/significance.py) for the 95% CI on the success-rate difference; Fisher's exact two-sided test for the p-value. The CI and p-value come from different procedures and can disagree at the margin. Holm-Bonferroni step-down adjustment across the 5 ff comparisons within each terrain.
 
 ### Slippery
 
@@ -81,7 +81,7 @@ Reading: the pool is balanced at 3 trajectories per mode but skewed in active-fa
 ![pool composition](sweep_curriculum_pool_composition.png)
 
 ## Notes & Limitations
-- **Statistical reading**: under BCa bootstrap + Fisher's exact + Holm-Bonferroni, no individual ff cell is statistically distinct from the ff=0.0 control at alpha=0.05 per terrain. The v0.3.0 point-estimate optimum at ff=0.5 (+5.1 pp slippery) is real but its 95% CI on the difference straddles 0. Treat the optimum as the best-bet starting point for a follow-up ablation, not as a proven win.
+- **Statistical reading**: under approximate BCa bootstrap + Fisher's exact + Holm-Bonferroni, no individual ff cell is statistically distinct from the ff=0.0 control at alpha=0.05 per terrain. The v0.3.0 point-estimate optimum at ff=0.5 (+5.1 pp slippery) is real but its 95% CI on the difference straddles 0. Treat the optimum as the best-bet starting point for a follow-up ablation, not as a proven win.
 - **Single seed**: every cell ran with `training.seed = 42`. All CIs above are within-run binomial; they say nothing about cross-seed variance.
 - **No per-episode raw data**: Phoenix `evaluate.py` collapses the rollout to aggregate scalars; there are no per-episode success indicators or failure-mode labels at eval time. Per-mode breakdowns at eval time require re-running with a logger patch and are deferred.
 - **n_episodes is approximate**: each cell's eval yields 128 to 140 terminations depending on episode length; `num_episodes` per cell is what we trust for Wilson and bootstrap CIs.

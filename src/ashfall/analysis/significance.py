@@ -163,10 +163,13 @@ def render_significance_markdown(sigs: list[CellSignificance]) -> str:
     lines.append("")
     lines.append(
         "Each non-control cell tested against the ff=0.0 control on the "
-        "same terrain. Method: BCa bootstrap (10k resamples) for the 95% "
-        "CI on the success-rate difference; Fisher's exact two-sided "
-        "test for the p-value; Holm-Bonferroni step-down adjustment "
-        "across the 5 ff comparisons within each terrain."
+        "same terrain. Method: approximate BCa bootstrap (10k resamples, "
+        "sign-corrected two-sample acceleration term, see "
+        "evaluation/significance.py) for the 95% CI on the success-rate "
+        "difference; Fisher's exact two-sided test for the p-value. The "
+        "CI and p-value come from different procedures and can disagree "
+        "at the margin. Holm-Bonferroni step-down adjustment across the "
+        "5 ff comparisons within each terrain."
     )
     lines.append("")
     for env_name, label in (("slippery", "Slippery"), ("rough", "Rough")):
