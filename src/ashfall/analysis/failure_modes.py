@@ -135,6 +135,8 @@ def plot_curriculum_pool_composition(
 
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
+    import physx_style as _physx_style  # editorial-print theme
+    _physx_style.apply()
     import numpy as np
 
     output_path = Path(output_path)
@@ -147,7 +149,7 @@ def plot_curriculum_pool_composition(
     ffs = [c["failure_fraction"] for c in cells]
     bottoms = np.zeros(len(cells))
     fig, ax = plt.subplots(figsize=(9, 5))
-    colors = plt.cm.tab10(np.linspace(0, 1, max(len(modes), 1)))
+    colors = _physx_style.cmap_cycle(max(len(modes), 1))
     for i, mode in enumerate(modes):
         vals = np.array([c["per_mode_share"].get(mode, 0.0) for c in cells])
         ax.bar(ffs, vals, bottom=bottoms, label=mode, color=colors[i], width=0.08)

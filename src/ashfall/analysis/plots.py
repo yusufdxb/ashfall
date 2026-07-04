@@ -23,7 +23,8 @@ def _import_plt():
 
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-
+    import physx_style as _physx_style  # editorial-print theme
+    _physx_style.apply()
     return plt
 
 
@@ -53,7 +54,7 @@ def plot_condition_comparison(
 
     fig, ax = plt.subplots(figsize=(max(8, n_envs * 2), 5))
 
-    colors = plt.cm.Set2(np.linspace(0, 1, max(n_conds, 3)))
+    colors = _physx_style.cmap_cycle(max(n_conds, 3))
     for i, cond in enumerate(conditions):
         values = [results[cond].get(env, {}).get(metric, 0.0) for env in envs]
         bars = ax.bar(x + i * width, values, width, label=cond, color=colors[i])
@@ -101,7 +102,7 @@ def plot_failure_distribution(
 
     x = np.arange(len(conditions))
     bottoms = np.zeros(len(conditions))
-    colors = plt.cm.tab10(np.linspace(0, 1, max(len(all_modes), 1)))
+    colors = _physx_style.cmap_cycle(max(len(all_modes), 1))
 
     for i, mode in enumerate(all_modes):
         values = [failure_counts[c].get(mode, 0) for c in conditions]
@@ -143,8 +144,8 @@ def plot_ablation_sweep(
     y_sorted = [p[1] for p in pairs]
 
     fig, ax = plt.subplots(figsize=(8, 5))
-    ax.plot(x_sorted, y_sorted, "o-", linewidth=2, markersize=8, color="#2196F3")
-    ax.fill_between(x_sorted, y_sorted, alpha=0.1, color="#2196F3")
+    ax.plot(x_sorted, y_sorted, "o-", linewidth=2, markersize=8, color=_physx_style.COLORS["physx"])
+    ax.fill_between(x_sorted, y_sorted, alpha=0.1, color=_physx_style.COLORS["physx"])
 
     for xi, yi in zip(x_sorted, y_sorted):
         ax.annotate(
