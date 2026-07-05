@@ -162,7 +162,7 @@ python3 -m pytest tests/ -v
 export ISAACLAB_PATH=$HOME/Sim/IsaacLab
 export PHOENIX_ROOT=$HOME/workspace/go2-phoenix
 
-# Train baseline (500 iters, ~28 min on RTX 5070)
+# Train baseline (500 iters, ~28 min on the Blackwell consumer GPU)
 ./scripts/run_experiment.sh configs/experiments/baseline.yaml
 
 # Train adapted policy (200 iters from baseline checkpoint)
@@ -203,7 +203,7 @@ export PHOENIX_ROOT=$HOME/workspace/go2-phoenix
 
 - **Robot:** Unitree GO2 EDU
 - **Onboard compute:** Jetson Orin NX (16 GB)
-- **Training GPU:** NVIDIA RTX 5070 (mewtwo)
+- **Training GPU:** NVIDIA Blackwell consumer GPU
 - **Sim:** NVIDIA Isaac Lab (Isaac Sim 4.5+)
 - **Middleware:** ROS 2 Humble
 

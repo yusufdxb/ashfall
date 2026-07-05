@@ -6,7 +6,7 @@
 # baseline cells on disk
 # (results/multiseed_pilot_2026-05-07_failure_fraction=0p0_seed=*).
 # 6 mode subsets x 3 pilot seeds {42, 123, 7} = 18 cells, ~15 min each
-# on RTX 5070 (~4.5 hr wall total).
+# on the Blackwell consumer GPU (~4.5 hr wall total).
 
 name: "failure_modes_pilot_2026-05-08"
 condition: "adapted"

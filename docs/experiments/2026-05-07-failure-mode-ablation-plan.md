@@ -37,7 +37,7 @@ Six cells, all at `failure_fraction = 0.5` and `seed = 42`:
 | severe_plus_slip       | `[attitude, collapse, slip]`           | minimal severity + friction set is sufficient |
 
 This is six runs. With v0.3.0's per-cell wall-clock of approximately
-15 to 25 minutes (200 fine-tune iters at 4096 envs on the RTX 5070,
+15 to 25 minutes (200 fine-tune iters at 4096 envs on the Blackwell consumer GPU,
 plus eval) the budget is 90 to 150 minutes total.
 
 ## Expected runtime

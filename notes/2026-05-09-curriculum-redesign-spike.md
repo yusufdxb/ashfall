@@ -24,7 +24,7 @@ Convergent evidence from Agent 2 (literature scan) and Agent 3 (pool diagnostic)
 
 ## Hypotheses to test (ordered, gated)
 
-- [ ] **H0, bug-fix recovers signal.** Patch `reset_bridge.py` to (a) seed from a configurable row offset, e.g. `failure_onset_row - K` for small K, and (b) write `base_lin_vel_body` + `base_ang_vel_body` to sim. Re-run n=3 pilot at ff in {0.0, 0.5} on slippery. If mean paired delta at ff=0.5 ≥ +3 pp and ≥2/3 seeds positive, the curriculum mechanism is fine and the v0.2.0/v0.3.0 lifts were on the right side of a buggy distribution. Cost: ~50 LOC + 90 min on RTX 5070.
+- [ ] **H0, bug-fix recovers signal.** Patch `reset_bridge.py` to (a) seed from a configurable row offset, e.g. `failure_onset_row - K` for small K, and (b) write `base_lin_vel_body` + `base_ang_vel_body` to sim. Re-run n=3 pilot at ff in {0.0, 0.5} on slippery. If mean paired delta at ff=0.5 ≥ +3 pp and ≥2/3 seeds positive, the curriculum mechanism is fine and the v0.2.0/v0.3.0 lifts were on the right side of a buggy distribution. Cost: ~50 LOC + 90 min on the Blackwell consumer GPU.
 
 - [ ] **H1, pool is the bottleneck.** If H0 null, command-diversify the synth pool (Agent 3 recommendation): sweep `(vx, vy, wz)` across 5 settings per mode, regenerate 90 parquets, re-run n=3 pilot. Eval-logger patch (Agent 3 §3, ~60 LOC in `evaluate.py`) lands in the same change so per-mode eval failure counts become observable. Cost: pool regen 20 min + 90 min training + logger patch.
 
@@ -69,7 +69,7 @@ Convergent evidence from Agent 2 (literature scan) and Agent 3 (pool diagnostic)
 ## Next concrete action
 
 1. **Today**: branch `H0-bridge-fix-2026-05-17` off `audit-fixes-2026-04-16` on Phoenix. Patch `reset_bridge.py` for (a) configurable seed-row strategy and (b) velocity write. Add unit test. Run existing 178-test suite to confirm no regressions.
-2. **Today/tomorrow**: re-run the multiseed pilot (n=3 at ff in {0.0, 0.5}, seeds 42/123/7) on the patched bridge. ~90 min wall on RTX 5070. Use the existing `multiseed_pilot_2026-05-07.yaml` config, only the Phoenix branch changes.
+2. **Today/tomorrow**: re-run the multiseed pilot (n=3 at ff in {0.0, 0.5}, seeds 42/123/7) on the patched bridge. ~90 min wall on the Blackwell consumer GPU. Use the existing `multiseed_pilot_2026-05-07.yaml` config, only the Phoenix branch changes.
 3. **After verdict**: write `notes/2026-05-17-h0-bridge-fix-verdict.md`. If H0 succeeds, scope v0.4.0; if null, scope H1 (pool diversification) as the next 1-day task.
 4. **In parallel, independent of H0-H3**: scope the `lowstate_bridge_node.py` patch (Agent 4 §3) to publish `foot_force` and `base_lin_vel_body`. Required for any hardware pass, useful for sim-to-real verification regardless of curriculum direction.
 

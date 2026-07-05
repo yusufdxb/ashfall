@@ -63,7 +63,7 @@ height_scan that the Rough-v0 trained policy expects.
 ### 1.4 Seeds
 
 Every cell ran with `training.seed = 42` and `device = cuda:0` on the
-mewtwo workstation. There is **one training run per cell**. This is
+the dev workstation. There is **one training run per cell**. This is
 a single-seed pilot; cross-seed variance is unmeasured.
 
 ## 2. Statistical approach
@@ -224,7 +224,7 @@ and the curriculum RNG seed (Phoenix-side patch on
 `audit-fixes-2026-04-16` that threads `cfg.run.seed` into
 `FailureCurriculum`). The seed-propagation audit lives at
 `notes/2026-05-07-seed-propagation-audit.md`. The pilot ran in
-91 min wall on RTX 5070, all 6 cells rc=0.
+91 min wall on the Blackwell consumer GPU, all 6 cells rc=0.
 
 ### What survived
 
@@ -273,7 +273,7 @@ The pilot's "directionally consistent slippery lift" claim was the
 weakest part of section 5b. On 2026-05-08 (run wall 22:48 to 00:51)
 we added 4 new seeds (99, 314, 1729, 2718) at ff in {0.0, 0.5} for
 n=7 paired analysis. Same warm-start, same recipe, same Phoenix
-patch (`d42ee01`). 8 new cells, all rc=0, total 7016 s on RTX 5070.
+patch (`d42ee01`). 8 new cells, all rc=0, total 7016 s on the Blackwell consumer GPU.
 
 ### Headline (n=7 paired)
 
