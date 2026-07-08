@@ -124,8 +124,6 @@ def _plot_success_curves(cells: list[dict], output_path: Path) -> None:
 
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    import physx_style as _physx_style  # editorial-print theme
-    _physx_style.apply()
     xs = [c["failure_fraction"] for c in cells if not c["missing"]]
     slip = [
         c["metrics"].get("slippery", {}).get("success_rate", float("nan"))
@@ -158,10 +156,10 @@ def _plot_success_curves(cells: list[dict], output_path: Path) -> None:
     ) if xs else ([], [])
 
     fig, ax = plt.subplots(figsize=(8, 5))
-    ax.plot(xs, slip, "o-", color=_physx_style.COLORS["physx"], label="slippery", linewidth=2)
-    ax.fill_between(xs, slip_lo, slip_hi, color=_physx_style.COLORS["physx"], alpha=0.15)
-    ax.plot(xs, rough, "s-", color=_physx_style.COLORS["newton"], label="rough", linewidth=2)
-    ax.fill_between(xs, rough_lo, rough_hi, color=_physx_style.COLORS["newton"], alpha=0.15)
+    ax.plot(xs, slip, "o-", color="C0", label="slippery", linewidth=2)
+    ax.fill_between(xs, slip_lo, slip_hi, color="C0", alpha=0.15)
+    ax.plot(xs, rough, "s-", color="C2", label="rough", linewidth=2)
+    ax.fill_between(xs, rough_lo, rough_hi, color="C2", alpha=0.15)
     ax.set_xlabel("failure_fraction")
     ax.set_ylabel("success rate")
     ax.set_title("Ashfall v0.3.0: Success Rate vs Failure-Curriculum Density")
@@ -179,8 +177,6 @@ def _plot_slew(cells: list[dict], output_path: Path) -> None:
 
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    import physx_style as _physx_style  # editorial-print theme
-    _physx_style.apply()
 
     xs = [c["failure_fraction"] for c in cells if not c["missing"]]
     slip = [
@@ -195,8 +191,8 @@ def _plot_slew(cells: list[dict], output_path: Path) -> None:
     ]
 
     fig, ax = plt.subplots(figsize=(8, 5))
-    ax.plot(xs, slip, "o-", color=_physx_style.COLORS["physx"], label="slippery", linewidth=2)
-    ax.plot(xs, rough, "s-", color=_physx_style.COLORS["newton"], label="rough", linewidth=2)
+    ax.plot(xs, slip, "o-", color="C0", label="slippery", linewidth=2)
+    ax.plot(xs, rough, "s-", color="C2", label="rough", linewidth=2)
     ax.set_xlabel("failure_fraction")
     ax.set_ylabel("slew saturation pct")
     ax.set_title("Ashfall v0.3.0: Slew Saturation vs Failure-Curriculum Density")

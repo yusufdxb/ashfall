@@ -14,8 +14,8 @@ and produces:
   exact one-sided sign-flip permutation p-value (n=3 -> 2**3 = 8
   permutations, asymptotic tests do not apply).
 
-The output is consumed by ``notes/2026-05-07-multiseed-verdict.md``
-and the ``docs/methodology/2026-05-07-ff-sweep-rigor.md`` update.
+The output is consumed by ``results/multiseed_n7_verdict.md``
+and the ``docs/methodology/ff_sweep_rigor.md`` update.
 
 Pure numpy. No torch import. Safe to call from no-sim CI.
 """

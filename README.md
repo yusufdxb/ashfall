@@ -57,11 +57,11 @@ Honest verdict:
 - **Slippery: no reliable effect.** 4/7 positive is roughly a coin flip. Per-seed deltas span +3.6 pp to -8.85 pp. The pilot's "3/3 positive" framing was a small-sample artifact.
 - **Rough: regresses on average.** 2/7 positive, mean -1.58 pp. The curriculum trades rough proficiency for an unreliable slippery effect.
 
-Full numbers: [`notes/2026-05-07-multiseed-scale-verdict.md`](notes/2026-05-07-multiseed-scale-verdict.md). Methodology: [`docs/methodology/2026-05-07-ff-sweep-rigor.md`](docs/methodology/2026-05-07-ff-sweep-rigor.md) section 5c.
+Full numbers: [`results/multiseed_n11_scale_verdict.md`](results/multiseed_n11_scale_verdict.md). Methodology: [`docs/methodology/ff_sweep_rigor.md`](docs/methodology/ff_sweep_rigor.md) section 5c.
 
 ### Earlier results (single-seed, kept for context)
 
-The v0.2.0 baseline-vs-adapted comparison and the v0.3.0 6-cell `failure_fraction` sweep (single seed=42) reported +9.4 pp and +5.1 pp slippery lifts respectively. Neither replicates at n=7 paired analysis. The 2026-05-07 n=3 pilot looked directionally positive (3/3 seeds) but flipped under scaling. Details retained in `notes/2026-05-07-{sweep-verification,multiseed-verdict}.md` and methodology sections 5b and earlier for history.
+The v0.2.0 baseline-vs-adapted comparison and the v0.3.0 6-cell `failure_fraction` sweep (single seed=42) reported +9.4 pp and +5.1 pp slippery lifts respectively. Neither replicates at n=7 paired analysis. The 2026-05-07 n=3 pilot looked directionally positive (3/3 seeds) but flipped under scaling. Details retained in [`results/multiseed_n7_verdict.md`](results/multiseed_n7_verdict.md) and methodology sections 5b and earlier for history.
 
 ### What's still salvageable
 

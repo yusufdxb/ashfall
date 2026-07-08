@@ -1,4 +1,4 @@
-wrote /home/yusuf/Projects/ashfall/notes/2026-05-07-multiseed-scale-verdict.md
+wrote /home/yusuf/Projects/ashfall/results/multiseed_n11_scale_verdict.md
 
 # Multi-seed scale verdict (n=7, 2026-05-07)
 
@@ -76,7 +76,7 @@ With n_seeds=7 the exact two-sided sign-flip permutation test has 2**7 = 128 per
 ### Slippery (prior optimum at ff=0.5)
 
 - Prior single-seed lift: +5.1 pp.
-- n=3 pilot mean delta (subset): see notes/2026-05-07-multiseed-verdict.md.
+- n=3 pilot mean delta (subset): see results/multiseed_n7_verdict.md.
 - Cross-seed mean delta (n=7): -1.10 pp (SE 1.68, 95% CI [-5.20, +3.01] pp).
 - Per-seed signs: 4/7 positive.
 - Exact two-sided sign-flip p: 0.5625 (floor at n=7 is 0.0156).
@@ -86,7 +86,7 @@ With n_seeds=7 the exact two-sided sign-flip permutation test has 2**7 = 128 per
 ### Rough (retention check)
 
 - Prior single-seed lift: +1.5 pp.
-- n=3 pilot mean delta (subset): see notes/2026-05-07-multiseed-verdict.md.
+- n=3 pilot mean delta (subset): see results/multiseed_n7_verdict.md.
 - Cross-seed mean delta (n=7): -1.58 pp (SE 1.93, 95% CI [-6.31, +3.15] pp).
 - Per-seed signs: 2/7 positive.
 - Exact two-sided sign-flip p: 0.3906 (floor at n=7 is 0.0156).

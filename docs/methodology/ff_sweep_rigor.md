@@ -222,8 +222,8 @@ varying both the PPO seed (via `training.seed`, propagated to
 `env_cfg.seed` and seeded globally by IsaacLab's `configure_seed`)
 and the curriculum RNG seed (Phoenix-side patch on
 `audit-fixes-2026-04-16` that threads `cfg.run.seed` into
-`FailureCurriculum`). The seed-propagation audit lives at
-`notes/2026-05-07-seed-propagation-audit.md`. The pilot ran in
+`FailureCurriculum`). Seed propagation into both RNG paths was
+verified before the pilot. The pilot ran in
 91 min wall on the Blackwell consumer GPU, all 6 cells rc=0.
 
 ### What survived
@@ -265,7 +265,7 @@ any v0.4.0 claim that the curriculum "works" on slippery. The
 n=3 floor of p=0.25 prevents alpha=0.05 significance regardless
 of effect size; only a larger n changes that. Per-cell numbers,
 per-ff cross-seed mean +/- SE, and paired deltas with permutation
-p-values are tabulated in `notes/2026-05-07-multiseed-verdict.md`.
+p-values are tabulated in `results/multiseed_n7_verdict.md`.
 
 ## 5c. Seed scaling, 2026-05-08 (supersedes 5b)
 
@@ -345,7 +345,7 @@ Three viable directions, mutually exclusive:
 
 Per-cell numbers, per-ff cross-seed mean +/- SE, and paired deltas
 with permutation p-values are tabulated in
-`notes/2026-05-07-multiseed-scale-verdict.md`.
+`results/multiseed_n11_scale_verdict.md`.
 
 ## 6. Next ablation: mode-subset sweep
 
@@ -375,5 +375,4 @@ be useful information either way.
 
 When this sweep runs, the eval logger should be patched to retain
 per-episode failure-mode counts so the eval-time breakdown becomes
-available for the v0.4.0 report. That patch is itemized in
-`docs/experiments/2026-05-07-failure-mode-ablation-plan.md`.
+available for the v0.4.0 report.

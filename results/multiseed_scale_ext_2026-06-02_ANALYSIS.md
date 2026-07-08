@@ -26,8 +26,7 @@ All statistics come from the exact functions the published n=7 analysis uses:
   two-sided sign-flip permutation p over `2**n` sign assignments, |mean| stat,
   no add-one (raw hits/total).
 
-The published n=7 renderer `scripts/render_multiseed_scale_verdict.py:52` calls
-exactly these two combine specs:
+The published n=7 analysis combines exactly these two specs:
 `(results, "multiseed_pilot_2026-05-07")` + `(results, "multiseed_scale_2026-05-07")`.
 The n=11 run adds a third spec `(results, "multiseed_scale_ext_2026-06-02")` and
 changes nothing else. The metric consumed is `success_rate` from each cell's
