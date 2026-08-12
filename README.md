@@ -2,9 +2,39 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**Failure-driven robot learning for the Unitree GO2.**
+**Failure-driven policy adaptation for the Unitree GO2: detect locomotion failures, replay them in simulation, fine-tune the policy on them, and then measure honestly whether any of it helped.**
 
-Ashfall is a failure-driven policy adaptation system for quadruped locomotion. It detects hardware failures, extracts replayable failure segments, reconstructs them in simulation with controlled variation, and fine-tunes the locomotion policy to reduce repeated failures over time.
+The idea is intuitive enough that most projects would ship it on a single seed and call it a result. A quadruped slips on low-friction ground, you log the trajectory, reconstruct the failure in sim with domain randomization, and fine-tune the policy on a curriculum enriched with those failure cases. Ashfall builds that entire loop (a 6-mode failure detector, a synthetic failure generator, a sweep runner, and a paired statistical evaluation layer) and then runs the experiment that usually gets skipped: the same curriculum across 11 random seeds, paired seed by seed, scored with an exact sign-flip permutation test.
+
+It does not work. The headline is a null result, and it is the point of the repo.
+
+## Headline result: the failure curriculum shows no reliable effect (n=11 seeds, paired)
+
+A single seed (42) suggested a +5.1 pp lift in slippery-terrain success rate at `failure_fraction=0.5`. Paired across seeds, that lift disappears and never comes back. Adding seeds moved the p-value *away* from significance, not toward it.
+
+| terrain  | n  | mean delta (ff=0.5 minus ff=0.0) | 95% CI (t, df=n-1) | seeds positive | exact two-sided sign-flip p | p-floor | clears alpha=0.05 |
+|:---------|---:|---------------------------------:|:-------------------|:---------------|----------------------------:|--------:|:------------------|
+| slippery |  7 | -1.099 pp | [-5.204, +3.006] pp | 4 / 7  | 0.5625 | 0.0156 | no |
+| slippery | 11 | -0.416 pp | [-2.823, +1.992] pp | 7 / 11 | 0.7266 | 0.0010 | no |
+| rough    |  7 | -1.578 pp | [-6.308, +3.153] pp | 2 / 7  | 0.3906 | 0.0156 | no |
+| rough    | 11 | +0.548 pp | [-3.463, +4.560] pp | 5 / 11 | 0.7676 | 0.0010 | no |
+
+The sample is not the problem. The p-floor column is `2 / 2**n`, the smallest exact sign-flip p reachable at that sample size: at n=11 it is 0.0010, so alpha=0.05 is structurally reachable and the test simply does not get there. **The null verdict HOLDS at n=11 on both terrains.** Full per-seed deltas, the exact commands, and the config-comparability audit are in [`results/multiseed_scale_ext_2026-06-02_ANALYSIS.md`](results/multiseed_scale_ext_2026-06-02_ANALYSIS.md).
+
+Known caveat, stated rather than buried: three of the four newest slippery `ff=0.0` cells sit at or near a 100% success ceiling (0.9922, 1.0000, 0.9922), so their deltas are mechanically clamped toward zero. The terrain configs were diffed and are identical, so this is a ceiling effect and not a confound, but it means part of the n=11 shrinkage toward zero is mechanical rather than fresh independent evidence. A future extension should pick seeds whose baseline slippery success leaves headroom below 0.95.
+
+## What survives the null
+
+| Component | Status | Evidence |
+|-----------|--------|----------|
+| 6-mode failure detector | Validated, defensible contribution | 18 / 18 synthetic parquets classified correctly, zero cross-fires (2026-04-19) |
+| Experiment + evaluation framework | Reusable regardless of the curriculum result | sweep generator, paired analysis, exact sign-flip permutation tests, BCa bootstrap |
+| Seed-propagation fix | Real bug fixed upstream | go2-phoenix `FailureCurriculum` patch (`d42ee01`), which had masked seed-driven variance in prior curriculum-style ablations |
+| Failure-fraction curriculum | **Does not work** | table above |
+| Real-hardware failure data | Not collected | synthetic failures only, see [Limitations](#limitations) |
+| Test suite | 113 tests passing | `python3 -m pytest tests/` |
+
+Three viable directions next: (1) re-design the curriculum (a research pivot, not a parameter sweep), (2) a mode-subset ablation at ff=0.5 with explicitly exploratory framing, (3) hardware data collection, since synthetic failures may simply not generalize. See methodology section 5c for the tradeoffs.
 
 ## The Ashfall Loop
 
@@ -38,42 +68,9 @@ Ashfall classifies quadruped locomotion failures into 6 modes, ordered by severi
 | Contact Loss | 2 | >= 2 feet below 5N for >= 0.1 s | Vary slope and surface irregularity |
 | Command Mismatch | 1 | \|cmd - actual\| > 0.4 m/s for > 1.0 s | Sweep mass + actuator strength |
 
-## Results (Simulation)
-
-Status as of 2026-05-08: the failure-fraction curriculum at ff=0.5 does NOT reliably improve slippery success rate across seeds. n=7 paired mean is -1.10 pp with 95% CI crossing zero. The v0.2.0 +9.4 pp and v0.3.0 +5.1 pp slippery claims were both seed=42 artifacts that did not reproduce.
-
-### 2026-05-08 seed-scaling pass (n=7, paired)
-
-3 pilot seeds (42, 123, 7) plus 4 scaling seeds (99, 314, 1729, 2718) at ff in {0.0, 0.5} on Phoenix `audit-fixes-2026-04-16` + commit `d42ee01` (FailureCurriculum seed-propagation fix). 200-iter PPO fine-tune from rough baseline, 128-140 eval episodes per cell per terrain. 14 cells total, all rc=0.
-
-| terrain  | ff=0.0 mean (SE) | ff=0.5 mean (SE) | paired mean delta | 95% paired CI       | per-seed signs | exact sign-flip p | clears alpha=0.05 |
-|----------|------------------|------------------|-------------------|---------------------|----------------|-------------------|:------------------|
-| slippery | 0.898 (0.011)    | 0.887 (0.012)    | -1.10 pp          | [-5.20, +3.01] pp   | 4 / 7 positive |            0.5625 | no                |
-| rough    | 0.920 (0.016)    | 0.905 (0.013)    | -1.58 pp          | [-6.31, +3.15] pp   | 2 / 7 positive |            0.3906 | no                |
-
-n=7 is structurally adequate (sign-flip floor 2/128 = 0.0156, so alpha=0.05 IS reachable at this sample size). Neither terrain comes close.
-
-Honest verdict:
-- **Slippery: no reliable effect.** 4/7 positive is roughly a coin flip. Per-seed deltas span +3.6 pp to -8.85 pp. The pilot's "3/3 positive" framing was a small-sample artifact.
-- **Rough: regresses on average.** 2/7 positive, mean -1.58 pp. The curriculum trades rough proficiency for an unreliable slippery effect.
-
-Full numbers: [`notes/2026-05-07-multiseed-scale-verdict.md`](notes/2026-05-07-multiseed-scale-verdict.md). Methodology: [`docs/methodology/2026-05-07-ff-sweep-rigor.md`](docs/methodology/2026-05-07-ff-sweep-rigor.md) section 5c.
-
-### Earlier results (single-seed, kept for context)
-
-The v0.2.0 baseline-vs-adapted comparison and the v0.3.0 6-cell `failure_fraction` sweep (single seed=42) reported +9.4 pp and +5.1 pp slippery lifts respectively. Neither replicates at n=7 paired analysis. The 2026-05-07 n=3 pilot looked directionally positive (3/3 seeds) but flipped under scaling. Details retained in `notes/2026-05-07-{sweep-verification,multiseed-verdict}.md` and methodology sections 5b and earlier for history.
-
-### What's still salvageable
-
-- The 6-mode failure taxonomy and detector are independently validated (18/18 synthetic parquets correctly classified, zero cross-fires, 2026-04-19) and remain a defensible contribution.
-- The experiment + evaluation framework (sweep generator, paired analysis, sign-flip permutation tests, BCa bootstrap) is generally useful regardless of the curriculum result.
-- The Phoenix FailureCurriculum seed-propagation patch (`d42ee01`) is a real fix that masked seed-driven variance in any prior curriculum-style ablation.
-
-Three viable directions next: (1) re-design the curriculum (research pivot, not parameter sweep), (2) mode-subset ablation at ff=0.5 anyway with exploratory framing, (3) hardware data collection (synth failures may not generalize). See methodology section 5c for tradeoffs.
-
 ### Taxonomy validation (2026-04-19, no GPU)
 
-The 6-mode `FailureDetector` was exercised against 18 synth parquets (6 modes × 3 variants) generated by `scripts/generate_failures.sh`. Every parquet's designed failure mode was correctly detected with zero cross-fires:
+The 6-mode `FailureDetector` was exercised against 18 synth parquets (6 modes x 3 variants) generated by `scripts/generate_failures.sh`. Every parquet's designed failure mode was correctly detected with zero cross-fires:
 
 | mode | detected | cross-fires |
 |---|---:|---:|
@@ -84,37 +81,44 @@ The 6-mode `FailureDetector` was exercised against 18 synth parquets (6 modes ×
 | contact_loss | 3 / 3 | 0 |
 | command_mismatch | 3 / 3 | 0 |
 
-The ablation-sweep generator (`scripts/run_ablation.sh`) produces 6 `failure_fraction` cells (0.0, 0.1, 0.25, 0.5, 0.75, 1.0) with per-cell `commands.sh` stubs ready to execute inside Isaac Lab. The analysis pipeline (`scripts/analyze.sh`) consumes the results directory and writes `results/REPORT.md`: full tables + plots, with zero experiments populated until training runs land.
+## Experimental history
+
+### The 2026-05-08 seed-scaling pass (n=7, paired)
+
+3 pilot seeds (42, 123, 7) plus 4 scaling seeds (99, 314, 1729, 2718) at ff in {0.0, 0.5} on Phoenix `audit-fixes-2026-04-16` plus commit `d42ee01` (FailureCurriculum seed-propagation fix). 200-iter PPO fine-tune from the rough baseline, 128-140 eval episodes per cell per terrain. 14 cells total, all rc=0. This is the analysis the n=11 extension pooled into; its per-terrain summary statistics were:
+
+| terrain  | ff=0.0 mean (SE) | ff=0.5 mean (SE) |
+|----------|------------------|------------------|
+| slippery | 0.898 (0.011)    | 0.887 (0.012)    |
+| rough    | 0.920 (0.016)    | 0.905 (0.013)    |
+
+Honest verdict at that stage, unchanged by the extension:
+
+- **Slippery: no reliable effect.** 4/7 positive is roughly a coin flip. Per-seed deltas span +3.6 pp to -8.85 pp. The pilot's "3/3 positive" framing was a small-sample artifact.
+- **Rough: regresses on average** at n=7 (mean -1.58 pp), and settles near zero at n=11 (+0.55 pp). Either way there is no reliable gain.
+
+Full numbers: [`notes/2026-05-07-multiseed-scale-verdict.md`](notes/2026-05-07-multiseed-scale-verdict.md). Methodology: [`docs/methodology/2026-05-07-ff-sweep-rigor.md`](docs/methodology/2026-05-07-ff-sweep-rigor.md) section 5c.
+
+### Earlier single-seed results (kept for context, not for citation)
+
+The v0.2.0 baseline-vs-adapted comparison and the v0.3.0 6-cell `failure_fraction` sweep (single seed=42) reported +9.4 pp and +5.1 pp slippery lifts respectively. Neither replicates under paired multi-seed analysis. The 2026-05-07 n=3 pilot looked directionally positive (3/3 seeds) but flipped under scaling. Details retained in `notes/2026-05-07-{sweep-verification,multiseed-verdict}.md` and in methodology sections 5b and earlier.
+
+The ablation-sweep generator (`scripts/run_ablation.sh`) produces 6 `failure_fraction` cells (0.0, 0.1, 0.25, 0.5, 0.75, 1.0) with per-cell `commands.sh` stubs ready to execute inside Isaac Lab. The analysis pipeline (`scripts/analyze.sh`) consumes the results directory and writes `results/REPORT.md` with full tables and plots.
 
 ## Project Structure
 
-```
-ashfall/
-  src/ashfall/
-    taxonomy/          # 6-mode failure detector (pure numpy)
-      detector.py      # Stateful multi-mode failure classifier
-      schema.py        # Taxonomy metadata and table generation
-    experiment/        # Experiment management
-      schema.py        # Config/result dataclasses
-      runner.py        # Pipeline orchestration (generates Isaac Lab commands)
-      sweep.py         # Ablation sweep generation
-    evaluation/        # Comparison framework
-      harness.py       # Multi-condition comparison + bootstrap CI
-      metrics.py       # Failure-specific metrics (recurrence, intervention)
-    analysis/          # Post-hoc analysis
-      plots.py         # Matplotlib visualizations
-      tables.py        # Markdown table generation
-      report.py        # Auto-generated experiment report
-    synth/             # Synthetic failure generation
-      generator.py     # Generates training data for all 6 failure modes
-  configs/
-    experiments/       # Named experiment configs (baseline, adapted, control, ablation)
-    taxonomy.yaml      # Failure detection thresholds
-  scripts/             # Shell scripts for reproducible runs
-  data/failures/       # Failure trajectory Parquets (synthetic + hardware)
-  results/             # Experiment outputs (metrics, plots, reports)
-  tests/               # 113 unit tests
-```
+| Path | Contents |
+|------|----------|
+| `src/ashfall/taxonomy/` | 6-mode failure detector (pure numpy): `detector.py` stateful multi-mode classifier, `schema.py` taxonomy metadata |
+| `src/ashfall/experiment/` | Config/result dataclasses, pipeline orchestration (generates Isaac Lab commands), ablation sweep generation |
+| `src/ashfall/evaluation/` | Multi-condition comparison, bootstrap CI, failure-specific metrics (recurrence, intervention) |
+| `src/ashfall/analysis/` | Matplotlib plots, markdown tables, auto-generated experiment report, multi-seed paired analysis |
+| `src/ashfall/synth/` | Synthetic failure generation for all 6 modes |
+| `configs/` | Named experiment configs (baseline, adapted, control, ablation) and `taxonomy.yaml` detection thresholds |
+| `scripts/` | Shell scripts for reproducible runs |
+| `data/failures/` | Failure trajectory Parquets (synthetic and hardware) |
+| `results/` | Experiment outputs: metrics, plots, reports, multi-seed analyses |
+| `tests/` | 113 unit tests |
 
 ## Dependencies
 
@@ -139,7 +143,6 @@ Ashfall builds on [go2-phoenix](https://github.com/yusufdxb/go2-phoenix) for Isa
 
 ```bash
 # Install
-cd ~/Projects/ashfall
 pip install -e ".[dev]"
 
 # Run tests (no GPU required)
@@ -187,6 +190,8 @@ export PHOENIX_ROOT=$HOME/workspace/go2-phoenix
 | Adaptation iters | 50, 100, 200, 400 | Diminishing returns past 200 iters |
 | Domain randomization | narrow vs wide | Wider DR improves transfer but may hurt convergence |
 
+The first axis has now been tested and the hypothesis is rejected at n=11.
+
 ## Evaluation Metrics
 
 | Metric | Description |
@@ -203,13 +208,14 @@ export PHOENIX_ROOT=$HOME/workspace/go2-phoenix
 
 - **Robot:** Unitree GO2 EDU
 - **Onboard compute:** Jetson Orin NX (16 GB)
-- **Training GPU:** NVIDIA Blackwell consumer GPU
+- **Training GPU:** NVIDIA (Blackwell) consumer GPU
 - **Sim:** NVIDIA Isaac Lab (Isaac Sim 4.5+)
 - **Middleware:** ROS 2 Humble
 
 ## Limitations
 
-- **The v0.3.0 ff=0.5 curriculum effect did not survive n=7 paired analysis.** Slippery: 4/7 positive, mean -1.10 pp, p=0.5625. Rough: 2/7 positive, mean -1.58 pp, p=0.3906. Neither clears alpha=0.05 with margin. Any future "the curriculum works" claim needs a different curriculum design or a different sample population.
+- **The failure-fraction curriculum effect did not survive paired multi-seed analysis.** At n=11: slippery 7/11 positive, mean -0.42 pp, p=0.7266; rough 5/11 positive, mean +0.55 pp, p=0.7676. Neither clears alpha=0.05. Any future "the curriculum works" claim needs a different curriculum design or a different sample population.
+- **Ceiling effect in the newest slippery cells.** Three of the four 2026-06-02 seeds start at or near 100% slippery success at ff=0.0, so their deltas are clamped toward zero. Terrain configs were verified identical, so this is not a confound, but the magnitude of the n=11 shrinkage is partly mechanical.
 - **Real hardware failures not yet collected.** Synthetic failures are physics-approximate, not sim-grade. Synth-only training may not generalize; real-failure replay is untested.
 - **Per-episode metric arrays not retained by Phoenix `evaluate.py`.** The current evaluation pipeline emits aggregate scalars per cell, which limits BCa bootstrap and per-mode breakdown to curriculum-input pool composition rather than eval-time failure-mode counts. A Phoenix-side patch to retain per-episode results is the prerequisite for any defensible mode-subset analysis.
 - **No real-robot deployment validation yet.** The ONNX policy passes parity checks but has not been exercised on the live GO2.
@@ -223,7 +229,7 @@ This is not a wrapper around existing tools. Ashfall contributes:
 2. **An experiment framework** that manages baselines, conditions, ablations, and statistical comparisons as first-class objects.
 3. **A failure-specific evaluation layer** that tracks intervention count, failure recurrence, and recovery time beyond standard RL metrics.
 4. **Synthetic failure generation** that produces structurally correct training data matching the Phoenix Parquet schema for all failure modes.
-5. **Integration with a validated sim-to-real pipeline** (go2-phoenix) that has proven baseline and fine-tune results.
+5. **A negative result reported as a negative result**, with the seed count, the permutation test, the p-floor, and the ceiling-effect caveat all published rather than a single flattering seed.
 
 The system is designed so that the next hardware session can close the full loop: deploy baseline, collect real failures, replay in sim, adapt, and evaluate.
 
