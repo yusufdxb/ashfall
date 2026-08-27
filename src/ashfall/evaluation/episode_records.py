@@ -17,6 +17,12 @@ Fail-closed rules:
   column or in the Arrow schema metadata, raises.
 * A missing required column raises.
 * A missing file, an empty units map, or a null version raises.
+* A null in any required column raises, so a partially written row cannot
+  become a record with ``None`` where a seed should be.
+* A file that is not readable parquet raises, so a mistyped path cannot
+  surface as an unrelated library error.
+* An artifact carrying zero rows raises, and so does an empty set of input
+  paths, so an arm can never be silently empty.
 
 Nothing is defaulted, inferred, or skipped.
 """
@@ -106,6 +112,12 @@ def validate_table(table, *, source: str = "<table>") -> None:
             f"{source}: missing required column(s): {', '.join(sorted(missing))}"
         )
 
+    if table.num_rows == 0:
+        raise EpisodeRecordSchemaError(
+            f"{source}: artifact carries zero episode rows; an empty arm is not a "
+            "readable result"
+        )
+
     versions: set[str] = set()
     meta = table.schema.metadata or {}
     if SCHEMA_VERSION_KEY in meta:
@@ -124,16 +136,31 @@ def validate_table(table, *, source: str = "<table>") -> None:
             f"but artifact declares {unexpected!r}"
         )
 
+    nulled = sorted(
+        name for name in REQUIRED_COLUMNS if table.column(name).null_count > 0
+    )
+    if nulled:
+        raise EpisodeRecordSchemaError(
+            f"{source}: null value(s) in required column(s): {', '.join(nulled)}"
+        )
+
 
 def table_units(table, *, source: str = "<table>") -> dict[str, str]:
     """Return the units map stamped into the artifact, raising if absent."""
     meta = table.schema.metadata or {}
     if UNITS_KEY not in meta:
         raise EpisodeRecordSchemaError(f"{source}: units map missing from schema metadata")
-    units = json.loads(meta[UNITS_KEY].decode())
+    try:
+        units = json.loads(meta[UNITS_KEY].decode())
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise EpisodeRecordSchemaError(f"{source}: units map is not valid JSON: {exc}") from exc
+    if not isinstance(units, dict):
+        raise EpisodeRecordSchemaError(
+            f"{source}: units map is not a JSON object, got {type(units).__name__}"
+        )
     if not units:
         raise EpisodeRecordSchemaError(f"{source}: units map is empty")
-    return units
+    return {str(k): str(v) for k, v in units.items()}
 
 
 def load_episode_records(path: str | Path) -> list[EpisodeRecord]:
@@ -141,7 +168,18 @@ def load_episode_records(path: str | Path) -> list[EpisodeRecord]:
     src = Path(path)
     if not src.exists():
         raise EpisodeRecordSchemaError(f"{src}: episode-record artifact does not exist")
-    table = pq.read_table(src)
+    if src.is_dir():
+        raise EpisodeRecordSchemaError(
+            f"{src}: is a directory, not an episode-record parquet; use load_run_records"
+        )
+    try:
+        table = pq.read_table(src)
+    except EpisodeRecordSchemaError:
+        raise
+    except Exception as exc:  # pyarrow raises several unrelated error types here
+        raise EpisodeRecordSchemaError(
+            f"{src}: not a readable episode-record parquet: {exc}"
+        ) from exc
     validate_table(table, source=str(src))
     table_units(table, source=str(src))
     known = {f.name for f in fields(EpisodeRecord)}
@@ -157,10 +195,17 @@ def load_run_records(paths) -> list[EpisodeRecord]:
     ``paths`` may be individual parquet files or directories, in which case
     every ``*.parquet`` directly inside the directory is read. A directory
     that contains no parquet raises rather than contributing zero rows, so a
-    mistyped results path cannot masquerade as an arm with no episodes.
+    mistyped results path cannot masquerade as an arm with no episodes. An
+    empty ``paths`` raises for the same reason.
     """
+    entries = list(paths)
+    if not entries:
+        raise EpisodeRecordSchemaError(
+            "no episode-record paths given; an arm with no artifacts is not an "
+            "arm with no episodes"
+        )
     out: list[EpisodeRecord] = []
-    for entry in paths:
+    for entry in entries:
         p = Path(entry)
         if p.is_dir():
             found = sorted(p.glob("*.parquet"))

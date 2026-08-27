@@ -280,7 +280,13 @@ def paired_recurrence_table(
 
     Only seeds present in both arms are emitted, because an unpaired seed
     cannot enter a paired test. Raises if the arms share no seed.
+
+    ``modes`` must cover every mode observed in either arm. A restricted list
+    that would drop observed failures raises rather than emitting a table
+    whose cells do not add up to the failures that were actually recorded.
     """
+    baseline = list(baseline)
+    treatment = list(treatment)
     base_by_seed = _by_seed(baseline)
     treat_by_seed = _by_seed(treatment)
     shared = sorted(set(base_by_seed) & set(treat_by_seed))
@@ -291,6 +297,20 @@ def paired_recurrence_table(
         )
 
     mode_list = list(modes)
+    if not mode_list:
+        raise RecurrenceError("no modes requested; an empty recurrence table is not a result")
+    duplicates = sorted({m for m in mode_list if mode_list.count(m) > 1})
+    if duplicates:
+        raise RecurrenceError(f"duplicate mode(s) requested: {', '.join(duplicates)}")
+
+    observed = {ep.mode for ep in baseline + treatment if ep.mode is not None}
+    unaccounted = sorted(observed - set(mode_list))
+    if unaccounted:
+        raise RecurrenceError(
+            "observed failure mode(s) absent from the requested modes, which would "
+            f"drop them from the table: {', '.join(unaccounted)}"
+        )
+
     rows: list[RecurrenceRow] = []
     for seed in shared:
         base_eps = base_by_seed[seed]
@@ -334,6 +354,11 @@ def unknown_fraction(episodes: Iterable[LabeledEpisode]) -> float:
     Report this next to any recurrence result. On the real GO2 path it is
     expected to be high, and a recurrence table read without it would
     understate how much of the failure population is unclassified.
+
+    Returns ``0.0`` when there are no failed episodes at all. That is the
+    labelled empty case, not a measured blind spot of zero: with no failures
+    there is nothing to classify, so check the failure count before reading
+    this number as evidence that the detector covered the population.
     """
     failures = [ep for ep in episodes if ep.mode is not None]
     if not failures:

@@ -279,3 +279,101 @@ class TestEndToEnd:
         assert row.baseline_failures == 1
         assert row.treatment_failures == 0
         assert row.delta_rate == pytest.approx(-0.25)
+
+
+class TestPairedTableRegressions:
+    """Silent-loss and degenerate-output holes found in the post-commit audit."""
+
+    def test_observed_mode_missing_from_requested_modes_raises(self):
+        """A restricted mode list used to drop real failures without a word."""
+        slip = FailureMode.SLIP.value
+        collapse = FailureMode.COLLAPSE.value
+        baseline = labeled(1, [collapse, None])
+        treatment = labeled(1, [slip, None])
+        with pytest.raises(RecurrenceError, match="absent from the requested modes"):
+            paired_recurrence_table(baseline, treatment, modes=[collapse])
+
+    def test_mode_outside_the_taxonomy_raises_rather_than_vanishing(self):
+        baseline = labeled(1, ["not_a_taxonomy_mode"])
+        treatment = labeled(1, [None])
+        with pytest.raises(RecurrenceError, match="not_a_taxonomy_mode"):
+            paired_recurrence_table(baseline, treatment)
+
+    def test_default_modes_account_for_every_failure(self):
+        """Cells must sum to the failures actually recorded, per seed and arm."""
+        slip = FailureMode.SLIP.value
+        collapse = FailureMode.COLLAPSE.value
+        baseline = labeled(1, [slip, collapse, MODE_UNKNOWN, None])
+        treatment = labeled(1, [slip, None, None, None])
+        rows = [r for r in paired_recurrence_table(baseline, treatment) if r.seed == 1]
+        assert sum(r.baseline_failures for r in rows) == 3
+        assert sum(r.treatment_failures for r in rows) == 1
+
+    def test_empty_mode_list_raises(self):
+        with pytest.raises(RecurrenceError, match="no modes requested"):
+            paired_recurrence_table(labeled(1, [None]), labeled(1, [None]), modes=[])
+
+    def test_duplicate_modes_raise_instead_of_double_counting(self):
+        slip = FailureMode.SLIP.value
+        with pytest.raises(RecurrenceError, match="duplicate mode"):
+            paired_recurrence_table(
+                labeled(1, [None]), labeled(1, [None]), modes=[slip, slip]
+            )
+
+    def test_both_arms_empty_raises(self):
+        with pytest.raises(RecurrenceError, match="no seed appears in both arms"):
+            paired_recurrence_table([], [])
+
+    def test_one_empty_arm_raises(self):
+        with pytest.raises(RecurrenceError, match="no seed appears in both arms"):
+            paired_recurrence_table([], labeled(1, [None]))
+
+    def test_generator_inputs_are_not_consumed_by_the_accounting_check(self):
+        """Arms given as generators must still produce a full table."""
+        slip = FailureMode.SLIP.value
+        base = (ep for ep in labeled(1, [slip, None]))
+        treat = (ep for ep in labeled(1, [None, None]))
+        row = next(r for r in paired_recurrence_table(base, treat) if r.mode == slip)
+        assert row.delta_rate == pytest.approx(-0.5)
+
+    def test_unequal_counts_keep_arms_comparable_with_known_answer(self):
+        """Baseline 1/4, treatment 2/3: rates, not raw counts, drive the delta."""
+        collapse = FailureMode.COLLAPSE.value
+        baseline = labeled(5, [collapse, None, None, None])
+        treatment = labeled(5, [collapse, collapse, None])
+        row = next(r for r in paired_recurrence_table(baseline, treatment) if r.mode == collapse)
+        assert (row.baseline_episodes, row.treatment_episodes) == (4, 3)
+        assert row.baseline_rate == pytest.approx(0.25)
+        assert row.treatment_rate == pytest.approx(2.0 / 3.0)
+        # Raw counts would say +1; rates say the mode got markedly worse.
+        assert row.delta_rate == pytest.approx(2.0 / 3.0 - 0.25)
+
+    def test_delta_is_treatment_minus_baseline_in_both_directions(self):
+        slip = FailureMode.SLIP.value
+        worse = next(
+            r
+            for r in paired_recurrence_table(labeled(1, [None, None]), labeled(1, [slip, None]))
+            if r.mode == slip
+        )
+        better = next(
+            r
+            for r in paired_recurrence_table(labeled(1, [slip, None]), labeled(1, [None, None]))
+            if r.mode == slip
+        )
+        assert worse.delta_rate == pytest.approx(0.5)
+        assert better.delta_rate == pytest.approx(-0.5)
+
+    def test_unpaired_seeds_are_dropped_from_both_directions(self):
+        slip = FailureMode.SLIP.value
+        baseline = labeled(1, [slip, None]) + labeled(2, [slip, None])
+        treatment = labeled(2, [None, None]) + labeled(3, [slip, None])
+        rows = paired_recurrence_table(baseline, treatment)
+        assert {r.seed for r in rows} == {2}
+        # Seed 1 (baseline only) and seed 3 (treatment only) contribute nothing.
+        assert not any(r.seed in (1, 3) for r in rows)
+
+    def test_unknown_fraction_empty_case_is_labelled_not_measured(self):
+        """Documented convention: 0.0 means no failures, not a zero blind spot."""
+        assert unknown_fraction([]) == 0.0
+        assert unknown_fraction(labeled(1, [None, None])) == 0.0
+        assert unknown_fraction(labeled(1, [MODE_UNKNOWN, None])) == pytest.approx(1.0)

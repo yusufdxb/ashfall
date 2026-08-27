@@ -32,9 +32,26 @@ Known caveat, stated rather than buried: three of the four newest slippery `ff=0
 | Seed-propagation fix | Real bug fixed upstream | go2-phoenix `FailureCurriculum` patch (`d42ee01`), which had masked seed-driven variance in prior curriculum-style ablations |
 | Failure-fraction curriculum | **Does not work** | table above |
 | Real-hardware failure data | Not collected | synthetic failures only, see [Limitations](#limitations) |
-| Test suite | 113 tests passing | `python3 -m pytest tests/` |
+| Test suite | 173 tests passing | `python3 -m pytest tests/` |
 
 Three viable directions next: (1) re-design the curriculum (a research pivot, not a parameter sweep), (2) a mode-subset ablation at ff=0.5 with explicitly exploratory framing, (3) hardware data collection, since synthetic failures may simply not generalize. See methodology section 5c for the tradeoffs.
+
+## Phase II: preregistered and plumbed, not run
+
+A re-analysis found that the Phase-I treatment was never actually delivered: the curriculum reset bridge seeded row 0 of each trajectory, which is a nominal gait state, so half the environments reset to a lightly jittered stand rather than to a failure. The n=11 null still reproduces exactly and is not revised, but its scope narrows: it is uninformative about failure curricula rather than evidence against them. A second defect is recorded alongside it, that a `terrain:` config block is silently dropped, which makes every rough-versus-slippery comparison a friction-randomization comparison on identical terrain. Both are written up in [`docs/phase2/HYPOTHESIS.md`](docs/phase2/HYPOTHESIS.md) together with the Phase-II hypotheses and the novelty boundary.
+
+**No Phase-II data exists.** What is on this branch is the consumer, not a result:
+
+| Piece | State |
+|-------|-------|
+| Phase-II hypotheses, delivery gate H0, novelty boundary | Preregistered, [`docs/phase2/HYPOTHESIS.md`](docs/phase2/HYPOTHESIS.md) |
+| `ashfall.evaluation.episode_records` | Built and tested, fail-closed reader for the Phoenix per-episode parquet (schema 1.0.0) |
+| `ashfall.analysis.recurrence` | Built and tested, paired per-seed per-mode recurrence table |
+| A real Phoenix per-episode parquet | Does not exist. Never read one |
+| Per-episode telemetry for mode labelling | Does not exist. Without it every failed episode labels UNKNOWN |
+| Any Phase-II experiment | Not run |
+
+The exact artifact, the producing command, the arm and seed structure, and the open telemetry blocker are specified in [`docs/phase2/INPUTS.md`](docs/phase2/INPUTS.md).
 
 ## The Ashfall Loop
 

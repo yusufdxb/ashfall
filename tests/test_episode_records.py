@@ -210,3 +210,81 @@ class TestFailClosed:
 
     def test_valid_table_passes(self):
         validate_table(pa.Table.from_pylist([make_row()], schema=ARROW_SCHEMA))
+
+
+class TestFailClosedRegressions:
+    """Holes found in the post-commit audit of the fail-closed reader.
+
+    Every case below returned a value, or raised something other than
+    EpisodeRecordSchemaError, before the fix.
+    """
+
+    def test_zero_row_parquet_raises(self, tmp_path):
+        path = tmp_path / "zero.parquet"
+        pq.write_table(pa.Table.from_pylist([], schema=ARROW_SCHEMA), path)
+        with pytest.raises(EpisodeRecordSchemaError, match="zero episode rows"):
+            load_episode_records(path)
+
+    def test_zero_row_arm_cannot_reach_the_analysis(self, tmp_path):
+        """An empty artifact inside a results directory fails the whole read."""
+        write_rows(tmp_path / "a.parquet", [make_row()])
+        pq.write_table(pa.Table.from_pylist([], schema=ARROW_SCHEMA), tmp_path / "b.parquet")
+        with pytest.raises(EpisodeRecordSchemaError, match="zero episode rows"):
+            load_run_records([tmp_path])
+
+    def test_mistyped_path_to_non_parquet_file_raises_schema_error(self, tmp_path):
+        """A results path pointing at a metrics json is a schema error, not ArrowInvalid."""
+        bogus = tmp_path / "metrics_seed0.json"
+        bogus.write_text('{"success_rate": 0.5}')
+        with pytest.raises(EpisodeRecordSchemaError, match="not a readable episode-record parquet"):
+            load_episode_records(bogus)
+
+    def test_corrupt_parquet_in_directory_raises_schema_error(self, tmp_path):
+        (tmp_path / "truncated.parquet").write_text("not parquet bytes")
+        with pytest.raises(EpisodeRecordSchemaError, match="not a readable episode-record parquet"):
+            load_run_records([tmp_path])
+
+    def test_directory_passed_to_single_file_loader_raises(self, tmp_path):
+        write_rows(tmp_path / "a.parquet", [make_row()])
+        with pytest.raises(EpisodeRecordSchemaError, match="is a directory"):
+            load_episode_records(tmp_path)
+
+    def test_empty_path_list_raises(self):
+        with pytest.raises(EpisodeRecordSchemaError, match="no episode-record paths given"):
+            load_run_records([])
+
+    def test_null_seed_raises(self, tmp_path):
+        path = write_rows(tmp_path / "nullseed.parquet", [make_row(seed=None)])
+        with pytest.raises(EpisodeRecordSchemaError, match="null value.*seed"):
+            load_episode_records(path)
+
+    def test_null_in_any_required_column_raises(self, tmp_path):
+        path = write_rows(
+            tmp_path / "nullish.parquet", [make_row(run_id=None, success=None)]
+        )
+        with pytest.raises(EpisodeRecordSchemaError, match="null value"):
+            load_episode_records(path)
+
+    def test_malformed_units_json_raises_schema_error(self, tmp_path):
+        schema = ARROW_SCHEMA.with_metadata(
+            {SCHEMA_VERSION_KEY: SCHEMA_VERSION.encode(), UNITS_KEY: b"{not json"}
+        )
+        path = write_rows(tmp_path / "badunits.parquet", [make_row()], schema=schema)
+        with pytest.raises(EpisodeRecordSchemaError, match="units map is not valid JSON"):
+            load_episode_records(path)
+
+    def test_units_map_that_is_not_an_object_raises(self, tmp_path):
+        schema = ARROW_SCHEMA.with_metadata(
+            {SCHEMA_VERSION_KEY: SCHEMA_VERSION.encode(), UNITS_KEY: b'["seconds", "m/s"]'}
+        )
+        path = write_rows(tmp_path / "listunits.parquet", [make_row()], schema=schema)
+        with pytest.raises(EpisodeRecordSchemaError, match="not a JSON object"):
+            load_episode_records(path)
+
+    def test_empty_units_map_raises(self, tmp_path):
+        schema = ARROW_SCHEMA.with_metadata(
+            {SCHEMA_VERSION_KEY: SCHEMA_VERSION.encode(), UNITS_KEY: b"{}"}
+        )
+        path = write_rows(tmp_path / "emptyunits.parquet", [make_row()], schema=schema)
+        with pytest.raises(EpisodeRecordSchemaError, match="units map is empty"):
+            load_episode_records(path)
