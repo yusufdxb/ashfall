@@ -240,7 +240,7 @@ def generate_sweep_report(
         "(500-iter PPO on rough), then fine-tunes for 200 iters on slippery "
         "with `failure_sample_fraction` set to the cell value. Failure "
         "trajectories are sampled from the synth pool at "
-        "`/home/yusuf/Projects/ashfall/data/failures/`. Each adapted "
+        "`data/failures/` under the repository root. Each adapted "
         "checkpoint is evaluated with 128 episodes × 32 envs on rough and "
         "slippery (flat is skipped because Flat-v0 obs are incompatible "
         "with the Rough-v0 trained obs)."
