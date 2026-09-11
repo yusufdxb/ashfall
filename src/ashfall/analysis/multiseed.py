@@ -265,18 +265,13 @@ def paired_delta(
     deltas = [by_seed_b[s].success_rate - by_seed_a[s].success_rate for s in common]
     n = len(deltas)
     if n == 0:
-        return PairedDeltaResult(
-            terrain=terrain,
-            ff_a=ff_a,
-            ff_b=ff_b,
-            n_seeds=0,
-            deltas=[],
-            mean_delta=0.0,
-            std_delta=0.0,
-            sem_delta=0.0,
-            ci95_lo=0.0,
-            ci95_hi=0.0,
-            permutation_p_two_sided=1.0,
+        # Fail closed. Returning mean 0.0 with p=1.0 for an empty pairing makes
+        # a missing-data failure indistinguishable from a measured null, which
+        # is the one error this repo can least afford.
+        raise ValueError(
+            f"no seeds paired for terrain={terrain!r} between ff={ff_a} and ff={ff_b}: "
+            f"{len(by_seed_a)} cells at ff={ff_a}, {len(by_seed_b)} at ff={ff_b}. "
+            "Check that the results directory holds metrics for both arms."
         )
     arr = np.array(deltas, dtype=np.float64)
     mean = float(arr.mean())
@@ -507,11 +502,25 @@ def render_combined_markdown(
     """Render an AnalysisReport as a markdown report body."""
     lines = [f"# {title}", ""]
     n_slip = report.n_seeds_per_terrain.get("slippery", 0)
-    p_floor = (2.0 / (2 ** n_slip)) if n_slip > 0 else 1.0
-    lines.append(
-        f"n_seeds (slippery, paired) = {n_slip}; exact sign-flip "
-        f"p-floor = 2/{2**n_slip} = {p_floor:.4f}"
+    # An exactly-zero delta contributes 0 under either sign, so each distinct
+    # non-zero sign pattern appears 2**zeros times and the achievable minimum
+    # is 2/2**(n - zeros), not 2/2**n.
+    slip_deltas = next(
+        (d.deltas for d in report.deltas if d.terrain == "slippery"), []
     )
+    effective = sum(1 for d in slip_deltas if d != 0.0) or n_slip
+    zeros = n_slip - effective
+    p_floor = (2.0 / (2**effective)) if effective > 0 else 1.0
+    floor_line = (
+        f"n_seeds (slippery, paired) = {n_slip}; exact sign-flip "
+        f"p-floor = 2/{2**effective} = {p_floor:.4f}"
+    )
+    if zeros:
+        floor_line += (
+            f" ({zeros} delta(s) exactly zero, so the floor is set by "
+            f"{effective} sign-carrying seeds, not {n_slip})"
+        )
+    lines.append(floor_line)
     lines.append("")
     lines.append(render_markdown(report.rows, report.per_ff, report.deltas))
     return "\n".join(lines)

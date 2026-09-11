@@ -142,7 +142,33 @@ def bootstrap_diff_proportion(
         return point, lo, hi
     z0 = _norm_ppf(frac_below)
 
-    # Acceleration: jackknife each arm.
+    a_accel = bca_acceleration(a, b)
+
+    z_lo = _norm_ppf(alpha / 2)
+    z_hi = _norm_ppf(1 - alpha / 2)
+    a1 = _norm_cdf(z0 + (z0 + z_lo) / (1 - a_accel * (z0 + z_lo)))
+    a2 = _norm_cdf(z0 + (z0 + z_hi) / (1 - a_accel * (z0 + z_hi)))
+    lo = float(np.percentile(diffs, 100 * a1))
+    hi = float(np.percentile(diffs, 100 * a2))
+    return point, lo, hi
+
+
+def bca_acceleration(a: "np.ndarray", b: "np.ndarray") -> float:
+    """Pooled-influence acceleration term for the two-sample BCa interval.
+
+    Standard two-sample BCa jackknifes the joint pseudovalue (Efron and
+    Tibshirani 1993, p.187), which needs a 2D grid. We stack the per-arm
+    jackknife replicates and use the pooled influence values instead, which
+    matches scipy's ``_bca_interval`` to a few significant figures.
+
+    The sign convention matters, because the term is an odd power of the
+    influence values. For ``theta = mean(b) - mean(a)``, leaving out ``a[i]``
+    gives ``theta_(i) = mean(b) - jack_a[i]``, so the influence value is
+    ``U_i = theta_(.) - theta_(i) = jack_a[i] - jack_a.mean()``. Leaving out
+    ``b[j]`` gives ``U_j = jack_b.mean() - jack_b[j]``. The inverted form
+    flips the sign of the acceleration and can move an interval across zero,
+    which is why this lives in its own function with its own test.
+    """
     jacks = []
     for arr in (a, b):
         n = len(arr)
@@ -152,24 +178,10 @@ def bootstrap_diff_proportion(
             means[i] = (s - arr[i]) / (n - 1)
         jacks.append(means)
     jack_a, jack_b = jacks
-    # Pseudo-jackknife on the difference: for each (i,j) we'd need a 2D
-    # grid which is expensive. Standard approach for two-sample BCa is
-    # to jackknife the joint pseudovalue (Efron & Tibshirani 1993, p.187).
-    # We approximate by stacking jackknife replicates of each arm and
-    # using the pooled influence values, which is a standard practical
-    # shortcut and recovers the right acceleration sign.
-    pseudo = np.concatenate([jack_a.mean() - jack_a, jack_b - jack_b.mean()])
+    pseudo = np.concatenate([jack_a - jack_a.mean(), jack_b.mean() - jack_b])
     num = float(np.sum(pseudo**3))
     den = 6.0 * (float(np.sum(pseudo**2)) ** 1.5)
-    a_accel = num / den if den > 0 else 0.0
-
-    z_lo = _norm_ppf(alpha / 2)
-    z_hi = _norm_ppf(1 - alpha / 2)
-    a1 = _norm_cdf(z0 + (z0 + z_lo) / (1 - a_accel * (z0 + z_lo)))
-    a2 = _norm_cdf(z0 + (z0 + z_hi) / (1 - a_accel * (z0 + z_hi)))
-    lo = float(np.percentile(diffs, 100 * a1))
-    hi = float(np.percentile(diffs, 100 * a2))
-    return point, lo, hi
+    return num / den if den > 0 else 0.0
 
 
 def _norm_cdf(x: float) -> float:
@@ -194,7 +206,9 @@ def _norm_ppf(q: float) -> float:
     p_high = 1 - p_low
     if q < p_low:
         r = math.sqrt(-2 * math.log(q))
-        return ((((c[0] * r + c[1]) * r + c[2]) * r + c[3]) * r + c[4]) * r + c[5] / (
+        # The whole numerator is divided by the denominator. Without the outer
+        # parentheses only c[5] was, which returned -134 for q=0.005.
+        return (((((c[0] * r + c[1]) * r + c[2]) * r + c[3]) * r + c[4]) * r + c[5]) / (
             (((d[0] * r + d[1]) * r + d[2]) * r + d[3]) * r + 1
         )
     if q <= p_high:

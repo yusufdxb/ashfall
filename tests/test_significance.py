@@ -12,6 +12,7 @@ from ashfall.analysis.significance import (
     render_significance_markdown,
 )
 from ashfall.evaluation.significance import (
+    bca_acceleration,
     bernoulli_arrays,
     bootstrap_diff_proportion,
     fishers_exact_p,
@@ -223,17 +224,107 @@ class TestNoTorchImport:
     """Ensure significance helpers do not pull torch into no-sim CI."""
 
     def test_module_import_does_not_load_torch(self):
-        # Reimport in a clean sense: confirm sys.modules does not have torch
-        # after using the public API. (In real CI we'd run this as a
-        # subprocess; here the smoke is sufficient because earlier tests
-        # haven't imported torch.)
+        # Must run in a subprocess. In-process the assertion is vacuous,
+        # because tests/test_phoenix_backend.py imports torch at collection
+        # time, so `before` and `after` are both True and nothing is checked.
+        import subprocess
         import sys
-        before = "torch" in sys.modules
-        # Run the full happy path.
-        bernoulli_arrays(5, 10, 3, 10)
-        bootstrap_diff_proportion(5, 10, 3, 10, n_bootstrap=50)
-        permutation_p_value(5, 10, 3, 10, n_perm=50)
-        fishers_exact_p(5, 10, 3, 10)
-        holm_adjust([0.1, 0.2, 0.3])
-        after = "torch" in sys.modules
-        assert before == after  # no transitive torch import
+
+        source = (
+            "import sys\n"
+            "from ashfall.evaluation.significance import (bernoulli_arrays,\n"
+            "    bootstrap_diff_proportion, permutation_p_value, fishers_exact_p,\n"
+            "    holm_adjust)\n"
+            "bernoulli_arrays(5, 10, 3, 10)\n"
+            "bootstrap_diff_proportion(5, 10, 3, 10, n_bootstrap=50)\n"
+            "permutation_p_value(5, 10, 3, 10, n_perm=50)\n"
+            "fishers_exact_p(5, 10, 3, 10)\n"
+            "holm_adjust([0.1, 0.2, 0.3])\n"
+            "assert 'torch' not in sys.modules, 'significance pulled in torch'\n"
+        )
+        result = subprocess.run(
+            [sys.executable, "-c", source], capture_output=True, text=True
+        )
+        assert result.returncode == 0, result.stderr
+
+
+class TestBcaAccelerationSign:
+    """The acceleration term is an odd power of the influence values, so an
+    inverted sign silently moves an interval across zero. It was inverted."""
+
+    @pytest.mark.parametrize(
+        "k_a,n_a,k_b,n_b",
+        [
+            (118, 130, 124, 128),  # near ceiling, the regime this repo runs in
+            (65, 130, 70, 128),  # symmetric
+            (10, 130, 120, 128),  # strongly skewed the other way
+        ],
+    )
+    def test_acceleration_matches_scipy_in_sign_and_magnitude(self, k_a, n_a, k_b, n_b):
+        """Compare against scipy's own BCa acceleration, not against ourselves.
+
+        scipy._resampling._bca_interval returns (alpha_1, alpha_2, a_hat) and
+        uses U_ji = (n - 1) * (theta_dot - theta_i), the Efron and Tibshirani
+        convention. Our pooled-influence shortcut should agree to a few
+        significant figures and, critically, in sign.
+        """
+        import numpy as np
+        from scipy.stats._resampling import _bca_interval
+
+        a, b = bernoulli_arrays(k_a, n_a, k_b, n_b)
+        a = np.asarray(a, dtype=float)
+        b = np.asarray(b, dtype=float)
+        ours = bca_acceleration(a, b)  # the module's own function, not a copy
+
+        def statistic(x, y, axis=-1):
+            return y.mean(axis=axis) - x.mean(axis=axis)
+
+        rng = np.random.default_rng(0)
+        theta_hat_b = np.array(
+            [
+                statistic(
+                    a[rng.integers(0, n_a, n_a)], b[rng.integers(0, n_b, n_b)]
+                )
+                for _ in range(2000)
+            ]
+        )
+        *_, a_hat = _bca_interval(
+            (a, b), statistic, axis=-1, alpha=0.025, theta_hat_b=theta_hat_b, batch=None
+        )
+        a_hat = float(np.ravel(a_hat)[0])
+
+        assert np.sign(ours) == np.sign(a_hat), (
+            f"acceleration sign disagrees with scipy: ours={ours}, scipy={a_hat}"
+        )
+        assert ours == pytest.approx(a_hat, rel=0.05)
+
+    def test_near_ceiling_interval_is_not_dragged_across_zero(self):
+        # With the sign inverted this configuration produced ci_low < 0 while
+        # the correct BCa excludes zero. Guard the direction, not the digits.
+        _point, low, high = bootstrap_diff_proportion(
+            118, 130, 124, 128, n_bootstrap=4000, seed=0
+        )
+        assert low < high
+        # Measured: the inverted sign gives [-0.000601, +0.115264] (includes
+        # zero); the correct sign gives [+0.006731, +0.122716] (excludes it).
+        # The inferential difference is whether zero is inside, so guard that.
+        assert low > 0.0, (
+            "acceleration sign regression: the near-ceiling interval now "
+            f"includes zero (low={low})"
+        )
+
+
+class TestNormPpfFallback:
+    """The scipy-free fallback is only reachable if scipy becomes optional,
+    but its lower tail returned -134 for q=0.005 before this guard existed."""
+
+    @pytest.mark.parametrize(
+        "q", [1e-4, 1e-3, 0.005, 0.01, 0.02, 0.024, 0.025, 0.2, 0.5, 0.8, 0.975, 0.999]
+    )
+    def test_fallback_matches_scipy_across_both_tails(self, q, monkeypatch):
+        from scipy.stats import norm
+
+        from ashfall.evaluation import significance as sig
+
+        monkeypatch.setattr(sig, "_HAS_SCIPY", False)
+        assert sig._norm_ppf(q) == pytest.approx(float(norm.ppf(q)), abs=1e-6)

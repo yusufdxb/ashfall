@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 
 from ashfall.analysis.multiseed import (
+    CellRaw,
     _exact_sign_flip_p,
     _t_975,
     combine_pilot_runs,
@@ -317,11 +318,13 @@ _RESULTS_DIR = _REPO_ROOT / "results" / "legacy_row0_curriculum"
 
 def test_published_n7_headline_reproduces_from_committed_results() -> None:
     pilot = _RESULTS_DIR / "multiseed_pilot_2026-05-07_failure_fraction=0p0_seed=42"
-    if not pilot.exists():
-        pytest.skip(
-            "committed multiseed results not present in this checkout; "
-            "headline regression guard is data-dependent"
-        )
+    # Not a skip. The metrics are tracked (gitignore whitelists
+    # results/legacy_row0_curriculum/**), so absence means the archive moved or
+    # broke, and this guard is the only thing pinning the published claim.
+    assert pilot.exists(), (
+        f"committed multiseed archive missing at {pilot}; the published headline "
+        "cannot be reproduced, which is a failure and not a skip"
+    )
 
     combined = combine_pilot_runs(
         (_RESULTS_DIR, "multiseed_pilot_2026-05-07"),
@@ -355,7 +358,89 @@ def test_published_n7_headline_reproduces_from_committed_results() -> None:
     assert rough.permutation_p_two_sided == pytest.approx(0.3906, abs=1e-4)
     assert rough.permutation_p_two_sided >= 0.05  # null verdict holds
 
-    # The single largest negative slippery seed (1729, -8.85 pp) must still
+    # The single largest negative slippery seed (2718, -8.85 pp) must still
     # be present; its removal would be the easiest way to fake a positive
-    # result, so guard it explicitly.
+    # result, so guard it explicitly. (Seed 1729 is -5.11 pp; the earlier
+    # comment here named the wrong seed.)
     assert min(slip.deltas) * 100 == pytest.approx(-8.85, abs=0.05)
+
+
+def test_published_n11_headline_reproduces_from_committed_results() -> None:
+    """The n=11 pooled result is the repo's current headline and had no guard.
+
+    Values from README.md and docs/phase2/HYPOTHESIS.md: slippery mean
+    -0.4155 pp with exact sign-flip p=0.726562; rough +0.5485 pp with
+    p=0.767578, over seeds 7, 42, 99, 123, 314, 1618, 1729, 2024, 2718, 4096,
+    6022.
+    """
+    ext = _RESULTS_DIR / "multiseed_scale_ext_2026-06-02_failure_fraction=0p0_seed=1618"
+    assert ext.exists(), f"committed n=11 extension archive missing at {ext}"
+
+    combined = combine_pilot_runs(
+        (_RESULTS_DIR, "multiseed_pilot_2026-05-07"),
+        (_RESULTS_DIR, "multiseed_scale_2026-05-07"),
+        (_RESULTS_DIR, "multiseed_scale_ext_2026-06-02"),
+    )
+    assert combined.seeds == [7, 42, 99, 123, 314, 1618, 1729, 2024, 2718, 4096, 6022]
+
+    report = run_combined_analysis(combined)
+    by_terrain = {d.terrain: d for d in report.deltas}
+    slip, rough = by_terrain["slippery"], by_terrain["rough"]
+
+    assert slip.n_seeds == 11
+    assert rough.n_seeds == 11
+
+    assert slip.mean_delta * 100 == pytest.approx(-0.4155, abs=0.002)
+    assert slip.ci95_lo * 100 == pytest.approx(-2.8229, abs=0.01)
+    assert slip.ci95_hi * 100 == pytest.approx(+1.9918, abs=0.01)
+    assert sum(1 for x in slip.deltas if x > 0) == 7
+    assert slip.permutation_p_two_sided == pytest.approx(0.726562, abs=1e-5)
+
+    assert rough.mean_delta * 100 == pytest.approx(+0.5485, abs=0.002)
+    assert rough.ci95_lo * 100 == pytest.approx(-3.4627, abs=0.01)
+    assert rough.ci95_hi * 100 == pytest.approx(+4.5596, abs=0.01)
+    assert sum(1 for x in rough.deltas if x > 0) == 5
+    assert rough.permutation_p_two_sided == pytest.approx(0.767578, abs=1e-5)
+
+    # Neither terrain clears alpha; the null verdict holds at n=11.
+    assert slip.permutation_p_two_sided >= 0.05
+    assert rough.permutation_p_two_sided >= 0.05
+
+    # Exactly one slippery delta is identically zero (seed 4096). The p-floor
+    # depends on this, so pin it.
+    assert sum(1 for x in slip.deltas if x == 0.0) == 1
+
+
+def test_empty_pairing_raises_instead_of_manufacturing_a_null() -> None:
+    """An empty pairing used to return mean 0.0 with p=1.0.
+
+    For a repo whose headline is a null result, a code path that produces a
+    null from missing data is the most dangerous failure mode available. It
+    was reachable from the reproduction command in the archived analysis note
+    once the metrics moved to the archive prefix.
+    """
+    # ff=0.0 has only seed 42, ff=0.5 only seed 99, so nothing pairs.
+    rows = [
+        CellRaw(ff=0.0, seed=42, terrain="slippery", n_episodes=128, success_rate=0.9),
+        CellRaw(ff=0.5, seed=99, terrain="slippery", n_episodes=128, success_rate=0.8),
+    ]
+    with pytest.raises(ValueError, match="no seeds paired"):
+        paired_delta(rows, ff_a=0.0, ff_b=0.5, terrain="slippery")
+
+
+def test_p_floor_accounts_for_exactly_zero_deltas() -> None:
+    """With z exact zeros the achievable minimum p is 2/2**(n-z), not 2/2**n.
+
+    A zero delta contributes 0 under either sign, so each distinct non-zero
+    sign pattern appears 2**z times. README quoted 2/2048 at n=11 where the
+    slippery arm has one zero delta, so the true floor is 4/2048.
+    """
+    combined = combine_pilot_runs(
+        (_RESULTS_DIR, "multiseed_pilot_2026-05-07"),
+        (_RESULTS_DIR, "multiseed_scale_2026-05-07"),
+        (_RESULTS_DIR, "multiseed_scale_ext_2026-06-02"),
+    )
+    md = render_combined_markdown(run_combined_analysis(combined))
+    assert "n_seeds (slippery, paired) = 11" in md
+    assert "p-floor = 2/1024 = 0.0020" in md
+    assert "1 delta(s) exactly zero" in md
