@@ -1,22 +1,8 @@
-"""Failure-mode breakdown for the curriculum pool.
+"""Legacy reset-pool composition, not PPO minibatch dosage.
 
-Eval-time per-episode failure-mode counts are not retained by
-Phoenix's ``evaluate.py``; only aggregate scalars land in
-``metrics_*.json``. Therefore the per-mode breakdown we *can* present
-in the v0.3.0 sweep report is the **input curriculum pool**: which
-synthetic failure trajectories were available to the fine-tune buffer,
-labeled by their authored ``failure_mode``. Across the ff sweep, the
-pool itself is identical and only the per-minibatch sampling fraction
-varies, so the bar chart is one-per-mode (not per-cell). It is
-included for completeness and as the right baseline against which the
-next ablation (mode-subset sweep, fixed ff=0.5) compares.
-
-This module also synthesizes a per-cell view: for each ff, the
-*expected* number of failure-trajectory-steps drawn into adaptation
-is `failure_fraction * pool_step_count` per minibatch, partitioned
-by mode in proportion to the pool composition. We render this as a
-stacked-bar so reviewers can see at a glance how the curriculum
-"dosage" scales with ff.
+Historical aggregate evaluation cannot identify failure modes. This module
+reports available reset files and expected file-selection shares only. Fresh
+PPO rollouts need not contain failure events even after a file-associated reset.
 """
 
 from __future__ import annotations
@@ -94,14 +80,14 @@ def per_mode_breakdown(
         }
 
     ``per_mode_share`` for each cell sums to ``failure_fraction`` and
-    is split in proportion to the active-step counts in the pool.
+    is split in proportion to the trajectory counts in the pool.
     """
     results_dir = Path(results_dir)
     pool_dir = Path(pool_dir)
     pool = load_pool_composition(pool_dir)
 
-    total_active = sum(p["n_active_steps"] for p in pool.values()) or 1
-    base_share = {m: p["n_active_steps"] / total_active for m, p in pool.items()}
+    total_trajectories = sum(p["n_traj"] for p in pool.values()) or 1
+    base_share = {m: p["n_traj"] / total_trajectories for m, p in pool.items()}
 
     cells: list[dict] = []
     for cell_dir in sorted(results_dir.glob("ablation_failure_fraction_failure_fraction=*")):
@@ -124,11 +110,11 @@ def plot_curriculum_pool_composition(
     breakdown: dict,
     output_path: str | Path,
 ) -> Path:
-    """Stacked-bar plot of expected failure-mode dosage vs failure_fraction.
+    """Stacked-bar plot of expected reset file share vs failure_fraction.
 
     For each ff cell, plots a stacked bar where each segment is the
-    fraction of the minibatch expected to come from that failure mode
-    (= ff * pool_share_by_active_steps). Cells at ff=0.0 are blank,
+    requested fraction of resets expected to come from that failure mode
+    (= ff * pool_share_by_trajectory_count). Cells at ff=0.0 are blank,
     ff=1.0 reproduces the pool composition exactly.
     """
     import matplotlib
@@ -198,8 +184,8 @@ def render_failure_mode_breakdown_markdown(
         "labels at eval time; only aggregate `success_rate` lands in "
         "`metrics_*.json`. The breakdown below is therefore the "
         "**curriculum-input pool**: the synthetic failure trajectories "
-        "available to the fine-tune buffer. Across this sweep the pool "
-        "is identical for every ff cell; only the per-minibatch sampling "
+        "available to the reset file pool. Across this sweep the pool "
+        "is identical for every ff cell; only the reset-file selection "
         "fraction differs."
     )
     lines.append("")

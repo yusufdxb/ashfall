@@ -1,15 +1,8 @@
-"""Synthetic failure trajectory generator.
+"""Synthetic failure fixtures in Phoenix's Parquet schema.
 
-Generates realistic-looking failure trajectories in Phoenix's Parquet schema
-for all 6 Ashfall failure modes. These serve as:
-1. Curriculum training data when real hardware failures are not yet available
-2. Unit test fixtures for the full pipeline
-3. Baselines for evaluating the failure detector
-
-Each generator produces a trajectory that starts stable, transitions into
-the failure mode, and (optionally) includes a partial recovery attempt.
-Physics are approximate — not sim-grade — but structurally correct for
-the Parquet schema and failure detector thresholds.
+These exercise schema integration and threshold regressions. They are not
+independent detector validation, reconstructed physics, or hardware evidence.
+Trajectories begin with stable frames before threshold-associated failure flags.
 """
 
 from __future__ import annotations

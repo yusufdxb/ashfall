@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ashfall"
-version = "0.1.0"
-description = "Failure-driven robot learning for the Unitree GO2"
+version = "0.2.0"
+description = "Hardware-counterexample-guided policy repair for legged robots"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
@@ -21,6 +21,9 @@ dependencies = [
     "rich>=13.0",
     "tabulate>=0.9",
 ]
+
+[project.scripts]
+ashfall = "ashfall.cli:main"
 
 [project.optional-dependencies]
 sim = [

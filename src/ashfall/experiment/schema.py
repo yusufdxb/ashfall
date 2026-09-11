@@ -41,13 +41,22 @@ class TrainingSpec:
 @dataclass
 class CurriculumSpec:
     failure_dir: str = "data/failures"
-    failure_fraction: float = 0.0
+    failure_fraction: float = 0.0  # legacy constructor/config alias
+    failure_reset_fraction: float | None = None
     failure_modes: list[str] = field(default_factory=list)  # empty = all modes
     num_variations: int = 16
     # Baseline checkpoint used as the warm-start for ADAPTED / CONTROL_*
     # fine-tunes. Resolved relative to the Phoenix repo. Empty string falls
     # back to the runner's default ("checkpoints/ashfall-baseline/latest.pt").
     baseline_checkpoint: str = ""
+
+    def __post_init__(self):
+        if self.failure_reset_fraction is not None:
+            if self.failure_fraction not in (0.0, self.failure_reset_fraction):
+                raise ValueError("Specify one failure reset fraction name")
+            self.failure_fraction = self.failure_reset_fraction
+        if not 0 <= self.failure_fraction <= 1:
+            raise ValueError("failure_reset_fraction must lie in [0,1]")
 
 
 @dataclass

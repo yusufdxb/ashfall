@@ -42,7 +42,7 @@ class ExperimentRunner:
     # the venv's symlinks. Calls into ~/Sim/IsaacLab/isaaclab.sh fall back to
     # system Python 3.10 in non-interactive shells, so we invoke the venv
     # python directly instead.
-    DEFAULT_PYTHON_EXE = "/home/yusuf/Sim/isaac-sim-venv/bin/python"
+    DEFAULT_PYTHON_EXE = "python3"
 
     def __init__(
         self,
@@ -163,6 +163,9 @@ class ExperimentRunner:
         adapt_cfg["curriculum"]["failure_sample_fraction"] = float(
             config.curriculum.failure_fraction
         )
+        adapt_cfg["curriculum"].pop("failure_reset_fraction", None)
+        adapt_cfg["curriculum"].pop("failure_fraction", None)
+        adapt_cfg["curriculum"]["seed_row_strategy"] = "first"
         adapt_cfg["curriculum"]["trajectory_dir"] = str(failure_dir)
 
         # Optional per-cell mode filter. Phoenix's curriculum loader is

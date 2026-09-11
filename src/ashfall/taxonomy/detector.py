@@ -1,19 +1,9 @@
-"""Extended failure taxonomy for quadruped locomotion.
+"""Threshold event capture for quadruped telemetry.
 
-Ashfall extends Phoenix's 3-mode detector (attitude/collapse/slip) with three
-additional failure modes grounded in real quadruped failure literature:
-
-4. **Stumble** — transient foot-catch events where a leg's swing trajectory
-   is interrupted. Detected via sudden joint velocity spikes during swing phase.
-5. **Contact loss** — one or more feet lose ground contact unexpectedly during
-   stance phase. Detected via contact force dropout below a minimum threshold
-   while the leg should be in stance.
-6. **Command mismatch** — sustained disagreement between the velocity command
-   and achieved velocity that does NOT qualify as slip (robot is moving, just
-   in the wrong direction or at wrong speed). Indicates policy tracking failure.
-
-All detectors are stateful, pure-numpy, and produce a single FailureEvent per
-failure episode (not per timestep).
+Mode labels are hypotheses: low tracking speed does not identify slip versus
+blockage; contact dropout lacks gait-phase conditioning; joint speed does not
+establish stumble. Validate against independently reviewed windows before
+reporting detector performance. Events are debounced, not unique per episode.
 """
 
 from __future__ import annotations
