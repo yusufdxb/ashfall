@@ -15,6 +15,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
+from ashfall.delivery import implausible_reset_fields, resolve_developing_seed_row
+
 SCHEMA_VERSION = "1.0"
 
 
@@ -196,12 +198,27 @@ class FailureCapsule:
         *,
         offset_steps: int = 0,
         offset_seconds: float = 0.5,
+        fraction: float = 0.5,
+        min_departure_z: float = 3.0,
     ) -> int:
+        """Resolve the row a reset should seed from.
+
+        ``failure_onset_minus_fraction`` is the strategy to prefer. The
+        seconds and steps strategies apply one global offset to every
+        trajectory, and failure development time varies by a factor of six
+        across this repo's modes, so a single offset lands inside the nominal
+        prefix for most of them. That is the Phase-I delivery defect, and
+        ``ashfall.delivery`` measures it rather than assuming it away.
+        """
         onset = self.failure_onset_index
         if strategy == "first":
             return 0  # Explicit historical behavior only.
         if strategy == "failure_onset":
             return onset
+        if strategy == "failure_onset_minus_fraction":
+            return resolve_developing_seed_row(
+                self, fraction=fraction, min_departure_z=min_departure_z
+            )
         if strategy == "failure_onset_minus_steps":
             if type(offset_steps) is not int or offset_steps < 0:
                 raise ValueError("offset_steps must be a nonnegative integer")
@@ -220,9 +237,22 @@ class FailureCapsule:
         return index
 
     def reset_frame(self, **kwargs) -> CapsuleFrame:
+        """The frame a reset would seed from, or a refusal.
+
+        Presence is not plausibility. The GO2 capture path writes hardcoded
+        zeros where a signal was never measured, so a present-and-zero channel
+        used to pass the null check and become a reset state: a base at the
+        terrain origin at zero height, holding a zero command.
+        """
         frame = self.frames[self.resolve_seed_index(**kwargs)]
         if frame.missing_reset_fields:
             raise ValueError(f"cannot reset from missing state: {frame.missing_reset_fields}")
+        implausible = implausible_reset_fields(frame)
+        if implausible:
+            raise ValueError(
+                f"cannot reset from physically impossible state: {implausible}; a base "
+                "height of exactly zero is an unrecorded signal, not a measurement"
+            )
         return frame
 
     def to_dict(self) -> dict:
