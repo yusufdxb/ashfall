@@ -1,0 +1,535 @@
+{
+  "source_git_sha": "cf0b81ac3f8343851bf3b02d0373687d796ab0a8",
+  "files": [
+    {
+      "original_path": "results/REPORT.md",
+      "archived_path": "results/legacy_row0_curriculum/REPORT.md",
+      "sha256": "641444c84b379c039f650847639482ac386d2f1e60ed440e1492ada967813c94"
+    },
+    {
+      "original_path": "results/ablation_failure_fraction_failure_fraction=0p0/2026-04-28_00-17-07/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/ablation_failure_fraction_failure_fraction=0p0/2026-04-28_00-17-07/metrics/metrics_rough.json",
+      "sha256": "007c3d3bc8bfe4cfbf0c028a7ba96aac49aef3a5df5b63c6165a2761d2fe7102"
+    },
+    {
+      "original_path": "results/ablation_failure_fraction_failure_fraction=0p0/2026-04-28_00-17-07/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/ablation_failure_fraction_failure_fraction=0p0/2026-04-28_00-17-07/metrics/metrics_slippery.json",
+      "sha256": "48d1b94b59e04558ddec8e1dcffdf694a9a2ddc1b348628e7ace82fdcdbf1e7e"
+    },
+    {
+      "original_path": "results/ablation_failure_fraction_failure_fraction=0p1/2026-04-28_00-17-07/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/ablation_failure_fraction_failure_fraction=0p1/2026-04-28_00-17-07/metrics/metrics_rough.json",
+      "sha256": "5b2e9d8232618b9c836cc53c416481fecc4de8116946f429415eeb22beee35ef"
+    },
+    {
+      "original_path": "results/ablation_failure_fraction_failure_fraction=0p1/2026-04-28_00-17-07/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/ablation_failure_fraction_failure_fraction=0p1/2026-04-28_00-17-07/metrics/metrics_slippery.json",
+      "sha256": "d0471b6657f32f21a73d171f76fb05681916b86d40e7addbeed27c6f64c6413a"
+    },
+    {
+      "original_path": "results/ablation_failure_fraction_failure_fraction=0p25/2026-04-28_00-17-07/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/ablation_failure_fraction_failure_fraction=0p25/2026-04-28_00-17-07/metrics/metrics_rough.json",
+      "sha256": "23c4c39556927b4d397ab02764597d0953217c041440a9510dda1ebf4a826217"
+    },
+    {
+      "original_path": "results/ablation_failure_fraction_failure_fraction=0p25/2026-04-28_00-17-07/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/ablation_failure_fraction_failure_fraction=0p25/2026-04-28_00-17-07/metrics/metrics_slippery.json",
+      "sha256": "3c95bfb8a990655cfd02a53e237224fbb03ee5d3b5683b1015033e3634c11432"
+    },
+    {
+      "original_path": "results/ablation_failure_fraction_failure_fraction=0p5/2026-04-28_00-17-07/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/ablation_failure_fraction_failure_fraction=0p5/2026-04-28_00-17-07/metrics/metrics_rough.json",
+      "sha256": "c51b6ff7bf5211455f6cf5dbc5f7e66302380a1d89ed960cd7794fe5b4952658"
+    },
+    {
+      "original_path": "results/ablation_failure_fraction_failure_fraction=0p5/2026-04-28_00-17-07/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/ablation_failure_fraction_failure_fraction=0p5/2026-04-28_00-17-07/metrics/metrics_slippery.json",
+      "sha256": "033b9d73b3eba8f33c77d499082652c634c37e40176f1ff3d0b160dbb910935e"
+    },
+    {
+      "original_path": "results/ablation_failure_fraction_failure_fraction=0p75/2026-04-28_00-17-07/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/ablation_failure_fraction_failure_fraction=0p75/2026-04-28_00-17-07/metrics/metrics_rough.json",
+      "sha256": "4769db8377ee66a4964cfbc78c2c08ab2fe3d1cee76bf8e65c64b2fd2262a312"
+    },
+    {
+      "original_path": "results/ablation_failure_fraction_failure_fraction=0p75/2026-04-28_00-17-07/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/ablation_failure_fraction_failure_fraction=0p75/2026-04-28_00-17-07/metrics/metrics_slippery.json",
+      "sha256": "1c3bd288bd90f75cc501f0c85760f3419479b68f75449f9a2c3f526b1840cec8"
+    },
+    {
+      "original_path": "results/ablation_failure_fraction_failure_fraction=1p0/2026-04-28_00-17-07/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/ablation_failure_fraction_failure_fraction=1p0/2026-04-28_00-17-07/metrics/metrics_rough.json",
+      "sha256": "bb70b80fd91a5a734b302acd1cefcc3b1176ff9359e7ecca95bfa75899315e16"
+    },
+    {
+      "original_path": "results/ablation_failure_fraction_failure_fraction=1p0/2026-04-28_00-17-07/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/ablation_failure_fraction_failure_fraction=1p0/2026-04-28_00-17-07/metrics/metrics_slippery.json",
+      "sha256": "524d44125e08b3d7493136727d31466646feaed2d7fbf63d6f3f4e52c759749b"
+    },
+    {
+      "original_path": "results/ashfall-adapted/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/ashfall-adapted/metrics/metrics_rough.json",
+      "sha256": "23c4c39556927b4d397ab02764597d0953217c041440a9510dda1ebf4a826217"
+    },
+    {
+      "original_path": "results/ashfall-adapted/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/ashfall-adapted/metrics/metrics_slippery.json",
+      "sha256": "3c95bfb8a990655cfd02a53e237224fbb03ee5d3b5683b1015033e3634c11432"
+    },
+    {
+      "original_path": "results/ashfall-baseline/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/ashfall-baseline/metrics/metrics_rough.json",
+      "sha256": "b57b233f9be6c41cb8448015681a4a0097784d1392db5058d07aeaeb4c7519a0"
+    },
+    {
+      "original_path": "results/ashfall-baseline/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/ashfall-baseline/metrics/metrics_slippery.json",
+      "sha256": "a7a9056cdf0cbae20a129be0c38e4a6f4c4f87eabba2965518f360b9e77b60a6"
+    },
+    {
+      "original_path": "results/failure_distribution.png",
+      "archived_path": "results/legacy_row0_curriculum/failure_distribution.png",
+      "sha256": "2cf4856a88ec86d7ae6b8f7f60d9e613fde6453117b03cf0d95b428fe8cc2031"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=all_modes_seed=123/2026-05-08_08-40-13/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=all_modes_seed=123/2026-05-08_08-40-13/metrics/metrics_rough.json",
+      "sha256": "d3d16ac53da3ebce0d58252f8fa9dc5927320370aa2836e159a099dc997e0039"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=all_modes_seed=123/2026-05-08_08-40-13/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=all_modes_seed=123/2026-05-08_08-40-13/metrics/metrics_slippery.json",
+      "sha256": "fc765babf6fbee19270fffec3c0066aaa9eee75b8bc77e786b565cd02c953847"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=all_modes_seed=42/2026-05-08_08-40-13/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=all_modes_seed=42/2026-05-08_08-40-13/metrics/metrics_rough.json",
+      "sha256": "17d9711462c1568da537dc22891975edb94899a85b8ac5a35fd3a8a8ec63c8ab"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=all_modes_seed=42/2026-05-08_08-40-13/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=all_modes_seed=42/2026-05-08_08-40-13/metrics/metrics_slippery.json",
+      "sha256": "f6d84888fbf0ff62370b79db3ddd1bc0696a37a81e1bc04fffd7a1d07d794f8b"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=all_modes_seed=7/2026-05-08_08-40-13/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=all_modes_seed=7/2026-05-08_08-40-13/metrics/metrics_rough.json",
+      "sha256": "eada4c88f4ab806e7b0426a8ff875f944e546d75df883e875b326c3e1c372290"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=all_modes_seed=7/2026-05-08_08-40-13/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=all_modes_seed=7/2026-05-08_08-40-13/metrics/metrics_slippery.json",
+      "sha256": "c6cadef5307efd4c5c37370b4ed0d236b681500a57b15a90f183cb8c8fd823d6"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=command_mismatch_only_seed=123/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=command_mismatch_only_seed=123/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "sha256": "d4e25dddc0839bda78521cbac6c4a63b8cd41f2f87b0e3962ecbf9b896bbc9e1"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=command_mismatch_only_seed=123/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=command_mismatch_only_seed=123/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "sha256": "5f023c5895c6ec12f3907820ade6bbb92b79822d9aa4bd8faf25645e953efcc0"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=command_mismatch_only_seed=42/2026-05-08_08-40-13/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=command_mismatch_only_seed=42/2026-05-08_08-40-13/metrics/metrics_rough.json",
+      "sha256": "36b3391c25190d3ad4def57f15e4e52f9d451f8ce81ee0e88f981e05f50999e3"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=command_mismatch_only_seed=42/2026-05-08_08-40-13/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=command_mismatch_only_seed=42/2026-05-08_08-40-13/metrics/metrics_slippery.json",
+      "sha256": "b4a8dc3d2659a9db8954988569ad2230206954ec71589d977003bbb03a6bb886"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=command_mismatch_only_seed=7/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=command_mismatch_only_seed=7/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "sha256": "99ee5cd154dc65f811aa639645b84d18ba552012f3d4427a3748a9c110c2f2ec"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=command_mismatch_only_seed=7/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=command_mismatch_only_seed=7/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "sha256": "eaae2421c40962a86eadd6a6d5a9bc62b8394ea2956a95396a19a67366f7a9c9"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=severe_only_seed=123/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=severe_only_seed=123/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "sha256": "19df58bbeeb14d686c3da5f74e1d2cdf3445d101f696b5f4a1ad11e06babdb1a"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=severe_only_seed=123/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=severe_only_seed=123/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "sha256": "8c0e2250a941749960786d077faa2c706b52bea5488c2de58d1b5944a8c9bc04"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=severe_only_seed=42/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=severe_only_seed=42/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "sha256": "01f8785bceeefc16578c52df196bc5309485c08a7a594fa7fef48966d16c2bc7"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=severe_only_seed=42/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=severe_only_seed=42/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "sha256": "19186195b0d12f108f25dc5497d4f4e150e816276acc577d03037c81c24f7d67"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=severe_only_seed=7/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=severe_only_seed=7/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "sha256": "8095a60fc646c695b0cb3e7f3142e037f24ba248a48b03d9555ef0b9dad428ad"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=severe_only_seed=7/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=severe_only_seed=7/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "sha256": "a8a08f6b80f68a5833a677aa698453c7bf4b70101b6e52eb3a2c36977d98fd83"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=severe_plus_slip_seed=123/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=severe_plus_slip_seed=123/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "sha256": "8ea59f8f83f25c34196c497fc2ac402df0c703e5c6c99d2c2de3742e92385b7b"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=severe_plus_slip_seed=123/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=severe_plus_slip_seed=123/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "sha256": "852297ccd23c53098cd7d88cb213a2bd4870c89a53461fadfdcc1f1706db0a7b"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=severe_plus_slip_seed=42/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=severe_plus_slip_seed=42/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "sha256": "f015c1c592a0708cfe0fbf538e3f18419255c0f5fd751ab9a4998c819fcc53c3"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=severe_plus_slip_seed=42/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=severe_plus_slip_seed=42/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "sha256": "868c78eb7908db9d918ced647061ff0fe14230c56e11fc53e829dd839cab9500"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=severe_plus_slip_seed=7/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=severe_plus_slip_seed=7/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "sha256": "438951a37a4023439655bcbbed2957f0de3211be3702bea6a155db1542491775"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=severe_plus_slip_seed=7/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=severe_plus_slip_seed=7/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "sha256": "7db28d1fd50f7cdc7f3e1c8ce662a513372fdda5a8c49a9a614b974e62c5ae41"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=slip_only_seed=123/2026-05-08_08-40-13/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=slip_only_seed=123/2026-05-08_08-40-13/metrics/metrics_rough.json",
+      "sha256": "5517cdd547c2e0c8bd994f192b900f23f5c314524eca3c88d4193d0159a49940"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=slip_only_seed=123/2026-05-08_08-40-13/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=slip_only_seed=123/2026-05-08_08-40-13/metrics/metrics_slippery.json",
+      "sha256": "a575a04de6cfb9782158262834c0cb8dc4b61fb3e359b1a39908a84bea5cbd2d"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=slip_only_seed=42/2026-05-08_08-40-13/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=slip_only_seed=42/2026-05-08_08-40-13/metrics/metrics_rough.json",
+      "sha256": "9aaa929d4ae973b0173d365cc03097510b6618d2933243cdc93d588693ab8b85"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=slip_only_seed=42/2026-05-08_08-40-13/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=slip_only_seed=42/2026-05-08_08-40-13/metrics/metrics_slippery.json",
+      "sha256": "859a7a59590b78dffe61c46671dbf75ceb50d6226137fc606328d24f503af5a5"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=slip_only_seed=7/2026-05-08_08-40-13/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=slip_only_seed=7/2026-05-08_08-40-13/metrics/metrics_rough.json",
+      "sha256": "d8d26c980efab3a8babbd1fd007335cbacb49c742977e5f3a83ca8ce93828e89"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=slip_only_seed=7/2026-05-08_08-40-13/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=slip_only_seed=7/2026-05-08_08-40-13/metrics/metrics_slippery.json",
+      "sha256": "a3ce8889629576960541ea05cfc5818a7c67996ac5c9d3eb677603ee94e3edde"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=slip_plus_cm_seed=123/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=slip_plus_cm_seed=123/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "sha256": "6722a474180b6854bc85c86ae090647d40b6b6d4944ab457c7ff91f0e8f8836e"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=slip_plus_cm_seed=123/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=slip_plus_cm_seed=123/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "sha256": "741f3c494cb6260cbb32bba7a22d8627bca39f4d018b064a1fc7f46da6e10819"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=slip_plus_cm_seed=42/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=slip_plus_cm_seed=42/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "sha256": "5fe9aaa7483209e5a5cef59a5f568a084e2e14e36c7f8080f90e35fd2dc0ab56"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=slip_plus_cm_seed=42/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=slip_plus_cm_seed=42/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "sha256": "763adfb0934f30489e1a2f10ff19ec9eba71130caa45ac9b81f2d263680edef5"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=slip_plus_cm_seed=7/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=slip_plus_cm_seed=7/2026-05-08_08-40-14/metrics/metrics_rough.json",
+      "sha256": "0ef0bc48d7aa1bdc85bebb1f1b6d562ebb0847fde95942c185cb415f5e715527"
+    },
+    {
+      "original_path": "results/failure_modes_pilot_2026-05-08_failure_modes=slip_plus_cm_seed=7/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/failure_modes_pilot_2026-05-08_failure_modes=slip_plus_cm_seed=7/2026-05-08_08-40-14/metrics/metrics_slippery.json",
+      "sha256": "632026012863fc53d887bcd8c5aaf4f2475689306a93c220ac7c8ea216dc5c6a"
+    },
+    {
+      "original_path": "results/multiseed_n11_scale_verdict.md",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_n11_scale_verdict.md",
+      "sha256": "5462fce357dff10803f8af3f3957825fd3f627d6b513319bfec1e612578414d1"
+    },
+    {
+      "original_path": "results/multiseed_n7_verdict.md",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_n7_verdict.md",
+      "sha256": "dddda6c49d2c345457cfad848813d0be7f1beb653d83f4edc688465dbd9416e8"
+    },
+    {
+      "original_path": "results/multiseed_pilot_2026-05-07_failure_fraction=0p0_seed=123/2026-05-07_14-03-14/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_pilot_2026-05-07_failure_fraction=0p0_seed=123/2026-05-07_14-03-14/metrics/metrics_rough.json",
+      "sha256": "548e7745467ac14ab039481d48bb83df07dee1bb9eac0e348cbb17453c149231"
+    },
+    {
+      "original_path": "results/multiseed_pilot_2026-05-07_failure_fraction=0p0_seed=123/2026-05-07_14-03-14/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_pilot_2026-05-07_failure_fraction=0p0_seed=123/2026-05-07_14-03-14/metrics/metrics_slippery.json",
+      "sha256": "cea63610506035f8fcdf6570faf53ef06a696a629b743aa3a0ce5b54f2a1c7e4"
+    },
+    {
+      "original_path": "results/multiseed_pilot_2026-05-07_failure_fraction=0p0_seed=42/2026-05-07_14-03-14/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_pilot_2026-05-07_failure_fraction=0p0_seed=42/2026-05-07_14-03-14/metrics/metrics_rough.json",
+      "sha256": "007c3d3bc8bfe4cfbf0c028a7ba96aac49aef3a5df5b63c6165a2761d2fe7102"
+    },
+    {
+      "original_path": "results/multiseed_pilot_2026-05-07_failure_fraction=0p0_seed=42/2026-05-07_14-03-14/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_pilot_2026-05-07_failure_fraction=0p0_seed=42/2026-05-07_14-03-14/metrics/metrics_slippery.json",
+      "sha256": "48d1b94b59e04558ddec8e1dcffdf694a9a2ddc1b348628e7ace82fdcdbf1e7e"
+    },
+    {
+      "original_path": "results/multiseed_pilot_2026-05-07_failure_fraction=0p0_seed=7/2026-05-07_14-03-14/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_pilot_2026-05-07_failure_fraction=0p0_seed=7/2026-05-07_14-03-14/metrics/metrics_rough.json",
+      "sha256": "511f7c35df4aac65f2495bfa58bc4b45724a3aed2b6ffcf30216e21e6f048482"
+    },
+    {
+      "original_path": "results/multiseed_pilot_2026-05-07_failure_fraction=0p0_seed=7/2026-05-07_14-03-14/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_pilot_2026-05-07_failure_fraction=0p0_seed=7/2026-05-07_14-03-14/metrics/metrics_slippery.json",
+      "sha256": "ae2f806dc1c9428a93f1065f2a7ff986faa4f515d6ee508f36f988ea88c9df7c"
+    },
+    {
+      "original_path": "results/multiseed_pilot_2026-05-07_failure_fraction=0p5_seed=123/2026-05-07_14-03-14/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_pilot_2026-05-07_failure_fraction=0p5_seed=123/2026-05-07_14-03-14/metrics/metrics_rough.json",
+      "sha256": "d3d16ac53da3ebce0d58252f8fa9dc5927320370aa2836e159a099dc997e0039"
+    },
+    {
+      "original_path": "results/multiseed_pilot_2026-05-07_failure_fraction=0p5_seed=123/2026-05-07_14-03-14/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_pilot_2026-05-07_failure_fraction=0p5_seed=123/2026-05-07_14-03-14/metrics/metrics_slippery.json",
+      "sha256": "fc765babf6fbee19270fffec3c0066aaa9eee75b8bc77e786b565cd02c953847"
+    },
+    {
+      "original_path": "results/multiseed_pilot_2026-05-07_failure_fraction=0p5_seed=42/2026-05-07_14-03-14/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_pilot_2026-05-07_failure_fraction=0p5_seed=42/2026-05-07_14-03-14/metrics/metrics_rough.json",
+      "sha256": "17d9711462c1568da537dc22891975edb94899a85b8ac5a35fd3a8a8ec63c8ab"
+    },
+    {
+      "original_path": "results/multiseed_pilot_2026-05-07_failure_fraction=0p5_seed=42/2026-05-07_14-03-14/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_pilot_2026-05-07_failure_fraction=0p5_seed=42/2026-05-07_14-03-14/metrics/metrics_slippery.json",
+      "sha256": "f6d84888fbf0ff62370b79db3ddd1bc0696a37a81e1bc04fffd7a1d07d794f8b"
+    },
+    {
+      "original_path": "results/multiseed_pilot_2026-05-07_failure_fraction=0p5_seed=7/2026-05-07_14-03-14/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_pilot_2026-05-07_failure_fraction=0p5_seed=7/2026-05-07_14-03-14/metrics/metrics_rough.json",
+      "sha256": "eada4c88f4ab806e7b0426a8ff875f944e546d75df883e875b326c3e1c372290"
+    },
+    {
+      "original_path": "results/multiseed_pilot_2026-05-07_failure_fraction=0p5_seed=7/2026-05-07_14-03-14/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_pilot_2026-05-07_failure_fraction=0p5_seed=7/2026-05-07_14-03-14/metrics/metrics_slippery.json",
+      "sha256": "c6cadef5307efd4c5c37370b4ed0d236b681500a57b15a90f183cb8c8fd823d6"
+    },
+    {
+      "original_path": "results/multiseed_scale_2026-05-07_failure_fraction=0p0_seed=1729/2026-05-07_22-48-04/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_2026-05-07_failure_fraction=0p0_seed=1729/2026-05-07_22-48-04/metrics/metrics_rough.json",
+      "sha256": "a0717ea71388e741d81a676816215a847f2cf9f5fe08b674b6bd4ecf7c239eec"
+    },
+    {
+      "original_path": "results/multiseed_scale_2026-05-07_failure_fraction=0p0_seed=1729/2026-05-07_22-48-04/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_2026-05-07_failure_fraction=0p0_seed=1729/2026-05-07_22-48-04/metrics/metrics_slippery.json",
+      "sha256": "52426844a1a9d3982d5677a68b72a8f83a8b6b6178c3484d2a9d8f753a23b69b"
+    },
+    {
+      "original_path": "results/multiseed_scale_2026-05-07_failure_fraction=0p0_seed=2718/2026-05-07_22-48-04/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_2026-05-07_failure_fraction=0p0_seed=2718/2026-05-07_22-48-04/metrics/metrics_rough.json",
+      "sha256": "1e8a932ceb9382d374c17ec2a22121dd9794ccb5d85bdf46cff579dfed2f8e5a"
+    },
+    {
+      "original_path": "results/multiseed_scale_2026-05-07_failure_fraction=0p0_seed=2718/2026-05-07_22-48-04/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_2026-05-07_failure_fraction=0p0_seed=2718/2026-05-07_22-48-04/metrics/metrics_slippery.json",
+      "sha256": "335b22619cd9f791b3e0a0307a6b3f73ac060615fc7683608416517018b3540e"
+    },
+    {
+      "original_path": "results/multiseed_scale_2026-05-07_failure_fraction=0p0_seed=314/2026-05-07_22-48-04/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_2026-05-07_failure_fraction=0p0_seed=314/2026-05-07_22-48-04/metrics/metrics_rough.json",
+      "sha256": "0f3475e19e6df3d83396c3f30279c3d8bbf3d4bc031b8504f0ec701d1144f404"
+    },
+    {
+      "original_path": "results/multiseed_scale_2026-05-07_failure_fraction=0p0_seed=314/2026-05-07_22-48-04/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_2026-05-07_failure_fraction=0p0_seed=314/2026-05-07_22-48-04/metrics/metrics_slippery.json",
+      "sha256": "46aa00e77aa5e46fcb1d1bbc32cda055d3bbf42ddc23a8d7599b7d8bf2b8e6a2"
+    },
+    {
+      "original_path": "results/multiseed_scale_2026-05-07_failure_fraction=0p0_seed=99/2026-05-07_22-48-04/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_2026-05-07_failure_fraction=0p0_seed=99/2026-05-07_22-48-04/metrics/metrics_rough.json",
+      "sha256": "86f3b949deac33fe6c097da0a571594034619668cf122ad1e69f9f4a63874c09"
+    },
+    {
+      "original_path": "results/multiseed_scale_2026-05-07_failure_fraction=0p0_seed=99/2026-05-07_22-48-04/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_2026-05-07_failure_fraction=0p0_seed=99/2026-05-07_22-48-04/metrics/metrics_slippery.json",
+      "sha256": "cff03f452cad6406b887387b8740ddc07be8975e4cc5f3ca11d980efe6d4d4b1"
+    },
+    {
+      "original_path": "results/multiseed_scale_2026-05-07_failure_fraction=0p5_seed=1729/2026-05-07_22-48-04/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_2026-05-07_failure_fraction=0p5_seed=1729/2026-05-07_22-48-04/metrics/metrics_rough.json",
+      "sha256": "c8c898b3698f13457d5281cd1f580bce00c39c7ad641aeae1d8321f38f94dbe5"
+    },
+    {
+      "original_path": "results/multiseed_scale_2026-05-07_failure_fraction=0p5_seed=1729/2026-05-07_22-48-04/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_2026-05-07_failure_fraction=0p5_seed=1729/2026-05-07_22-48-04/metrics/metrics_slippery.json",
+      "sha256": "c4a088115438bad9f94ebc2242ce5fd1b1cf8a1ac9869845382186b7aa2b4b54"
+    },
+    {
+      "original_path": "results/multiseed_scale_2026-05-07_failure_fraction=0p5_seed=2718/2026-05-07_22-48-04/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_2026-05-07_failure_fraction=0p5_seed=2718/2026-05-07_22-48-04/metrics/metrics_rough.json",
+      "sha256": "9c5d1e08da847d77c484698f0be145161692c45cddf407cfd69b6ab34a3212fe"
+    },
+    {
+      "original_path": "results/multiseed_scale_2026-05-07_failure_fraction=0p5_seed=2718/2026-05-07_22-48-04/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_2026-05-07_failure_fraction=0p5_seed=2718/2026-05-07_22-48-04/metrics/metrics_slippery.json",
+      "sha256": "d2d9bb7b5191daf3ef337d4894fe071bddebaca8b22cdab1f18144c19bc3eb4d"
+    },
+    {
+      "original_path": "results/multiseed_scale_2026-05-07_failure_fraction=0p5_seed=314/2026-05-07_22-48-04/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_2026-05-07_failure_fraction=0p5_seed=314/2026-05-07_22-48-04/metrics/metrics_rough.json",
+      "sha256": "8ef1498088b75207eaeb703c5db8e172b9cba4536eb9e7cf013f14f7ece8332a"
+    },
+    {
+      "original_path": "results/multiseed_scale_2026-05-07_failure_fraction=0p5_seed=314/2026-05-07_22-48-04/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_2026-05-07_failure_fraction=0p5_seed=314/2026-05-07_22-48-04/metrics/metrics_slippery.json",
+      "sha256": "856f99088d0bab2e73f6201688825b90e78b203c46a7b3cd6eaa6e77ab97b1c1"
+    },
+    {
+      "original_path": "results/multiseed_scale_2026-05-07_failure_fraction=0p5_seed=99/2026-05-07_22-48-04/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_2026-05-07_failure_fraction=0p5_seed=99/2026-05-07_22-48-04/metrics/metrics_rough.json",
+      "sha256": "986e41ccd91553ea9ea2f7b586344cba0eaaede2475bc68489550d0d212e2e87"
+    },
+    {
+      "original_path": "results/multiseed_scale_2026-05-07_failure_fraction=0p5_seed=99/2026-05-07_22-48-04/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_2026-05-07_failure_fraction=0p5_seed=99/2026-05-07_22-48-04/metrics/metrics_slippery.json",
+      "sha256": "a6f782edf7d00acb270b9a35b2e1b0f91a550c4db703c2a282b175ffd55b82e2"
+    },
+    {
+      "original_path": "results/multiseed_scale_ext_2026-06-02_ANALYSIS.md",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_ANALYSIS.md",
+      "sha256": "5f35ae5d2f62df70b8a11eda1f16dd65ec5fb274d6a5681a1b1a85577f449c49"
+    },
+    {
+      "original_path": "results/multiseed_scale_ext_2026-06-02_failure_fraction=0p0_seed=1618/2026-06-02_22-23-19/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_failure_fraction=0p0_seed=1618/2026-06-02_22-23-19/metrics/metrics_rough.json",
+      "sha256": "39be119805f62b7c65ffc67c9b257eb94ecbe6fb8451422f2e5afac53a4bed42"
+    },
+    {
+      "original_path": "results/multiseed_scale_ext_2026-06-02_failure_fraction=0p0_seed=1618/2026-06-02_22-23-19/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_failure_fraction=0p0_seed=1618/2026-06-02_22-23-19/metrics/metrics_slippery.json",
+      "sha256": "5c5b40a40d4823c3551331bc64153d44f6413aeae5200bce4abcceb88b79fc88"
+    },
+    {
+      "original_path": "results/multiseed_scale_ext_2026-06-02_failure_fraction=0p0_seed=2024/2026-06-02_22-23-19/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_failure_fraction=0p0_seed=2024/2026-06-02_22-23-19/metrics/metrics_rough.json",
+      "sha256": "ef500774439c435eba70bc388fb4149605b5d682c79d9602ae2426a0d90addce"
+    },
+    {
+      "original_path": "results/multiseed_scale_ext_2026-06-02_failure_fraction=0p0_seed=2024/2026-06-02_22-23-19/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_failure_fraction=0p0_seed=2024/2026-06-02_22-23-19/metrics/metrics_slippery.json",
+      "sha256": "6ba332a330e9bfcf3d8f653f84da655b8a8e88a203ba42a36ce464c6d7ec42ab"
+    },
+    {
+      "original_path": "results/multiseed_scale_ext_2026-06-02_failure_fraction=0p0_seed=4096/2026-06-02_22-23-19/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_failure_fraction=0p0_seed=4096/2026-06-02_22-23-19/metrics/metrics_rough.json",
+      "sha256": "9e0ace33150eb965d48e7217731cedac1c70503fb6307bda472f2d8a7fe87ff6"
+    },
+    {
+      "original_path": "results/multiseed_scale_ext_2026-06-02_failure_fraction=0p0_seed=4096/2026-06-02_22-23-19/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_failure_fraction=0p0_seed=4096/2026-06-02_22-23-19/metrics/metrics_slippery.json",
+      "sha256": "d002809eb85fa802703531632ae278de2d6b8e62d5b555449b3c7073db4378d6"
+    },
+    {
+      "original_path": "results/multiseed_scale_ext_2026-06-02_failure_fraction=0p0_seed=6022/2026-06-02_22-23-19/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_failure_fraction=0p0_seed=6022/2026-06-02_22-23-19/metrics/metrics_rough.json",
+      "sha256": "f6c27a1764d0b4dd0f4c6aa5d575cd1ac03183b8b82416768c1e52732c584f45"
+    },
+    {
+      "original_path": "results/multiseed_scale_ext_2026-06-02_failure_fraction=0p0_seed=6022/2026-06-02_22-23-19/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_failure_fraction=0p0_seed=6022/2026-06-02_22-23-19/metrics/metrics_slippery.json",
+      "sha256": "ec489eb13abd1f3b1bea32a9c6663a411cf2d5c249f540dbce40535cfafb4af7"
+    },
+    {
+      "original_path": "results/multiseed_scale_ext_2026-06-02_failure_fraction=0p5_seed=1618/2026-06-02_22-23-19/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_failure_fraction=0p5_seed=1618/2026-06-02_22-23-19/metrics/metrics_rough.json",
+      "sha256": "63ddb520502181c1a751bc0acf312462d69a5c1af78add68911e1326cb4dc47f"
+    },
+    {
+      "original_path": "results/multiseed_scale_ext_2026-06-02_failure_fraction=0p5_seed=1618/2026-06-02_22-23-19/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_failure_fraction=0p5_seed=1618/2026-06-02_22-23-19/metrics/metrics_slippery.json",
+      "sha256": "b6ed89434c218abb543b79e43da8878d71c92464baaa40f4a99adaa9e1391b6f"
+    },
+    {
+      "original_path": "results/multiseed_scale_ext_2026-06-02_failure_fraction=0p5_seed=2024/2026-06-02_22-23-19/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_failure_fraction=0p5_seed=2024/2026-06-02_22-23-19/metrics/metrics_rough.json",
+      "sha256": "37efa0cad48f4710d23aa87b6b4c1c2075b10e356896d332175ea00e68e57982"
+    },
+    {
+      "original_path": "results/multiseed_scale_ext_2026-06-02_failure_fraction=0p5_seed=2024/2026-06-02_22-23-19/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_failure_fraction=0p5_seed=2024/2026-06-02_22-23-19/metrics/metrics_slippery.json",
+      "sha256": "2da385388365fe13324f7930fed1fd10c2e95e45167d304ae2fea320bb2ee934"
+    },
+    {
+      "original_path": "results/multiseed_scale_ext_2026-06-02_failure_fraction=0p5_seed=4096/2026-06-02_22-23-19/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_failure_fraction=0p5_seed=4096/2026-06-02_22-23-19/metrics/metrics_rough.json",
+      "sha256": "c400d4df5eac4126f331dba8fdba47a9cf0296978d1148d0f954d1df13cc91a9"
+    },
+    {
+      "original_path": "results/multiseed_scale_ext_2026-06-02_failure_fraction=0p5_seed=4096/2026-06-02_22-23-19/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_failure_fraction=0p5_seed=4096/2026-06-02_22-23-19/metrics/metrics_slippery.json",
+      "sha256": "f0db706987ffe4c7f6722aa5cf44355802ced66112e2b4259f184b82d81d7e26"
+    },
+    {
+      "original_path": "results/multiseed_scale_ext_2026-06-02_failure_fraction=0p5_seed=6022/2026-06-02_22-23-20/metrics/metrics_rough.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_failure_fraction=0p5_seed=6022/2026-06-02_22-23-20/metrics/metrics_rough.json",
+      "sha256": "933fee91ff5340d938817564ebbc4e40bb326b379e43779d72b885fc8ac62d01"
+    },
+    {
+      "original_path": "results/multiseed_scale_ext_2026-06-02_failure_fraction=0p5_seed=6022/2026-06-02_22-23-20/metrics/metrics_slippery.json",
+      "archived_path": "results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_failure_fraction=0p5_seed=6022/2026-06-02_22-23-20/metrics/metrics_slippery.json",
+      "sha256": "2669d6045236421bc8a68fbd7b896dc88baad7305da16957a3378eb5d4eb72f2"
+    },
+    {
+      "original_path": "results/return_comparison.png",
+      "archived_path": "results/legacy_row0_curriculum/return_comparison.png",
+      "sha256": "b9eabebf5742cd04ec311acfdb0881314027b6c0ae33636f044d5170107555af"
+    },
+    {
+      "original_path": "results/success_rate_comparison.png",
+      "archived_path": "results/legacy_row0_curriculum/success_rate_comparison.png",
+      "sha256": "1b3d9dd64b3ae68119e8a932e283bc56f64099386faaeacfd905e405b986b398"
+    },
+    {
+      "original_path": "results/sweep_curriculum_pool_composition.png",
+      "archived_path": "results/legacy_row0_curriculum/sweep_curriculum_pool_composition.png",
+      "sha256": "04d7b11a417f979339809abd8139eacc3aa6924bc01b1f87a657fb6beab6e6ba"
+    },
+    {
+      "original_path": "results/sweep_slew_saturation.png",
+      "archived_path": "results/legacy_row0_curriculum/sweep_slew_saturation.png",
+      "sha256": "0eb8b81ac839b99327d944b28756bb9bf87e5df2c6f97310209cb7d99c3bc0b9"
+    },
+    {
+      "original_path": "results/sweep_success_rate.png",
+      "archived_path": "results/legacy_row0_curriculum/sweep_success_rate.png",
+      "sha256": "d3945026afd80fe8b8f0019a8aa3e9b4ca7492495ccc3475c4d4d27eab6b1b2a"
+    }
+  ]
+}

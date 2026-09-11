@@ -312,7 +312,7 @@ def test_paired_delta_n7_uses_t_multiplier_2_447(tmp_path: Path) -> None:
 import pytest  # noqa: E402
 
 _REPO_ROOT = Path(__file__).resolve().parents[1]
-_RESULTS_DIR = _REPO_ROOT / "results"
+_RESULTS_DIR = _REPO_ROOT / "results" / "legacy_row0_curriculum"
 
 
 def test_published_n7_headline_reproduces_from_committed_results() -> None:

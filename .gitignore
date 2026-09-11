@@ -25,3 +25,7 @@ data/failures/*.parquet
 # IDE
 .vscode/
 .idea/
+
+# Preserved historical evidence and portable software-validation artifacts.
+!results/legacy_row0_curriculum/**
+!results/software_validation/**
