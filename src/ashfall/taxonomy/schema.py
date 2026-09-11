@@ -1,15 +1,22 @@
 """Failure taxonomy schema and metadata.
 
 Provides structured metadata about each failure mode: description, detection
-method and proposed reconstruction strategy. Reproducibility is established
-per capsule by the reproduction gate, never by this mode catalog. This powers both the
-README taxonomy table and the experiment runner's mode-aware logic.
+method, deliverability, and proposed reconstruction strategy. Whether a given
+capsule reproduces is established per capsule by the reproduction gate, never
+by this catalog. Whether a mode can be delivered AT ALL is a property of the
+mode, decided here against the simulator's restore contract: every entry used
+to carry the same reproduction_status, which was false a priori for the one
+mode whose signature no reset can write.
+
+This powers the README taxonomy table. It is not read by the experiment
+runner, which the previous docstring claimed.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 
+from ashfall.delivery import is_deliverable, signature_channels
 from ashfall.taxonomy.detector import FailureMode
 
 
@@ -22,6 +29,22 @@ class FailureModeSpec:
     reproduction_status: str
     replay_strategy: str
     severity: int
+
+    @property
+    def signature_channels(self) -> tuple[str, ...]:
+        """Raw telemetry channels this mode's detector signature is read from."""
+        return signature_channels(self.mode.value)
+
+    @property
+    def deliverable(self) -> bool:
+        """Whether a reset can write every channel carrying the signature.
+
+        False means no seed row, friction sweep or reset strategy can deliver
+        this mode: the state-restore contract has no way to set the channel
+        the detector reads. Seeding such a capsule yields a nominal-looking
+        episode that still scores as though the treatment were applied.
+        """
+        return is_deliverable(self.mode.value)
 
 
 TAXONOMY: dict[FailureMode, FailureModeSpec] = {
@@ -66,8 +89,12 @@ TAXONOMY: dict[FailureMode, FailureModeSpec] = {
         label="Contact Loss",
         description="Multiple feet have low normal force; expected gait phase is not observed.",
         detection="Sustained: >= 2 feet below 5N force for >= 0.1 s.",
-        reproduction_status="requires_capsule_reproduction_gate",
-        replay_strategy="Vary terrain slope and surface irregularity.",
+        reproduction_status="undeliverable_signature_channel",
+        replay_strategy=(
+            "Not deliverable by state restore: the signature is contact force, which is "
+            "an output of the physics engine. Regenerate the mode so it perturbs pose or "
+            "joint state, or induce it through terrain and friction and label it there."
+        ),
         severity=2,
     ),
     FailureMode.COMMAND_MISMATCH: FailureModeSpec(
@@ -91,6 +118,7 @@ def taxonomy_table_rows() -> list[dict[str, str]]:
                 "Mode": spec.label,
                 "Severity": str(spec.severity),
                 "Detection": spec.detection,
+                "Deliverable": "yes" if spec.deliverable else "no",
                 "Sim Replay": "Hypothesis: " + spec.replay_strategy,
             }
         )

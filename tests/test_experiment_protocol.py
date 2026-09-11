@@ -45,7 +45,9 @@ def protocol_fixture():
     capsule = demo_capsule()
     backend = AnalyticBackend()
     config = ReproductionConfig(
-        "baseline", FailureDescriptor("slip", 0.5), capsule.resolve_seed_index()
+        "baseline",
+        FailureDescriptor("slip", 0.5),
+        capsule.resolve_seed_index("failure_onset_minus_fraction"),
     )
     candidate = ReproductionCandidate(
         capsule.capsule_id, (("dynamic_friction", 0.3),), config.seed_row

@@ -6,6 +6,7 @@ from pathlib import Path
 
 from .basin import discover_basin, evaluate_basin, save_observations
 from .capsule import CapsuleFrame, FailureCapsule
+from .delivery import assert_delivers
 from .evaluation.paired import paired_comparison
 from .evaluation.regression import regression_verdict
 from .frontier import FrontierEstimator, SeverityMetric, frontier_shift
@@ -44,12 +45,41 @@ class AnalyticBackend:
         self.thresholds['mock_repaired'] = self.thresholds['baseline'] + .1 * bool(selected)
 
 
+# Nominal walking, then a slip that develops over ten frames and holds.
+# The previous fixture was 80 byte-identical frames, so its "pre-failure" seed
+# row was the same state as row 0 and the demo exercised no delivery at all.
+# It was the fixture for most of the loop tests, which is why nothing noticed.
+_DEMO_NOMINAL_ROWS = 40
+_DEMO_ONSET_ROW = 50
+_DEMO_TOTAL_ROWS = 80
+_DEMO_COMMAND_VX = .5
+_DEMO_SLIPPED_VX = .02
+
+
+def _demo_forward_speed(row: int) -> float:
+    """Body forward speed at a row. Deterministic, so the demo stays byte-stable."""
+    if row < _DEMO_NOMINAL_ROWS:
+        # A little structure so the nominal reference is a distribution rather
+        # than a constant, without any randomness.
+        return _DEMO_COMMAND_VX + .004 * (1 if row % 2 else -1)
+    if row < _DEMO_ONSET_ROW:
+        # Traction decays across the development window.
+        span = _DEMO_ONSET_ROW - _DEMO_NOMINAL_ROWS
+        progress = (row - _DEMO_NOMINAL_ROWS + 1) / span
+        return _DEMO_COMMAND_VX - progress * (_DEMO_COMMAND_VX - _DEMO_SLIPPED_VX)
+    return _DEMO_SLIPPED_VX
+
+
 def demo_capsule():
-    frames = tuple(CapsuleFrame(i*.02, (0., 0., .3), (0., 0., 0., 1.),
-                                (.5, 0., 0.), (0., 0., 0.), (0.,)*12, (0.,)*12,
-                                (.5, 0., 0.)) for i in range(80))
+    frames = tuple(
+        CapsuleFrame(i*.02, (0., 0., .3), (0., 0., 0., 1.),
+                     (_demo_forward_speed(i), 0., 0.), (0., 0., 0.), (0.,)*12, (0.,)*12,
+                     (_DEMO_COMMAND_VX, 0., 0.))
+        for i in range(_DEMO_TOTAL_ROWS)
+    )
     return FailureCapsule('synthetic_fixture', 'quadruped_fixture', 'baseline',
-                          '2026-01-01T00:00:00+00:00', .02, 'slip', 50, 0, 79, frames,
+                          '2026-01-01T00:00:00+00:00', .02, 'slip', _DEMO_ONSET_ROW,
+                          _DEMO_NOMINAL_ROWS, _DEMO_TOTAL_ROWS - 1, frames,
                           detector_version='fixture-v1', threshold_config_version='fixture-v1')
 
 
@@ -57,7 +87,11 @@ def run_demo(output: str | Path):
     out = Path(output)
     capsule = demo_capsule()
     capsule.save(out / 'capsule.json')
-    seed_row = capsule.resolve_seed_index()
+    # Seed at a fraction of this capsule's own development window, and record
+    # the measured delivery evidence alongside the verdict. A fixed 0.5 s
+    # rollback would land before the reviewed window here and is refused.
+    seed_row = capsule.resolve_seed_index('failure_onset_minus_fraction')
+    delivery = assert_delivers(capsule, seed_row)
     backend = AnalyticBackend()
     config = ReproductionConfig('baseline', FailureDescriptor('slip', .5), seed_row)
     candidate = ReproductionCandidate(capsule.capsule_id, (('dynamic_friction', .3),), seed_row)
@@ -104,14 +138,21 @@ def run_demo(output: str | Path):
     write_artifact(out / 'nominal_fixture.json', nominal)
     candidate_nominal = [{**r, 'policy_id': 'mock_repaired', 'training_seed': 11} for r in nominal]
     verdict = regression_verdict(effect.candidate_minus_baseline, nominal, candidate_nominal)
-    result = dict(evidence_kind='mock', purpose='software wiring only; no PPO or robot result',
+    # The verdict is deliberately not stored under "verdict". This artifact
+    # shares the RepairVerdict schema with a real result and used to read
+    # accepted: true next to a plausible frontier shift, distinguished from
+    # research evidence only by two adjacent strings. A reader quoting
+    # mock_verdict has to quote the word mock.
+    result = dict(evidence_kind='mock', is_research_result=False,
+                  purpose='software wiring only; no PPO or robot result',
                   capsule_id=capsule.capsule_id, resolved_seed_row=seed_row,
+                  delivery_evidence=delivery.to_dict(),
                   reproduction_status=reproduction.status, manifest_hash=manifest.manifest_hash,
                   training_scenario_draws=len(selected),
                   training_ids=sorted({s.scenario_id for s in selected}),
                   baseline_frontier=margins['baseline'].to_dict(),
                   repaired_frontier=margins['mock_repaired'].to_dict(),
                   frontier_shift=frontier_shift(margins['baseline'], margins['mock_repaired']),
-                  held_out_effect=asdict(effect), verdict=asdict(verdict))
+                  held_out_effect=asdict(effect), mock_verdict=asdict(verdict))
     write_artifact(out / 'demo.json', result)
     return result

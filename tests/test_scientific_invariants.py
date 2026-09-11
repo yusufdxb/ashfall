@@ -17,10 +17,10 @@ from ashfall.scenarios import ScenarioManifest
 
 def reproduction():
     capsule = demo_capsule()
-    config = ReproductionConfig("baseline", FailureDescriptor("slip", 0.5), 25)
+    config = ReproductionConfig("baseline", FailureDescriptor("slip", 0.5), 45)
     return capsule, ReproductionGate(config).run(
         capsule,
-        ReproductionCandidate(capsule.capsule_id, (("dynamic_friction", 0.3),), 25),
+        ReproductionCandidate(capsule.capsule_id, (("dynamic_friction", 0.3),), 45),
         AnalyticBackend(),
     )
 

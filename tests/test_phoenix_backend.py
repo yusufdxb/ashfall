@@ -149,11 +149,24 @@ def backend(tmp_path, monkeypatch):
     return obj
 
 
+def _collapse_height(row: int) -> float:
+    """Nominal, then a base height that decays into a collapse.
+
+    The previous fixture held 0.3 m on all 70 frames, so its "pre-failure"
+    seed state was identical to nominal and the delivery gate would refuse it.
+    """
+    if row < 30:
+        return 0.3
+    if row < 50:
+        return 0.3 - (row - 29) * 0.007
+    return 0.1
+
+
 def capsule(policy_id):
     frames = tuple(
         CapsuleFrame(
             i * 0.02,
-            base_pos=(0.0, 0.0, 0.3),
+            base_pos=(0.0, 0.0, _collapse_height(i)),
             base_quat=(0.0, 0.0, 0.0, 1.0),
             base_lin_vel_body=(0.5, 0.0, 0.0),
             base_ang_vel_body=(0.0, 0.0, 0.0),
@@ -171,7 +184,7 @@ def capsule(policy_id):
         control_dt=0.02,
         failure_mode="collapse",
         failure_onset_index=50,
-        pre_failure_start_index=25,
+        pre_failure_start_index=30,
         post_failure_end_index=69,
         frames=frames,
     )

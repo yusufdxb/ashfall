@@ -9,6 +9,7 @@ from typing import Protocol
 import numpy as np
 from scipy.stats import qmc
 
+from .delivery import assert_delivers
 from .provenance import content_hash, write_artifact
 
 
@@ -209,8 +210,24 @@ class ReproductionGate:
             raise ValueError("Reproduction target mode differs from original capsule failure")
         if capsule.policy_id != self.config.baseline_policy_id:
             raise ValueError("Reproduction must use the capsule baseline policy identity")
-        if not capsule.pre_failure_start_index <= candidate.seed_row <= capsule.failure_onset_index:
+        if not capsule.pre_failure_start_index <= candidate.seed_row < capsule.failure_onset_index:
+            # Strictly before onset. The upper bound was inclusive, so seeding
+            # AT onset was gate-legal, which makes reproducing the failure
+            # close to tautological: the seeded state already is the failure.
             raise ValueError("Reproduction seed must lie in recorded pre-onset window")
+        frame = capsule.frames[candidate.seed_row]
+        if frame.missing_reset_fields:
+            # The gate never checked this, so an unresettable capsule could
+            # reach REPRODUCED and pass assert_eligible while the real
+            # simulator would refuse it.
+            raise ValueError(
+                f"Reproduction seed row lacks reset state: {frame.missing_reset_fields}"
+            )
+        # Refuse an undeliverable mode and an undelivered seed state before any
+        # score is computed. Without this the gate scores whatever the
+        # simulator did, with no diagnostic that the treatment never arrived,
+        # which is exactly how the Phase-I result came to be uninformative.
+        assert_delivers(capsule, candidate.seed_row)
         observations = tuple(
             backend.replay(capsule, candidate, self.config.baseline_policy_id, s)
             for s in self.config.seeds

@@ -186,3 +186,42 @@ class TestTaxonomySchema:
         # Sorted by severity descending
         severities = [int(r["Severity"]) for r in rows]
         assert severities == sorted(severities, reverse=True)
+
+
+class TestDeliverability:
+    """Deliverability is a property of the mode, not of a capsule.
+
+    Every entry used to carry the identical reproduction_status
+    "requires_capsule_reproduction_gate", which is false a priori for a mode
+    whose signature the restore contract cannot write: no capsule of that mode
+    can ever pass a gate, so deferring the question to the gate was itself the
+    wrong answer.
+    """
+
+    def test_contact_loss_is_marked_undeliverable(self):
+        spec = TAXONOMY[FailureMode.CONTACT_LOSS]
+        assert spec.deliverable is False
+        assert spec.signature_channels == ("contact_forces",)
+        assert spec.reproduction_status == "undeliverable_signature_channel"
+        assert "not deliverable" in spec.replay_strategy.lower()
+
+    def test_the_other_five_modes_are_deliverable(self):
+        for mode, spec in TAXONOMY.items():
+            if mode is FailureMode.CONTACT_LOSS:
+                continue
+            assert spec.deliverable is True, mode
+            assert spec.signature_channels
+
+    def test_table_surfaces_deliverability_to_the_reader(self):
+        rows = taxonomy_table_rows()
+        assert all("Deliverable" in row for row in rows)
+        by_mode = {row["Mode"]: row for row in rows}
+        assert by_mode["Contact Loss"]["Deliverable"] == "no"
+        assert by_mode["Body Collapse"]["Deliverable"] == "yes"
+
+    def test_signature_channels_are_consistent_with_the_restore_contract(self):
+        from ashfall.delivery import RESTORABLE_CHANNELS
+
+        for spec in TAXONOMY.values():
+            writable = set(spec.signature_channels) <= set(RESTORABLE_CHANNELS)
+            assert writable == spec.deliverable, spec.mode

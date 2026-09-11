@@ -22,9 +22,9 @@ from ashfall.scenarios import ScenarioManifest
 
 def reproduced():
     cap = demo_capsule()
-    config = ReproductionConfig('baseline', FailureDescriptor('slip', .5), 25)
+    config = ReproductionConfig('baseline', FailureDescriptor('slip', .5), 45)
     return cap, ReproductionGate(config).run(cap, ReproductionCandidate(cap.capsule_id,
-                            (('dynamic_friction', .3),), 25), AnalyticBackend())
+                            (('dynamic_friction', .3),), 45), AnalyticBackend())
 
 
 def basin():
@@ -168,8 +168,30 @@ def test_full_loop_is_deterministic_software_evidence(tmp_path):
     a, b = run_demo(tmp_path/'a'), run_demo(tmp_path/'b')
     assert a == b
     assert a['evidence_kind'] == 'mock'
-    assert a['resolved_seed_row'] == 25
-    assert a['verdict']['accepted']
+    assert a['resolved_seed_row'] == 45
+    assert a['mock_verdict']['accepted']
     assert a['frontier_shift'] > 0
     manifest = ScenarioManifest.load(tmp_path/'a/scenarios.json')
     assert not set(a['training_ids']) & {s.scenario_id for s in manifest.select('held_out')}
+
+
+def test_demo_artifact_cannot_be_read_as_a_research_result(tmp_path):
+    """The artifact shares RepairVerdict's schema with a real result.
+
+    It used to store accepted: true under the key "verdict" next to a
+    plausible frontier shift, so the only thing separating it from evidence
+    was two adjacent strings. Quoting it now requires quoting the word mock.
+    """
+    result = run_demo(tmp_path/'demo')
+    assert result['is_research_result'] is False
+    assert 'verdict' not in result
+    assert 'accepted' in result['mock_verdict']
+
+
+def test_demo_records_measured_delivery_not_an_assumed_one(tmp_path):
+    result = run_demo(tmp_path/'demo')
+    delivery = result['delivery_evidence']
+    assert delivery['delivers'] is True
+    assert delivery['distinguishable'] and delivery['directional'] and delivery['sustained']
+    assert delivery['seed_departure_z'] > 3.0
+    assert delivery['seed_row'] == result['resolved_seed_row'] < delivery['onset_row']
