@@ -19,7 +19,7 @@ A single seed (42) suggested a +5.1 pp lift in slippery-terrain success rate at 
 | rough    |  7 | -1.578 pp | [-6.308, +3.153] pp | 2 / 7  | 0.3906 | 0.0156 | no |
 | rough    | 11 | +0.548 pp | [-3.463, +4.560] pp | 5 / 11 | 0.7676 | 0.0010 | no |
 
-The sample is not the problem. The p-floor column is `2 / 2**n`, the smallest exact sign-flip p reachable at that sample size: at n=11 it is 0.0010, so alpha=0.05 is structurally reachable and the test simply does not get there. **The null verdict HOLDS at n=11 on both terrains.** Full per-seed deltas, the exact commands, and the config-comparability audit are in [`results/multiseed_scale_ext_2026-06-02_ANALYSIS.md`](results/multiseed_scale_ext_2026-06-02_ANALYSIS.md).
+The sample is not the problem. The p-floor column is `2 / 2**n`, the smallest exact sign-flip p reachable at that sample size: at n=11 it is 0.0010, so alpha=0.05 is structurally reachable and the test simply does not get there. **The null verdict HOLDS at n=11 on both terrains.** Full per-seed deltas, the exact commands, and the config-comparability audit are in [`results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_ANALYSIS.md`](results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_ANALYSIS.md).
 
 Known caveat, stated rather than buried: three of the four newest slippery `ff=0.0` cells sit at or near a 100% success ceiling (0.9922, 1.0000, 0.9922), so their deltas are mechanically clamped toward zero. The terrain configs were diffed and are identical, so this is a ceiling effect and not a confound, but it means part of the n=11 shrinkage toward zero is mechanical rather than fresh independent evidence. A future extension should pick seeds whose baseline slippery success leaves headroom below 0.95.
 
@@ -114,7 +114,7 @@ Honest verdict at that stage, unchanged by the extension:
 - **Slippery: no reliable effect.** 4/7 positive is roughly a coin flip. Per-seed deltas span +3.6 pp to -8.85 pp. The pilot's "3/3 positive" framing was a small-sample artifact.
 - **Rough: regresses on average** at n=7 (mean -1.58 pp), and settles near zero at n=11 (+0.55 pp). Either way there is no reliable gain.
 
-Full numbers: [`results/multiseed_scale_ext_2026-06-02_ANALYSIS.md`](results/multiseed_scale_ext_2026-06-02_ANALYSIS.md). Methodology: [`docs/methodology/ff_sweep_rigor.md`](docs/methodology/ff_sweep_rigor.md) section 5c.
+Full numbers: [`results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_ANALYSIS.md`](results/legacy_row0_curriculum/multiseed_scale_ext_2026-06-02_ANALYSIS.md). Methodology: [`docs/methodology/ff_sweep_rigor.md`](docs/methodology/ff_sweep_rigor.md) section 5c.
 
 ### Earlier single-seed results (kept for context, not for citation)
 

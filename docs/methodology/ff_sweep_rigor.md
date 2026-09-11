@@ -265,7 +265,7 @@ any v0.4.0 claim that the curriculum "works" on slippery. The
 n=3 floor of p=0.25 prevents alpha=0.05 significance regardless
 of effect size; only a larger n changes that. Per-cell numbers,
 per-ff cross-seed mean +/- SE, and paired deltas with permutation
-p-values are tabulated in `results/multiseed_n7_verdict.md`.
+p-values are tabulated in `results/legacy_row0_curriculum/multiseed_n7_verdict.md`.
 
 ## 5c. Seed scaling, 2026-05-08 (supersedes 5b)
 
@@ -345,7 +345,7 @@ Three viable directions, mutually exclusive:
 
 Per-cell numbers, per-ff cross-seed mean +/- SE, and paired deltas
 with permutation p-values are tabulated in
-`results/multiseed_n11_scale_verdict.md`.
+`results/legacy_row0_curriculum/multiseed_n11_scale_verdict.md`.
 
 ## 6. Next ablation: mode-subset sweep
 
