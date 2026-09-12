@@ -1,3 +1,5 @@
+> Historical design note (v2). The current architecture is in [`ashfall_v3.md`](ashfall_v3.md); the reproduction gate, basin and frontier machinery described below are retained by v3, the delivery criterion described in "Capsule contract" is superseded by the matched-counterfactual gates.
+
 # Ashfall research architecture
 
 ## Research question

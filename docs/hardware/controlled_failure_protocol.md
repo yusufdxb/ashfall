@@ -1,6 +1,6 @@
 # Controlled low-friction counterexample protocol
 
-Status: protocol and software preparation. No physical Ashfall repair or re-test result is asserted.
+Status: protocol and software preparation. No physical Ashfall repair or re-test result is asserted. On the stock GO2, slip and collapse are unsupported phenotypes: there is no calibrated per-foot contact and no validated ground-relative height (`ashfall.ontology.PHENOTYPES`), so a hardware capture can label a tracking stall or an attitude excursion but not a verified slip or collapse.
 
 ## Initial question and scope
 
@@ -37,4 +37,4 @@ After a reproducible candidate is found, freeze basin train/validation/held-out 
 
 Repeat the original reference and challenge protocol using baseline and accepted candidate with randomized, logged order. Match command, surface, payload, battery operating range and support conditions. Predeclare a fixed repetition count and the effect size of practical interest. Retain all attempts, including aborts, interventions and missing-data episodes; report missing data explicitly.
 
-Primary physical endpoint: matched target event recurrence with confidence intervals, alongside reference-task preservation. Secondary outcomes: tracking, intervention and sustained recovery time in seconds. A simulator frontier shift alone is not a physical repair result. Stop further exposure if the candidate introduces a new hazardous mode, even when the original slip label becomes less frequent.
+Primary physical endpoint: matched target event incidence (the fraction of trials in which the event occurs) with confidence intervals; recurrence within a trial (event, sustained recovery, event again) is reported separately, alongside reference-task preservation. Secondary outcomes: tracking, intervention and sustained recovery time in seconds. A simulator frontier shift alone is not a physical repair result. Stop further exposure if the candidate introduces a new hazardous mode, even when the original slip label becomes less frequent.

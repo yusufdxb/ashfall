@@ -1,0 +1,46 @@
+digraph ashfall {
+  rankdir=TB;
+  graph [fontname="Helvetica", fontsize=11, nodesep=0.35, ranksep=0.5, bgcolor="white"];
+  node  [fontname="Helvetica", fontsize=10, shape=box, style="rounded,filled", fillcolor="#f4f1ea", color="#5a5347"];
+  edge  [fontname="Helvetica", fontsize=9, color="#5a5347"];
+
+  subgraph cluster_ontology {
+    label="Ontology (ashfall.ontology)"; style="rounded"; color="#9a8f7a"; fontcolor="#5a5347";
+    intervention [label="Intervention\n(cause, verified by readback)"];
+    response [label="Dynamical response\n(matched pair traces)"];
+    phenotype [label="FailurePhenotype\n(observed, per-platform observability)"];
+    intervention -> response -> phenotype;
+  }
+
+  policy [label="Baseline policy\n(checkpoint SHA-256)", fillcolor="#e8e2d3"];
+  state [label="RestorableState\n(7 restorable channels)", fillcolor="#e8e2d3"];
+  backend [label="Backend\nphoenix (simulation) | toy (mock)", fillcolor="#e8e2d3"];
+
+  pair [label="MatchedPairEvidence\ncontrol | treatment | nominal replicates\nsame state, policy, command, seed, scene"];
+  d1 [label="D1 intervention\nInterventionReceipt readback", fillcolor="#fbe9d7"];
+  d2 [label="D2 departure\nshrunk-covariance Mahalanobis\nvs pairwise nominal null", fillcolor="#fbe9d7"];
+  d3 [label="D3 phenotype\nin treatment, not in control", fillcolor="#fbe9d7"];
+  verdict [label="DeliveryVerdict\nDELIVERED iff D1 and D2 and D3", fillcolor="#f6d8c4"];
+  h0 [label="H0 calibration (ashfall.h0)\nexact McNemar over pairs\nPASS | FAIL | UNINFORMATIVE", fillcolor="#f6d8c4"];
+  harvest [label="Harvest (ashfall.harvest)\nschema-1.1 capsules from DELIVERED pairs\nscientific dataset manifest"];
+  bundle [label="EvidenceBundle\nmanifest | environment | provenance\nmetrics | verdict | index | logs", fillcolor="#e3ebe0"];
+
+  deteval [label="Detector evaluation\nindependent labels, mutation suite", fillcolor="#e3ebe0"];
+  arms [label="Arms A B C D\nComputeBudget, TrainingArtifact\nassert_equal_compute"];
+  selection [label="Selection + HeldOutLedger\nvalidation -> frozen SHA -> one held-out\nImmutableVerdict"];
+  stats [label="Primary endpoint\nheld-out incidence per training seed\nexact sign-flip; Holm on secondaries"];
+  ledger [label="HypothesisLedger\nH0 -> H1 -> H2 -> H3 -> H4", fillcolor="#f6d8c4"];
+
+  policy -> backend; state -> backend; intervention -> backend;
+  backend -> pair;
+  pair -> d1; pair -> d2; pair -> d3;
+  d1 -> verdict; d2 -> verdict; d3 -> verdict;
+  verdict -> h0; h0 -> harvest; h0 -> bundle; harvest -> bundle;
+  phenotype -> d3 [style=dashed]; phenotype -> deteval [style=dashed];
+  deteval -> ledger [label="H1 fidelity", style=dashed];
+  h0 -> ledger [label="H0 verdict"];
+  harvest -> arms [label="capsules"];
+  ledger -> arms [label="H0 PASS for every\nretained phenotype"];
+  arms -> selection -> stats -> ledger [label="H2 H3 H4"];
+  arms -> bundle [style=dashed]; selection -> bundle [style=dashed];
+}

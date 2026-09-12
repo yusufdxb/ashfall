@@ -76,3 +76,18 @@ owns. Item numbers refer to that document.
 - The n=11 reproduction from the committed metrics (slippery -0.4155 pp, p=0.726562; rough
   +0.5485 pp, p=0.767578) remains pinned by `tests/test_multiseed_combined.py`.
 - Content-addressed artifacts, write-once evidence, exact sign-flip permutation, split discipline.
+
+## Phoenix-side findings made while integrating
+
+Found on this machine (Isaac Lab 4.5.22 on Isaac Sim 6.0, rsl_rl 5.0.1) while
+running the H0 smoke. None is fixed in go2-phoenix by this pass; Ashfall works
+around the ones it touches.
+
+| finding | status | consequence |
+|---|---|---|
+| `checkpoints/phoenix-flat-v4/latest.pt` (`model_4999.pt`) is diverged: learned action standard deviation parameter about 49, action maximum about 330 on a canonical standing observation, against about 0.2 to 0.3 and 3.1 for v3b | VERIFIED offline; the policy fell within a second in Isaac Lab | the `NEGATIVE_RESULT.md` table beside it (32 of 32 successes) cannot describe this file as it stands (INFERRED); H0 uses v3b |
+| `FrictionScenarioAdapter._get` calls `.clone()` on the material view's return value, which is a `wp.array` on this build even when the robot exposes `root_physx_view` | VERIFIED (`AttributeError` in the probe) | Phoenix's `scenario_bridge` and `fine_tune` with `restore_environment_parameters` would fail here; Ashfall uses its own `MaterialWriter` |
+| Articulation data buffers (`root_pos_w` and the rest) are Warp arrays; `np.asarray` on one raises | VERIFIED | any converter must go through the array's own `numpy()`; Phoenix's `state_adapter.as_numpy` does, the converter passed into `snapshot_manager_state` must too |
+| None of the flat or rough runner checkpoints carry observation-normalizer statistics, while their train configs set `empirical_normalization: true` | VERIFIED for four checkpoints | rebuilding a runner from the YAML adds an untrained normaliser (a 1% observation shrink); the backend now resolves the flag from the checkpoint |
+| v3b was trained in April; `DelayedDCMotor` latency, motor-strength randomisation and `RateLimitedJointPositionAction` were wired in June and are active when `configs/env/flat.yaml` is built today | VERIFIED by probe | nominal behaviour in the H0 smoke is not the trained behaviour; every smoke control rollout was flagged for attitude |
+| The harvest script's usage example names flat-v4 with `flat_perturb.yaml`, and the published harvest report does not record its checkpoint; 74 of its 148 terminations left windows under two rows | INFERRED only | if that harvest used flat-v4, an immediately falling policy would explain the short windows; recording the checkpoint hash in the report would settle it |

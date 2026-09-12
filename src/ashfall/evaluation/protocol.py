@@ -1,5 +1,11 @@
 """Frozen experimental protocols, nominal suites and independent-seed inference.
 
+This is the v2 frontier-repair acceptance protocol (arms ``A_baseline`` to
+``E_frontier_repair``) behind ``ashfall verdict``. The Phase-II comparison is
+registered in ``docs/phase2/PREREGISTRATION.md`` and implemented by
+:mod:`ashfall.protocol.arms` (arms A to D) with :mod:`ashfall.selection`. The
+two arm vocabularies are distinct and must not be mixed in one analysis.
+
 A manifest declares an experiment; it is not evidence that its scenarios were
 executed. Unsupported nominal cases block experiment readiness explicitly.
 """
@@ -354,7 +360,7 @@ def evidence_verdict(
 ) -> RepairVerdict:
     """Derive target improvement from complete reproduced held-out episode evidence.
 
-    The lower clustered interval bound for target recurrence reduction must meet
+    The lower clustered interval bound for target incidence reduction must meet
     the practical improvement margin. This checks one candidate training seed;
     independent_seed_interval is needed for a campaign-level estimate.
     """

@@ -1,3 +1,12 @@
+> Superseded for Phase II. This note describes the v1 episode-record parquet contract and the
+> per-seed table built from it. The confirmatory endpoint is defined in
+> [PREREGISTRATION.md](PREREGISTRATION.md) and computed by `ashfall.stats.primary` from v2
+> episode outcomes, one incidence per training seed. Two corrections apply to the text below:
+> the table it calls a recurrence table is an episode-incidence table
+> (`ashfall.analysis.recurrence.paired_incidence_table`), and the go2-phoenix branch it names
+> (`research/ashfall-curriculum-delivery`) is archived; the integration pin now lives in
+> `ashfall.backends.phoenix_compat`.
+
 # Ashfall Phase II: the input the analysis needs
 
 Status: the consumer is built and tested. The data does not exist yet. No

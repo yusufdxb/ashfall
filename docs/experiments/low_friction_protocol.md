@@ -1,3 +1,8 @@
+> Superseded. This v2 protocol compared arms A to E and used "recurrence" for what is episode
+> incidence. The Phase-II design is [PREREGISTRATION.md](../phase2/PREREGISTRATION.md): arms A to D
+> under an enforced compute budget, with H0 causal delivery required first. Kept as a record of
+> the v2 design.
+
 # First counterexample experiment
 
 This is a protocol, not a new locomotion result. Start with one reviewed low-friction capsule and a fixed baseline checkpoint. Do not launch the multi-seed campaign until the software and simulator reset/reproduction/episode smoke gates pass.

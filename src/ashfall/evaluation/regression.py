@@ -85,7 +85,7 @@ def regression_verdict(
     """Accept only positive target effect and complete matched nominal evidence.
 
     ``target_improvement`` is oriented so larger is better and must come from
-    a frozen counterexample evaluation (e.g. R50 increase or recurrence drop).
+    a frozen counterexample evaluation (e.g. R50 increase or target incidence drop).
     The budget must be frozen before evaluating the candidate. With
     ``require_interval_within_budget`` the bound that could violate each
     budget must lie inside it; a degenerate zero-width interval is never

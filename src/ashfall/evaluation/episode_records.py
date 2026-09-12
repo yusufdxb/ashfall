@@ -2,7 +2,7 @@
 
 Phoenix writes one parquet row per finished evaluation episode
 (``phoenix.training.episode_records``, schema version 1.0.0). Ashfall reads
-those rows to build the per-failure-mode recurrence table that the Phase-II
+those rows to build the per-failure-mode episode-incidence table that the Phase-II
 primary endpoint needs, which the aggregate ``metrics_*.json`` cannot supply.
 
 Ashfall does not import Phoenix. The contract between the two repos is the
