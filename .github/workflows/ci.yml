@@ -38,8 +38,12 @@ jobs:
           pip install -e ".[dev]"
       - name: Pytest (no-sim suite)
         run: pytest -q -m "not sim"
-      - name: Scientific guards must be present
-        run: pytest -q -m guard --co -q | tail -1
+      - name: Scientific guards run and cover every protected defect
+        # A real run, not a collection: pytest exits 5 when the marker selects nothing,
+        # and the meta-test fails if any protected defect has lost its guard.
+        run: |
+          pytest -q -m guard
+          pytest -q tests/test_scientific_guards.py::test_every_protected_defect_has_a_guard_test
 
   simulator-boundary:
     # The Phoenix boundary tests need torch and the sibling repo. They run

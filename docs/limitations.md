@@ -49,6 +49,15 @@ what would lift it.
   with an identity normalizer; the backend now resolves this from the checkpoint
   instead of trusting the train YAML.
 
+- **A contact-sensor read right after a reset can carry the previous episode's
+  contact.** Phoenix measured this in its harvest loop: reading contact data
+  after `_reset_idx` but before a physics step stored the pre-reset base contact
+  and fired a spurious illegal-contact termination one step later. The H0 backend
+  reads contact only in the snapshot after `env.step`, and no episode in the
+  Isaac smoke ended before frame 38, so the smoke shows no sign of it. That is
+  INFERRED from the code path and the episode lengths; it has not been tested for
+  the backend directly.
+
 ## Method
 
 - **A restored row is a state-only seed.** `last_action`, the rate limiter
