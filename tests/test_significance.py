@@ -138,8 +138,7 @@ class TestProportionDiffTest:
     def test_returns_full_result(self):
         res = proportion_diff_test(80, 100, 90, 100, n_bootstrap=500, n_perm=500)
         d = res.as_dict()
-        keys = ("p_a", "p_b", "diff", "ci_lower", "ci_upper",
-                "p_value", "n_a", "n_b", "method")
+        keys = ("p_a", "p_b", "diff", "ci_lower", "ci_upper", "p_value", "n_a", "n_b", "method")
         for key in keys:
             assert key in d
         assert abs(res.diff - 0.10) < 1e-9
@@ -242,9 +241,7 @@ class TestNoTorchImport:
             "holm_adjust([0.1, 0.2, 0.3])\n"
             "assert 'torch' not in sys.modules, 'significance pulled in torch'\n"
         )
-        result = subprocess.run(
-            [sys.executable, "-c", source], capture_output=True, text=True
-        )
+        result = subprocess.run([sys.executable, "-c", source], capture_output=True, text=True)
         assert result.returncode == 0, result.stderr
 
 
@@ -282,28 +279,31 @@ class TestBcaAccelerationSign:
         rng = np.random.default_rng(0)
         theta_hat_b = np.array(
             [
-                statistic(
-                    a[rng.integers(0, n_a, n_a)], b[rng.integers(0, n_b, n_b)]
-                )
+                statistic(a[rng.integers(0, n_a, n_a)], b[rng.integers(0, n_b, n_b)])
                 for _ in range(2000)
             ]
         )
-        *_, a_hat = _bca_interval(
-            (a, b), statistic, axis=-1, alpha=0.025, theta_hat_b=theta_hat_b, batch=None
-        )
+        # scipy >= 1.16 added a required array-namespace argument to this private
+        # helper; older scipy (the only one Python 3.10 resolves) does not take it.
+        import inspect
+
+        kwargs = dict(axis=-1, alpha=0.025, theta_hat_b=theta_hat_b, batch=None)
+        if "xp" in inspect.signature(_bca_interval).parameters:
+            from scipy._lib._array_api import array_namespace
+
+            kwargs["xp"] = array_namespace(a, b)
+        *_, a_hat = _bca_interval((a, b), statistic, **kwargs)
         a_hat = float(np.ravel(a_hat)[0])
 
-        assert np.sign(ours) == np.sign(a_hat), (
-            f"acceleration sign disagrees with scipy: ours={ours}, scipy={a_hat}"
-        )
+        assert np.sign(ours) == np.sign(
+            a_hat
+        ), f"acceleration sign disagrees with scipy: ours={ours}, scipy={a_hat}"
         assert ours == pytest.approx(a_hat, rel=0.05)
 
     def test_near_ceiling_interval_is_not_dragged_across_zero(self):
         # With the sign inverted this configuration produced ci_low < 0 while
         # the correct BCa excludes zero. Guard the direction, not the digits.
-        _point, low, high = bootstrap_diff_proportion(
-            118, 130, 124, 128, n_bootstrap=4000, seed=0
-        )
+        _point, low, high = bootstrap_diff_proportion(118, 130, 124, 128, n_bootstrap=4000, seed=0)
         assert low < high
         # Measured: the inverted sign gives [-0.000601, +0.115264] (includes
         # zero); the correct sign gives [+0.006731, +0.122716] (excludes it).

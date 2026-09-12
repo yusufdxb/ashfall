@@ -57,7 +57,9 @@ markers = [
 ]
 
 [tool.mypy]
-python_version = "3.10"
+# No python_version pin: mypy targets the interpreter it runs under. Pinned to 3.10
+# it could not parse numpy >= 2.3 stubs on 3.12 (PEP 695 type statements). ruff
+# target-version py310 and the 3.10 CI job keep the code itself 3.10-compatible.
 ignore_missing_imports = true
 warn_unused_ignores = false
 # Typed core. Legacy analysis modules are checked as they are migrated.
