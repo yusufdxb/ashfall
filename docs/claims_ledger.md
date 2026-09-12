@@ -38,7 +38,7 @@ go2-phoenix `feat/causal-viability-replication` @ `d607e2f` (advanced from `5783
 
 | claim | status | evidence |
 |---|---|---|
-| CPU suite passes on Python 3.10 with ruff and mypy (typed core) clean | VERIFIED on this machine | final `pytest -q` output in the session log for this revision; CI matrix for 3.10 to 3.12 is configured but has not run on GitHub for this branch |
+| CPU suite, ruff and mypy (typed core) pass on Python 3.10, 3.11 and 3.12, and the simulator-boundary job passes against the pinned Phoenix SHA | VERIFIED on GitHub Actions for `43b43fe` (run 34719374452: lint, test 3.10, test 3.11, test 3.12, simulator-boundary all succeeded) and locally on all three versions | the first push, `d4516b5`, failed CI: mypy pinned to 3.10 could not parse numpy 2.5 stubs, and a pre-existing test called a private scipy helper whose signature changed in scipy 1.16; both were reproduced locally and fixed in `43b43fe` |
 | Every protected defect has a guard test that fails when the defect is reintroduced | VERIFIED | `tests/test_scientific_guards.py::test_every_protected_defect_has_a_guard_test` and the nine guards it indexes |
 | Fixture data cannot be passed where scientific data is required | VERIFIED | `tests/test_provenance_bundle.py::TestDatasets` |
 | Evidence bundles refuse missing provenance | VERIFIED | `tests/test_provenance_bundle.py`, `tests/test_scientific_guards.py` |
