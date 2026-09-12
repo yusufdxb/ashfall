@@ -213,6 +213,21 @@ def _run_h0(args, holder: dict | None = None) -> dict:
         phoenix_repo = args.phoenix_repo or backend_config.get("phoenix_repo")
     if holder is not None:
         holder["backend"] = backend
+    # Identity is read BEFORE the bundle directory exists. A bundle written inside the
+    # repository would otherwise show up as untracked files and make the tree look
+    # dirty to its own provenance.
+    environment = environment_snapshot(
+        redact_hardware=args.publication, redact_local_packages=args.publication
+    )
+    provenance = collect_provenance(
+        ashfall_repo=REPO_ROOT,
+        phoenix_repo=phoenix_repo,
+        config_paths=config_paths,
+        policy_paths=policy_paths,
+        seeds={"seed_base": spec.seed_base},
+        environment=environment,
+        redact_untracked_paths=args.publication,
+    )
     bundle = EvidenceBundle.create(
         args.output,
         {
@@ -225,19 +240,7 @@ def _run_h0(args, holder: dict | None = None) -> dict:
             "config_hashes": {k: file_hash(v) for k, v in config_paths.items()},
         },
     )
-    bundle.write_environment(
-        environment_snapshot(
-            redact_hardware=args.publication, redact_local_packages=args.publication
-        )
-    )
-    provenance = collect_provenance(
-        ashfall_repo=REPO_ROOT,
-        phoenix_repo=phoenix_repo,
-        config_paths=config_paths,
-        policy_paths=policy_paths,
-        seeds={"seed_base": spec.seed_base},
-        redact_untracked_paths=args.publication,
-    )
+    bundle.write_environment(environment)
     bundle.write_provenance(provenance)
     write_artifact(bundle.root / "seed_plan.json", h0_seed_plan(spec))
     states = select_states(backend, spec, command=command)

@@ -135,3 +135,54 @@ def test_unknown_spec_purpose_is_refused(tmp_path):
     spec_path.write_text(json.dumps({"purpose": "exploratory", "intervention": {"kind": "none"}}))
     with pytest.raises(SystemExit):
         main(["h0", "--backend", "toy", "--spec", str(spec_path), "--output", str(tmp_path)])
+
+
+def test_provenance_is_collected_before_the_bundle_exists(tmp_path, monkeypatch, capsys):
+    """An in-repo bundle must not make its own provenance read the tree as dirty."""
+    import ashfall.provenance as prov
+
+    order = []
+    real_collect = prov.collect_provenance
+    real_create = prov.EvidenceBundle.create
+
+    def collect(**kwargs):
+        order.append("provenance")
+        return real_collect(**kwargs)
+
+    def create(parent, specification, **kwargs):
+        order.append("bundle")
+        return real_create(parent, specification, **kwargs)
+
+    monkeypatch.setattr(prov, "collect_provenance", collect)
+    monkeypatch.setattr(prov.EvidenceBundle, "create", staticmethod(create))
+    spec = {
+        "intervention": {
+            "kind": "friction_reduction",
+            "parameters": [["dynamic_friction", 0.08], ["static_friction", 0.1]],
+        },
+        "intended_phenotype": "slip",
+        "command": [0.6, 0.0, 0.0],
+        "n_pairs": 1,
+        "replicates_per_pair": 2,
+        "horizon_steps": 40,
+        "seed_base": 900,
+    }
+    spec_path = tmp_path / "spec.json"
+    spec_path.write_text(json.dumps(spec))
+    assert (
+        main(
+            [
+                "h0",
+                "--backend",
+                "toy",
+                "--spec",
+                str(spec_path),
+                "--output",
+                str(tmp_path / "out"),
+                "--sensitivity-pairs",
+                "0",
+            ]
+        )
+        == 0
+    )
+    assert order.index("provenance") < order.index("bundle"), order
