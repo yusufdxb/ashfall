@@ -1,7 +1,10 @@
 """Event incidence, sustained recovery, and explicit intervention metrics.
 
 Detector event counts are capture statistics, not independent labeled failures.
-Matched counterexample recurrence is computed from episode records in ``paired``.
+``episode_incidence_by_mode`` is per-episode incidence; ``repeated_events_after_recovery``
+is the only quantity here that is a recurrence, an event of a mode after a sustained
+recovery from an earlier event of that mode within the same episode. Matched
+counterexample incidence across arms is computed from episode records in ``paired``.
 """
 
 from __future__ import annotations

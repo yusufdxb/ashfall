@@ -62,7 +62,12 @@ def test_incidence_counts_episodes_not_events():
     assert result.repeated_events_after_recovery == {}
 
 
-def records(success=True, tracking=0.1, intervention=False):
+def records(success=True, tracking=0.1, intervention=False, n=5, arm="baseline"):
+    """Matched nominal records. ``arm="candidate"`` adds a tiny alternating
+    tracking-error offset so the paired deltas carry variance; identical
+    values in both arms produce a degenerate interval, which the regression
+    gate now refuses to read as proof."""
+    offset = 0.001 if arm == "candidate" else 0.0
     return [
         dict(
             scenario_id=f"s{i}",
@@ -72,13 +77,20 @@ def records(success=True, tracking=0.1, intervention=False):
             policy_id="baseline",
             training_seed=42,
             success=success,
-            tracking_error=tracking,
+            tracking_error=tracking + 0.002 * ((i % 7) - 3) / 3 + offset * (1 if i % 2 else -1),
             intervention_required=intervention,
             failure_modes=[] if success else ["slip"],
             environment_parameters={"friction": 0.5},
         )
-        for i in range(5)
+        for i in range(n)
     ]
+
+
+#: A budget an honest finite suite can meet: 200 all-success clusters give an
+#: exact one-sided lower bound of 0.025**(1/200) on the candidate success rate,
+#: within 2 pp of the baseline's upper bound of 1, and a zero intervention
+#: margin can never be established by an interval, so it is set to 2 pp.
+ACHIEVABLE = RegressionBudget(intervention_rate_increase=0.02)
 
 
 def test_paired_actual_outcomes_and_deterministic_intervals():
@@ -110,10 +122,13 @@ def test_pairing_fails_closed(damage):
 def test_regression_rejects_target_only_improvement():
     verdict = regression_verdict(0.2, records(), records(False))
     assert verdict.target_improved and not verdict.regression_passed and not verdict.accepted
-    assert regression_verdict(0.2, records(), records()).accepted
-    assert not regression_verdict(0.01, records(), records()).accepted
-    assert not regression_verdict(float("nan"), records(), records()).accepted
-    assert not regression_verdict(0.2, records(), records(intervention=True)).accepted
+    base, cand = records(n=200), records(n=200, arm="candidate")
+    assert regression_verdict(0.2, base, cand, ACHIEVABLE).accepted
+    assert not regression_verdict(0.01, base, cand, ACHIEVABLE).accepted
+    assert not regression_verdict(float("nan"), base, cand, ACHIEVABLE).accepted
+    assert not regression_verdict(
+        0.2, base, records(n=200, arm="candidate", intervention=True), ACHIEVABLE
+    ).accepted
     with pytest.raises(ValueError):
         RegressionBudget(nominal_success_drop=-0.1)
 

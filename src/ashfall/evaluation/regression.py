@@ -1,4 +1,12 @@
-"""Explicit target improvement and nominal degradation budgets."""
+"""Explicit target improvement and nominal degradation budgets.
+
+A budget is met only when the interval bound that could violate it stays
+inside it. A degenerate interval (every matched scenario delta identical, as
+happens whenever both policies succeed everywhere) has no width and therefore
+cannot show that. For binary metrics the gate falls back to the exact
+conservative bound in :mod:`ashfall.evaluation.paired`; for continuous metrics
+it fails closed with a named reason.
+"""
 
 from __future__ import annotations
 
@@ -6,11 +14,25 @@ import math
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 
-from ashfall.evaluation.paired import paired_comparison
+from ashfall.evaluation.paired import paired_binary_effect_bounds, paired_comparison
+
+#: Metrics whose per-episode values are 0/1 and admit an exact bound.
+BINARY_METRICS = ("success", "intervention_required")
 
 
 @dataclass(frozen=True)
 class RegressionBudget:
+    """Preregistered nominal-degradation margins.
+
+    With ``require_interval_within_budget`` the bound that could violate a
+    margin must lie inside it. A margin of exactly zero can then never be
+    established from a finite sample, because every valid upper bound on a
+    rate increase is strictly positive; a study that wants interval gating
+    must preregister a positive margin, and a study that keeps a zero margin
+    is gating on the point estimate whether it says so or not. The defaults
+    below are protocol inputs, not empirically justified values.
+    """
+
     nominal_success_drop: float = 0.02
     tracking_error_increase: float = 0.02
     intervention_rate_increase: float = 0.0
@@ -37,6 +59,23 @@ class RepairVerdict:
     reasons: tuple[str, ...]
 
 
+def _budget_bound(effect, metric, direction, left, right, budget):
+    """The value compared against the budget, and how it was obtained."""
+    if not budget.require_interval_within_budget:
+        return effect.candidate_minus_baseline, "point_estimate"
+    if not effect.degenerate:
+        return (effect.ci_low if direction == "lower" else effect.ci_high), effect.interval_method
+    if metric in BINARY_METRICS:
+        lower, upper = paired_binary_effect_bounds(
+            left, right, metric, confidence=effect.confidence
+        )
+        return (lower if direction == "lower" else upper), "exact_binary_bound"
+    raise ValueError(
+        "degenerate interval cannot establish budget: every matched scenario delta is "
+        f"identical for {metric}, so the bootstrap interval has no width and is not evidence"
+    )
+
+
 def regression_verdict(
     target_improvement: float,
     baseline_nominal: Sequence[Mapping],
@@ -47,7 +86,10 @@ def regression_verdict(
 
     ``target_improvement`` is oriented so larger is better and must come from
     a frozen counterexample evaluation (e.g. R50 increase or recurrence drop).
-    The budget must be frozen before evaluating the candidate.
+    The budget must be frozen before evaluating the candidate. With
+    ``require_interval_within_budget`` the bound that could violate each
+    budget must lie inside it; a degenerate zero-width interval is never
+    accepted as that bound.
     """
     budget = budget or RegressionBudget()
     target = (
@@ -77,13 +119,13 @@ def regression_verdict(
         for metric, limit, direction in limits:
             try:
                 effect = paired_comparison(left, right, metric)
-                value = effect.candidate_minus_baseline
-                if budget.require_interval_within_budget:
-                    value = effect.ci_low if direction == "lower" else effect.ci_high
+                value, method = _budget_bound(effect, metric, direction, left, right, budget)
                 violated = value < limit if direction == "lower" else value > limit
                 if violated:
                     passed = False
-                    reasons.append(f"nominal {group}/{metric} exceeds degradation budget")
+                    reasons.append(
+                        f"nominal {group}/{metric} exceeds degradation budget ({method})"
+                    )
             except (ValueError, TypeError) as exc:
                 passed = False
                 reasons.append(f"nominal {group}/{metric}: {exc}")

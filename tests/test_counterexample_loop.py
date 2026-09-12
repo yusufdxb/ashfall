@@ -115,11 +115,20 @@ def points(counts):
 
 def test_r50_interpolation_censoring_and_nonmonotonic_pooling():
     e = estimator()
-    assert e.estimate(points([0, 2, 8, 10])).threshold == 1.5
+    crossing = e.estimate(points([0, 2, 8, 10]))
+    assert crossing.threshold == 1.5 and crossing.censoring == 'interpolated_crossing'
     assert e.estimate(points([0, 0])).censoring == 'above_support'
     assert e.estimate(points([10, 10])).censoring == 'below_support'
-    assert e.estimate(points([5, 5])).threshold is None
-    assert e.estimate(points([0, 8, 2, 10])).threshold == 1
+    flat = e.estimate(points([5, 5]))
+    assert flat.threshold is None and flat.censoring == 'unidentifiable'
+    # Raw 0, .8, .2, 1.0 pools to 0, .5, .5, 1.0: the crossing is anywhere in
+    # the plateau, so the data identify an interval, never the point 1.0 the
+    # earlier estimator reported from the left edge of the pooled block.
+    pooled = e.estimate(points([0, 8, 2, 10]))
+    assert pooled.threshold is None and pooled.censoring == 'identified_interval'
+    assert pooled.threshold_interval == (1.0, 2.0)
+    assert pooled.monotone_violations == 1 and not pooled.monotonic_assumption
+    assert frontier_shift(crossing, pooled) is None
     a, b = e.estimate(points([0, 2, 8, 10])), e.estimate(points([0, 0, 4, 10]))
     assert frontier_shift(a, b) > 0
     with pytest.raises(ValueError):
@@ -169,8 +178,17 @@ def test_full_loop_is_deterministic_software_evidence(tmp_path):
     assert a == b
     assert a['evidence_kind'] == 'mock'
     assert a['resolved_seed_row'] == 45
-    assert a['mock_verdict']['accepted']
+    # The mock nominal fixture is 32 identical all-success scenarios. A
+    # zero-width cluster bootstrap used to pass that as proof the nominal
+    # budgets were met; the interval is now flagged degenerate and the exact
+    # binary bound from 32 clusters cannot establish a 2 pp margin, so the
+    # mock verdict is honestly refused rather than accepted.
+    assert not a['mock_verdict']['accepted']
+    assert a['mock_verdict']['target_improved']
+    reasons = ' '.join(a['mock_verdict']['reasons'])
+    assert 'exact_binary_bound' in reasons and 'degenerate interval' in reasons
     assert a['frontier_shift'] > 0
+    assert a['baseline_frontier']['censoring'] == 'interpolated_crossing'
     manifest = ScenarioManifest.load(tmp_path/'a/scenarios.json')
     assert not set(a['training_ids']) & {s.scenario_id for s in manifest.select('held_out')}
 

@@ -1,4 +1,4 @@
-"""Tests for the paired per-seed, per-mode recurrence table."""
+"""Tests for the paired per-seed, per-mode episode-incidence table."""
 
 from __future__ import annotations
 
@@ -15,9 +15,9 @@ from ashfall.analysis.recurrence import (
     attach_modes,
     detect_episode_mode,
     episode_key,
+    incidence_deltas_by_mode,
     missing_signals,
-    paired_recurrence_table,
-    recurrence_deltas_by_mode,
+    paired_incidence_table,
     unknown_fraction,
 )
 from ashfall.evaluation.episode_records import EpisodeRecord
@@ -182,7 +182,7 @@ def labeled(seed: int, modes: list) -> list[LabeledEpisode]:
     return out
 
 
-class TestPairedRecurrenceTable:
+class TestPairedIncidenceTable:
     def test_synthetic_fixture_computes_correctly(self):
         slip = FailureMode.SLIP.value
         collapse = FailureMode.COLLAPSE.value
@@ -191,7 +191,7 @@ class TestPairedRecurrenceTable:
         baseline = labeled(1, [slip, slip, None, None]) + labeled(2, [collapse, None, None, None])
         treatment = labeled(1, [slip, None, None, None]) + labeled(2, [None, None, None, None])
 
-        rows = paired_recurrence_table(baseline, treatment)
+        rows = paired_incidence_table(baseline, treatment)
         cells = {(r.seed, r.mode): r for r in rows}
 
         s1 = cells[(1, slip)]
@@ -214,7 +214,7 @@ class TestPairedRecurrenceTable:
     def test_every_mode_and_unknown_emitted_per_seed(self):
         baseline = labeled(1, [None, None])
         treatment = labeled(1, [None, None])
-        rows = paired_recurrence_table(baseline, treatment)
+        rows = paired_incidence_table(baseline, treatment)
         assert {r.mode for r in rows} == set(TABLE_MODES)
         assert MODE_UNKNOWN in TABLE_MODES
         assert len(rows) == len(TABLE_MODES)
@@ -223,7 +223,7 @@ class TestPairedRecurrenceTable:
         slip = FailureMode.SLIP.value
         baseline = labeled(1, [slip, None])  # 1/2
         treatment = labeled(1, [slip, None, None, None])  # 1/4
-        row = next(r for r in paired_recurrence_table(baseline, treatment) if r.mode == slip)
+        row = next(r for r in paired_incidence_table(baseline, treatment) if r.mode == slip)
         assert row.baseline_rate == pytest.approx(0.5)
         assert row.treatment_rate == pytest.approx(0.25)
         assert row.delta_rate == pytest.approx(-0.25)
@@ -231,22 +231,22 @@ class TestPairedRecurrenceTable:
     def test_only_paired_seeds_are_emitted(self):
         baseline = labeled(1, [None]) + labeled(2, [None])
         treatment = labeled(2, [None]) + labeled(3, [None])
-        rows = paired_recurrence_table(baseline, treatment)
+        rows = paired_incidence_table(baseline, treatment)
         assert {r.seed for r in rows} == {2}
 
     def test_no_shared_seed_raises(self):
         with pytest.raises(RecurrenceError, match="no seed appears in both arms"):
-            paired_recurrence_table(labeled(1, [None]), labeled(2, [None]))
+            paired_incidence_table(labeled(1, [None]), labeled(2, [None]))
 
     def test_deltas_by_mode_groups_per_seed_values(self):
         slip = FailureMode.SLIP.value
         baseline = labeled(1, [slip, None]) + labeled(2, [slip, None])
         treatment = labeled(1, [None, None]) + labeled(2, [slip, None])
-        deltas = recurrence_deltas_by_mode(paired_recurrence_table(baseline, treatment))
+        deltas = incidence_deltas_by_mode(paired_incidence_table(baseline, treatment))
         assert deltas[slip] == [pytest.approx(-0.5), pytest.approx(0.0)]
 
     def test_row_to_dict_round_trip(self):
-        rows = paired_recurrence_table(labeled(1, [None]), labeled(1, [None]))
+        rows = paired_incidence_table(labeled(1, [None]), labeled(1, [None]))
         d = rows[0].to_dict()
         assert d["seed"] == 1
         assert set(d) == {
@@ -272,7 +272,7 @@ class TestEndToEnd:
         treat_recs = [make_record(seed=5, episode_id=i, success=True) for i in range(4)]
         telem = {episode_key(base_recs[0]): slipping}
 
-        rows = paired_recurrence_table(
+        rows = paired_incidence_table(
             attach_modes(base_recs, telem), attach_modes(treat_recs, telem)
         )
         row = next(r for r in rows if r.mode == slip)
@@ -291,13 +291,13 @@ class TestPairedTableRegressions:
         baseline = labeled(1, [collapse, None])
         treatment = labeled(1, [slip, None])
         with pytest.raises(RecurrenceError, match="absent from the requested modes"):
-            paired_recurrence_table(baseline, treatment, modes=[collapse])
+            paired_incidence_table(baseline, treatment, modes=[collapse])
 
     def test_mode_outside_the_taxonomy_raises_rather_than_vanishing(self):
         baseline = labeled(1, ["not_a_taxonomy_mode"])
         treatment = labeled(1, [None])
         with pytest.raises(RecurrenceError, match="not_a_taxonomy_mode"):
-            paired_recurrence_table(baseline, treatment)
+            paired_incidence_table(baseline, treatment)
 
     def test_default_modes_account_for_every_failure(self):
         """Cells must sum to the failures actually recorded, per seed and arm."""
@@ -305,35 +305,33 @@ class TestPairedTableRegressions:
         collapse = FailureMode.COLLAPSE.value
         baseline = labeled(1, [slip, collapse, MODE_UNKNOWN, None])
         treatment = labeled(1, [slip, None, None, None])
-        rows = [r for r in paired_recurrence_table(baseline, treatment) if r.seed == 1]
+        rows = [r for r in paired_incidence_table(baseline, treatment) if r.seed == 1]
         assert sum(r.baseline_failures for r in rows) == 3
         assert sum(r.treatment_failures for r in rows) == 1
 
     def test_empty_mode_list_raises(self):
         with pytest.raises(RecurrenceError, match="no modes requested"):
-            paired_recurrence_table(labeled(1, [None]), labeled(1, [None]), modes=[])
+            paired_incidence_table(labeled(1, [None]), labeled(1, [None]), modes=[])
 
     def test_duplicate_modes_raise_instead_of_double_counting(self):
         slip = FailureMode.SLIP.value
         with pytest.raises(RecurrenceError, match="duplicate mode"):
-            paired_recurrence_table(
-                labeled(1, [None]), labeled(1, [None]), modes=[slip, slip]
-            )
+            paired_incidence_table(labeled(1, [None]), labeled(1, [None]), modes=[slip, slip])
 
     def test_both_arms_empty_raises(self):
         with pytest.raises(RecurrenceError, match="no seed appears in both arms"):
-            paired_recurrence_table([], [])
+            paired_incidence_table([], [])
 
     def test_one_empty_arm_raises(self):
         with pytest.raises(RecurrenceError, match="no seed appears in both arms"):
-            paired_recurrence_table([], labeled(1, [None]))
+            paired_incidence_table([], labeled(1, [None]))
 
     def test_generator_inputs_are_not_consumed_by_the_accounting_check(self):
         """Arms given as generators must still produce a full table."""
         slip = FailureMode.SLIP.value
         base = (ep for ep in labeled(1, [slip, None]))
         treat = (ep for ep in labeled(1, [None, None]))
-        row = next(r for r in paired_recurrence_table(base, treat) if r.mode == slip)
+        row = next(r for r in paired_incidence_table(base, treat) if r.mode == slip)
         assert row.delta_rate == pytest.approx(-0.5)
 
     def test_unequal_counts_keep_arms_comparable_with_known_answer(self):
@@ -341,7 +339,7 @@ class TestPairedTableRegressions:
         collapse = FailureMode.COLLAPSE.value
         baseline = labeled(5, [collapse, None, None, None])
         treatment = labeled(5, [collapse, collapse, None])
-        row = next(r for r in paired_recurrence_table(baseline, treatment) if r.mode == collapse)
+        row = next(r for r in paired_incidence_table(baseline, treatment) if r.mode == collapse)
         assert (row.baseline_episodes, row.treatment_episodes) == (4, 3)
         assert row.baseline_rate == pytest.approx(0.25)
         assert row.treatment_rate == pytest.approx(2.0 / 3.0)
@@ -352,12 +350,12 @@ class TestPairedTableRegressions:
         slip = FailureMode.SLIP.value
         worse = next(
             r
-            for r in paired_recurrence_table(labeled(1, [None, None]), labeled(1, [slip, None]))
+            for r in paired_incidence_table(labeled(1, [None, None]), labeled(1, [slip, None]))
             if r.mode == slip
         )
         better = next(
             r
-            for r in paired_recurrence_table(labeled(1, [slip, None]), labeled(1, [None, None]))
+            for r in paired_incidence_table(labeled(1, [slip, None]), labeled(1, [None, None]))
             if r.mode == slip
         )
         assert worse.delta_rate == pytest.approx(0.5)
@@ -367,7 +365,7 @@ class TestPairedTableRegressions:
         slip = FailureMode.SLIP.value
         baseline = labeled(1, [slip, None]) + labeled(2, [slip, None])
         treatment = labeled(2, [None, None]) + labeled(3, [slip, None])
-        rows = paired_recurrence_table(baseline, treatment)
+        rows = paired_incidence_table(baseline, treatment)
         assert {r.seed for r in rows} == {2}
         # Seed 1 (baseline only) and seed 3 (treatment only) contribute nothing.
         assert not any(r.seed in (1, 3) for r in rows)

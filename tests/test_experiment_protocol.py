@@ -60,7 +60,14 @@ def protocol_fixture():
         allow_mock=True,
     )
     nominal = supported_suite()
-    budget = RegressionBudget(required_nominal_groups=NOMINAL_GROUPS)
+    # The fixture's nominal suite has one to three scenarios per stratum, all
+    # succeeding identically in both arms. An interval gate cannot be met by
+    # that (the cluster bootstrap is degenerate and the exact binary bound from
+    # three clusters is wide), so this fixture declares point-estimate gating
+    # explicitly. It exercises the evidence-structure checks, not the budget.
+    budget = RegressionBudget(
+        required_nominal_groups=NOMINAL_GROUPS, require_interval_within_budget=False
+    )
     protocol = ExperimentProtocol(
         "baseline",
         manifest.manifest_hash,
