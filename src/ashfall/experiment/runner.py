@@ -26,6 +26,13 @@ from ashfall.experiment.schema import Condition, ExperimentConfig, ExperimentRes
 
 logger = logging.getLogger("ashfall.experiment.runner")
 
+#: Tag a legacy config must carry to reproduce the archived row-0 runs.
+LEGACY_ROW0_TAG = "legacy_row0_reproduction"
+
+
+class Row0SeedingError(ValueError):
+    """The curriculum would seed row 0, a nominal state, as if it were a failure."""
+
 
 class ExperimentRunner:
     """Generates and manages experiment runs.
@@ -107,15 +114,9 @@ class ExperimentRunner:
         ``OMNI_KIT_ACCEPT_EULA=YES`` to avoid the interactive prompt.
         """
         pythonpath = f"{self.ashfall_root / 'src'}:{self.phoenix_root / 'src'}"
-        return (
-            f"OMNI_KIT_ACCEPT_EULA=YES "
-            f"PYTHONPATH={pythonpath} "
-            f"{self.python_exe}"
-        )
+        return f"OMNI_KIT_ACCEPT_EULA=YES " f"PYTHONPATH={pythonpath} " f"{self.python_exe}"
 
-    def _write_adapt_override(
-        self, config: ExperimentConfig, run_dir: Path
-    ) -> Path:
+    def _write_adapt_override(self, config: ExperimentConfig, run_dir: Path) -> Path:
         """Write a per-cell adaptation YAML that injects failure_fraction.
 
         We start from the template at ``t.adapt_config`` (relative to the
@@ -135,9 +136,7 @@ class ExperimentRunner:
         template_rel = t.adapt_config or "configs/train/adaptation.yaml"
         template_path = (self.phoenix_root / template_rel).resolve()
         if not template_path.exists():
-            raise FileNotFoundError(
-                f"Adaptation template not found: {template_path}"
-            )
+            raise FileNotFoundError(f"Adaptation template not found: {template_path}")
         with open(template_path) as f:
             adapt_cfg = yaml.safe_load(f)
 
@@ -165,7 +164,25 @@ class ExperimentRunner:
         )
         adapt_cfg["curriculum"].pop("failure_reset_fraction", None)
         adapt_cfg["curriculum"].pop("failure_fraction", None)
-        adapt_cfg["curriculum"]["seed_row_strategy"] = "first"
+        # The historical Phase-I runs seeded row 0 of every trajectory, which
+        # is a nominal gait state, so the treatment was never delivered. That
+        # strategy is now refused unless the config carries the explicit tag
+        # below, which exists only so the archived runs stay reproducible.
+        # Phoenix's reset bridge accepts first / failure_onset / failure_onset_minus_k /
+        # failure_onset_minus_steps / failure_onset_minus_seconds. This legacy runner
+        # is kept only for the archived experiment; new work goes through the H0
+        # matched-pair path and its capsules.
+        strategy = adapt_cfg["curriculum"].get("seed_row_strategy", "failure_onset_minus_seconds")
+        legacy = LEGACY_ROW0_TAG in config.tags
+        if strategy == "first" and not legacy:
+            raise Row0SeedingError(
+                "seed_row_strategy='first' seeds row 0 of each trajectory, a nominal state; "
+                f"this is the Phase-I delivery defect. Tag the config '{LEGACY_ROW0_TAG}' only "
+                "to reproduce the archived historical runs."
+            )
+        if legacy:
+            strategy = "first"
+        adapt_cfg["curriculum"]["seed_row_strategy"] = strategy
         adapt_cfg["curriculum"]["trajectory_dir"] = str(failure_dir)
 
         # Optional per-cell mode filter. Phoenix's curriculum loader is
@@ -174,9 +191,7 @@ class ExperimentRunner:
         # default behaviour). Down-stream sweeps that vary the mode
         # subset (mode-subset ablation, v0.4.0) drive this field.
         if config.curriculum.failure_modes:
-            adapt_cfg["curriculum"]["failure_modes"] = list(
-                config.curriculum.failure_modes
-            )
+            adapt_cfg["curriculum"]["failure_modes"] = list(config.curriculum.failure_modes)
 
         # Save into Phoenix's _generated dir so the relative paths in the
         # template (e.g. variation.config) still resolve when fine_tune
@@ -193,9 +208,7 @@ class ExperimentRunner:
 
         return out_path
 
-    def _generate_commands(
-        self, config: ExperimentConfig, run_dir: Path
-    ) -> list[dict[str, str]]:
+    def _generate_commands(self, config: ExperimentConfig, run_dir: Path) -> list[dict[str, str]]:
         commands = []
         phoenix = self.phoenix_root
         t = config.training

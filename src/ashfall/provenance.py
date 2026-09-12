@@ -129,7 +129,10 @@ SIMULATOR_PACKAGES = (
 def _package_versions() -> dict[str, str]:
     versions: dict[str, str] = {}
     for dist in metadata.distributions():
-        name = dist.metadata.get("Name")
+        try:
+            name = dist.metadata["Name"]
+        except KeyError:
+            continue
         if name:
             versions[name.lower()] = dist.version
     return dict(sorted(versions.items()))

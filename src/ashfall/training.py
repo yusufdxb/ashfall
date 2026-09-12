@@ -149,13 +149,69 @@ def run_repair(spec):
             curriculum.update(outcomes, current_id, completed)
             return current_id
 
+        # Count every environment reset so the training artifact records episodes,
+        # and time the run so equal-compute comparison has wall clock and GPU time.
+        import time
+
+        import torch
+
+        episodes = {"count": 0}
+        counted_reset = env.unwrapped._reset_idx
+
+        def counting_reset(env_ids):
+            if env_ids is not None:
+                episodes["count"] += int(len(env_ids))
+            return counted_reset(env_ids)
+
+        env.unwrapped._reset_idx = counting_reset
+        cuda = torch.cuda.is_available() and str(cfg.sim.device).startswith("cuda")
+        if cuda:
+            start_event, end_event = torch.cuda.Event(enable_timing=True), torch.cuda.Event(
+                enable_timing=True
+            )
+            start_event.record()
+        wall_start = time.perf_counter()
         learn_with_frontier_updates(runner, total_iterations=spec['iterations'],
              update_interval=curriculum.schedule.refresh_interval, reestimate=reestimate,
              control=control)
+        wall_clock_s = time.perf_counter() - wall_start
+        if cuda:
+            end_event.record()
+            torch.cuda.synchronize()
+            gpu_time_s = start_event.elapsed_time(end_event) / 1000.0
+        else:
+            gpu_time_s = 0.0
         runner.save(str(out / 'candidate.pt'))
-        write_artifact(out / 'candidate.json', {'policy_id': file_hash(out/'candidate.pt'),
+        final_hash = file_hash(out / 'candidate.pt')
+        write_artifact(out / 'candidate.json', {'policy_id': final_hash,
                        'training_seed': spec['training_seed'], 'accepted': False,
                        'status': 'REQUIRES_FROZEN_TARGET_AND_NOMINAL_EVALUATION'})
+        # Equal-compute evidence. Reset seeding inserts no recorded transitions
+        # into PPO, so replay_transitions is zero by construction for this arm.
+        from ashfall.protocol.budget import artifact_from_rsl_rl
+
+        artifact = artifact_from_rsl_rl(
+            arm=spec.get('arm', 'D_phenotype_conditioned'),
+            training_seed=spec['training_seed'],
+            iterations=spec['iterations'],
+            num_envs=spec['num_envs'],
+            num_steps_per_env=int(train_cfg['runner']['num_steps_per_env']),
+            num_learning_epochs=int(train_cfg['algorithm']['num_learning_epochs']),
+            num_mini_batches=int(train_cfg['algorithm']['num_mini_batches']),
+            episodes=episodes["count"],
+            replay_transitions=0,
+            wall_clock_s=wall_clock_s,
+            gpu_time_s=gpu_time_s,
+            initial_checkpoint_sha256=baseline_hash,
+            final_checkpoint_sha256=final_hash,
+            config_hashes={'train_config': file_hash(spec['train_config']),
+                           'env_config': file_hash(backend_config['env_config']),
+                           'repair_spec': manifest_record.experiment_id},
+        )
+        write_artifact(out / 'training_artifact.json',
+                       {**artifact.to_dict(), 'gpu_time_method':
+                        'cuda_event_elapsed' if cuda else 'unavailable_cpu_device',
+                        'replay_transitions_method': 'reset_seeding_inserts_no_transitions'})
     finally:
         if env is not None:
             env.close()

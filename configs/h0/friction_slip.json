@@ -1,0 +1,19 @@
+{
+  "_comment": "Preregistered H0 spec: robot-shape friction reduction -> slip. Content-addressed by ashfall.h0.H0Spec; edit only before a run and commit the edit.",
+  "intervention": {
+    "kind": "friction_reduction",
+    "parameters": [["dynamic_friction", 0.1], ["static_friction", 0.12]],
+    "intensity": 0.9,
+    "intensity_axis": "1-dynamic_friction"
+  },
+  "intended_phenotype": "slip",
+  "command": [0.6, 0.0, 0.0],
+  "n_pairs": 8,
+  "replicates_per_pair": 4,
+  "horizon_steps": 150,
+  "alpha": 0.05,
+  "min_delivered_fraction": 0.5,
+  "departure": {"statistic": "q95", "margin_ratio": 1.5, "shrinkage": "ledoit_wolf", "regularization_floor": 1e-6, "min_replicates": 3},
+  "platform": "simulation",
+  "seed_base": 10000
+}
