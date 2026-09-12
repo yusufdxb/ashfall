@@ -1,5 +1,10 @@
 # Event capture and independent labeling
 
+The machine-readable side of this procedure now lives in `ashfall.detector_eval`
+and the evaluation protocol, dataset composition, metrics and mutation
+precondition are specified in [validation_protocol.md](validation_protocol.md).
+Labels produced under this document are `label_source="human_review"` there.
+
 The threshold detector captures candidate events for review. It cannot infer a
 failure mechanism from tracking error alone. In particular, wall blockage and
 low friction can produce the same available telemetry. Contact dropout without
