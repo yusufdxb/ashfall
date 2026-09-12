@@ -40,7 +40,8 @@ class TrainingSpec:
 
 @dataclass
 class CurriculumSpec:
-    failure_dir: str = "data/failures"
+    # Fixtures. Scientific data lives under data/scientific/ with a manifest.
+    failure_dir: str = "data/fixtures/synthetic"
     failure_fraction: float = 0.0  # legacy constructor/config alias
     failure_reset_fraction: float | None = None
     failure_modes: list[str] = field(default_factory=list)  # empty = all modes

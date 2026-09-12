@@ -6,7 +6,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 source "$SCRIPT_DIR/_activate.sh"
 
-OUTPUT_DIR="${1:-$ASHFALL_ROOT/data/failures}"
+OUTPUT_DIR="${1:-$ASHFALL_ROOT/data/fixtures/synthetic}"
 N_VARIANTS="${2:-3}"
 
 echo "[ashfall] Generating synthetic failures to $OUTPUT_DIR ($N_VARIANTS variants per mode)"

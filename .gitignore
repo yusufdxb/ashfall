@@ -19,8 +19,12 @@ results/*/**
 !results/REPORT.md
 !results/*.png
 
-# Large data files
-data/failures/*.parquet
+# Trajectory data. Manifests (dataset.json, *.meta.json) are tracked; the
+# parquet bytes are not. Fixtures and scientific data are separate trees and
+# ashfall.datasets refuses one where the other is required.
+data/failures/
+data/fixtures/**/*.parquet
+data/scientific/**/*.parquet
 
 # IDE
 .vscode/

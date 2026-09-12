@@ -65,7 +65,7 @@ def load_pool_composition(pool_dir: Path) -> dict[str, dict[str, int]]:
 
 def per_mode_breakdown(
     results_dir: str | Path,
-    pool_dir: str | Path = "data/failures",
+    pool_dir: str | Path = "data/fixtures/synthetic",
 ) -> dict:
     """Compute the per-mode pool composition + per-cell expected dosage.
 
@@ -157,7 +157,7 @@ def plot_curriculum_pool_composition(
 
 def render_failure_mode_breakdown_markdown(
     results_dir: str | Path,
-    pool_dir: str | Path = "data/failures",
+    pool_dir: str | Path = "data/fixtures/synthetic",
 ) -> str:
     """Render the failure-mode-composition section as markdown."""
     results_dir = Path(results_dir)

@@ -1,8 +1,17 @@
-"""Synthetic failure fixtures in Phoenix's Parquet schema.
+"""Synthetic failure FIXTURES in Phoenix's Parquet schema.
 
-These exercise schema integration and threshold regressions. They are not
-independent detector validation, reconstructed physics, or hardware evidence.
-Trajectories begin with stable frames before threshold-associated failure flags.
+These exercise schema integration and threshold regressions. They are test
+fixtures and nothing else: not independent detector validation, not
+reconstructed physics, not hardware evidence, and never an input to a
+scientific claim. They are written under ``data/fixtures/`` with a manifest
+whose ``kind`` is ``fixture`` (:mod:`ashfall.datasets`), and every scientific
+consumer refuses that manifest.
+
+Known physical defects, kept on purpose because the fixtures are regression
+material rather than data: position advances at the commanded speed while the
+logged body velocity is zeroed in the slip and command-mismatch generators, the
+stable prefix length is a parameter (``n_stable``) with no physical meaning,
+and ``failure_flag`` is the generator's recipe rather than a detector decision.
 """
 
 from __future__ import annotations
@@ -289,15 +298,26 @@ _MODE_SEED_OFFSETS: dict[FailureMode, int] = {
 }
 
 
+#: Default fixture location. Not ``data/failures``: that name let fixtures be
+#: read as data.
+DEFAULT_FIXTURE_DIR = "data/fixtures/synthetic"
+
+
 def generate_all_failures(
-    output_dir: str | Path,
+    output_dir: str | Path = DEFAULT_FIXTURE_DIR,
     n_variants: int = 3,
     seed: int = 42,
+    *,
+    n_stable: int = 50,
+    write_manifest: bool = True,
 ) -> list[Path]:
-    """Generate synthetic failure parquets for all 6 modes.
+    """Generate synthetic failure FIXTURE parquets for all 6 modes.
 
-    Creates ``n_variants`` trajectories per mode with different seeds.
-    Returns list of generated file paths.
+    Creates ``n_variants`` trajectories per mode with different seeds and a
+    ``dataset.json`` manifest of kind ``fixture``. ``n_stable`` is the length
+    of the stable prefix every generator prepends; it is a fixture parameter,
+    and exposing it here is what lets a test vary development time instead of
+    inheriting one global value.
     """
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -306,7 +326,7 @@ def generate_all_failures(
     for mode, gen_fn in GENERATORS.items():
         for v in range(n_variants):
             variant_seed = seed + _MODE_SEED_OFFSETS[mode] + v
-            rows = gen_fn(seed=variant_seed)
+            rows = gen_fn(n_stable=n_stable, seed=variant_seed)
             table = pa.Table.from_pylist(rows, schema=SCHEMA)
 
             fname = f"synth_{mode.value}_{v:03d}.parquet"
@@ -315,7 +335,24 @@ def generate_all_failures(
             paths.append(path)
             logger.info("Generated %s (%d rows)", fname, len(rows))
 
-    logger.info("Generated %d synthetic failure files in %s", len(paths), output_dir)
+    if write_manifest:
+        from ashfall.datasets import fixture_manifest
+
+        manifest = fixture_manifest(
+            output_dir,
+            "Hand-authored synthetic failure trajectories. Test fixtures only; not "
+            "detector validation, not physics, not hardware evidence.",
+            generator="ashfall.synth.generator",
+            seed=seed,
+            n_variants=n_variants,
+            n_stable=n_stable,
+        )
+        manifest_path = output_dir / "dataset.json"
+        if manifest_path.exists():
+            manifest_path.unlink()
+        manifest.save(output_dir)
+
+    logger.info("Generated %d synthetic fixture files in %s", len(paths), output_dir)
     return paths
 
 
@@ -323,5 +360,5 @@ if __name__ == "__main__":
     import sys
 
     logging.basicConfig(level=logging.INFO, format="[%(name)s] %(message)s")
-    out = sys.argv[1] if len(sys.argv) > 1 else "data/failures"
+    out = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_FIXTURE_DIR
     generate_all_failures(out)

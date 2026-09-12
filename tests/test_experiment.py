@@ -92,7 +92,8 @@ class TestExperimentRunner:
                 "run: {name: phoenix-adapt}\n"
                 "resume: {path: checkpoints/phoenix-base/latest.pt}\n"
                 "env: {config: configs/env/slippery.yaml}\n"
-                "curriculum: {failure_sample_fraction: 0.0, trajectory_dir: data/failures}\n"
+                "curriculum: {failure_sample_fraction: 0.0, "
+                "trajectory_dir: data/fixtures/synthetic}\n"
             )
             runner = ExperimentRunner(
                 ashfall_root=tmp / "ashfall",
@@ -183,7 +184,7 @@ class TestSweep:
             "resume:\n  path: checkpoints/phoenix-base/latest.pt\n"
             "env:\n  config: configs/env/slippery.yaml\n"
             "curriculum:\n  failure_sample_fraction: 0.0\n"
-            "  trajectory_dir: data/failures\n"
+            "  trajectory_dir: data/fixtures/synthetic\n"
         )
 
         ashfall_root = tmp_path / "ashfall"
