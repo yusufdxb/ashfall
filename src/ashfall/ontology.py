@@ -607,7 +607,10 @@ class DeliveryVerdict:
         object.__setattr__(self, "status", expected)
 
     def _derive_status(self) -> str:
-        if self.d1_intervention.detail.get("unsupported"):
+        if any(
+            gate.detail.get("unsupported")
+            for gate in (self.d1_intervention, self.d2_departure, self.d3_phenotype)
+        ):
             return "UNSUPPORTED"
         if not self.d1_intervention.passed:
             return "NOT_APPLIED"

@@ -293,6 +293,53 @@ def equivalence_verdict(
     }
 
 
+#: Keys a backend may add to ``environment_parameters`` beside the applied
+#: scenario parameters. They describe HOW the episode was produced and are
+#: recorded, not compared against the frozen scenario (audit finding A4).
+BACKEND_METADATA_KEYS = frozenset(
+    {
+        "effective_env_config_hash",
+        "rsl_rl_version",
+        "simulator",
+        "material_scope",
+        "known_physical_context_reconstructed",
+        "actuator_internal_state_restored",
+        "action_history_restored",
+        "command_strategy",
+        "reset_state_id",
+        "success_criterion",
+        "nominal_group",
+        "scene_seed",
+    }
+)
+
+
+def applied_parameters(record: Mapping, frozen_parameters) -> dict:
+    """The scenario parameters a record reports it applied, without backend metadata.
+
+    Every frozen parameter must be present in the record: a missing key is
+    reported as missing rather than dropped, so a backend that silently
+    skipped a parameter still fails the comparison. Extra keys outside the
+    declared metadata vocabulary are kept as well, because an undeclared
+    manipulation is a difference from the frozen scenario.
+    """
+    environment = record.get("environment_parameters") or {}
+    names = {name for name, _ in frozen_parameters}
+    return {
+        key: value
+        for key, value in environment.items()
+        if key in names or key not in BACKEND_METADATA_KEYS
+    }
+
+
+def nominal_group_of(record: Mapping):
+    """The nominal stratum a record was evaluated in, top-level or stamped by the backend."""
+    group = record.get("nominal_group")
+    if group is None:
+        group = (record.get("environment_parameters") or {}).get("nominal_group")
+    return group
+
+
 def evidence_verdict(
     baseline_target,
     candidate_target,
@@ -346,7 +393,7 @@ def evidence_verdict(
                 if (
                     record["parameter_sample_id"] != scenario.parameter_sample_id
                     or record["scenario_seed"] != scenario.scenario_seed
-                    or record.get("environment_parameters") != dict(scenario.parameters)
+                    or applied_parameters(record, scenario.parameters) != dict(scenario.parameters)
                 ):
                     raise ValueError("observed target scenario differs from frozen parameters")
                 if record.get("failure_modes") is None:
@@ -364,10 +411,10 @@ def evidence_verdict(
             scenario = nominal_lookup[left["scenario_id"]]
             for record in (left, right):
                 if (
-                    record.get("nominal_group") != scenario.group
+                    nominal_group_of(record) != scenario.group
                     or record["scenario_seed"] != scenario.scenario_seed
                     or record["parameter_sample_id"] != scenario.parameter_sample_id
-                    or record.get("environment_parameters") != dict(scenario.parameters)
+                    or applied_parameters(record, scenario.parameters) != dict(scenario.parameters)
                 ):
                     raise ValueError("observed nominal case differs from frozen parameters")
         if {r["policy_id"] for r in baseline_nominal} != {protocol.baseline_policy_id} or {

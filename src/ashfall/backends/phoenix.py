@@ -11,6 +11,7 @@ by importing or constructing this backend.
 from __future__ import annotations
 
 import hashlib
+import inspect
 import math
 from dataclasses import asdict
 from pathlib import Path
@@ -18,7 +19,10 @@ from pathlib import Path
 import numpy as np
 
 from ashfall.backends.phoenix_compat import KINEMATIC_RESTORE_FIELDS
+from ashfall.counterfactual import RestorableState, RolloutTrace
 from ashfall.evaluation.metrics import FailureAnalyzer
+from ashfall.gates import MatchedPairEvidence
+from ashfall.ontology import Intervention
 from ashfall.provenance import content_hash, write_artifact
 from ashfall.reproduction import FailureDescriptor, ReproductionCandidate
 
@@ -362,17 +366,17 @@ class PhoenixBackend:
         primary = target_events[0] if target_events else (events[0] if events else None)
         descriptor = FailureDescriptor(
             mode=primary["mode"] if primary else f"termination:{reason}" if terminated else None,
-            time_to_failure_s=primary["timestamp_s"]
-            if primary
-            else len(errors) * dt
-            if terminated
-            else None,
+            time_to_failure_s=(
+                primary["timestamp_s"] if primary else len(errors) * dt if terminated else None
+            ),
             termination_reason=reason,
             attitude_rms_rad=float(np.sqrt(np.mean(attitudes))),
             velocity_error_mps=float(np.sqrt(np.mean(np.square(errors)))),
-            contact_signature=tuple(np.mean(np.asarray(contacts) > 5.0, axis=0))
-            if np.isfinite(contacts).all()
-            else None,
+            contact_signature=(
+                tuple(np.mean(np.asarray(contacts) > 5.0, axis=0))
+                if np.isfinite(contacts).all()
+                else None
+            ),
         )
         outcome = EpisodeOutcome(
             policy_id=policy_id,
@@ -395,11 +399,11 @@ class PhoenixBackend:
             failure_onset_s=min((e["timestamp_s"] for e in events), default=None),
             intervention_required=bool(metrics.intervention_count),
             intervention_criterion="detected_attitude_or_collapse",
-            recovery_outcome="unrecovered"
-            if metrics.unrecovered_events
-            else "recovered"
-            if metrics.recovered_events
-            else "no_detected_failure",
+            recovery_outcome=(
+                "unrecovered"
+                if metrics.unrecovered_events
+                else "recovered" if metrics.recovered_events else "no_detected_failure"
+            ),
             recovery_time_s=metrics.mean_recovery_time_s,
             environment_parameters={
                 **parameters,
@@ -444,6 +448,254 @@ class PhoenixBackend:
         candidate = ReproductionCandidate(capsule.capsule_id, scenario.parameters, row)
         return self._episode(capsule, candidate, policy_id, evaluation_seed, scenario=scenario)[1]
 
+    # ------------------------------------------------------------------ #
+    # Matched counterfactual pairs (H0) on a persistent environment
+    # ------------------------------------------------------------------ #
+
+    def _ensure_started(self, scene_seed):
+        """Create the simulator once and keep it; matched arms must share one scene.
+
+        Startup-mode domain randomisation (mass, material, motor strength) is
+        drawn when the scene is created, so control and treatment share it by
+        construction when they run in the same environment instance.
+        """
+        if self.env is None:
+            self._start_episode(scene_seed)
+            self.scene_seed = scene_seed
+        return self.env.unwrapped
+
+    def _restore(self, state: RestorableState, env_id: int = 0) -> dict:
+        from phoenix.replay.state_adapter import restore_state
+        from phoenix.replay.trajectory_reader import InitialState
+
+        target = self.env.unwrapped
+        initial = InitialState(
+            **{
+                name: np.asarray(getattr(state, name), dtype=np.float32)
+                for name in KINEMATIC_RESTORE_FIELDS
+            },
+            position_frame="env_local",
+            position_frame_source="ashfall_restorable_state_env_local",
+        )
+        restored = restore_state(target, initial, env_id)
+        target.scene.write_data_to_sim()
+        target.sim.forward()
+        target.scene.update(dt=0.0)
+        if hasattr(self.policy, "reset"):
+            import torch
+
+            self.policy.reset(torch.ones(1, dtype=torch.bool, device=target.device))
+        return restored
+
+    def _rollout(self, horizon_steps: int, *, on_step=None) -> RolloutTrace:
+        """Run the policy from the current simulator state and record restorable channels."""
+        import torch
+        from phoenix.training.episode_outcomes import PreResetCapture, snapshot_manager_state
+
+        target = self.env.unwrapped
+        dt = float(target.step_dt)
+        if int(target.max_episode_length) < horizon_steps:
+            raise ValueError("environment time limit is shorter than the requested horizon")
+        rows = {
+            name: []
+            for name in (
+                "base_pos",
+                "base_quat",
+                "base_lin_vel_body",
+                "base_ang_vel_body",
+                "joint_pos",
+                "joint_vel",
+                "command_vel",
+                "contact_forces",
+                "actions",
+            )
+        }
+
+        def snapshot():
+            state = snapshot_manager_state(target, _numpy)
+            state["joint_position"] = _numpy(target.scene["robot"].data.joint_pos).copy()
+            return state
+
+        capture = PreResetCapture(target, snapshot)
+        termination = "evaluation_horizon"
+        terminated_step = None
+        observations = self.env.get_observations()
+        try:
+            with torch.inference_mode():
+                for step in range(horizon_steps):
+                    if on_step is not None:
+                        on_step(step, dt)
+                    capture.begin_step()
+                    action = self.policy(_policy_observations(self.policy, observations))
+                    observations, _reward, done, _extras = self.env.step(action)
+                    state = capture.overlay(snapshot())
+                    quat_wxyz = state["quaternion"][0]
+                    rows["base_pos"].append(state["position"][0].tolist())
+                    rows["base_quat"].append([*quat_wxyz[1:], quat_wxyz[0]])
+                    rows["base_lin_vel_body"].append(state["linear"][0].tolist())
+                    rows["base_ang_vel_body"].append(state["angular"][0].tolist())
+                    rows["joint_pos"].append(state["joint_position"][0].tolist())
+                    rows["joint_vel"].append(state["joint_velocity"][0].tolist())
+                    rows["command_vel"].append(state["command"][0][:3].tolist())
+                    contact = state["contacts"][0]
+                    rows["contact_forces"].append(
+                        contact.tolist() if np.isfinite(contact).all() else [np.nan] * 4
+                    )
+                    rows["actions"].append(_numpy(action)[0].tolist())
+                    if bool(_numpy(done)[0]):
+                        reasons = [
+                            name.split(":", 1)[1]
+                            for name, value in state.items()
+                            if name.startswith("termination:") and bool(value[0])
+                        ]
+                        failed = [
+                            r
+                            for r in reasons
+                            if not target.termination_manager.get_term_cfg(r).time_out
+                        ]
+                        if failed:
+                            termination = "|".join(reasons)
+                            terminated_step = step
+                            break
+                        if step + 1 < horizon_steps:
+                            raise RuntimeError("environment truncated before the requested horizon")
+        finally:
+            capture.close()
+        contacts = np.array(rows["contact_forces"])
+        return RolloutTrace(
+            dt,
+            np.array(rows["base_pos"]),
+            np.array(rows["base_quat"]),
+            np.array(rows["base_lin_vel_body"]),
+            np.array(rows["base_ang_vel_body"]),
+            np.array(rows["joint_pos"]),
+            np.array(rows["joint_vel"]),
+            np.array(rows["command_vel"]),
+            termination,
+            terminated_step,
+            contact_forces=None if np.isnan(contacts).any() else contacts,
+            actions=np.array(rows["actions"]),
+            metadata={
+                "backend_id": self.backend_id,
+                "env_config_hash": self.config_hashes["env_config"],
+                "scene_seed": getattr(self, "scene_seed", None),
+            },
+        )
+
+    def _arm(self, state, intervention, *, seed, horizon_steps):
+        """One arm of a matched pair: seed, reset, restore, apply, roll out, release."""
+        from ashfall.backends.phoenix_interventions import PhoenixInterventionAdapter
+
+        target = self._ensure_started(seed)
+        self.env.seed(seed)
+        self.env.reset()
+        self._restore(state, 0)
+        adapter = PhoenixInterventionAdapter(target, env_id=0)
+        receipt = adapter.apply(intervention)
+        completed = {"receipt": receipt}
+
+        def on_step(step, dt):
+            if adapter.pending_push is not None:
+                done = adapter.apply_pending_push(step, dt, intervention)
+                if done is not None:
+                    completed["receipt"] = done
+
+        try:
+            trace = self._rollout(horizon_steps, on_step=on_step)
+        finally:
+            adapter.release()
+        return trace, completed["receipt"]
+
+    def matched_pair(
+        self,
+        state: RestorableState,
+        intervention: Intervention,
+        *,
+        simulator_seed: int,
+        replicate_seeds,
+        horizon_steps: int,
+    ) -> MatchedPairEvidence:
+        """Control, treatment and nominal replicates from one restored state in one scene."""
+        if type(simulator_seed) is not int or simulator_seed < 0:
+            raise ValueError("simulator_seed must be a nonnegative integer")
+        control, control_receipt = self._arm(
+            state, Intervention.none(), seed=simulator_seed, horizon_steps=horizon_steps
+        )
+        treatment, treatment_receipt = self._arm(
+            state, intervention, seed=simulator_seed, horizon_steps=horizon_steps
+        )
+        replicates = [
+            self._arm(state, Intervention.none(), seed=int(s), horizon_steps=horizon_steps)[0]
+            for s in replicate_seeds
+        ]
+        return MatchedPairEvidence(
+            treatment,
+            control,
+            tuple(replicates),
+            treatment_receipt,
+            control_receipt,
+            simulator_seed,
+            tuple(int(s) for s in replicate_seeds),
+        )
+
+    def nominal_rollout(self, *, seed: int, horizon_steps: int, command) -> RolloutTrace:
+        """A no-intervention rollout from the environment's own reset, holding ``command``."""
+        from phoenix.replay.state_adapter import VelocityCommandAdapter
+
+        target = self._ensure_started(seed)
+        self.env.seed(seed)
+        self.env.reset()
+        adapter = VelocityCommandAdapter(target)
+        import torch
+
+        ids = torch.as_tensor([0], dtype=torch.long, device=adapter.term.vel_command_b.device)
+        adapter.restore(ids, [float(v) for v in command], hold_seconds=None)
+        return self._rollout(horizon_steps)
+
+    def provenance(self) -> dict:
+        import importlib.metadata as metadata
+
+        try:
+            version = metadata.version("isaaclab")
+        except metadata.PackageNotFoundError:
+            version = None
+        return {
+            "simulator_version": version,
+            "env_config_hash": self.config_hashes["env_config"],
+            "train_config_hash": self.config_hashes["train_config"],
+            "backend_id": self.backend_id,
+            "evidence_kind": self.evidence_kind,
+            "checkpoint_sha256": self.policy_id,
+            "scene_seed": getattr(self, "scene_seed", None),
+            **self.environment_metadata,
+        }
+
+    def evaluate(
+        self, manifest, capsules, *, policy_id, evaluation_seeds, training_seed=None, split
+    ):
+        """Episode outcomes for every scenario of ``split`` and every evaluation seed.
+
+        This is the producer ``ashfall evaluate`` calls (audit finding A1). The
+        training seed is recorded on every outcome and never inferred.
+        """
+        if not evaluation_seeds or len(set(evaluation_seeds)) != len(evaluation_seeds):
+            raise ValueError("distinct evaluation seeds required")
+        previous = self.training_seed
+        self.training_seed = training_seed
+        records = []
+        try:
+            for scenario in manifest.select(split):
+                capsule = capsules[scenario.capsule_id]
+                for seed in evaluation_seeds:
+                    records.append(self.evaluate_scenario(capsule, scenario, policy_id, int(seed)))
+        finally:
+            self.training_seed = previous
+        if not records:
+            raise ValueError(
+                f"no scenarios in split {split!r}; an empty evaluation is not evidence"
+            )
+        return records
+
     def close(self):
         if self.env is not None:
             self.env.close()
@@ -460,5 +712,15 @@ class PhoenixBackend:
 
 
 def create_backend(config):
-    """CLI plugin factory. Config paths resolve in the invoking working directory."""
-    return PhoenixBackend(**config)
+    """CLI plugin factory. Config paths resolve in the invoking working directory.
+
+    Only keys ``PhoenixBackend.__init__`` accepts are passed through. Provenance
+    keys such as ``simulator_version`` that the same JSON legitimately carries
+    for the training path are kept on ``backend.extra_config`` instead of
+    raising ``TypeError`` (audit finding A3).
+    """
+    accepted = set(inspect.signature(PhoenixBackend.__init__).parameters) - {"self"}
+    kwargs = {k: v for k, v in config.items() if k in accepted}
+    backend = PhoenixBackend(**kwargs)
+    backend.extra_config = {k: v for k, v in config.items() if k not in accepted}
+    return backend
