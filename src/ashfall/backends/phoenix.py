@@ -17,6 +17,7 @@ from pathlib import Path
 
 import numpy as np
 
+from ashfall.backends.phoenix_compat import KINEMATIC_RESTORE_FIELDS
 from ashfall.evaluation.metrics import FailureAnalyzer
 from ashfall.provenance import content_hash, write_artifact
 from ashfall.reproduction import FailureDescriptor, ReproductionCandidate
@@ -189,11 +190,18 @@ class PhoenixBackend:
         dt = float(target.step_dt)
         if not math.isclose(dt, capsule.control_dt, rel_tol=0, abs_tol=1e-8):
             raise ValueError("capsule and simulator control periods differ")
+        # Only the kinematic restore channels come from the frame. InitialState
+        # also carries metadata (position frame, controller history, declared
+        # environment parameters); iterating every dataclass field broke the
+        # moment Phoenix added those, which is exactly the drift
+        # phoenix_compat pins. Ashfall capsules are env-local captures.
         state = InitialState(
             **{
                 name: np.asarray(getattr(frame, name), dtype=np.float32)
-                for name in InitialState.__dataclass_fields__
-            }
+                for name in KINEMATIC_RESTORE_FIELDS
+            },
+            position_frame="env_local",
+            position_frame_source="ashfall_capsule_env_local",
         )
         applied = FrictionScenarioAdapter(target).apply(0, parameters)
         restored = restore_state(target, state, 0)

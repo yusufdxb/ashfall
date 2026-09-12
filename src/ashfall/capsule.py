@@ -16,8 +16,13 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from ashfall.delivery import implausible_reset_fields, resolve_developing_seed_row
+from ashfall.ontology import INTERVENTION_KINDS, PHENOTYPE_NAMES, Intervention, OnsetWindow
 
-SCHEMA_VERSION = "1.0"
+#: Current capsule schema. ``1.0`` capsules (no ontology fields) still load;
+#: ``1.1`` adds the explicit intervention, phenotype label, onset window and
+#: provenance mapping so a capsule states its cause and its effect separately.
+SCHEMA_VERSION = "1.1"
+ACCEPTED_SCHEMA_VERSIONS = ("1.0", "1.1")
 
 
 def _canonical(value: Any) -> str:
@@ -122,12 +127,48 @@ class FailureCapsule:
     disturbances: Mapping[str, Any] | None = None
     payload: Mapping[str, Any] | None = None
     actuator_settings: Mapping[str, Any] | None = None
+    # Schema 1.1: cause and effect named separately. ``failure_mode`` remains
+    # the legacy detector label (a phenotype hypothesis); ``phenotype_label``
+    # is the reviewed or ground-truth phenotype, ``intervention`` the physical
+    # cause that was applied when the recording was made, ``onset_window`` the
+    # precursor/transition/established indices, ``provenance`` the simulator,
+    # seed, environment and repository identities.
+    intervention: Mapping[str, Any] | None = None
+    phenotype_label: str | None = None
+    onset_window: Mapping[str, Any] | None = None
+    provenance: Mapping[str, Any] | None = None
     schema_version: str = SCHEMA_VERSION
     capsule_id: str = ""
 
     def __post_init__(self):
-        if self.schema_version != SCHEMA_VERSION:
+        if self.schema_version not in ACCEPTED_SCHEMA_VERSIONS:
             raise ValueError(f"unsupported capsule schema: {self.schema_version}")
+        if self.schema_version == "1.0" and any(
+            getattr(self, name) is not None
+            for name in ("intervention", "phenotype_label", "onset_window", "provenance")
+        ):
+            raise ValueError("schema 1.0 capsules cannot carry schema 1.1 ontology fields")
+        if self.failure_mode in INTERVENTION_KINDS:
+            raise ValueError(
+                f"failure_mode {self.failure_mode!r} names an intervention, not a phenotype; "
+                "record the cause under `intervention` and the observed effect here"
+            )
+        if self.phenotype_label is not None:
+            if self.phenotype_label in INTERVENTION_KINDS:
+                raise ValueError(
+                    f"phenotype_label {self.phenotype_label!r} is an intervention kind"
+                )
+            if self.phenotype_label not in PHENOTYPE_NAMES:
+                raise ValueError(f"unknown phenotype_label {self.phenotype_label!r}")
+        if self.intervention is not None:
+            # Validate, refuse phenotype names, and store the JSON-canonical
+            # form so an in-memory capsule equals its own round trip.
+            canonical = Intervention.from_dict(self.intervention).to_dict()
+            object.__setattr__(self, "intervention", json.loads(_canonical(canonical)))
+        if self.onset_window is not None:
+            window = OnsetWindow(**self.onset_window)
+            if window.established_start != self.failure_onset_index:
+                raise ValueError("onset_window.established_start must equal failure_onset_index")
         for name in ("source", "robot", "failure_mode"):
             if not isinstance(getattr(self, name), str) or not getattr(self, name).strip():
                 raise ValueError(f"{name} must be a nonempty string")
@@ -173,6 +214,9 @@ class FailureCapsule:
             "disturbances",
             "payload",
             "actuator_settings",
+            "intervention",
+            "onset_window",
+            "provenance",
         ):
             value = getattr(self, name)
             if value is not None and not isinstance(value, Mapping):
@@ -186,6 +230,19 @@ class FailureCapsule:
         data = asdict(self)
         data.pop("capsule_id")
         return "cap_" + hashlib.sha256(_canonical(data).encode()).hexdigest()
+
+    @property
+    def phenotype(self) -> str:
+        """The reviewed phenotype when present, else the legacy detector label."""
+        return self.phenotype_label or self.failure_mode
+
+    @property
+    def cause(self) -> Intervention | None:
+        return None if self.intervention is None else Intervention.from_dict(self.intervention)
+
+    @property
+    def window(self) -> OnsetWindow | None:
+        return None if self.onset_window is None else OnsetWindow(**self.onset_window)
 
     @property
     def pre_failure_frames(self) -> tuple[CapsuleFrame, ...]:

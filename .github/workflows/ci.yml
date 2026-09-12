@@ -5,16 +5,61 @@ on:
   pull_request:
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
         with:
-          python-version: "3.10"
+          python-version: "3.12"
+      - name: Install (dev extra, no sim/torch)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+      - name: Ruff
+        run: ruff check .
+      - name: Mypy (typed core)
+        run: mypy
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
       - name: Install (dev extra, no sim/torch)
         run: |
           python -m pip install --upgrade pip
           pip install -e ".[dev]"
       - name: Pytest (no-sim suite)
         run: pytest -q -m "not sim"
+      - name: Scientific guards must be present
+        run: pytest -q -m guard --co -q | tail -1
+
+  simulator-boundary:
+    # The Phoenix boundary tests need torch and the sibling repo. They run
+    # against CPU torch and a pinned Phoenix checkout, not Isaac Lab.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/checkout@v5
+        with:
+          repository: yusufdxb/go2-phoenix
+          ref: feat/causal-viability-replication
+          path: go2-phoenix
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.10"
+      - name: Install with CPU torch and the sibling
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -e ".[dev]"
+          pip install -e ./go2-phoenix
+      - name: Boundary tests
+        run: pytest -q tests/test_phoenix_backend.py tests/test_delivery.py -k "contract or backend or Restore"

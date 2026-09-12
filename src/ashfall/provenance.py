@@ -76,7 +76,7 @@ def build_manifest(*, ashfall_repo, phoenix_repo, config, checkpoint,
                    training_seed, scenario_manifest_hash, capsule_ids,
                    command: list[str], simulator_version: str | None = None,
                    evaluation_seed: int | None = None) -> ExperimentManifest:
-    versions = {}
+    versions: dict[str, str | None] = {}
     for name in ('isaaclab', 'rsl-rl-lib', 'numpy'):
         try:
             versions[name] = metadata.version(name)

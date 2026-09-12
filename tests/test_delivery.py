@@ -88,7 +88,25 @@ class TestRestoreContract:
         pytest.importorskip("phoenix")
         from phoenix.replay.trajectory_reader import InitialState
 
-        assert set(RESTORABLE_CHANNELS) == set(InitialState.__dataclass_fields__)
+        from ashfall.backends.phoenix_compat import (
+            INITIAL_STATE_METADATA_FIELDS,
+            KINEMATIC_RESTORE_FIELDS,
+            check_phoenix_interface,
+        )
+
+        # InitialState carries metadata about HOW to restore (position frame,
+        # controller history, declared environment parameters) beside the
+        # kinematic channels that are actually written. Only the latter are
+        # the restore contract; the metadata list is pinned separately so a new
+        # metadata field is a deliberate classification, not a silent widening.
+        kinematic = {
+            name
+            for name in InitialState.__dataclass_fields__
+            if name not in INITIAL_STATE_METADATA_FIELDS
+        }
+        assert set(RESTORABLE_CHANNELS) == kinematic == set(KINEMATIC_RESTORE_FIELDS)
+        report = check_phoenix_interface()
+        assert report.compatible, report.problems
 
     def test_contact_forces_is_not_restorable(self):
         # Contact force is an output of the physics engine given pose, joint

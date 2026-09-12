@@ -33,6 +33,7 @@ sim = [
 dev = [
     "pytest>=7.0",
     "pytest-cov",
+    "hypothesis>=6.0",
     "ruff",
     "black",
     "mypy",
@@ -52,6 +53,18 @@ select = ["E", "F", "W", "I"]
 testpaths = ["tests"]
 markers = [
     "sim: requires Isaac Lab (deselect with -m 'not sim')",
+    "guard: scientific guard that must fail when its protected defect is reintroduced",
+]
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+warn_unused_ignores = false
+# Typed core. Legacy analysis modules are checked as they are migrated.
+files = [
+    "src/ashfall/ontology.py",
+    "src/ashfall/provenance.py",
+    "src/ashfall/backends/phoenix_compat.py",
 ]
 
 [tool.black]
