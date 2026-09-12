@@ -181,3 +181,29 @@ def test_every_protected_defect_has_a_guard_test():
         if not any(re.search(pattern, name, re.IGNORECASE) for name in names)
     ]
     assert not missing, f"no @pytest.mark.guard test covers: {missing}\nguards: {names}"
+
+
+@pytest.mark.guard
+def test_every_historical_config_reproduces_row0_explicitly():
+    """A Phase-I config without the legacy tag would silently run a different treatment.
+
+    Reintroduce the defect by removing the tag from any historical config: the
+    runner would then default to a pre-onset strategy and the "reproduction"
+    would not reproduce the archive.
+    """
+    import yaml
+
+    from ashfall.experiment.runner import load_experiment_config
+
+    root = Path(__file__).resolve().parents[1]
+    configs = sorted((root / "configs" / "experiments").glob("*.yaml")) + sorted(
+        (root / "configs" / "ablations").rglob("*.yaml")
+    )
+    assert configs
+    for path in configs:
+        raw = yaml.safe_load(path.read_text())
+        assert LEGACY_ROW0_TAG in raw.get("tags", []), path
+        config = load_experiment_config(path)
+        assert LEGACY_ROW0_TAG in config.tags, path
+        failure_dir = config.curriculum.failure_dir
+        assert failure_dir.startswith("data/fixtures/"), (path, failure_dir)

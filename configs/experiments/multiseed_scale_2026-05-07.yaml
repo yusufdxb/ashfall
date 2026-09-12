@@ -1,3 +1,6 @@
+# LEGACY Phase-I configuration. Reproduces the archived row-0 reset-file runs under
+# results/legacy_row0_curriculum/; the tag legacy_row0_reproduction is what lets the runner
+# seed row 0. Do not use for new work: see docs/phase2/PREREGISTRATION.md.
 # Ashfall multi-seed scale (2026-05-07)
 # Adds 4 new seeds at ff in {0.0, 0.5} to combine with the n=3
 # pilot (multiseed_pilot_2026-05-07_*) for an n=7 verdict.
@@ -26,7 +29,7 @@ training:
   seed: 42  # base; swept by ablation
 
 curriculum:
-  failure_dir: "data/failures"
+  failure_dir: "data/fixtures/synthetic"
   failure_fraction: 0.0  # base; swept by ablation
   failure_modes: []
   num_variations: 16
@@ -46,4 +49,4 @@ ablations:
     values: [99, 314, 1729, 2718]
 
 phoenix_root: "../../workspace/go2-phoenix"
-tags: ["multiseed-scale", "ff-validation", "n7"]
+tags: ["legacy_row0_reproduction", "multiseed-scale", "ff-validation", "n7"]

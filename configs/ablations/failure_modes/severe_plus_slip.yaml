@@ -1,3 +1,6 @@
+# LEGACY Phase-I configuration. Reproduces the archived row-0 reset-file runs under
+# results/legacy_row0_curriculum/; the tag legacy_row0_reproduction is what lets the runner
+# seed row 0. Do not use for new work: see docs/phase2/PREREGISTRATION.md.
 # Failure-mode subset ablation: attitude + collapse + slip.
 # Tests the severity-plus-friction minimal-set hypothesis.
 
@@ -20,7 +23,7 @@ training:
   seed: 42
 
 curriculum:
-  failure_dir: "data/failures"
+  failure_dir: "data/fixtures/synthetic"
   failure_fraction: 0.5
   failure_modes: ["attitude", "collapse", "slip"]
   num_variations: 16
@@ -32,4 +35,4 @@ evaluation:
   record_video: false
 
 phoenix_root: "../../workspace/go2-phoenix"
-tags: ["ablation", "failure-mode-subset", "ff0p5", "severe-slip"]
+tags: ["legacy_row0_reproduction", "ablation", "failure-mode-subset", "ff0p5", "severe-slip"]

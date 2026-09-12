@@ -1,3 +1,6 @@
+# LEGACY Phase-I configuration. Reproduces the archived row-0 reset-file runs under
+# results/legacy_row0_curriculum/; the tag legacy_row0_reproduction is what lets the runner
+# seed row 0. Do not use for new work: see docs/phase2/PREREGISTRATION.md.
 # Ashfall experiment: Failure-adapted policy
 # Fine-tunes baseline with failure-seeded curriculum on slippery terrain.
 
@@ -17,7 +20,7 @@ training:
   seed: 42
 
 curriculum:
-  failure_dir: "data/failures"
+  failure_dir: "data/fixtures/synthetic"
   failure_fraction: 0.25
   failure_modes: []  # all modes
   num_variations: 16
@@ -29,4 +32,4 @@ evaluation:
   record_video: true
 
 phoenix_root: "../../workspace/go2-phoenix"
-tags: ["adapted", "failure-curriculum"]
+tags: ["legacy_row0_reproduction", "adapted", "failure-curriculum"]

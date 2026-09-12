@@ -1,3 +1,6 @@
+# LEGACY Phase-I configuration. Reproduces the archived row-0 reset-file runs under
+# results/legacy_row0_curriculum/; the tag legacy_row0_reproduction is what lets the runner
+# seed row 0. Do not use for new work: see docs/phase2/PREREGISTRATION.md.
 # Ashfall multi-seed scale EXTENSION (2026-06-02)
 #
 # Purpose: ADD seeds beyond the published n=7 baseline to strengthen the
@@ -38,7 +41,7 @@ training:
   seed: 42  # base; swept by ablation
 
 curriculum:
-  failure_dir: "data/failures"
+  failure_dir: "data/fixtures/synthetic"
   failure_fraction: 0.0  # base; swept by ablation
   failure_modes: []
   num_variations: 16
@@ -58,4 +61,4 @@ ablations:
     values: [1618, 2024, 4096, 6022]
 
 phoenix_root: "../../workspace/go2-phoenix"
-tags: ["multiseed-scale", "ff-validation", "n11-extension", "null-strengthen"]
+tags: ["legacy_row0_reproduction", "multiseed-scale", "ff-validation", "n11-extension", "null-strengthen"]

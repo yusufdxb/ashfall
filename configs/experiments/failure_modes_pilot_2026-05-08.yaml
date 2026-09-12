@@ -1,3 +1,6 @@
+# LEGACY Phase-I configuration. Reproduces the archived row-0 reset-file runs under
+# results/legacy_row0_curriculum/; the tag legacy_row0_reproduction is what lets the runner
+# seed row 0. Do not use for new work: see docs/phase2/PREREGISTRATION.md.
 # Ashfall failure-mode-subset pilot (2026-05-08)
 # Stage-1 directional triage: does ANY specific failure-mode subset
 # show a 3/3 positive slippery sign at fixed ff=0.5?
@@ -24,7 +27,7 @@ training:
   seed: 42  # base; swept by ablation
 
 curriculum:
-  failure_dir: "data/failures"
+  failure_dir: "data/fixtures/synthetic"
   failure_fraction: 0.5  # fixed for this sweep
   failure_modes: []  # base; swept by ablation
   num_variations: 16
@@ -50,4 +53,4 @@ ablations:
     values: [42, 123, 7]
 
 phoenix_root: "../../workspace/go2-phoenix"
-tags: ["mode-subset-pilot", "ff0p5", "stage1"]
+tags: ["legacy_row0_reproduction", "mode-subset-pilot", "ff0p5", "stage1"]
