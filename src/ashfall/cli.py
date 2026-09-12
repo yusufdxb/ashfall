@@ -19,6 +19,7 @@ Subcommands added by the causal-repair redesign:
 from __future__ import annotations
 
 import argparse
+import io
 import json
 import os
 import shutil
@@ -123,7 +124,22 @@ def _build_parser():
         help="acknowledge a declared-but-unapplied env config block as documentation only",
     )
     p.add_argument("--phoenix-repo", help="path of the go2-phoenix checkout for provenance")
-    p.add_argument("--sensitivity-pairs", type=int, default=2)
+    p.add_argument(
+        "--sensitivity-pairs",
+        type=int,
+        default=-1,
+        help="pairs to run the D2 regularisation sweep on; -1 (default) means every pair",
+    )
+    p.add_argument(
+        "--publication",
+        "--redact-hardware",
+        dest="publication",
+        action="store_true",
+        help=(
+            "bundle will be published: record the GPU model, local package names and untracked "
+            "file paths only as SHA-256 digests"
+        ),
+    )
 
     p = commands.add_parser("detector-eval", help="independent detector evaluation + mutations")
     p.add_argument("--dataset", help="labelled JSONL dataset; default is the regression fixture")
@@ -134,7 +150,17 @@ def _build_parser():
     return parser
 
 
-def _run_h0(args) -> dict:
+#: Why an H0 spec exists. Only simulator evidence from a preregistered spec may
+#: be quoted as a research result; a smoke or an unlabelled spec may not.
+H0_PURPOSES = ("preregistered", "implementation_smoke", "unregistered")
+
+
+def _is_research_result(evidence_kind: str, purpose: str) -> bool:
+    """Simulator evidence from a preregistered spec, and nothing else."""
+    return evidence_kind == "simulation" and purpose == "preregistered"
+
+
+def _run_h0(args, holder: dict | None = None) -> dict:
     from .config_guard import assert_config_applied, load_effective_env_config
     from .counterfactual import DepartureConfig, sensitivity_analysis
     from .h0 import H0Spec, h0_seed_plan, run_h0, select_states
@@ -145,6 +171,9 @@ def _run_h0(args) -> dict:
     if args.backend == "phoenix" and not args.backend_config:
         raise SystemExit("--backend-config is required for --backend phoenix")
     raw = read(args.spec)
+    purpose = raw.get("purpose", "unregistered")
+    if purpose not in H0_PURPOSES:
+        raise SystemExit(f"spec purpose must be one of {H0_PURPOSES}, got {purpose!r}")
     departure = DepartureConfig(**raw.get("departure", {}))
     command = tuple(raw.get("command", (0.5, 0.0, 0.0)))
     spec = H0Spec(
@@ -182,64 +211,71 @@ def _run_h0(args) -> dict:
         )
         backend = backend_from_config(args.backend_config)
         phoenix_repo = args.phoenix_repo or backend_config.get("phoenix_repo")
+    if holder is not None:
+        holder["backend"] = backend
     bundle = EvidenceBundle.create(
         args.output,
         {
             "kind": "h0_delivery_calibration",
+            "purpose": purpose,
+            "publication": args.publication,
             "spec": spec.to_dict(),
             "command": list(command),
             "backend": args.backend,
             "config_hashes": {k: file_hash(v) for k, v in config_paths.items()},
         },
     )
-    bundle.write_environment(environment_snapshot())
+    bundle.write_environment(
+        environment_snapshot(
+            redact_hardware=args.publication, redact_local_packages=args.publication
+        )
+    )
     provenance = collect_provenance(
         ashfall_repo=REPO_ROOT,
         phoenix_repo=phoenix_repo,
         config_paths=config_paths,
         policy_paths=policy_paths,
         seeds={"seed_base": spec.seed_base},
+        redact_untracked_paths=args.publication,
     )
     bundle.write_provenance(provenance)
     write_artifact(bundle.root / "seed_plan.json", h0_seed_plan(spec))
-    try:
-        states = select_states(backend, spec, command=command)
-        result, records = run_h0(
-            backend,
-            spec,
-            states=states,
-            provenance={
-                "ashfall_sha": provenance.ashfall["sha"],
-                "phoenix_sha": None if provenance.phoenix is None else provenance.phoenix["sha"],
-            },
+    states = select_states(backend, spec, command=command)
+    result, records = run_h0(
+        backend,
+        spec,
+        states=states,
+        provenance={
+            "ashfall_sha": provenance.ashfall["sha"],
+            "phoenix_sha": None if provenance.phoenix is None else provenance.phoenix["sha"],
+        },
+    )
+    sensitivity = []
+    chosen = records if args.sensitivity_pairs < 0 else records[: args.sensitivity_pairs]
+    for record in chosen:
+        evidence = record.evidence
+        report = sensitivity_analysis(
+            evidence.treatment,
+            evidence.control,
+            evidence.nominal_replicates,
+            config=spec.departure,
+            phenotype=spec.intended_phenotype,
         )
-        sensitivity = []
-        for record in records[: max(0, args.sensitivity_pairs)]:
-            evidence = record.evidence
-            report = sensitivity_analysis(
-                evidence.treatment,
-                evidence.control,
-                evidence.nominal_replicates,
-                config=spec.departure,
-                phenotype=spec.intended_phenotype,
-            )
-            sensitivity.append({"attempt_id": record.attempt.attempt_id, **report.to_dict()})
-        harvest = harvest_h0_run(
-            spec,
-            result,
-            records,
-            bundle.root / "harvest",
-            robot=args.robot,
-            provenance={
-                "ashfall_sha": provenance.ashfall["sha"],
-                "phoenix_sha": None if provenance.phoenix is None else provenance.phoenix["sha"],
-                "policy_id": backend.policy_id,
-                "env_config_hash": backend.provenance().get("env_config_hash"),
-                "simulator_version": backend.provenance().get("simulator_version"),
-            },
-        )
-    finally:
-        backend.close()
+        sensitivity.append({"attempt_id": record.attempt.attempt_id, **report.to_dict()})
+    harvest = harvest_h0_run(
+        spec,
+        result,
+        records,
+        bundle.root / "harvest",
+        robot=args.robot,
+        provenance={
+            "ashfall_sha": provenance.ashfall["sha"],
+            "phoenix_sha": None if provenance.phoenix is None else provenance.phoenix["sha"],
+            "policy_id": backend.policy_id,
+            "env_config_hash": backend.provenance().get("env_config_hash"),
+            "simulator_version": backend.provenance().get("simulator_version"),
+        },
+    )
     metrics = {
         "h0": result.to_dict(),
         "per_pair": [
@@ -270,7 +306,8 @@ def _run_h0(args) -> dict:
             "verdict": result.verdict,
             "reasons": list(result.reasons),
             "evidence_kind": result.evidence_kind,
-            "is_research_result": result.evidence_kind == "simulation",
+            "purpose": purpose,
+            "is_research_result": _is_research_result(result.evidence_kind, purpose),
             "spec_id": spec.spec_id,
         }
     )
@@ -280,6 +317,7 @@ def _run_h0(args) -> dict:
         "run_id": bundle.run_id,
         "verdict": result.verdict,
         "evidence_kind": result.evidence_kind,
+        "purpose": purpose,
         "statuses": result.statuses,
         "exact_p": result.exact_p,
         "delivered_fraction": result.delivered_fraction,
@@ -457,7 +495,37 @@ def main(argv=None):
 
         build_manifest(**read(args.config)).save(args.output)
     elif args.command == "h0":
-        print(json.dumps(_run_h0(args), indent=2))
+        # Under Isaac Sim, closing the simulation app ends the interpreter, and
+        # Kit can turn an uncaught exception into exit status 0. So every
+        # artifact and the summary are written BEFORE the simulator is closed,
+        # and a failed simulator run records its traceback and exits 1 itself.
+        import faulthandler
+        import sys
+        import traceback
+
+        try:
+            faulthandler.enable(all_threads=True)
+        except (OSError, ValueError, AttributeError, io.UnsupportedOperation):
+            pass  # captured or non-file stdout, as under pytest
+        holder: dict = {}
+        try:
+            summary = _run_h0(args, holder)
+        except BaseException as exc:  # noqa: BLE001 - recorded, then a nonzero exit
+            if isinstance(exc, SystemExit) and not holder:
+                raise
+            text = traceback.format_exc()
+            print(text, flush=True)
+            failure_dir = Path(args.output)
+            failure_dir.mkdir(parents=True, exist_ok=True)
+            (failure_dir / "h0_failure.log").write_text(text)
+            if args.backend == "phoenix" and holder:
+                os._exit(1)  # skip Kit shutdown, which would report success
+            backend = holder.get("backend")
+            if backend is not None:
+                backend.close()
+            sys.exit(f"ashfall h0 failed: {exc}")
+        print(json.dumps(summary, indent=2), flush=True)
+        holder["backend"].close()  # may end the interpreter; everything is on disk
     elif args.command == "detector-eval":
         print(json.dumps(_run_detector_eval(args), indent=2))
     elif args.command == "env-snapshot":

@@ -541,7 +541,7 @@ def sensitivity_analysis(
     """
     config = config or DepartureConfig()
     primary = measure_departure(treatment, control, nominal, config=config, phenotype=phenotype)
-    cells = []
+    cells: list[dict[str, Any]] = []
     for shrinkage in shrinkage_grid:
         for floor in floor_grid:
             cell_config = DepartureConfig(

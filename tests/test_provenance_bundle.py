@@ -24,6 +24,7 @@ from ashfall.provenance import (
     dataset_hash,
     environment_snapshot,
     file_hash,
+    git_identity,
 )
 
 
@@ -74,6 +75,40 @@ class TestProvenance:
         assert set(snapshot["simulator_packages"]) >= {"isaaclab", "torch", "numpy"}
         assert snapshot["packages_hash"] == content_hash(snapshot["packages"])
         assert "gpu" in snapshot and "cuda" in snapshot
+
+    def test_hardware_redaction_hides_the_gpu_model(self):
+        snapshot = environment_snapshot(include_all_packages=False, redact_hardware=True)
+        assert "name" not in snapshot["gpu"] and "memory_total" not in snapshot["gpu"]
+        assert snapshot["gpu"]["redacted"] is True
+
+    def test_publication_mode_hides_local_package_names(self, monkeypatch):
+        import ashfall.provenance as prov
+
+        fake = {"numpy": "1.26.4", "private-project": "0.0.0"}
+        monkeypatch.setattr(prov, "_package_versions", lambda: dict(fake))
+        monkeypatch.setattr(prov, "_local_package_names", lambda: {"private-project"})
+        snapshot = prov.environment_snapshot(redact_local_packages=True)
+        assert "private-project" not in snapshot["packages"]
+        assert snapshot["packages"]["numpy"] == "1.26.4"
+        assert snapshot["packages_hash"] == prov.content_hash(fake)  # identity is the full set
+        assert snapshot["local_packages"] == {
+            "redacted": True,
+            "count": 1,
+            "sha256": prov.content_hash({"private-project": "0.0.0"}),
+        }
+        plain = prov.environment_snapshot()
+        assert plain["packages"] == fake and plain["local_packages"] == {"redacted": False}
+
+    def test_publication_mode_hashes_untracked_paths(self, tmp_path):
+        repo = git_repo(tmp_path / "repo")
+        (repo / "unpublished_idea.py").write_text("x = 1\n")
+        plain = git_identity(repo)
+        redacted = git_identity(repo, redact_untracked_paths=True)
+        assert "unpublished_idea.py" in plain["untracked"]
+        assert "unpublished_idea.py" not in redacted["untracked"]
+        assert list(redacted["untracked"].values()) == list(plain["untracked"].values())
+        assert all(len(key) == 64 for key in redacted["untracked"])
+        assert redacted["untracked_paths_redacted"] is True
 
     def test_missing_identity_is_refused_not_blanked(self):
         with pytest.raises(ValueError, match="Ashfall"):

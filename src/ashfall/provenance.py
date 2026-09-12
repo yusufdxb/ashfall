@@ -86,7 +86,7 @@ def read_artifact(path: str | Path) -> Any:
     return json.loads(Path(path).read_text())
 
 
-def git_identity(repo: str | Path) -> dict:
+def git_identity(repo: str | Path, *, redact_untracked_paths: bool = False) -> dict:
     """SHA plus dirty-tree patch and untracked-file hashes.
 
     A SHA alone cannot identify an edited run.
@@ -103,9 +103,16 @@ def git_identity(repo: str | Path) -> dict:
         "branch": git("rev-parse", "--abbrev-ref", "HEAD"),
         "dirty": bool(status),
         "patch_sha256": hashlib.sha256(patch.encode()).hexdigest(),
+        # In publication mode an untracked path is recorded by its digest, so the
+        # names of unpublished files cannot leak; the content hash still pins it.
         "untracked": {
-            p: file_hash(Path(repo) / p) for p in sorted(untracked) if (Path(repo) / p).is_file()
+            (hashlib.sha256(p.encode()).hexdigest() if redact_untracked_paths else p): file_hash(
+                Path(repo) / p
+            )
+            for p in sorted(untracked)
+            if (Path(repo) / p).is_file()
         },
+        "untracked_paths_redacted": redact_untracked_paths,
     }
 
 
@@ -138,6 +145,30 @@ def _package_versions() -> dict[str, str]:
     return dict(sorted(versions.items()))
 
 
+def _local_package_names() -> set[str]:
+    """Distributions installed from a local directory (editable or file URL), lower-cased.
+
+    These are the author's own projects; a published bundle withholds their
+    names. Third-party packages installed from an index are not affected.
+    """
+    names: set[str] = set()
+    for dist in metadata.distributions():
+        try:
+            name = dist.metadata["Name"]
+        except KeyError:
+            continue
+        raw = dist.read_text("direct_url.json")
+        if not name or not raw:
+            continue
+        try:
+            info = json.loads(raw)
+        except json.JSONDecodeError:
+            continue
+        if info.get("dir_info", {}).get("editable") or str(info.get("url", "")).startswith("file:"):
+            names.add(name.lower())
+    return names
+
+
 def _nvidia_smi(query: str) -> str | None:
     exe = shutil.which("nvidia-smi")
     if exe is None:
@@ -151,7 +182,29 @@ def _nvidia_smi(query: str) -> str | None:
     return out.strip() or None
 
 
-def environment_snapshot(*, include_all_packages: bool = True) -> dict:
+def _gpu_record(redact: bool) -> dict:
+    """GPU name and memory, or their SHA-256 digests when the bundle will be published.
+
+    A digest still identifies the hardware for a reader who knows it (compare
+    against the digest of a candidate name) without printing the model.
+    """
+    name = _nvidia_smi("name")
+    memory = _nvidia_smi("memory.total")
+    if not redact:
+        return {"name": name, "memory_total": memory}
+
+    def digest(value):
+        return None if value is None else hashlib.sha256(value.encode()).hexdigest()
+
+    return {"name_sha256": digest(name), "memory_total_sha256": digest(memory), "redacted": True}
+
+
+def environment_snapshot(
+    *,
+    include_all_packages: bool = True,
+    redact_hardware: bool = False,
+    redact_local_packages: bool = False,
+) -> dict:
     """What this interpreter and machine are, as far as it can be read without side effects.
 
     Torch is not imported here: on a machine with Isaac Lab that import is
@@ -159,6 +212,14 @@ def environment_snapshot(*, include_all_packages: bool = True) -> dict:
     ``nvidia-smi`` when present. Fields that cannot be read are ``None``.
     """
     packages = _package_versions()
+    # The identity is always the FULL package set, whatever is shown.
+    full_packages_hash = content_hash(packages)
+    local_record: dict[str, Any] = {"redacted": False}
+    if redact_local_packages:
+        local_names = _local_package_names()
+        local = {k: v for k, v in packages.items() if k in local_names}
+        packages = {k: v for k, v in packages.items() if k not in local_names}
+        local_record = {"redacted": True, "count": len(local), "sha256": content_hash(local)}
     cuda_from_torch = None
     if "torch" in sys.modules:  # already loaded by the caller; reading is free
         cuda_from_torch = getattr(getattr(sys.modules["torch"], "version", None), "cuda", None)
@@ -172,12 +233,10 @@ def environment_snapshot(*, include_all_packages: bool = True) -> dict:
             "driver_version": _nvidia_smi("driver_version"),
             "torch_cuda": cuda_from_torch,
         },
-        "gpu": {
-            "name": _nvidia_smi("name"),
-            "memory_total": _nvidia_smi("memory.total"),
-        },
+        "gpu": _gpu_record(redact_hardware),
         "packages": packages if include_all_packages else {},
-        "packages_hash": content_hash(packages),
+        "packages_hash": full_packages_hash,
+        "local_packages": local_record,
         "captured_at": datetime.now(timezone.utc).isoformat(),
     }
 
@@ -241,6 +300,7 @@ def collect_provenance(
     policy_paths: Mapping[str, str | Path],
     seeds: Mapping[str, int],
     environment: Mapping[str, Any] | None = None,
+    redact_untracked_paths: bool = False,
 ) -> RunProvenance:
     environment = environment or environment_snapshot(include_all_packages=False)
     phoenix = None
@@ -249,11 +309,11 @@ def collect_provenance(
         reason = "no simulator sibling declared for this run"
     else:
         try:
-            phoenix = git_identity(phoenix_repo)
+            phoenix = git_identity(phoenix_repo, redact_untracked_paths=redact_untracked_paths)
         except (subprocess.SubprocessError, OSError) as exc:
             reason = f"phoenix repo not readable: {exc}"
     return RunProvenance(
-        ashfall=git_identity(ashfall_repo),
+        ashfall=git_identity(ashfall_repo, redact_untracked_paths=redact_untracked_paths),
         phoenix=phoenix,
         config_hashes={k: file_hash(v) for k, v in config_paths.items()},
         dataset_hashes={k: dataset_hash(v) for k, v in (dataset_paths or {}).items()},

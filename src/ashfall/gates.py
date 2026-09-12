@@ -231,6 +231,11 @@ def gate_d3(
         "detector": DETECTOR_VERSION,
         "observed_phenotypes": list(names_t),
         "control_phenotypes": list(names_c),
+        # Threshold labels for phenotypes the platform cannot observe are kept
+        # for the record and marked; they are not evidence of those phenotypes.
+        "unsupported_labels_on_platform": sorted(
+            {name for name in (*names_t, *names_c) if not PHENOTYPES[name].supported_on(platform)}
+        ),
         "treatment_observations": [o.to_dict() for o in observed_t],
         "control_observations": [o.to_dict() for o in observed_c],
     }

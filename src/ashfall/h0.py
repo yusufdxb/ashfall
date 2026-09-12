@@ -151,13 +151,13 @@ def summarise_attempts(spec: H0Spec, attempts: Sequence[ReproductionAttempt]) ->
     d1 = d2 = d3 = delivered = 0
     treatment_hits = control_hits = treatment_only = control_only = 0
     for attempt in attempts:
-        verdict = attempt.verdict
-        statuses[verdict.status] = statuses.get(verdict.status, 0) + 1
-        d1 += verdict.d1_intervention.passed
-        d2 += verdict.d2_departure.passed
-        d3 += verdict.d3_phenotype.passed
-        delivered += verdict.delivered
-        detail = verdict.d3_phenotype.detail
+        pair_verdict = attempt.verdict
+        statuses[pair_verdict.status] = statuses.get(pair_verdict.status, 0) + 1
+        d1 += pair_verdict.d1_intervention.passed
+        d2 += pair_verdict.d2_departure.passed
+        d3 += pair_verdict.d3_phenotype.passed
+        delivered += pair_verdict.delivered
+        detail = pair_verdict.d3_phenotype.detail
         in_t = bool(detail.get("phenotype_in_treatment", False))
         in_c = bool(detail.get("phenotype_in_control", False))
         treatment_hits += in_t
@@ -177,8 +177,9 @@ def summarise_attempts(spec: H0Spec, attempts: Sequence[ReproductionAttempt]) ->
         reasons.append("at least one pair reported an unsupported gate")
     if d1 < n:
         reasons.append(f"intervention application was not verified in {n - d1} of {n} pairs")
+    outcome: str
     if reasons:
-        verdict = "UNINFORMATIVE"
+        outcome = "UNINFORMATIVE"
     else:
         if fraction < spec.min_delivered_fraction:
             reasons.append(
@@ -193,7 +194,7 @@ def summarise_attempts(spec: H0Spec, attempts: Sequence[ReproductionAttempt]) ->
             )
         if treatment_only <= control_only:
             reasons.append("treatment did not show the phenotype more often than control")
-        verdict = "FAIL" if reasons else "PASS"
+        outcome = "FAIL" if reasons else "PASS"
     return H0Result(
         spec_id=spec.spec_id,
         n_pairs=n,
@@ -209,7 +210,7 @@ def summarise_attempts(spec: H0Spec, attempts: Sequence[ReproductionAttempt]) ->
         control_only=control_only,
         exact_p=p,
         p_floor=p_floor,
-        verdict=verdict,
+        verdict=outcome,
         reasons=tuple(reasons),
         attempt_ids=tuple(a.attempt_id for a in attempts),
         evidence_kind=next(iter(kinds)),
@@ -232,7 +233,11 @@ def _episode(
         source=source,
         policy_id=policy_id,
         intervention=intervention,
-        command=tuple(float(v) for v in trace.command_vel[0]),
+        command=(
+            float(trace.command_vel[0][0]),
+            float(trace.command_vel[0][1]),
+            float(trace.command_vel[0][2]),
+        ),
         initial_state_id=state.state_id,
         control_dt=trace.control_dt,
         n_frames=trace.n_steps,

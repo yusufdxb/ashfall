@@ -68,6 +68,7 @@ def test_h0_toy_writes_a_complete_bundle(tmp_path, capsys):
         assert (bundle / name).exists(), name
     verdict = json.loads((bundle / "verdict.json").read_text())
     assert verdict["evidence_kind"] == "mock" and verdict["is_research_result"] is False
+    assert verdict["purpose"] == "unregistered"
     assert verdict["verdict"] in ("PASS", "FAIL", "UNINFORMATIVE")
     metrics = json.loads((bundle / "metrics.json").read_text())
     assert len(metrics["per_pair"]) == 6 and len(metrics["d2_sensitivity"]) == 1
@@ -117,3 +118,20 @@ def test_console_entry_point_parses():
         [sys.executable, "-m", "ashfall.cli", "h0", "--help"], capture_output=True, text=True
     )
     assert proc.returncode == 0 and "--allow-config-block" in proc.stdout
+    assert "--publication" in proc.stdout and "--redact-hardware" in proc.stdout
+
+
+def test_only_preregistered_simulation_is_a_research_result():
+    from ashfall.cli import _is_research_result
+
+    assert _is_research_result("simulation", "preregistered")
+    assert not _is_research_result("simulation", "implementation_smoke")
+    assert not _is_research_result("simulation", "unregistered")
+    assert not _is_research_result("mock", "preregistered")
+
+
+def test_unknown_spec_purpose_is_refused(tmp_path):
+    spec_path = tmp_path / "spec.json"
+    spec_path.write_text(json.dumps({"purpose": "exploratory", "intervention": {"kind": "none"}}))
+    with pytest.raises(SystemExit):
+        main(["h0", "--backend", "toy", "--spec", str(spec_path), "--output", str(tmp_path)])

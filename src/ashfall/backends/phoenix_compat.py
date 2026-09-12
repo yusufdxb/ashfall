@@ -23,7 +23,10 @@ from dataclasses import dataclass, field
 #: Branch and commit of go2-phoenix this Ashfall revision was integrated and
 #: CPU-tested against. Update deliberately, with the interface check below.
 PHOENIX_BRANCH = "feat/causal-viability-replication"
-EXPECTED_PHOENIX_SHA = "5783416bf3d966a148a671d2ce7cb5f649f57c4c"
+#: Advanced from 5783416 on 2026-09-12: the four commits between the two touch the
+#: deploy-ablation script, its evidence and one harvest test; the interface files
+#: checked below are byte-identical across them.
+EXPECTED_PHOENIX_SHA = "d607e2f9a4a9cddff29c5a382c9b3f89af974cca"
 
 #: The kinematic restore contract: the channels ``restore_state`` writes into
 #: the simulator. ``InitialState`` also carries metadata fields

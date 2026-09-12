@@ -17,6 +17,8 @@ from __future__ import annotations
 import math
 from typing import Any
 
+import numpy as np
+
 from ashfall.gates import InterventionReceipt
 from ashfall.ontology import Intervention
 
@@ -33,7 +35,88 @@ SUPPORTED_KINDS = (
 def _to_numpy(value):
     if hasattr(value, "detach"):
         return value.detach().cpu().numpy()
-    return value
+    if hasattr(value, "numpy") and not isinstance(value, np.ndarray):
+        return np.asarray(value.numpy())
+    return np.asarray(value)
+
+
+def _as_torch(value):
+    """A torch view of a torch tensor or a Warp array (shared memory for device arrays)."""
+    if hasattr(value, "detach"):
+        return value
+    import warp as wp
+
+    return wp.to_torch(value)
+
+
+class MaterialWriter:
+    """Per-environment robot-shape material coefficients with readback.
+
+    Mirrors ``phoenix.adaptation.scenario_bridge.FrictionScenarioAdapter`` but
+    decides torch versus Warp from the DATA the view returns rather than from
+    which view attribute exists: on the Isaac Lab build probed here the robot
+    exposes ``root_physx_view`` and its ``get_material_properties`` still
+    returns a ``wp.array``, which the Phoenix adapter's ``.clone()`` cannot
+    handle. Columns are static friction, dynamic friction, restitution.
+    """
+
+    def __init__(self, env):
+        robot = env.scene["robot"]
+        self.view = getattr(robot, "root_physx_view", None) or getattr(robot, "root_view", None)
+        if self.view is None:
+            raise RuntimeError("No supported material physics view")
+        self.original: dict[int, Any] = {}
+
+    def _get(self):
+        data = self.view.get_material_properties()
+        return _as_torch(data).clone()
+
+    def _set(self, values, ids):
+        import torch
+
+        indices = torch.as_tensor(ids, dtype=torch.int32, device="cpu")
+        raw = self.view.get_material_properties()
+        if hasattr(raw, "detach"):
+            self.view.set_material_properties(values, indices)
+        else:
+            import warp as wp
+
+            self.view.set_material_properties(
+                wp.from_torch(values.contiguous(), dtype=wp.float32),
+                wp.from_torch(indices, dtype=wp.int32),
+            )
+
+    def read(self, env_id: int) -> dict[str, float]:
+        values = _to_numpy(self._get()[env_id])
+        return {
+            "static_friction": float(values[:, 0].mean()),
+            "dynamic_friction": float(values[:, 1].mean()),
+        }
+
+    def apply(self, env_id: int, parameters: dict) -> dict[str, float]:
+        import torch
+
+        values = self._get()
+        if env_id not in self.original:
+            self.original[env_id] = values[env_id].clone()
+        for name, column in (("static_friction", 0), ("dynamic_friction", 1)):
+            if name in parameters:
+                values[env_id, :, column] = float(parameters[name])
+        if (values[env_id, :, 1] > values[env_id, :, 0]).any():
+            raise ValueError("dynamic friction must not exceed static friction")
+        self._set(values, [env_id])
+        readback = self._get()[env_id]
+        if not torch.allclose(readback, values[env_id], atol=1e-6, rtol=0):
+            raise RuntimeError("material readback does not match requested coefficients")
+        return self.read(env_id)
+
+    def reset(self, env_ids) -> None:
+        ids = [int(i) for i in env_ids if int(i) in self.original]
+        if ids:
+            values = self._get()
+            for i in ids:
+                values[i] = self.original.pop(i)
+            self._set(values, ids)
 
 
 class PhoenixInterventionAdapter:
@@ -47,11 +130,9 @@ class PhoenixInterventionAdapter:
         self.pending_push: dict[str, Any] | None = None
 
     # ------------------------------------------------------------------ #
-    def _friction_adapter(self):
+    def _friction_adapter(self) -> MaterialWriter:
         if self._friction is None:
-            from phoenix.adaptation.scenario_bridge import FrictionScenarioAdapter
-
-            self._friction = FrictionScenarioAdapter(self.env)
+            self._friction = MaterialWriter(self.env)
         return self._friction
 
     def _robot(self):
@@ -60,12 +141,7 @@ class PhoenixInterventionAdapter:
     # ------------------------------------------------------------------ #
     def control_receipt(self) -> InterventionReceipt:
         """Read the nominal material coefficients back so the control arm is verified untouched."""
-        adapter = self._friction_adapter()
-        values = _to_numpy(adapter._get())[self.env_id]
-        baseline = {
-            "static_friction": float(values[:, 0].mean()),
-            "dynamic_friction": float(values[:, 1].mean()),
-        }
+        baseline = self._friction_adapter().read(self.env_id)
         return InterventionReceipt(
             Intervention.none(), {}, {}, "material_readback", baseline=baseline, env_id=self.env_id
         )
@@ -83,12 +159,7 @@ class PhoenixInterventionAdapter:
             return self.control_receipt()
         if kind == "friction_reduction":
             adapter = self._friction_adapter()
-            adapter.apply(self.env_id, params)
-            values = _to_numpy(adapter._get())[self.env_id]
-            readback = {
-                "static_friction": float(values[:, 0].mean()),
-                "dynamic_friction": float(values[:, 1].mean()),
-            }
+            readback = adapter.apply(self.env_id, params)
             self._restore.append(lambda: adapter.reset([self.env_id]))
             return InterventionReceipt(
                 intervention,
@@ -151,13 +222,13 @@ class PhoenixInterventionAdapter:
         import torch
 
         robot = self._robot()
-        velocity = robot.data.root_vel_w[self.env_id].clone()
+        velocity = _as_torch(robot.data.root_vel_w)[self.env_id].clone()
         before = velocity.clone()
         velocity[0] += push["vx"]
         velocity[1] += push["vy"]
         ids = torch.as_tensor([self.env_id], dtype=torch.long, device=velocity.device)
         robot.write_root_velocity_to_sim(velocity[None], env_ids=ids)
-        after = robot.data.root_vel_w[self.env_id]
+        after = _as_torch(robot.data.root_vel_w)[self.env_id]
         delta = _to_numpy(after - before)
         readback = {
             "push_vx_mps": float(delta[0]),
@@ -191,9 +262,10 @@ class PhoenixInterventionAdapter:
                 continue
             ratios = []
             for actuator in actuators.values():
-                tensor = getattr(actuator, scale, None)
-                if tensor is None:
+                raw = getattr(actuator, scale, None)
+                if raw is None:
                     continue
+                tensor = _as_torch(raw)
                 original = tensor[self.env_id].clone()
                 tensor[self.env_id] = original * params[name]
                 ratio = tensor[self.env_id] / original
@@ -220,7 +292,7 @@ class PhoenixInterventionAdapter:
             )
         import torch
 
-        masses = view.get_masses().clone()
+        masses = _as_torch(view.get_masses()).clone()
         original = masses[self.env_id].clone()
         masses[self.env_id, 0] = original[0] + params["mass_offset_kg"]
         ids = torch.as_tensor([self.env_id], dtype=torch.int32, device="cpu")
@@ -247,4 +319,4 @@ def is_finite_receipt(receipt: InterventionReceipt) -> bool:
     return receipt.readback is not None and all(math.isfinite(v) for v in receipt.readback.values())
 
 
-__all__ = ["PhoenixInterventionAdapter", "SUPPORTED_KINDS", "is_finite_receipt"]
+__all__ = ["MaterialWriter", "PhoenixInterventionAdapter", "SUPPORTED_KINDS", "is_finite_receipt"]

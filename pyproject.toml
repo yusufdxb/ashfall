@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ashfall"
-version = "0.2.0"
-description = "Hardware-counterexample-guided policy repair for legged robots"
+version = "0.3.0"
+description = "Causal failure reproduction and phenotype-conditioned policy repair for quadruped locomotion"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
@@ -65,6 +65,11 @@ files = [
     "src/ashfall/ontology.py",
     "src/ashfall/provenance.py",
     "src/ashfall/backends/phoenix_compat.py",
+    "src/ashfall/counterfactual.py",
+    "src/ashfall/gates.py",
+    "src/ashfall/h0.py",
+    "src/ashfall/datasets.py",
+    "src/ashfall/config_guard.py",
 ]
 
 [tool.black]

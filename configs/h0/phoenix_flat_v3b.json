@@ -1,0 +1,9 @@
+{
+  "_comment": "Phoenix backend for H0 on the v3b flat walking policy. The runner checkpoint is the one whose actor weights equal the exported, parity-gated checkpoints/phoenix-flat/v3b/policy.pt (max weight difference 0). flat-v4 is not used: its checkpoint directory carries a documented negative result. ${PHOENIX_ROOT} is expanded by the CLI.",
+  "checkpoint": "${PHOENIX_ROOT}/checkpoints/phoenix-flat/2026-04-16_21-39-16/model_999.pt",
+  "env_config": "${PHOENIX_ROOT}/configs/env/flat.yaml",
+  "train_config": "${PHOENIX_ROOT}/configs/train/ppo_flat.yaml",
+  "device": "cuda:0",
+  "horizon_s": 10.0,
+  "phoenix_repo": "${PHOENIX_ROOT}"
+}

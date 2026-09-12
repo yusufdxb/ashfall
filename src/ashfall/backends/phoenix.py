@@ -45,7 +45,18 @@ def resolve_scenario_row(capsule, scenario):
 
 
 def _numpy(value):
-    return value.detach().cpu().numpy() if hasattr(value, "detach") else np.asarray(value)
+    """Torch tensor, Warp array or sequence to numpy.
+
+    Isaac Lab builds on the Newton/Warp physics path return ``wp.array`` for
+    articulation data; ``np.asarray`` on one raises, and item indexing is not
+    supported, so the array is materialised through its own ``numpy()`` first.
+    Mirrors ``phoenix.replay.state_adapter.as_numpy``.
+    """
+    if hasattr(value, "detach"):
+        return value.detach().cpu().numpy()
+    if hasattr(value, "numpy") and not isinstance(value, np.ndarray):
+        return np.asarray(value.numpy())
+    return np.asarray(value)
 
 
 def _policy_observations(policy, observations):
@@ -148,6 +159,21 @@ class PhoenixBackend:
         training = OmegaConf.to_container(OmegaConf.load(self.train_config), resolve=True)
         training["run"]["device"] = self.device
         training["run"]["seed"] = scenario_seed
+        # Observation normalisation is decided by the CHECKPOINT, never by the
+        # train YAML. A config that says empirical_normalization: true on a
+        # checkpoint with no normalizer statistics makes rsl_rl build an
+        # untrained EmpiricalNormalization, (x - 0) / (1 + 0.01), so the policy
+        # sees observations shrunk by about 1%. Phoenix's harvest resolves the
+        # flag this way (phoenix.sim2real.export.checkpoint_has_obs_normalizer).
+        # Verified on Isaac Lab for the v3b checkpoint: with the resolved flag the
+        # runtime actor output equals a plain MLP built from the checkpoint
+        # weights exactly. This is a fidelity fix; it is NOT what made the
+        # flat-v4 probe fall, which ran with the flag already resolved.
+        from phoenix.sim2real.export import checkpoint_has_obs_normalizer
+
+        use_normalizer = bool(checkpoint_has_obs_normalizer(self.checkpoint))
+        declared = training.setdefault("runner", {}).get("empirical_normalization")
+        training["runner"]["empirical_normalization"] = use_normalizer
         runner_cfg = build_runner_cfg(training, task)
         runner_cfg = handle_deprecated_rsl_rl_cfg(runner_cfg, metadata.version("rsl-rl-lib"))
         self.runner = OnPolicyRunner(
@@ -173,6 +199,8 @@ class PhoenixBackend:
             "actuator_internal_state_restored": False,
             "action_history_restored": False,
             "command_strategy": "hold_seed_command",
+            "empirical_normalization_resolved_from_checkpoint": use_normalizer,
+            "empirical_normalization_declared_in_train_config": declared,
         }
         self.env.seed(scenario_seed)
         self.env.reset()

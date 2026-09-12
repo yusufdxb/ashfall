@@ -1,13 +1,27 @@
 {
   "_comment": "Implementation smoke, NOT the preregistered study: 4 pairs cannot reach alpha (p floor 0.125) and the verdict is expected to read FAIL or UNINFORMATIVE on p-floor grounds. Its purpose is to exercise the simulator path end to end.",
+  "purpose": "implementation_smoke",
   "intervention": {
     "kind": "friction_reduction",
-    "parameters": [["dynamic_friction", 0.1], ["static_friction", 0.12]],
+    "parameters": [
+      [
+        "dynamic_friction",
+        0.1
+      ],
+      [
+        "static_friction",
+        0.12
+      ]
+    ],
     "intensity": 0.9,
     "intensity_axis": "1-dynamic_friction"
   },
   "intended_phenotype": "slip",
-  "command": [0.6, 0.0, 0.0],
+  "command": [
+    0.6,
+    0.0,
+    0.0
+  ],
   "n_pairs": 4,
   "replicates_per_pair": 3,
   "horizon_steps": 100,

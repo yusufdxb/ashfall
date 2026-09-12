@@ -82,6 +82,10 @@ class TestVerdicts:
     def test_friction_delivers_slip(self, slip_pair):
         verdict = evaluate_delivery(slip_pair, intervention=FRICTION, intended_phenotype="slip")
         assert verdict.status == "DELIVERED"
+        unsupported = verdict.d3_phenotype.detail["unsupported_labels_on_platform"]
+        from ashfall.ontology import PHENOTYPES
+
+        assert all(not PHENOTYPES[name].supported_on("simulation") for name in unsupported)
         assert verdict.d2_departure.detail["directional"]["moves_in_expected_direction"]
 
     def test_wrong_phenotype_and_unsupported(self, backend, state, slip_pair):

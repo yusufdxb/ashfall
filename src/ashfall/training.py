@@ -90,6 +90,12 @@ def run_repair(spec):
         train_cfg = yaml.safe_load(Path(spec['train_config']).read_text())
         train_cfg['run'].update(seed=spec['training_seed'], device=cfg.sim.device,
                                 max_iterations=spec['iterations'])
+        # Normalisation follows the baseline checkpoint, not the YAML; see the
+        # matching comment in backends/phoenix.py.
+        from phoenix.sim2real.export import checkpoint_has_obs_normalizer
+
+        train_cfg.setdefault('runner', {})['empirical_normalization'] = bool(
+            checkpoint_has_obs_normalizer(backend_config['checkpoint']))
         runner_cfg = handle_deprecated_rsl_rl_cfg(build_runner_cfg(train_cfg, task),
                                                   metadata.version('rsl-rl-lib'))
         runner = OnPolicyRunner(env, runner_cfg.to_dict(), log_dir=str(out/'ppo'),

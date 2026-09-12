@@ -50,7 +50,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           repository: yusufdxb/go2-phoenix
-          ref: feat/causal-viability-replication
+          ref: d607e2f9a4a9cddff29c5a382c9b3f89af974cca  # ashfall.backends.phoenix_compat.EXPECTED_PHOENIX_SHA
           path: go2-phoenix
       - uses: actions/setup-python@v6
         with:
