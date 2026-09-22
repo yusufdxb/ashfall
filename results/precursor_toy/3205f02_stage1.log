@@ -1,0 +1,130 @@
+setup W1: onset 2.48 s, band hi 0.114
+setup W2: onset 2.72 s, band hi 0.157
+setup W3: onset 2.58 s, band hi 0.117
+setup W4: onset 2.48 s, band hi 0.140
+setup W5: onset 3.14 s, band hi 0.143
+setup W6: onset 2.32 s, band hi 0.170
+  seed 23 world W1: 24 arms
+  seed 11 world W1: 24 arms
+  seed 11 world W5: 24 arms
+  seed 11 world W4: 24 arms
+  seed 23 world W2: 24 arms
+  seed 11 world W2: 24 arms
+  seed 23 world W3: 24 arms
+  seed 47 world W4: 24 arms
+  seed 11 world W3: 24 arms
+  seed 47 world W2: 24 arms
+  seed 11 world W6: 24 arms
+  seed 23 world W4: 24 arms
+  seed 23 world W6: 24 arms
+  seed 47 world W1: 24 arms
+  seed 47 world W5: 24 arms
+  seed 23 world W5: 24 arms
+  seed 59 world W2: 24 arms
+  seed 47 world W3: 24 arms
+  seed 47 world W6: 24 arms
+  seed 59 world W1: 24 arms
+  seed 59 world W4: 24 arms
+  seed 59 world W6: 24 arms
+  seed 59 world W3: 24 arms
+  seed 71 world W6: 24 arms
+  seed 83 world W4: 24 arms
+  seed 71 world W3: 24 arms
+  seed 59 world W5: 24 arms
+  seed 71 world W2: 24 arms
+  seed 71 world W5: 24 arms
+  seed 83 world W1: 24 arms
+  seed 71 world W1: 24 arms
+  seed 71 world W4: 24 arms
+  seed 97 world W3: 24 arms
+  seed 83 world W2: 24 arms
+  seed 83 world W3: 24 arms
+  seed 83 world W6: 24 arms
+  seed 97 world W1: 24 arms
+  seed 83 world W5: 24 arms
+  seed 97 world W4: 24 arms
+  seed 97 world W2: 24 arms
+  seed 97 world W5: 24 arms
+  seed 101 world W3: 24 arms
+  seed 97 world W6: 24 arms
+  seed 101 world W1: 24 arms
+  seed 101 world W5: 24 arms
+  seed 101 world W6: 24 arms
+  seed 113 world W2: 24 arms
+  seed 101 world W4: 24 arms
+  seed 101 world W2: 24 arms
+  seed 113 world W1: 24 arms
+  seed 113 world W3: 24 arms
+  seed 113 world W4: 24 arms
+  seed 113 world W5: 24 arms
+  seed 127 world W1: 24 arms
+  seed 113 world W6: 24 arms
+  seed 127 world W2: 24 arms
+  seed 127 world W4: 24 arms
+  seed 127 world W5: 24 arms
+  seed 127 world W3: 24 arms
+  seed 127 world W6: 24 arms
+  seed 131 world W1: 24 arms
+  seed 131 world W2: 24 arms
+  seed 131 world W3: 24 arms
+  seed 131 world W6: 24 arms
+  seed 131 world W4: 24 arms
+  seed 131 world W5: 24 arms
+  seed 149 world W3: 24 arms
+  seed 149 world W4: 24 arms
+  seed 149 world W1: 24 arms
+  seed 149 world W2: 24 arms
+  seed 149 world W5: 24 arms
+  seed 149 world W6: 24 arms
+{
+ "curve_class": {
+  "class": "C",
+  "t_star": "d1.5",
+  "reason": "interior optimum resolved"
+ },
+ "P_star": "d1.5",
+ "stage2_licensed": true,
+ "omnibus": {
+  "statistic": 0.001976114118196994,
+  "p": 4.999750012499375e-05,
+  "permutations": 20000
+ },
+ "holm_pre_failure_vs_T0": {
+  "d2": 0.0029296875,
+  "d1.5": 0.0029296875,
+  "d0.75": 0.091796875,
+  "d1": 0.6650390625,
+  "d0.5": 1.0,
+  "d0.25": 1.0
+ },
+ "means_held_out_failure": {
+  "A": 0.479709201388889,
+  "B": 0.350830078125,
+  "ADR": 0.3909324363425926,
+  "C": 0.28762478298611116,
+  "match_T0": 0.38499168113425924,
+  "match_d0.25": 0.37493670428240744,
+  "match_d0.5": 0.3315972222222222,
+  "match_d0.75": 0.3096607349537037,
+  "match_d1": 0.2777687355324074,
+  "match_d1.5": 0.2677408854166667,
+  "match_d2": 0.2678313078703704,
+  "real_T0": 0.3623137297453704,
+  "real_d0.25": 0.36234989872685186,
+  "real_d0.5": 0.3597638165509259,
+  "real_d0.75": 0.33573857060185186,
+  "real_d1": 0.34448242187500006,
+  "real_d1.5": 0.2467357494212963,
+  "real_d2": 0.26825629340277773,
+  "real_entry": 0.32356770833333337,
+  "real_start": 0.34450050636574076,
+  "sim_T0": 0.3623137297453704,
+  "sim_d0.25": 0.36273871527777773,
+  "sim_d0.5": 0.3572681568287037,
+  "sim_d0.75": 0.3603786892361111,
+  "sim_d1": 0.31347656249999994,
+  "sim_d1.5": 0.24905960648148148,
+  "sim_d2": 0.27300347222222227,
+  "sim_entry": 0.35358796296296297
+ }
+}

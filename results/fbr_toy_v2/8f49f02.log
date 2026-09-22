@@ -1,0 +1,85 @@
+{
+ "summary": {
+  "A_no_repair": {
+   "held_out_failure": 0.479709201388889,
+   "deployment_condition": 0.486328125,
+   "nominal_success": 0.97265625,
+   "nominal_tracking_rmse": 0.5125033643302155
+  },
+  "B_broad_dr": {
+   "held_out_failure": 0.350830078125,
+   "deployment_condition": 0.33859592013888884,
+   "nominal_success": 0.96337890625,
+   "nominal_tracking_rmse": 0.5153938811232627
+  },
+  "ADR": {
+   "held_out_failure": 0.3909324363425926,
+   "deployment_condition": 0.37993706597222227,
+   "nominal_success": 0.9607747395833334,
+   "nominal_tracking_rmse": 0.5114949667824364
+  },
+  "C_entry": {
+   "held_out_failure": 0.28762478298611116,
+   "deployment_condition": 0.2626953125,
+   "nominal_success": 0.91845703125,
+   "nominal_tracking_rmse": 0.549614212978503
+  },
+  "D_fbr_entry": {
+   "held_out_failure": 0.32356770833333337,
+   "deployment_condition": 0.2940538194444445,
+   "nominal_success": 0.9071723090277778,
+   "nominal_tracking_rmse": 0.5501804245026357
+  }
+ },
+ "decision": {
+  "iut_rejects": false,
+  "d_minus_adr_pp": -6.736472800925927,
+  "non_degradation_passes": false,
+  "GO_for_GO2_E0": false,
+  "rule": "GO iff D beats both ADR and B (exact sign-flip, alpha 0.05 each), D minus ADR <= -5 pp, and non-degradation passes"
+ },
+ "per_world": {
+  "W1": {
+   "A_no_repair": 0.505859375,
+   "B_broad_dr": 0.3580729166666667,
+   "ADR": 0.4051106770833334,
+   "C_entry": 0.2805447048611111,
+   "D_fbr_entry": 0.3420138888888889
+  },
+  "W2": {
+   "A_no_repair": 0.666015625,
+   "B_broad_dr": 0.5496961805555556,
+   "ADR": 0.594997829861111,
+   "C_entry": 0.4773220486111111,
+   "D_fbr_entry": 0.4436848958333333
+  },
+  "W3": {
+   "A_no_repair": 0.3372395833333333,
+   "B_broad_dr": 0.20638020833333337,
+   "ADR": 0.24240451388888887,
+   "C_entry": 0.16661241319444445,
+   "D_fbr_entry": 0.17594401041666666
+  },
+  "W4": {
+   "A_no_repair": 0.20703125,
+   "B_broad_dr": 0.0905490451388889,
+   "ADR": 0.1193576388888889,
+   "C_entry": 0.05284288194444445,
+   "D_fbr_entry": 0.07335069444444446
+  },
+  "W5": {
+   "A_no_repair": 0.7298177083333334,
+   "B_broad_dr": 0.6161566840277778,
+   "ADR": 0.6570638020833334,
+   "C_entry": 0.5551215277777778,
+   "D_fbr_entry": 0.6500108506944445
+  },
+  "W6": {
+   "A_no_repair": 0.43229166666666674,
+   "B_broad_dr": 0.28412543402777773,
+   "ADR": 0.32666015625000006,
+   "C_entry": 0.1933051215277778,
+   "D_fbr_entry": 0.2564019097222222
+  }
+ }
+}

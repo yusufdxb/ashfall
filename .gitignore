@@ -18,6 +18,10 @@ results/*/**
 !results/**/metrics_*.json
 !results/REPORT.md
 !results/*.png
+# The FBR toy study is small and CPU-only; its full evidence is committed.
+!results/fbr_toy/**
+!results/fbr_toy_v2/**
+!results/precursor_toy/**
 
 # Trajectory data. Manifests (dataset.json, *.meta.json) are tracked; the
 # parquet bytes are not. Fixtures and scientific data are separate trees and

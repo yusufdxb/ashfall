@@ -8,7 +8,7 @@ backend cannot write returns an unsupported receipt instead of a silent no-op.
 The adapters are written against the Isaac Lab articulation and event
 interfaces Phoenix already relies on, and are exercised on the CPU against
 fakes in ``tests/test_phoenix_backend.py``. Their behaviour on the real
-simulator is UNVERIFIED until the H0 smoke in ``docs/runbooks/h0_isaac.md`` has
+simulator is UNVERIFIED until the H0 smoke in ``docs/legacy/runbooks/h0_isaac.md`` has
 been run and its bundle committed.
 """
 

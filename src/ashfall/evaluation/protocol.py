@@ -2,7 +2,8 @@
 
 This is the v2 frontier-repair acceptance protocol (arms ``A_baseline`` to
 ``E_frontier_repair``) behind ``ashfall verdict``. The Phase-II comparison is
-registered in ``docs/phase2/PREREGISTRATION.md`` and implemented by
+registered in ``docs/legacy/phase2/PREREGISTRATION.md`` (archived, superseded
+by ``docs/research/PREREGISTRATION.md``) and implemented by
 :mod:`ashfall.protocol.arms` (arms A to D) with :mod:`ashfall.selection`. The
 two arm vocabularies are distinct and must not be mixed in one analysis.
 

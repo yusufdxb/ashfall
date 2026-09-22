@@ -1,0 +1,228 @@
+  K3_braking#0: FCSI identified aniso (644 s)
+  K1_kinetic#5: FCSI identified kinetic_ratio (648 s)
+  K1_kinetic#2: FCSI unexplained None (648 s)
+  K3_braking#1: FCSI unexplained None (654 s)
+  K1_kinetic#4: FCSI identified kinetic_ratio (658 s)
+  K1_kinetic#0: FCSI identified kinetic_ratio (659 s)
+  K3_braking#2: FCSI identified aniso (659 s)
+  K1_kinetic#3: FCSI unexplained None (663 s)
+  U1_strip#2: FCSI unexplained None (664 s)
+  K2_latency#4: FCSI unexplained None (665 s)
+  K3_braking#3: FCSI unexplained None (668 s)
+  K3_braking#4: FCSI unexplained None (674 s)
+  K3_braking#5: FCSI identified aniso (675 s)
+  K2_latency#1: FCSI unexplained None (676 s)
+  K2_latency#0: FCSI unexplained None (678 s)
+  K1_kinetic#1: FCSI unexplained None (679 s)
+  K2_latency#5: FCSI identified action_delay (682 s)
+  K2_latency#3: FCSI unexplained None (683 s)
+  U1_strip#0: FCSI unexplained None (684 s)
+  U1_strip#3: FCSI unexplained None (684 s)
+  U1_strip#1: FCSI unexplained None (687 s)
+  K2_latency#2: FCSI unexplained None (691 s)
+  N_harmless#2: FCSI no_failure None (362 s)
+  N_harmless#1: FCSI no_failure None (366 s)
+  N_harmless#0: FCSI no_failure None (367 s)
+  U2_dropout#2: FCSI unexplained None (405 s)
+  U2_dropout#3: FCSI unexplained None (401 s)
+  U2_dropout#1: FCSI unexplained None (408 s)
+  U2_dropout#0: FCSI unexplained None (412 s)
+{
+ "gates": {
+  "G2a_identification": false,
+  "G2b_heldout_prediction": false,
+  "G2c_reproduction": false,
+  "G2d_nominal_fidelity": true,
+  "G2e_abstention": true,
+  "G2f_negative_control": true
+ },
+ "GO": false,
+ "identification_correct": {
+  "FCSI": 7,
+  "FCSI_no_event": 18,
+  "G0_whole_trajectory": 3,
+  "G0b_multiple_shooting": 14,
+  "G1_dropo_like": 7
+ },
+ "known_instances": 18,
+ "mean_heldout_mae": {
+  "FCSI": 0.123046875,
+  "FCSI_no_event": 0.021375868055555552,
+  "G0_whole_trajectory": 0.1037868923611111,
+  "G0b_multiple_shooting": 0.0508716724537037,
+  "G1_dropo_like": 0.09516059027777776
+ },
+ "best_global": "G0b_multiple_shooting",
+ "fcsi_minus_global_mae": {
+  "G0_whole_trajectory": {
+   "metric": "heldout_mae",
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+   ],
+   "deltas": [
+    -0.11067708333333334,
+    -0.04166666666666666,
+    0.18880208333333331,
+    0.07486979166666666,
+    -0.15462239583333334,
+    0.029296874999999993,
+    0.04654947916666667,
+    0.037109375,
+    0.06022135416666666,
+    -0.0126953125,
+    -0.001953125,
+    -0.04557291666666666,
+    -0.08723958333333333,
+    0.13151041666666669,
+    -0.013997395833333334,
+    0.111328125,
+    0.154296875,
+    -0.018880208333333332
+   ],
+   "mean": 0.019259982638888888,
+   "sd": 0.09216310231710158,
+   "sem": 0.021723051541204047,
+   "ci_low": -0.026571649900816494,
+   "ci_high": 0.06509161517859427,
+   "confidence": 0.95,
+   "p_exact_two_sided": 0.38580322265625,
+   "p_floor": 7.62939453125e-06,
+   "sign_carrying_seeds": 18,
+   "inference_unit": "training_seed",
+   "interval_method": "student_t_paired"
+  },
+  "G0b_multiple_shooting": {
+   "metric": "heldout_mae",
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+   ],
+   "deltas": [
+    -0.03417968750000001,
+    0.21354166666666669,
+    0.06803385416666666,
+    0.19921875,
+    -0.09830729166666669,
+    0.04329427083333333,
+    0.04264322916666667,
+    0.0771484375,
+    0.05598958333333333,
+    0.015950520833333336,
+    0.06510416666666667,
+    0.060546875,
+    -0.008463541666666668,
+    0.19954427083333334,
+    -0.02734375,
+    0.23665364583333331,
+    0.22493489583333331,
+    -0.03515625
+   ],
+   "mean": 0.0721752025462963,
+   "sd": 0.10186350474917964,
+   "sem": 0.024009458321191005,
+   "ci_low": 0.021519673364911028,
+   "ci_high": 0.12283073172768155,
+   "confidence": 0.95,
+   "p_exact_two_sided": 0.008209228515625,
+   "p_floor": 7.62939453125e-06,
+   "sign_carrying_seeds": 18,
+   "inference_unit": "training_seed",
+   "interval_method": "student_t_paired"
+  },
+  "G1_dropo_like": {
+   "metric": "heldout_mae",
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+   ],
+   "deltas": [
+    -0.038736979166666664,
+    0.11946614583333334,
+    0.18619791666666666,
+    0.05045572916666666,
+    -0.142578125,
+    -0.21712239583333337,
+    0.09342447916666667,
+    0.07096354166666666,
+    0.05403645833333333,
+    -0.13020833333333334,
+    0.07194010416666667,
+    0.036458333333333336,
+    -0.12272135416666667,
+    0.22298177083333334,
+    -0.027994791666666664,
+    0.21256510416666666,
+    0.08040364583333331,
+    -0.017578125
+   ],
+   "mean": 0.027886284722222217,
+   "sd": 0.12464695359414428,
+   "sem": 0.029379568713554776,
+   "ci_low": -0.03409918701965599,
+   "ci_high": 0.08987175646410042,
+   "confidence": 0.95,
+   "p_exact_two_sided": 0.35225677490234375,
+   "p_floor": 7.62939453125e-06,
+   "sign_carrying_seeds": 18,
+   "inference_unit": "training_seed",
+   "interval_method": "student_t_paired"
+  }
+ },
+ "fcsi_reproduced": 7,
+ "nominal_d2": {
+  "FCSI": 15.901497092190649,
+  "nominal": 20.751110793279608
+ },
+ "unknown_abstained": 8,
+ "unknown_instances": 8,
+ "negative_no_patch": 3
+}

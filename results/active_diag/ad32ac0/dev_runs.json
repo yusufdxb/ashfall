@@ -1,0 +1,6560 @@
+[
+ {
+  "id": "KA_patch_friction#0",
+  "world": "KA_patch_friction",
+  "kind": "known",
+  "truth": "mu_scale",
+  "target_condition": {
+   "mu_patch": 0.2393863782709551,
+   "patch_start": 1.0544837771865345,
+   "v_cmd": 1.0790504324130394
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.5,
+    "entropy0": 1.583706130253991e-107,
+    "entropy": 1.583706130253991e-107,
+    "history": [
+     {
+      "weights": {
+       "none": 3.812823263684093e-271,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 6.298443258361232e-110,
+       "aniso": 1.9304651404551403e-125,
+       "force_scale": 2.605515248985843e-242,
+       "action_delay": 2.9329409720647923e-272,
+       "force_max": 2.9329409720647923e-272,
+       "pole_mass": 2.8521110852423023e-247,
+       "cart_damping": 9.19489999108324e-272,
+       "obs_delay": 2.9329409720647923e-272,
+       "theta_bias": 2.9329409720647923e-272
+      },
+      "entropy": 1.583706130253991e-107,
+      "top": "mu_scale"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.188930675614796,
+     "per_log": [
+      1.6960018704555573,
+      1.7978169113307447,
+      2.0488644092037367,
+      1.8417556301834648,
+      2.90593252793595,
+      2.9709916241199092,
+      3.188930675614796,
+      1.920491920517302,
+      2.4640599410560986
+     ]
+    },
+    "budget": {
+     "steps": 199660,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.5,
+    "entropy0": 1.583706130253991e-107,
+    "entropy": 1.583706130253991e-107,
+    "history": [
+     {
+      "weights": {
+       "none": 3.812823263684093e-271,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 6.298443258361232e-110,
+       "aniso": 1.9304651404551403e-125,
+       "force_scale": 2.605515248985843e-242,
+       "action_delay": 2.9329409720647923e-272,
+       "force_max": 2.9329409720647923e-272,
+       "pole_mass": 2.8521110852423023e-247,
+       "cart_damping": 9.19489999108324e-272,
+       "obs_delay": 2.9329409720647923e-272,
+       "theta_bias": 2.9329409720647923e-272
+      },
+      "entropy": 1.583706130253991e-107,
+      "top": "mu_scale"
+     },
+     {
+      "weights": {
+       "none": 3.812823263684093e-271,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 6.298443258361232e-110,
+       "aniso": 1.9304651404551403e-125,
+       "force_scale": 1.2387020198425205e-248,
+       "action_delay": 2.9329409720647923e-272,
+       "force_max": 2.9329409720647923e-272,
+       "pole_mass": 1.6565357553427853e-252,
+       "cart_damping": 9.627923308932231e-272,
+       "obs_delay": 2.9329409720647923e-272,
+       "theta_bias": 2.9329409720647923e-272
+      },
+      "entropy": 1.583706130253991e-107,
+      "top": "mu_scale",
+      "entropy_drop": 0.0
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.18750024994876635,
+      "max_speed": 0.9664723069065311,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.188930675614796,
+     "per_log": [
+      1.6960018704555573,
+      1.7978169113307447,
+      2.0488644092037367,
+      1.8417556301834648,
+      2.90593252793595,
+      2.9709916241199092,
+      3.188930675614796,
+      1.920491920517302,
+      2.4640599410560986,
+      1.894305110040258
+     ]
+    },
+    "budget": {
+     "steps": 438766,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.5,
+    "entropy0": 1.583706130253991e-107,
+    "entropy": 1.583706130253991e-107,
+    "history": [
+     {
+      "weights": {
+       "none": 3.812823263684093e-271,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 6.298443258361232e-110,
+       "aniso": 1.9304651404551403e-125,
+       "force_scale": 2.605515248985843e-242,
+       "action_delay": 2.9329409720647923e-272,
+       "force_max": 2.9329409720647923e-272,
+       "pole_mass": 2.8521110852423023e-247,
+       "cart_damping": 9.19489999108324e-272,
+       "obs_delay": 2.9329409720647923e-272,
+       "theta_bias": 2.9329409720647923e-272
+      },
+      "entropy": 1.583706130253991e-107,
+      "top": "mu_scale"
+     },
+     {
+      "weights": {
+       "none": 3.812823263684093e-271,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 6.298443258361232e-110,
+       "aniso": 1.9304651404551403e-125,
+       "force_scale": 1.2387020198425205e-248,
+       "action_delay": 2.9329409720647923e-272,
+       "force_max": 2.9329409720647923e-272,
+       "pole_mass": 1.6565357553427853e-252,
+       "cart_damping": 9.627923308932231e-272,
+       "obs_delay": 2.9329409720647923e-272,
+       "theta_bias": 2.9329409720647923e-272
+      },
+      "entropy": 1.583706130253991e-107,
+      "top": "mu_scale",
+      "entropy_drop": 0.0
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "none",
+       "amplitude": 0.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.18750024994876635,
+      "max_speed": 0.9664723069065311,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.188930675614796,
+     "per_log": [
+      1.6960018704555573,
+      1.7978169113307447,
+      2.0488644092037367,
+      1.8417556301834648,
+      2.90593252793595,
+      2.9709916241199092,
+      3.188930675614796,
+      1.920491920517302,
+      2.4640599410560986,
+      1.894305110040258
+     ]
+    },
+    "budget": {
+     "steps": 1782766,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.5,
+    "entropy0": 1.583706130253991e-107,
+    "entropy": 1.583706130253991e-107,
+    "history": [
+     {
+      "weights": {
+       "none": 3.812823263684093e-271,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 6.298443258361232e-110,
+       "aniso": 1.9304651404551403e-125,
+       "force_scale": 2.605515248985843e-242,
+       "action_delay": 2.9329409720647923e-272,
+       "force_max": 2.9329409720647923e-272,
+       "pole_mass": 2.8521110852423023e-247,
+       "cart_damping": 9.19489999108324e-272,
+       "obs_delay": 2.9329409720647923e-272,
+       "theta_bias": 2.9329409720647923e-272
+      },
+      "entropy": 1.583706130253991e-107,
+      "top": "mu_scale"
+     },
+     {
+      "weights": {
+       "none": 3.812823263684093e-271,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 6.298443258361232e-110,
+       "aniso": 1.9304651404551403e-125,
+       "force_scale": 1.2387020198425205e-248,
+       "action_delay": 2.9329409720647923e-272,
+       "force_max": 2.9329409720647923e-272,
+       "pole_mass": 1.6565357553427853e-252,
+       "cart_damping": 9.627923308932231e-272,
+       "obs_delay": 2.9329409720647923e-272,
+       "theta_bias": 2.9329409720647923e-272
+      },
+      "entropy": 1.583706130253991e-107,
+      "top": "mu_scale",
+      "entropy_drop": 0.0
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.4,
+       "speed": 0.6,
+       "kind": "none",
+       "amplitude": 0.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.4,v=0.6)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.18750024994876635,
+      "max_speed": 0.9664723069065311,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [
+     0.11690677732740792
+    ],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.188930675614796,
+     "per_log": [
+      1.6960018704555573,
+      1.7978169113307447,
+      2.0488644092037367,
+      1.8417556301834648,
+      2.90593252793595,
+      2.9709916241199092,
+      3.188930675614796,
+      1.920491920517302,
+      2.4640599410560986,
+      1.894305110040258
+     ]
+    },
+    "budget": {
+     "steps": 1809806,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 20.590444803237915
+ },
+ {
+  "id": "KA_patch_friction#1",
+  "world": "KA_patch_friction",
+  "kind": "known",
+  "truth": "mu_scale",
+  "target_condition": {
+   "mu_patch": 0.1917349736830872,
+   "patch_start": 0.9318535555130272,
+   "v_cmd": 1.190418652111721
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.5,
+    "entropy0": 1.9697003102707265e-71,
+    "entropy": 1.9697003102707265e-71,
+    "history": [
+     {
+      "weights": {
+       "none": 1.0644961408580445e-140,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 1.1729349504920667e-73,
+       "aniso": 4.85721782478791e-109,
+       "force_scale": 1.104775893888648e-113,
+       "action_delay": 8.188431852754485e-142,
+       "force_max": 2.270477384483697e-141,
+       "pole_mass": 1.5414175352104412e-115,
+       "cart_damping": 2.4375028067595415e-141,
+       "obs_delay": 8.188431852754485e-142,
+       "theta_bias": 8.188431852754485e-142
+      },
+      "entropy": 1.9697003102707265e-71,
+      "top": "mu_scale"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 4.070090071658768,
+     "per_log": [
+      2.0156658486074077,
+      2.466320453814262,
+      4.070090071658768,
+      2.2429574141375537,
+      3.4665994383218424,
+      3.575255121039503,
+      1.4579540417282744,
+      3.0508149301022196,
+      3.336879007116179
+     ]
+    },
+    "budget": {
+     "steps": 193228,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.5,
+    "entropy0": 1.9697003102707265e-71,
+    "entropy": 8.095284704334137e-75,
+    "history": [
+     {
+      "weights": {
+       "none": 1.0644961408580445e-140,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 1.1729349504920667e-73,
+       "aniso": 4.85721782478791e-109,
+       "force_scale": 1.104775893888648e-113,
+       "action_delay": 8.188431852754485e-142,
+       "force_max": 2.270477384483697e-141,
+       "pole_mass": 1.5414175352104412e-115,
+       "cart_damping": 2.4375028067595415e-141,
+       "obs_delay": 8.188431852754485e-142,
+       "theta_bias": 8.188431852754485e-142
+      },
+      "entropy": 1.9697003102707265e-71,
+      "top": "mu_scale"
+     },
+     {
+      "weights": {
+       "none": 2.120762966750826e-147,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 4.605565464227782e-77,
+       "aniso": 4.85721782478791e-109,
+       "force_scale": 7.292524519332422e-129,
+       "action_delay": 1.6313561282699246e-148,
+       "force_max": 4.523402358125622e-148,
+       "pole_mass": 2.109900011096167e-129,
+       "cart_damping": 4.8650291202841226e-148,
+       "obs_delay": 1.6313561282699246e-148,
+       "theta_bias": 1.6313561282699246e-148
+      },
+      "entropy": 8.095284704334137e-75,
+      "top": "mu_scale",
+      "entropy_drop": 1.968890781800293e-71
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.16779753573884904,
+      "max_speed": 0.9815389028061285,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 4.070090071658768,
+     "per_log": [
+      2.0156658486074077,
+      2.466320453814262,
+      4.070090071658768,
+      2.2429574141375537,
+      3.4665994383218424,
+      3.575255121039503,
+      1.4579540417282744,
+      3.0508149301022196,
+      3.336879007116179,
+      3.623602086426221
+     ]
+    },
+    "budget": {
+     "steps": 425902,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.5,
+    "entropy0": 1.9697003102707265e-71,
+    "entropy": 5.802100467155199e-72,
+    "history": [
+     {
+      "weights": {
+       "none": 1.0644961408580445e-140,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 1.1729349504920667e-73,
+       "aniso": 4.85721782478791e-109,
+       "force_scale": 1.104775893888648e-113,
+       "action_delay": 8.188431852754485e-142,
+       "force_max": 2.270477384483697e-141,
+       "pole_mass": 1.5414175352104412e-115,
+       "cart_damping": 2.4375028067595415e-141,
+       "obs_delay": 8.188431852754485e-142,
+       "theta_bias": 8.188431852754485e-142
+      },
+      "entropy": 1.9697003102707265e-71,
+      "top": "mu_scale"
+     },
+     {
+      "weights": {
+       "none": 2.1024324846277147e-147,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 3.4299737159521004e-74,
+       "aniso": 4.85721782478791e-109,
+       "force_scale": 7.229492727269977e-129,
+       "action_delay": 1.6172557574059925e-148,
+       "force_max": 4.4843050392072825e-148,
+       "pole_mass": 2.091663421226718e-129,
+       "cart_damping": 4.82297900402129e-148,
+       "obs_delay": 1.6172557574059925e-148,
+       "theta_bias": 1.6172557574059925e-148
+      },
+      "entropy": 5.802100467155199e-72,
+      "top": "mu_scale",
+      "entropy_drop": 1.3894902635552067e-71
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.4,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.4,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.16779753573884904,
+      "max_speed": 0.9815389028061285,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 4.070090071658768,
+     "per_log": [
+      2.0156658486074077,
+      2.466320453814262,
+      4.070090071658768,
+      2.2429574141375537,
+      3.4665994383218424,
+      3.575255121039503,
+      1.4579540417282744,
+      3.0508149301022196,
+      3.336879007116179,
+      3.623602086426221
+     ]
+    },
+    "budget": {
+     "steps": 1769902,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.5,
+    "entropy0": 1.9697003102707265e-71,
+    "entropy": 9.853924524709443e-73,
+    "history": [
+     {
+      "weights": {
+       "none": 1.0644961408580445e-140,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 1.1729349504920667e-73,
+       "aniso": 4.85721782478791e-109,
+       "force_scale": 1.104775893888648e-113,
+       "action_delay": 8.188431852754485e-142,
+       "force_max": 2.270477384483697e-141,
+       "pole_mass": 1.5414175352104412e-115,
+       "cart_damping": 2.4375028067595415e-141,
+       "obs_delay": 8.188431852754485e-142,
+       "theta_bias": 8.188431852754485e-142
+      },
+      "entropy": 1.9697003102707265e-71,
+      "top": "mu_scale"
+     },
+     {
+      "weights": {
+       "none": 5.2315477021065846e-142,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 5.764478525982342e-75,
+       "aniso": 4.85721782478791e-109,
+       "force_scale": 1.8039198569896473e-123,
+       "action_delay": 4.0242674631590563e-143,
+       "force_max": 1.1158434763037806e-142,
+       "pole_mass": 5.155959479580255e-124,
+       "cart_damping": 1.1996218424513686e-142,
+       "obs_delay": 4.0242674631590563e-143,
+       "theta_bias": 4.0242674631590563e-143
+      },
+      "entropy": 9.853924524709443e-73,
+      "top": "mu_scale",
+      "entropy_drop": 1.8711610650236322e-71
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "none",
+       "amplitude": 0.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.16779753573884904,
+      "max_speed": 0.9815389028061285,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [
+     0.11690679900849059
+    ],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 4.070090071658768,
+     "per_log": [
+      2.0156658486074077,
+      2.466320453814262,
+      4.070090071658768,
+      2.2429574141375537,
+      3.4665994383218424,
+      3.575255121039503,
+      1.4579540417282744,
+      3.0508149301022196,
+      3.336879007116179,
+      3.623602086426221
+     ]
+    },
+    "budget": {
+     "steps": 1796942,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 20.140645742416382
+ },
+ {
+  "id": "KA_patch_friction#2",
+  "world": "KA_patch_friction",
+  "kind": "known",
+  "truth": "mu_scale",
+  "target_condition": {
+   "mu_patch": 0.19925751895957583,
+   "patch_start": 0.9785906699533573,
+   "v_cmd": 1.1560972147240776
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.5,
+    "entropy0": 6.433970588022865e-153,
+    "entropy": 6.433970588022865e-153,
+    "history": [
+     {
+      "weights": {
+       "none": 4.5597e-320,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 1.8014856481840527e-155,
+       "aniso": 4.1557151073853745e-158,
+       "force_scale": 1.476575682623862e-296,
+       "action_delay": 3.51e-321,
+       "force_max": 3.51e-321,
+       "pole_mass": 2.0770504123076165e-301,
+       "cart_damping": 1.1675e-320,
+       "obs_delay": 3.51e-321,
+       "theta_bias": 3.51e-321
+      },
+      "entropy": 6.433970588022865e-153,
+      "top": "mu_scale"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.94726575706175,
+     "per_log": [
+      3.94726575706175,
+      3.301086168625361,
+      3.1804912649940373,
+      1.995050151480151,
+      2.2429574141375537,
+      1.5544157617898,
+      2.1878051588811513,
+      2.2429574141375537,
+      1.731165624048914
+     ]
+    },
+    "budget": {
+     "steps": 197248,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.5,
+    "entropy0": 6.433970588022865e-153,
+    "entropy": 5.91740467364409e-167,
+    "history": [
+     {
+      "weights": {
+       "none": 4.5597e-320,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 1.8014856481840527e-155,
+       "aniso": 4.1557151073853745e-158,
+       "force_scale": 1.476575682623862e-296,
+       "action_delay": 3.51e-321,
+       "force_max": 3.51e-321,
+       "pole_mass": 2.0770504123076165e-301,
+       "cart_damping": 1.1675e-320,
+       "obs_delay": 3.51e-321,
+       "theta_bias": 3.51e-321
+      },
+      "entropy": 6.433970588022865e-153,
+      "top": "mu_scale"
+     },
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 3.48129423006069e-173,
+       "aniso": 1.5219359615943355e-169,
+       "force_scale": 2.9608905465e-314,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 3.09344e-319,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 5.91740467364409e-167,
+      "top": "mu_scale",
+      "entropy_drop": 6.433970588022805e-153
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.14722263656662157,
+      "max_speed": 0.889699332183975,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 5.308985282727717,
+     "per_log": [
+      3.94726575706175,
+      3.301086168625361,
+      3.1804912649940373,
+      1.995050151480151,
+      2.2429574141375537,
+      1.5544157617898,
+      2.1878051588811513,
+      2.2429574141375537,
+      1.731165624048914,
+      5.308985282727717
+     ]
+    },
+    "budget": {
+     "steps": 433942,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.5,
+    "entropy0": 6.433970588022865e-153,
+    "entropy": 1.270165503636749e-171,
+    "history": [
+     {
+      "weights": {
+       "none": 4.5597e-320,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 1.8014856481840527e-155,
+       "aniso": 4.1557151073853745e-158,
+       "force_scale": 1.476575682623862e-296,
+       "action_delay": 3.51e-321,
+       "force_max": 3.51e-321,
+       "pole_mass": 2.0770504123076165e-301,
+       "cart_damping": 1.1675e-320,
+       "obs_delay": 3.51e-321,
+       "theta_bias": 3.51e-321
+      },
+      "entropy": 6.433970588022865e-153,
+      "top": "mu_scale"
+     },
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 1.8344422851133245e-178,
+       "aniso": 3.1792545089705727e-174,
+       "force_scale": 6e-323,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 1.270165503636749e-171,
+      "top": "mu_scale",
+      "entropy_drop": 6.433970588022865e-153
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.4,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.4,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.14664104260772037,
+      "max_speed": 0.889699332183975,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 5.308985282727717,
+     "per_log": [
+      3.94726575706175,
+      3.301086168625361,
+      3.1804912649940373,
+      1.995050151480151,
+      2.2429574141375537,
+      1.5544157617898,
+      2.1878051588811513,
+      2.2429574141375537,
+      1.731165624048914,
+      5.308985282727717
+     ]
+    },
+    "budget": {
+     "steps": 1777942,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.5,
+    "entropy0": 6.433970588022865e-153,
+    "entropy": 5.836704221411297e-160,
+    "history": [
+     {
+      "weights": {
+       "none": 4.5597e-320,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 1.8014856481840527e-155,
+       "aniso": 4.1557151073853745e-158,
+       "force_scale": 1.476575682623862e-296,
+       "action_delay": 3.51e-321,
+       "force_max": 3.51e-321,
+       "pole_mass": 2.0770504123076165e-301,
+       "cart_damping": 1.1675e-320,
+       "obs_delay": 3.51e-321,
+       "theta_bias": 3.51e-321
+      },
+      "entropy": 6.433970588022865e-153,
+      "top": "mu_scale"
+     },
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 1.5353681503699366e-162,
+       "aniso": 3.0830386711213165e-164,
+       "force_scale": 1.1726445356257402e-303,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 1.349832755135751e-308,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 5.836704221411297e-160,
+      "top": "mu_scale",
+      "entropy_drop": 6.433970004352443e-153
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "none",
+       "amplitude": 0.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.13629983380273764,
+      "max_speed": 0.889699332183975,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [
+     0.11690674805904955
+    ],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 5.308985282727717,
+     "per_log": [
+      3.94726575706175,
+      3.301086168625361,
+      3.1804912649940373,
+      1.995050151480151,
+      2.2429574141375537,
+      1.5544157617898,
+      2.1878051588811513,
+      2.2429574141375537,
+      1.731165624048914,
+      5.308985282727717
+     ]
+    },
+    "budget": {
+     "steps": 1804982,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 19.855066299438477
+ },
+ {
+  "id": "KB_sliding_friction#0",
+  "world": "KB_sliding_friction",
+  "kind": "known",
+  "truth": "kinetic_ratio",
+  "target_condition": {
+   "mu_patch": 0.2128135964822919,
+   "patch_start": 0.8632866404958246,
+   "v_cmd": 1.042709917333761
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "kinetic_ratio",
+    "top_weight": 1.0,
+    "map_value": 0.41666666666666663,
+    "entropy0": 3.1784402069063476e-62,
+    "entropy": 3.1784402069063476e-62,
+    "history": [
+     {
+      "weights": {
+       "none": 2.892263657340355e-96,
+       "mu_scale": 2.1682290193076784e-64,
+       "kinetic_ratio": 1.0,
+       "aniso": 2.3355282304894346e-75,
+       "force_scale": 1.410066745306884e-78,
+       "action_delay": 2.2248181979541995e-97,
+       "force_max": 1.2381755402358241e-96,
+       "pole_mass": 2.966559367941209e-78,
+       "cart_damping": 5.338721645098234e-97,
+       "obs_delay": 2.2248181979541995e-97,
+       "theta_bias": 2.2248181979541995e-97
+      },
+      "entropy": 3.1784402069063476e-62,
+      "top": "kinetic_ratio"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 5.267906299023121,
+     "per_log": [
+      2.0820590325466517,
+      5.047597495519858,
+      1.6308926678713633,
+      2.099221228048864,
+      4.052932531466988,
+      1.8590401468116213,
+      5.267906299023121,
+      3.2415317238078796,
+      1.347172871145202
+     ]
+    },
+    "budget": {
+     "steps": 195640,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "kinetic_ratio",
+    "top_weight": 1.0,
+    "map_value": 0.41666666666666663,
+    "entropy0": 3.1784402069063476e-62,
+    "entropy": 1.8667309450292685e-73,
+    "history": [
+     {
+      "weights": {
+       "none": 2.892263657340355e-96,
+       "mu_scale": 2.1682290193076784e-64,
+       "kinetic_ratio": 1.0,
+       "aniso": 2.3355282304894346e-75,
+       "force_scale": 1.410066745306884e-78,
+       "action_delay": 2.2248181979541995e-97,
+       "force_max": 1.2381755402358241e-96,
+       "pole_mass": 2.966559367941209e-78,
+       "cart_damping": 5.338721645098234e-97,
+       "obs_delay": 2.2248181979541995e-97,
+       "theta_bias": 2.2248181979541995e-97
+      },
+      "entropy": 3.1784402069063476e-62,
+      "top": "kinetic_ratio"
+     },
+     {
+      "weights": {
+       "none": 2.892263657340355e-96,
+       "mu_scale": 1.08107627732743e-75,
+       "kinetic_ratio": 1.0,
+       "aniso": 4.802289305345423e-85,
+       "force_scale": 8.150559863683481e-80,
+       "action_delay": 2.2248181979541995e-97,
+       "force_max": 1.2381755402355426e-96,
+       "pole_mass": 2.612414343914853e-79,
+       "cart_damping": 5.73176564635762e-97,
+       "obs_delay": 2.2248181979541995e-97,
+       "theta_bias": 2.2248181979541995e-97
+      },
+      "entropy": 1.8667309450292685e-73,
+      "top": "kinetic_ratio",
+      "entropy_drop": 3.17844020688768e-62
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.1496214890931739,
+      "max_speed": 1.471171182073463,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 5.267906299023121,
+     "per_log": [
+      2.0820590325466517,
+      5.047597495519858,
+      1.6308926678713633,
+      2.099221228048864,
+      4.052932531466988,
+      1.8590401468116213,
+      5.267906299023121,
+      3.2415317238078796,
+      1.347172871145202,
+      1.869917273914066
+     ]
+    },
+    "budget": {
+     "steps": 430726,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "kinetic_ratio",
+    "top_weight": 1.0,
+    "map_value": 0.41666666666666663,
+    "entropy0": 3.1784402069063476e-62,
+    "entropy": 7.952615164458931e-75,
+    "history": [
+     {
+      "weights": {
+       "none": 2.892263657340355e-96,
+       "mu_scale": 2.1682290193076784e-64,
+       "kinetic_ratio": 1.0,
+       "aniso": 2.3355282304894346e-75,
+       "force_scale": 1.410066745306884e-78,
+       "action_delay": 2.2248181979541995e-97,
+       "force_max": 1.2381755402358241e-96,
+       "pole_mass": 2.966559367941209e-78,
+       "cart_damping": 5.338721645098234e-97,
+       "obs_delay": 2.2248181979541995e-97,
+       "theta_bias": 2.2248181979541995e-97
+      },
+      "entropy": 3.1784402069063476e-62,
+      "top": "kinetic_ratio"
+     },
+     {
+      "weights": {
+       "none": 1.0114354054544722e-95,
+       "mu_scale": 4.523863785676281e-77,
+       "kinetic_ratio": 1.0,
+       "aniso": 5.247584701233276e-88,
+       "force_scale": 1.3544875254806433e-82,
+       "action_delay": 7.780272349650066e-97,
+       "force_max": 4.3299461180989215e-96,
+       "pole_mass": 5.542516639382343e-82,
+       "cart_damping": 2.0231556281305533e-96,
+       "obs_delay": 7.780272349650066e-97,
+       "theta_bias": 7.780272349650066e-97
+      },
+      "entropy": 7.952615164458931e-75,
+      "top": "kinetic_ratio",
+      "entropy_drop": 3.178440206905552e-62
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.4,
+       "speed": 0.6,
+       "kind": "none",
+       "amplitude": 0.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.4,v=0.6)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.15046451210396963,
+      "max_speed": 1.471171182073463,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 5.267906299023121,
+     "per_log": [
+      2.0820590325466517,
+      5.047597495519858,
+      1.6308926678713633,
+      2.099221228048864,
+      4.052932531466988,
+      1.8590401468116213,
+      5.267906299023121,
+      3.2415317238078796,
+      1.347172871145202,
+      2.2429574141375537
+     ]
+    },
+    "budget": {
+     "steps": 1774726,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "kinetic_ratio",
+    "top_weight": 1.0,
+    "map_value": 0.41666666666666663,
+    "entropy0": 3.1784402069063476e-62,
+    "entropy": 2.618942387131261e-122,
+    "history": [
+     {
+      "weights": {
+       "none": 2.892263657340355e-96,
+       "mu_scale": 2.1682290193076784e-64,
+       "kinetic_ratio": 1.0,
+       "aniso": 2.3355282304894346e-75,
+       "force_scale": 1.410066745306884e-78,
+       "action_delay": 2.2248181979541995e-97,
+       "force_max": 1.2381755402358241e-96,
+       "pole_mass": 2.966559367941209e-78,
+       "cart_damping": 5.338721645098234e-97,
+       "obs_delay": 2.2248181979541995e-97,
+       "theta_bias": 2.2248181979541995e-97
+      },
+      "entropy": 3.1784402069063476e-62,
+      "top": "kinetic_ratio"
+     },
+     {
+      "weights": {
+       "none": 4.920884519735706e-133,
+       "mu_scale": 1.961061373033106e-128,
+       "kinetic_ratio": 1.0,
+       "aniso": 6.239587267772289e-132,
+       "force_scale": 4.763913695880801e-126,
+       "action_delay": 3.785295784412218e-134,
+       "force_max": 2.106626355863889e-133,
+       "pole_mass": 8.684737681640978e-125,
+       "cart_damping": 9.826188680870616e-134,
+       "obs_delay": 3.785295784412218e-134,
+       "theta_bias": 3.785295784412218e-134
+      },
+      "entropy": 2.618942387131261e-122,
+      "top": "kinetic_ratio",
+      "entropy_drop": 3.1784402069063476e-62
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.4,
+       "speed": 0.6,
+       "kind": "sine",
+       "amplitude": 6.0,
+       "frequency": 3.0,
+       "name": "cross(mu=0.4,v=0.6)+sine(6N,3Hz)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.1467965475914501,
+      "max_speed": 1.471171182073463,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [
+     0.11674886163031765
+    ],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 5.267906299023121,
+     "per_log": [
+      2.0820590325466517,
+      5.047597495519858,
+      1.6308926678713633,
+      2.099221228048864,
+      4.052932531466988,
+      1.8590401468116213,
+      5.267906299023121,
+      3.2415317238078796,
+      1.347172871145202,
+      2.2429574141375537
+     ]
+    },
+    "budget": {
+     "steps": 1812582,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 20.008057117462158
+ },
+ {
+  "id": "KB_sliding_friction#1",
+  "world": "KB_sliding_friction",
+  "kind": "known",
+  "truth": "kinetic_ratio",
+  "target_condition": {
+   "mu_patch": 0.20795146087889604,
+   "patch_start": 1.0133960978821595,
+   "v_cmd": 1.001804694930213
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "kinetic_ratio",
+    "top_weight": 1.0,
+    "map_value": 0.475,
+    "entropy0": 5.953748421844756e-16,
+    "entropy": 5.953748421844756e-16,
+    "history": [
+     {
+      "weights": {
+       "none": 1.319780586582851e-110,
+       "mu_scale": 6.048961934792283e-40,
+       "kinetic_ratio": 1.0,
+       "aniso": 1.5378986313233605e-17,
+       "force_scale": 2.8588685458590725e-39,
+       "action_delay": 1.0152158358329989e-111,
+       "force_max": 1.5590979139070788e-111,
+       "pole_mass": 5.708044142630896e-41,
+       "cart_damping": 2.6379324556424843e-111,
+       "obs_delay": 1.0152158358329989e-111,
+       "theta_bias": 1.0152158358329989e-111
+      },
+      "entropy": 5.953748421844756e-16,
+      "top": "kinetic_ratio"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 5.382977888091969,
+     "per_log": [
+      3.4602117273984367,
+      1.4888512256380202,
+      5.382977888091969,
+      1.6622802874308005,
+      2.2809321095625834,
+      2.6172141049751465,
+      2.2535074784657683,
+      1.4250585013143862,
+      1.5638680800940272
+     ]
+    },
+    "budget": {
+     "steps": 198990,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "kinetic_ratio",
+    "top_weight": 1.0,
+    "map_value": 0.475,
+    "entropy0": 5.953748421844756e-16,
+    "entropy": 5.953748421844756e-16,
+    "history": [
+     {
+      "weights": {
+       "none": 1.319780586582851e-110,
+       "mu_scale": 6.048961934792283e-40,
+       "kinetic_ratio": 1.0,
+       "aniso": 1.5378986313233605e-17,
+       "force_scale": 2.8588685458590725e-39,
+       "action_delay": 1.0152158358329989e-111,
+       "force_max": 1.5590979139070788e-111,
+       "pole_mass": 5.708044142630896e-41,
+       "cart_damping": 2.6379324556424843e-111,
+       "obs_delay": 1.0152158358329989e-111,
+       "theta_bias": 1.0152158358329989e-111
+      },
+      "entropy": 5.953748421844756e-16,
+      "top": "kinetic_ratio"
+     },
+     {
+      "weights": {
+       "none": 1.319780586582851e-110,
+       "mu_scale": 6.048961934792283e-40,
+       "kinetic_ratio": 1.0,
+       "aniso": 1.5378986313233605e-17,
+       "force_scale": 2.228870872723197e-39,
+       "action_delay": 1.0152158358329989e-111,
+       "force_max": 1.5590979139070788e-111,
+       "pole_mass": 1.8587062951215713e-41,
+       "cart_damping": 2.5057964292875712e-111,
+       "obs_delay": 1.0152158358329989e-111,
+       "theta_bias": 1.0152158358329989e-111
+      },
+      "entropy": 5.953748421844756e-16,
+      "top": "kinetic_ratio",
+      "entropy_drop": 0.0
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.15302244764798736,
+      "max_speed": 0.8383329114634882,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 5.382977888091969,
+     "per_log": [
+      3.4602117273984367,
+      1.4888512256380202,
+      5.382977888091969,
+      1.6622802874308005,
+      2.2809321095625834,
+      2.6172141049751465,
+      2.2535074784657683,
+      1.4250585013143862,
+      1.5638680800940272,
+      4.653724984692985
+     ]
+    },
+    "budget": {
+     "steps": 437426,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "kinetic_ratio",
+    "top_weight": 1.0,
+    "map_value": 0.475,
+    "entropy0": 5.953748421844756e-16,
+    "entropy": 5.953748421844756e-16,
+    "history": [
+     {
+      "weights": {
+       "none": 1.319780586582851e-110,
+       "mu_scale": 6.048961934792283e-40,
+       "kinetic_ratio": 1.0,
+       "aniso": 1.5378986313233605e-17,
+       "force_scale": 2.8588685458590725e-39,
+       "action_delay": 1.0152158358329989e-111,
+       "force_max": 1.5590979139070788e-111,
+       "pole_mass": 5.708044142630896e-41,
+       "cart_damping": 2.6379324556424843e-111,
+       "obs_delay": 1.0152158358329989e-111,
+       "theta_bias": 1.0152158358329989e-111
+      },
+      "entropy": 5.953748421844756e-16,
+      "top": "kinetic_ratio"
+     },
+     {
+      "weights": {
+       "none": 1.319780586582851e-110,
+       "mu_scale": 6.048961934792283e-40,
+       "kinetic_ratio": 1.0,
+       "aniso": 1.5378986313233605e-17,
+       "force_scale": 2.2381411593809474e-39,
+       "action_delay": 1.0152158358329989e-111,
+       "force_max": 1.5590979139070788e-111,
+       "pole_mass": 1.8558931387293355e-41,
+       "cart_damping": 2.5000182722439925e-111,
+       "obs_delay": 1.0152158358329989e-111,
+       "theta_bias": 1.0152158358329989e-111
+      },
+      "entropy": 5.953748421844756e-16,
+      "top": "kinetic_ratio",
+      "entropy_drop": 0.0
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "sine",
+       "amplitude": 6.0,
+       "frequency": 3.0,
+       "name": "cross(mu=0.5,v=0.6)+sine(6N,3Hz)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.15302244764798736,
+      "max_speed": 0.9974979127599019,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 5.382977888091969,
+     "per_log": [
+      3.4602117273984367,
+      1.4888512256380202,
+      5.382977888091969,
+      1.6622802874308005,
+      2.2809321095625834,
+      2.6172141049751465,
+      2.2535074784657683,
+      1.4250585013143862,
+      1.5638680800940272,
+      4.653724984692985
+     ]
+    },
+    "budget": {
+     "steps": 1781426,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "kinetic_ratio",
+    "top_weight": 1.0,
+    "map_value": 0.475,
+    "entropy0": 5.953748421844756e-16,
+    "entropy": 5.953748421844756e-16,
+    "history": [
+     {
+      "weights": {
+       "none": 1.319780586582851e-110,
+       "mu_scale": 6.048961934792283e-40,
+       "kinetic_ratio": 1.0,
+       "aniso": 1.5378986313233605e-17,
+       "force_scale": 2.8588685458590725e-39,
+       "action_delay": 1.0152158358329989e-111,
+       "force_max": 1.5590979139070788e-111,
+       "pole_mass": 5.708044142630896e-41,
+       "cart_damping": 2.6379324556424843e-111,
+       "obs_delay": 1.0152158358329989e-111,
+       "theta_bias": 1.0152158358329989e-111
+      },
+      "entropy": 5.953748421844756e-16,
+      "top": "kinetic_ratio"
+     },
+     {
+      "weights": {
+       "none": 1.319780586582851e-110,
+       "mu_scale": 6.048961934792283e-40,
+       "kinetic_ratio": 1.0,
+       "aniso": 1.5378986313233605e-17,
+       "force_scale": 2.2381411593809474e-39,
+       "action_delay": 1.0152158358329989e-111,
+       "force_max": 1.5590979139070788e-111,
+       "pole_mass": 1.8558931387293355e-41,
+       "cart_damping": 2.5000182722439925e-111,
+       "obs_delay": 1.0152158358329989e-111,
+       "theta_bias": 1.0152158358329989e-111
+      },
+      "entropy": 5.953748421844756e-16,
+      "top": "kinetic_ratio",
+      "entropy_drop": 0.0
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.4,
+       "speed": 0.6,
+       "kind": "sine",
+       "amplitude": 6.0,
+       "frequency": 3.0,
+       "name": "cross(mu=0.4,v=0.6)+sine(6N,3Hz)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.15302244764798736,
+      "max_speed": 0.9974979127599019,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [
+     0.11670603698971745
+    ],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 5.382977888091969,
+     "per_log": [
+      3.4602117273984367,
+      1.4888512256380202,
+      5.382977888091969,
+      1.6622802874308005,
+      2.2809321095625834,
+      2.6172141049751465,
+      2.2535074784657683,
+      1.4250585013143862,
+      1.5638680800940272,
+      4.653724984692985
+     ]
+    },
+    "budget": {
+     "steps": 1819282,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 20.577459812164307
+ },
+ {
+  "id": "KB_sliding_friction#2",
+  "world": "KB_sliding_friction",
+  "kind": "known",
+  "truth": "kinetic_ratio",
+  "target_condition": {
+   "mu_patch": 0.21630128215365588,
+   "patch_start": 0.9235433494193361,
+   "v_cmd": 1.1447838466517868
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "kinetic_ratio",
+    "top_weight": 1.0,
+    "map_value": 0.475,
+    "entropy0": 3.1247758264545936e-54,
+    "entropy": 3.1247758264545936e-54,
+    "history": [
+     {
+      "weights": {
+       "none": 7.080370755430729e-156,
+       "mu_scale": 4.8652128898972045e-67,
+       "kinetic_ratio": 1.0,
+       "aniso": 2.440226919558091e-56,
+       "force_scale": 1.7742151023331282e-125,
+       "action_delay": 5.446439042639218e-157,
+       "force_max": 1.253208247025603e-156,
+       "pole_mass": 1.2131686928139235e-107,
+       "cart_damping": 2.890784656973817e-156,
+       "obs_delay": 5.446439042639218e-157,
+       "theta_bias": 5.446439042639218e-157
+      },
+      "entropy": 3.1247758264545936e-54,
+      "top": "kinetic_ratio"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 5.0839487822640566,
+     "per_log": [
+      3.835375560152504,
+      2.2429574141375537,
+      4.556138475479125,
+      1.6870854615057451,
+      3.833178959075491,
+      5.0839487822640566,
+      3.6540748389333597,
+      4.485914828275107,
+      2.4708861555624617
+     ]
+    },
+    "budget": {
+     "steps": 199392,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "kinetic_ratio",
+    "top_weight": 1.0,
+    "map_value": 0.475,
+    "entropy0": 3.1247758264545936e-54,
+    "entropy": 1.773560617353018e-55,
+    "history": [
+     {
+      "weights": {
+       "none": 7.080370755430729e-156,
+       "mu_scale": 4.8652128898972045e-67,
+       "kinetic_ratio": 1.0,
+       "aniso": 2.440226919558091e-56,
+       "force_scale": 1.7742151023331282e-125,
+       "action_delay": 5.446439042639218e-157,
+       "force_max": 1.253208247025603e-156,
+       "pole_mass": 1.2131686928139235e-107,
+       "cart_damping": 2.890784656973817e-156,
+       "obs_delay": 5.446439042639218e-157,
+       "theta_bias": 5.446439042639218e-157
+      },
+      "entropy": 3.1247758264545936e-54,
+      "top": "kinetic_ratio"
+     },
+     {
+      "weights": {
+       "none": 7.080370755432339e-156,
+       "mu_scale": 7.293661547877094e-80,
+       "kinetic_ratio": 1.0,
+       "aniso": 1.3544424745406582e-57,
+       "force_scale": 1.2937838933472984e-125,
+       "action_delay": 5.4464390426404565e-157,
+       "force_max": 1.253208247025603e-156,
+       "pole_mass": 2.4681036787003253e-108,
+       "cart_damping": 2.7956769765683544e-156,
+       "obs_delay": 5.4464390426404565e-157,
+       "theta_bias": 5.4464390426404565e-157
+      },
+      "entropy": 1.773560617353018e-55,
+      "top": "kinetic_ratio",
+      "entropy_drop": 2.947419764719292e-54
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.16309191625301403,
+      "max_speed": 0.9010321586685179,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 5.0839487822640566,
+     "per_log": [
+      3.835375560152504,
+      2.2429574141375537,
+      4.556138475479125,
+      1.6870854615057451,
+      3.833178959075491,
+      5.0839487822640566,
+      3.6540748389333597,
+      4.485914828275107,
+      2.4708861555624617,
+      3.8732893786298073
+     ]
+    },
+    "budget": {
+     "steps": 438230,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "kinetic_ratio",
+    "top_weight": 1.0,
+    "map_value": 0.475,
+    "entropy0": 3.1247758264545936e-54,
+    "entropy": 3.1247758263803063e-54,
+    "history": [
+     {
+      "weights": {
+       "none": 7.080370755430729e-156,
+       "mu_scale": 4.8652128898972045e-67,
+       "kinetic_ratio": 1.0,
+       "aniso": 2.440226919558091e-56,
+       "force_scale": 1.7742151023331282e-125,
+       "action_delay": 5.446439042639218e-157,
+       "force_max": 1.253208247025603e-156,
+       "pole_mass": 1.2131686928139235e-107,
+       "cart_damping": 2.890784656973817e-156,
+       "obs_delay": 5.446439042639218e-157,
+       "theta_bias": 5.446439042639218e-157
+      },
+      "entropy": 3.1247758264545936e-54,
+      "top": "kinetic_ratio"
+     },
+     {
+      "weights": {
+       "none": 7.08037075542912e-156,
+       "mu_scale": 3.140612703672446e-82,
+       "kinetic_ratio": 1.0,
+       "aniso": 2.440226919558091e-56,
+       "force_scale": 2.269674294467199e-128,
+       "action_delay": 5.44643904263798e-157,
+       "force_max": 1.2532082470250331e-156,
+       "pole_mass": 3.998935230493376e-111,
+       "cart_damping": 2.857327790675869e-156,
+       "obs_delay": 5.44643904263798e-157,
+       "theta_bias": 5.44643904263798e-157
+      },
+      "entropy": 3.1247758263803063e-54,
+      "top": "kinetic_ratio",
+      "entropy_drop": 7.428728530981442e-65
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "sine",
+       "amplitude": 6.0,
+       "frequency": 1.0,
+       "name": "cross(mu=0.5,v=0.6)+sine(6N,1Hz)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.130570180932298,
+      "max_speed": 0.9010321586685179,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 5.0839487822640566,
+     "per_log": [
+      3.835375560152504,
+      2.2429574141375537,
+      4.556138475479125,
+      1.6870854615057451,
+      3.833178959075491,
+      5.0839487822640566,
+      3.6540748389333597,
+      4.485914828275107,
+      2.4708861555624617,
+      3.9062374188433315
+     ]
+    },
+    "budget": {
+     "steps": 1782230,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "kinetic_ratio",
+    "top_weight": 1.0,
+    "map_value": 0.41666666666666663,
+    "entropy0": 3.1247758264545936e-54,
+    "entropy": 2.5970056231883774e-88,
+    "history": [
+     {
+      "weights": {
+       "none": 7.080370755430729e-156,
+       "mu_scale": 4.8652128898972045e-67,
+       "kinetic_ratio": 1.0,
+       "aniso": 2.440226919558091e-56,
+       "force_scale": 1.7742151023331282e-125,
+       "action_delay": 5.446439042639218e-157,
+       "force_max": 1.253208247025603e-156,
+       "pole_mass": 1.2131686928139235e-107,
+       "cart_damping": 2.890784656973817e-156,
+       "obs_delay": 5.446439042639218e-157,
+       "theta_bias": 5.446439042639218e-157
+      },
+      "entropy": 3.1247758264545936e-54,
+      "top": "kinetic_ratio"
+     },
+     {
+      "weights": {
+       "none": 8.74110514323587e-186,
+       "mu_scale": 1.0585559221784479e-96,
+       "kinetic_ratio": 1.0,
+       "aniso": 1.2545553388917427e-90,
+       "force_scale": 1.6796336421828542e-155,
+       "action_delay": 6.723927033258603e-187,
+       "force_max": 1.547154157883108e-186,
+       "pole_mass": 2.427409620405378e-138,
+       "cart_damping": 3.5476841376596404e-186,
+       "obs_delay": 6.723927033258603e-187,
+       "theta_bias": 6.723927033258603e-187
+      },
+      "entropy": 2.5970056231883774e-88,
+      "top": "kinetic_ratio",
+      "entropy_drop": 3.1247758264545936e-54
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.4,
+       "speed": 0.6,
+       "kind": "sine",
+       "amplitude": 6.0,
+       "frequency": 3.0,
+       "name": "cross(mu=0.4,v=0.6)+sine(6N,3Hz)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.17010308487466885,
+      "max_speed": 1.1022216030238803,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [
+     0.11682533161927859
+    ],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 5.0839487822640566,
+     "per_log": [
+      3.835375560152504,
+      2.2429574141375537,
+      4.556138475479125,
+      1.6870854615057451,
+      3.833178959075491,
+      5.0839487822640566,
+      3.6540748389333597,
+      4.485914828275107,
+      2.8948828260428776,
+      3.8408154083265016
+     ]
+    },
+    "budget": {
+     "steps": 1820086,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 16.108882665634155
+ },
+ {
+  "id": "KC_braking_friction#0",
+  "world": "KC_braking_friction",
+  "kind": "known",
+  "truth": "aniso",
+  "target_condition": {
+   "mu_patch": 0.23193789519870833,
+   "patch_start": 0.7944475988781787,
+   "v_cmd": 0.9284715691685258
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "aniso",
+    "top_weight": 1.0,
+    "map_value": 0.39999999999999997,
+    "entropy0": 4.336377645303726e-92,
+    "entropy": 4.336377645303726e-92,
+    "history": [
+     {
+      "weights": {
+       "none": 2.065874543520727e-281,
+       "mu_scale": 2.0099561705555808e-94,
+       "kinetic_ratio": 3.014364977220699e-112,
+       "aniso": 1.0,
+       "force_scale": 5.587553241232113e-235,
+       "action_delay": 1.5891342642467704e-282,
+       "force_max": 1.018961571391878e-281,
+       "pole_mass": 7.018555356321105e-199,
+       "cart_damping": 5.391596246416847e-282,
+       "obs_delay": 1.5891342642467704e-282,
+       "theta_bias": 1.5891342642467704e-282
+      },
+      "entropy": 4.336377645303726e-92,
+      "top": "aniso"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 4.046098747572147,
+     "per_log": [
+      1.1049207959839593,
+      4.046098747572147,
+      2.105964117587523,
+      2.134980201386811,
+      2.333589848366336,
+      1.2538652107514943,
+      2.911714460519887,
+      3.0917857103420867,
+      2.509661821831159
+     ]
+    },
+    "budget": {
+     "steps": 198722,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "aniso",
+    "top_weight": 1.0,
+    "map_value": 0.39999999999999997,
+    "entropy0": 4.336377645303726e-92,
+    "entropy": 2.7040339303649876e-114,
+    "history": [
+     {
+      "weights": {
+       "none": 2.065874543520727e-281,
+       "mu_scale": 2.0099561705555808e-94,
+       "kinetic_ratio": 3.014364977220699e-112,
+       "aniso": 1.0,
+       "force_scale": 5.587553241232113e-235,
+       "action_delay": 1.5891342642467704e-282,
+       "force_max": 1.018961571391878e-281,
+       "pole_mass": 7.018555356321105e-199,
+       "cart_damping": 5.391596246416847e-282,
+       "obs_delay": 1.5891342642467704e-282,
+       "theta_bias": 1.5891342642467704e-282
+      },
+      "entropy": 4.336377645303726e-92,
+      "top": "aniso"
+     },
+     {
+      "weights": {
+       "none": 1.181955683804119e-287,
+       "mu_scale": 1.0124148745920487e-116,
+       "kinetic_ratio": 8.653521243937324e-125,
+       "aniso": 1.0,
+       "force_scale": 1.7641117364432365e-242,
+       "action_delay": 9.09196679849355e-289,
+       "force_max": 5.829818778893116e-288,
+       "pole_mass": 1.7697594494031246e-207,
+       "cart_damping": 3.0773312024383345e-288,
+       "obs_delay": 9.09196679849355e-289,
+       "theta_bias": 9.09196679849355e-289
+      },
+      "entropy": 2.7040339303649876e-114,
+      "top": "aniso",
+      "entropy_drop": 4.336377645303726e-92
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.16618850554755646,
+      "max_speed": 0.9641347582676647,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 4.046098747572147,
+     "per_log": [
+      1.1049207959839593,
+      4.046098747572147,
+      2.105964117587523,
+      2.134980201386811,
+      2.333589848366336,
+      1.2538652107514943,
+      2.911714460519887,
+      3.0917857103420867,
+      2.509661821831159,
+      1.9713446885774566
+     ]
+    },
+    "budget": {
+     "steps": 436890,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "aniso",
+    "top_weight": 1.0,
+    "map_value": 0.39999999999999997,
+    "entropy0": 4.336377645303726e-92,
+    "entropy": 1.6833454630920903e-101,
+    "history": [
+     {
+      "weights": {
+       "none": 2.065874543520727e-281,
+       "mu_scale": 2.0099561705555808e-94,
+       "kinetic_ratio": 3.014364977220699e-112,
+       "aniso": 1.0,
+       "force_scale": 5.587553241232113e-235,
+       "action_delay": 1.5891342642467704e-282,
+       "force_max": 1.018961571391878e-281,
+       "pole_mass": 7.018555356321105e-199,
+       "cart_damping": 5.391596246416847e-282,
+       "obs_delay": 1.5891342642467704e-282,
+       "theta_bias": 1.5891342642467704e-282
+      },
+      "entropy": 4.336377645303726e-92,
+      "top": "aniso"
+     },
+     {
+      "weights": {
+       "none": 7.749733389164309e-287,
+       "mu_scale": 7.087456339523805e-104,
+       "kinetic_ratio": 1.1307813915591275e-117,
+       "aniso": 1.0,
+       "force_scale": 2.1921825002640988e-240,
+       "action_delay": 5.961333376280452e-288,
+       "force_max": 3.8224395265712516e-287,
+       "pole_mass": 2.3040881865513628e-204,
+       "cart_damping": 1.9952984094070784e-287,
+       "obs_delay": 5.961333376280452e-288,
+       "theta_bias": 5.961333376280452e-288
+      },
+      "entropy": 1.6833454630920903e-101,
+      "top": "aniso",
+      "entropy_drop": 4.336377643620381e-92
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "none",
+       "amplitude": 0.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.16618850554755646,
+      "max_speed": 0.9641347582676647,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 4.046098747572147,
+     "per_log": [
+      1.1049207959839593,
+      4.046098747572147,
+      2.105964117587523,
+      2.134980201386811,
+      2.333589848366336,
+      1.2538652107514943,
+      2.911714460519887,
+      3.0917857103420867,
+      2.509661821831159,
+      1.9713446885774566
+     ]
+    },
+    "budget": {
+     "steps": 1780890,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "aniso",
+    "top_weight": 1.0,
+    "map_value": 0.39999999999999997,
+    "entropy0": 4.336377645303726e-92,
+    "entropy": 1.3597197414398245e-107,
+    "history": [
+     {
+      "weights": {
+       "none": 2.065874543520727e-281,
+       "mu_scale": 2.0099561705555808e-94,
+       "kinetic_ratio": 3.014364977220699e-112,
+       "aniso": 1.0,
+       "force_scale": 5.587553241232113e-235,
+       "action_delay": 1.5891342642467704e-282,
+       "force_max": 1.018961571391878e-281,
+       "pole_mass": 7.018555356321105e-199,
+       "cart_damping": 5.391596246416847e-282,
+       "obs_delay": 1.5891342642467704e-282,
+       "theta_bias": 1.5891342642467704e-282
+      },
+      "entropy": 4.336377645303726e-92,
+      "top": "aniso"
+     },
+     {
+      "weights": {
+       "none": 1.9728954931382312e-290,
+       "mu_scale": 5.404352598476016e-110,
+       "kinetic_ratio": 1.731448753967471e-124,
+       "aniso": 1.0,
+       "force_scale": 2.6564930427799522e-244,
+       "action_delay": 1.5176119177986939e-291,
+       "force_max": 9.731010521355584e-291,
+       "pole_mass": 1.7314038651598996e-208,
+       "cart_damping": 5.053431395352282e-291,
+       "obs_delay": 1.5176119177986939e-291,
+       "theta_bias": 1.5176119177986939e-291
+      },
+      "entropy": 1.3597197414398245e-107,
+      "top": "aniso",
+      "entropy_drop": 4.336377645303725e-92
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.4,
+       "speed": 0.6,
+       "kind": "none",
+       "amplitude": 0.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.4,v=0.6)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.16618850554755646,
+      "max_speed": 0.9641347582676647,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [
+     0.11690684001728113
+    ],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 4.046098747572147,
+     "per_log": [
+      1.1049207959839593,
+      4.046098747572147,
+      2.105964117587523,
+      2.134980201386811,
+      2.333589848366336,
+      1.2538652107514943,
+      2.911714460519887,
+      3.0917857103420867,
+      2.509661821831159,
+      1.9713446885774566
+     ]
+    },
+    "budget": {
+     "steps": 1802492,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 20.321634531021118
+ },
+ {
+  "id": "KC_braking_friction#1",
+  "world": "KC_braking_friction",
+  "kind": "known",
+  "truth": "aniso",
+  "target_condition": {
+   "mu_patch": 0.24022911017384155,
+   "patch_start": 0.7290781506254311,
+   "v_cmd": 0.9423916552809635
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "aniso",
+    "top_weight": 1.0,
+    "map_value": 0.39999999999999997,
+    "entropy0": 2.320696723774506e-85,
+    "entropy": 2.320696723774506e-85,
+    "history": [
+     {
+      "weights": {
+       "none": 8.693960506155465e-181,
+       "mu_scale": 1.1593219691336899e-87,
+       "kinetic_ratio": 5.375935326647932e-129,
+       "aniso": 1.0,
+       "force_scale": 3.0874699165013303e-174,
+       "action_delay": 6.687661927812137e-182,
+       "force_max": 5.52705924842021e-181,
+       "pole_mass": 1.7694911984903752e-171,
+       "cart_damping": 2.9289934771536065e-181,
+       "obs_delay": 6.687661927812137e-182,
+       "theta_bias": 6.687661927812137e-182
+      },
+      "entropy": 2.320696723774506e-85,
+      "top": "aniso"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.4310883138154296,
+     "per_log": [
+      1.6559831158096716,
+      2.9200439146527493,
+      2.828206757477838,
+      2.0380712142952375,
+      1.8975973857224553,
+      3.4310883138154296,
+      1.0656155499981939,
+      2.6688941436061375,
+      2.29544051375655
+     ]
+    },
+    "budget": {
+     "steps": 196176,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "aniso",
+    "top_weight": 1.0,
+    "map_value": 0.39999999999999997,
+    "entropy0": 2.320696723774506e-85,
+    "entropy": 1.6896560497043064e-102,
+    "history": [
+     {
+      "weights": {
+       "none": 8.693960506155465e-181,
+       "mu_scale": 1.1593219691336899e-87,
+       "kinetic_ratio": 5.375935326647932e-129,
+       "aniso": 1.0,
+       "force_scale": 3.0874699165013303e-174,
+       "action_delay": 6.687661927812137e-182,
+       "force_max": 5.52705924842021e-181,
+       "pole_mass": 1.7694911984903752e-171,
+       "cart_damping": 2.9289934771536065e-181,
+       "obs_delay": 6.687661927812137e-182,
+       "theta_bias": 6.687661927812137e-182
+      },
+      "entropy": 2.320696723774506e-85,
+      "top": "aniso"
+     },
+     {
+      "weights": {
+       "none": 1.917318165326331e-241,
+       "mu_scale": 7.04554590748964e-105,
+       "kinetic_ratio": 1.28920993439099e-176,
+       "aniso": 1.0,
+       "force_scale": 1.3696987641302165e-242,
+       "action_delay": 1.4748601271741538e-242,
+       "force_max": 7.526832908740841e-242,
+       "pole_mass": 5.933724372395206e-241,
+       "cart_damping": 6.017867433183814e-242,
+       "obs_delay": 1.4748601271741538e-242,
+       "theta_bias": 1.4748601271741538e-242
+      },
+      "entropy": 1.6896560497043064e-102,
+      "top": "aniso",
+      "entropy_drop": 2.320696723774506e-85
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.20847226921737194,
+      "max_speed": 2.1542159648774963,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.4310883138154296,
+     "per_log": [
+      1.6559831158096716,
+      2.9200439146527493,
+      2.828206757477838,
+      2.0380712142952375,
+      1.8975973857224553,
+      3.4310883138154296,
+      1.0656155499981939,
+      2.6688941436061375,
+      2.29544051375655,
+      3.323814699607374
+     ]
+    },
+    "budget": {
+     "steps": 431798,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "aniso",
+    "top_weight": 1.0,
+    "map_value": 0.39999999999999997,
+    "entropy0": 2.320696723774506e-85,
+    "entropy": 2.2043569111054174e-128,
+    "history": [
+     {
+      "weights": {
+       "none": 8.693960506155465e-181,
+       "mu_scale": 1.1593219691336899e-87,
+       "kinetic_ratio": 5.375935326647932e-129,
+       "aniso": 1.0,
+       "force_scale": 3.0874699165013303e-174,
+       "action_delay": 6.687661927812137e-182,
+       "force_max": 5.52705924842021e-181,
+       "pole_mass": 1.7694911984903752e-171,
+       "cart_damping": 2.9289934771536065e-181,
+       "obs_delay": 6.687661927812137e-182,
+       "theta_bias": 6.687661927812137e-182
+      },
+      "entropy": 2.320696723774506e-85,
+      "top": "aniso"
+     },
+     {
+      "weights": {
+       "none": 2.9046777199379925e-308,
+       "mu_scale": 7.356609558338486e-131,
+       "kinetic_ratio": 4.3425271094628036e-191,
+       "aniso": 1.0,
+       "force_scale": 2.074883323935793e-309,
+       "action_delay": 2.23436747687546e-309,
+       "force_max": 1.140291906012087e-308,
+       "pole_mass": 7.993937217737532e-308,
+       "cart_damping": 9.89207542173186e-309,
+       "obs_delay": 2.23436747687546e-309,
+       "theta_bias": 2.23436747687546e-309
+      },
+      "entropy": 2.2043569111054174e-128,
+      "top": "aniso",
+      "entropy_drop": 2.320696723774506e-85
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.4,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.4,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.20847226921737194,
+      "max_speed": 2.1542159648774963,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.4310883138154296,
+     "per_log": [
+      1.6559831158096716,
+      2.9200439146527493,
+      2.828206757477838,
+      2.0380712142952375,
+      1.8975973857224553,
+      3.4310883138154296,
+      1.0656155499981939,
+      2.6688941436061375,
+      2.29544051375655,
+      3.128208516281771
+     ]
+    },
+    "budget": {
+     "steps": 1775798,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "aniso",
+    "top_weight": 1.0,
+    "map_value": 0.39999999999999997,
+    "entropy0": 2.320696723774506e-85,
+    "entropy": 4.555544432774581e-117,
+    "history": [
+     {
+      "weights": {
+       "none": 8.693960506155465e-181,
+       "mu_scale": 1.1593219691336899e-87,
+       "kinetic_ratio": 5.375935326647932e-129,
+       "aniso": 1.0,
+       "force_scale": 3.0874699165013303e-174,
+       "action_delay": 6.687661927812137e-182,
+       "force_max": 5.52705924842021e-181,
+       "pole_mass": 1.7694911984903752e-171,
+       "cart_damping": 2.9289934771536065e-181,
+       "obs_delay": 6.687661927812137e-182,
+       "theta_bias": 6.687661927812137e-182
+      },
+      "entropy": 2.320696723774506e-85,
+      "top": "aniso"
+     },
+     {
+      "weights": {
+       "none": 3.8552085327594595e-281,
+       "mu_scale": 1.6656627754017415e-119,
+       "kinetic_ratio": 2.8353554293778065e-194,
+       "aniso": 1.0,
+       "force_scale": 2.7540280091812058e-282,
+       "action_delay": 2.965545025199691e-282,
+       "force_max": 1.5134426293558622e-281,
+       "pole_mass": 1.1251206046475319e-280,
+       "cart_damping": 1.25847599508329e-281,
+       "obs_delay": 2.965545025199691e-282,
+       "theta_bias": 2.965545025199691e-282
+      },
+      "entropy": 4.555544432774581e-117,
+      "top": "aniso",
+      "entropy_drop": 2.320696723774506e-85
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.4,
+       "speed": 0.6,
+       "kind": "none",
+       "amplitude": 0.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.4,v=0.6)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.20847226921737194,
+      "max_speed": 2.1542159648774963,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [
+     0.11690682574441232
+    ],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.4310883138154296,
+     "per_log": [
+      1.6559831158096716,
+      2.9200439146527493,
+      2.828206757477838,
+      2.0380712142952375,
+      1.8975973857224553,
+      3.4310883138154296,
+      1.0656155499981939,
+      2.6688941436061375,
+      2.29544051375655,
+      3.326837004248209
+     ]
+    },
+    "budget": {
+     "steps": 1797400,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 18.84870719909668
+ },
+ {
+  "id": "KC_braking_friction#2",
+  "world": "KC_braking_friction",
+  "kind": "known",
+  "truth": "aniso",
+  "target_condition": {
+   "mu_patch": 0.26501989427578476,
+   "patch_start": 0.9089332714729204,
+   "v_cmd": 0.9812891499626423
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "aniso",
+    "top_weight": 1.0,
+    "map_value": 0.39999999999999997,
+    "entropy0": 4.202026481852726e-58,
+    "entropy": 4.202026481852726e-58,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 3.0663981374027005e-60,
+       "kinetic_ratio": 4.513290558852207e-166,
+       "aniso": 1.0,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 2.83e-321,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 4.202026481852726e-58,
+      "top": "aniso"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.934934586795806,
+     "per_log": [
+      1.9644546484012761,
+      3.365534652201491,
+      3.1748649292534936,
+      2.99679153731784,
+      1.9402101056755154,
+      3.3282848217266747,
+      3.378854379196994,
+      2.4022726193121136,
+      3.934934586795806
+     ]
+    },
+    "budget": {
+     "steps": 200330,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "aniso",
+    "top_weight": 1.0,
+    "map_value": 0.39999999999999997,
+    "entropy0": 4.202026481852726e-58,
+    "entropy": 4.202026481852726e-58,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 3.0663981374027005e-60,
+       "kinetic_ratio": 4.513290558852207e-166,
+       "aniso": 1.0,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 2.83e-321,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 4.202026481852726e-58,
+      "top": "aniso"
+     },
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 3.0663981374027005e-60,
+       "kinetic_ratio": 4.513290558852207e-166,
+       "aniso": 1.0,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 4.202026481852726e-58,
+      "top": "aniso",
+      "entropy_drop": 0.0
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.19930208422020923,
+      "max_speed": 0.7504352567758523,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.934934586795806,
+     "per_log": [
+      1.9644546484012761,
+      3.365534652201491,
+      3.1748649292534936,
+      2.99679153731784,
+      1.9402101056755154,
+      3.3282848217266747,
+      3.378854379196994,
+      2.4022726193121136,
+      3.934934586795806,
+      3.2235244517720703
+     ]
+    },
+    "budget": {
+     "steps": 440106,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "aniso",
+    "top_weight": 1.0,
+    "map_value": 0.39999999999999997,
+    "entropy0": 4.202026481852726e-58,
+    "entropy": 4.202026481852726e-58,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 3.0663981374027005e-60,
+       "kinetic_ratio": 4.513290558852207e-166,
+       "aniso": 1.0,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 2.83e-321,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 4.202026481852726e-58,
+      "top": "aniso"
+     },
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 3.0663981374027005e-60,
+       "kinetic_ratio": 4.513290558852207e-166,
+       "aniso": 1.0,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 4.202026481852726e-58,
+      "top": "aniso",
+      "entropy_drop": 0.0
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "none",
+       "amplitude": 0.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.19930208422020923,
+      "max_speed": 0.7504352567758523,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.934934586795806,
+     "per_log": [
+      1.9644546484012761,
+      3.365534652201491,
+      3.1748649292534936,
+      2.99679153731784,
+      1.9402101056755154,
+      3.3282848217266747,
+      3.378854379196994,
+      2.4022726193121136,
+      3.934934586795806,
+      3.2235244517720703
+     ]
+    },
+    "budget": {
+     "steps": 1784106,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "aniso",
+    "top_weight": 1.0,
+    "map_value": 0.39999999999999997,
+    "entropy0": 4.202026481852726e-58,
+    "entropy": 4.202026481852726e-58,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 3.0663981374027005e-60,
+       "kinetic_ratio": 4.513290558852207e-166,
+       "aniso": 1.0,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 2.83e-321,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 4.202026481852726e-58,
+      "top": "aniso"
+     },
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 3.0663981374027005e-60,
+       "kinetic_ratio": 4.513290558852207e-166,
+       "aniso": 1.0,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 4.202026481852726e-58,
+      "top": "aniso",
+      "entropy_drop": 0.0
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.4,
+       "speed": 0.6,
+       "kind": "none",
+       "amplitude": 0.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.4,v=0.6)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.19930208422020923,
+      "max_speed": 0.7504352567758523,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [
+     0.11690680971987494
+    ],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.934934586795806,
+     "per_log": [
+      1.9644546484012761,
+      3.365534652201491,
+      3.1748649292534936,
+      2.99679153731784,
+      1.9402101056755154,
+      3.3282848217266747,
+      3.378854379196994,
+      2.4022726193121136,
+      3.934934586795806,
+      3.2235244517720703
+     ]
+    },
+    "budget": {
+     "steps": 1805706,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 19.046121835708618
+ },
+ {
+  "id": "KD_action_latency#0",
+  "world": "KD_action_latency",
+  "kind": "known",
+  "truth": "action_delay",
+  "target_condition": {
+   "mu_patch": 0.20854976604649456,
+   "patch_start": 1.1023225785349036,
+   "v_cmd": 0.9797051847948562
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "action_delay",
+    "top_weight": 1.0,
+    "map_value": 1.3333333333333333,
+    "entropy0": -0.0,
+    "entropy": -0.0,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 0.0,
+       "kinetic_ratio": 0.0,
+       "aniso": 0.0,
+       "force_scale": 0.0,
+       "action_delay": 1.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": -0.0,
+      "top": "action_delay"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 22.308291216429257,
+     "per_log": [
+      2.2429574141375537,
+      5.547674278094341,
+      5.564470477260798,
+      2.7021550814051016,
+      1.9443241722241171,
+      4.113418593389605,
+      4.526347401977279,
+      1.6135574665070944,
+      22.308291216429257
+     ]
+    },
+    "budget": {
+     "steps": 202742,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "action_delay",
+    "top_weight": 1.0,
+    "map_value": 1.3333333333333333,
+    "entropy0": -0.0,
+    "entropy": -0.0,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 0.0,
+       "kinetic_ratio": 0.0,
+       "aniso": 0.0,
+       "force_scale": 0.0,
+       "action_delay": 1.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": -0.0,
+      "top": "action_delay"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": "no_admissible_probe",
+    "unknown_stat": {
+     "peak": 22.308291216429257,
+     "per_log": [
+      2.2429574141375537,
+      5.547674278094341,
+      5.564470477260798,
+      2.7021550814051016,
+      1.9443241722241171,
+      4.113418593389605,
+      4.526347401977279,
+      1.6135574665070944,
+      22.308291216429257
+     ]
+    },
+    "budget": {
+     "steps": 219542,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "action_delay",
+    "top_weight": 1.0,
+    "map_value": 1.3333333333333333,
+    "entropy0": -0.0,
+    "entropy": -0.0,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 0.0,
+       "kinetic_ratio": 0.0,
+       "aniso": 0.0,
+       "force_scale": 0.0,
+       "action_delay": 1.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": -0.0,
+      "top": "action_delay"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": "no_admissible_probe",
+    "unknown_stat": {
+     "peak": 22.308291216429257,
+     "per_log": [
+      2.2429574141375537,
+      5.547674278094341,
+      5.564470477260798,
+      2.7021550814051016,
+      1.9443241722241171,
+      4.113418593389605,
+      4.526347401977279,
+      1.6135574665070944,
+      22.308291216429257
+     ]
+    },
+    "budget": {
+     "steps": 1563542,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "action_delay",
+    "top_weight": 1.0,
+    "map_value": 1.3333333333333333,
+    "entropy0": -0.0,
+    "entropy": -0.0,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 0.0,
+       "kinetic_ratio": 0.0,
+       "aniso": 0.0,
+       "force_scale": 0.0,
+       "action_delay": 1.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": -0.0,
+      "top": "action_delay"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": "no_admissible_probe",
+    "unknown_stat": {
+     "peak": 22.308291216429257,
+     "per_log": [
+      2.2429574141375537,
+      5.547674278094341,
+      5.564470477260798,
+      2.7021550814051016,
+      1.9443241722241171,
+      4.113418593389605,
+      4.526347401977279,
+      1.6135574665070944,
+      22.308291216429257
+     ]
+    },
+    "budget": {
+     "steps": 1563542,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 17.97446870803833
+ },
+ {
+  "id": "KD_action_latency#1",
+  "world": "KD_action_latency",
+  "kind": "known",
+  "truth": "action_delay",
+  "target_condition": {
+   "mu_patch": 0.20184004709408604,
+   "patch_start": 0.7784947052541118,
+   "v_cmd": 0.922144399397517
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "action_delay",
+    "top_weight": 1.0,
+    "map_value": 1.3333333333333333,
+    "entropy0": -0.0,
+    "entropy": -0.0,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 0.0,
+       "kinetic_ratio": 0.0,
+       "aniso": 0.0,
+       "force_scale": 0.0,
+       "action_delay": 1.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": -0.0,
+      "top": "action_delay"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 15.434128547817124,
+     "per_log": [
+      3.7556091315434856,
+      5.758282117334222,
+      2.6871430462979875,
+      2.2429574141375537,
+      4.396180913774654,
+      2.345673578900596,
+      3.4230616301881533,
+      2.8743038042558746,
+      15.434128547817124
+     ]
+    },
+    "budget": {
+     "steps": 195640,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "action_delay",
+    "top_weight": 1.0,
+    "map_value": 1.3333333333333333,
+    "entropy0": -0.0,
+    "entropy": -0.0,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 0.0,
+       "kinetic_ratio": 0.0,
+       "aniso": 0.0,
+       "force_scale": 0.0,
+       "action_delay": 1.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": -0.0,
+      "top": "action_delay"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": "no_admissible_probe",
+    "unknown_stat": {
+     "peak": 15.434128547817124,
+     "per_log": [
+      3.7556091315434856,
+      5.758282117334222,
+      2.6871430462979875,
+      2.2429574141375537,
+      4.396180913774654,
+      2.345673578900596,
+      3.4230616301881533,
+      2.8743038042558746,
+      15.434128547817124
+     ]
+    },
+    "budget": {
+     "steps": 212440,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "action_delay",
+    "top_weight": 1.0,
+    "map_value": 1.3333333333333333,
+    "entropy0": -0.0,
+    "entropy": -0.0,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 0.0,
+       "kinetic_ratio": 0.0,
+       "aniso": 0.0,
+       "force_scale": 0.0,
+       "action_delay": 1.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": -0.0,
+      "top": "action_delay"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": "no_admissible_probe",
+    "unknown_stat": {
+     "peak": 15.434128547817124,
+     "per_log": [
+      3.7556091315434856,
+      5.758282117334222,
+      2.6871430462979875,
+      2.2429574141375537,
+      4.396180913774654,
+      2.345673578900596,
+      3.4230616301881533,
+      2.8743038042558746,
+      15.434128547817124
+     ]
+    },
+    "budget": {
+     "steps": 1556440,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "action_delay",
+    "top_weight": 1.0,
+    "map_value": 1.3333333333333333,
+    "entropy0": -0.0,
+    "entropy": -0.0,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 0.0,
+       "kinetic_ratio": 0.0,
+       "aniso": 0.0,
+       "force_scale": 0.0,
+       "action_delay": 1.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": -0.0,
+      "top": "action_delay"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": "no_admissible_probe",
+    "unknown_stat": {
+     "peak": 15.434128547817124,
+     "per_log": [
+      3.7556091315434856,
+      5.758282117334222,
+      2.6871430462979875,
+      2.2429574141375537,
+      4.396180913774654,
+      2.345673578900596,
+      3.4230616301881533,
+      2.8743038042558746,
+      15.434128547817124
+     ]
+    },
+    "budget": {
+     "steps": 1556440,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 17.272380352020264
+ },
+ {
+  "id": "KD_action_latency#2",
+  "world": "KD_action_latency",
+  "kind": "known",
+  "truth": "action_delay",
+  "target_condition": {
+   "mu_patch": 0.17686915883166135,
+   "patch_start": 0.7827260129157989,
+   "v_cmd": 1.2168763879960753
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "action_delay",
+    "top_weight": 1.0,
+    "map_value": 1.3333333333333333,
+    "entropy0": 4.612846294085835e-221,
+    "entropy": 4.612846294085835e-221,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 5.393831137906251e-262,
+       "kinetic_ratio": 3.3933e-318,
+       "aniso": 0.0,
+       "force_scale": 8.981680357880581e-224,
+       "action_delay": 1.0,
+       "force_max": 1.9249327661754488e-231,
+       "pole_mass": 2.447301956361611e-269,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 4.612846294085835e-221,
+      "top": "action_delay"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 10.086356031337619,
+     "per_log": [
+      2.2429574141375537,
+      3.0239406509498794,
+      2.2429574141375537,
+      2.9505740409957877,
+      4.171572244034268,
+      2.2478880507153884,
+      2.210049769748065,
+      4.485914828275107,
+      10.086356031337619
+     ]
+    },
+    "budget": {
+     "steps": 194166,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "action_delay",
+    "top_weight": 1.0,
+    "map_value": 1.3333333333333333,
+    "entropy0": 4.612846294085835e-221,
+    "entropy": 4.612846294085835e-221,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 5.393831137906251e-262,
+       "kinetic_ratio": 3.3933e-318,
+       "aniso": 0.0,
+       "force_scale": 8.981680357880581e-224,
+       "action_delay": 1.0,
+       "force_max": 1.9249327661754488e-231,
+       "pole_mass": 2.447301956361611e-269,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 4.612846294085835e-221,
+      "top": "action_delay"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": "no_admissible_probe",
+    "unknown_stat": {
+     "peak": 10.086356031337619,
+     "per_log": [
+      2.2429574141375537,
+      3.0239406509498794,
+      2.2429574141375537,
+      2.9505740409957877,
+      4.171572244034268,
+      2.2478880507153884,
+      2.210049769748065,
+      4.485914828275107,
+      10.086356031337619
+     ]
+    },
+    "budget": {
+     "steps": 210966,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "action_delay",
+    "top_weight": 1.0,
+    "map_value": 1.3333333333333333,
+    "entropy0": 4.612846294085835e-221,
+    "entropy": 4.612846294085835e-221,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 5.393831137906251e-262,
+       "kinetic_ratio": 3.3933e-318,
+       "aniso": 0.0,
+       "force_scale": 8.981680357880581e-224,
+       "action_delay": 1.0,
+       "force_max": 1.9249327661754488e-231,
+       "pole_mass": 2.447301956361611e-269,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 4.612846294085835e-221,
+      "top": "action_delay"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": "no_admissible_probe",
+    "unknown_stat": {
+     "peak": 10.086356031337619,
+     "per_log": [
+      2.2429574141375537,
+      3.0239406509498794,
+      2.2429574141375537,
+      2.9505740409957877,
+      4.171572244034268,
+      2.2478880507153884,
+      2.210049769748065,
+      4.485914828275107,
+      10.086356031337619
+     ]
+    },
+    "budget": {
+     "steps": 1554966,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "action_delay",
+    "top_weight": 1.0,
+    "map_value": 1.3333333333333333,
+    "entropy0": 4.612846294085835e-221,
+    "entropy": 4.612846294085835e-221,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 5.393831137906251e-262,
+       "kinetic_ratio": 3.3933e-318,
+       "aniso": 0.0,
+       "force_scale": 8.981680357880581e-224,
+       "action_delay": 1.0,
+       "force_max": 1.9249327661754488e-231,
+       "pole_mass": 2.447301956361611e-269,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 4.612846294085835e-221,
+      "top": "action_delay"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": "no_admissible_probe",
+    "unknown_stat": {
+     "peak": 10.086356031337619,
+     "per_log": [
+      2.2429574141375537,
+      3.0239406509498794,
+      2.2429574141375537,
+      2.9505740409957877,
+      4.171572244034268,
+      2.2478880507153884,
+      2.210049769748065,
+      4.485914828275107,
+      10.086356031337619
+     ]
+    },
+    "budget": {
+     "steps": 1554966,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 17.514286994934082
+ },
+ {
+  "id": "KE_sensor_latency#0",
+  "world": "KE_sensor_latency",
+  "kind": "known",
+  "truth": "obs_delay",
+  "target_condition": {
+   "mu_patch": 0.18757422119613207,
+   "patch_start": 0.7680009052861746,
+   "v_cmd": 1.2897347184725392
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "obs_delay",
+    "top_weight": 1.0,
+    "map_value": 1.0,
+    "entropy0": 3.5694104113088807e-66,
+    "entropy": 3.5694104113088807e-66,
+    "history": [
+     {
+      "weights": {
+       "none": 1.64837066209697e-70,
+       "mu_scale": 1.2679774323826186e-71,
+       "kinetic_ratio": 1.3739591904064865e-70,
+       "aniso": 1.267977432382907e-71,
+       "force_scale": 1.1774076157835038e-71,
+       "action_delay": 1.2679774323823303e-71,
+       "force_max": 1.2699478847919853e-71,
+       "pole_mass": 2.2479944164866135e-68,
+       "cart_damping": 4.283904630085897e-71,
+       "obs_delay": 1.0,
+       "theta_bias": 1.2679853529129963e-71
+      },
+      "entropy": 3.5694104113088807e-66,
+      "top": "obs_delay"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.072065591401245,
+     "per_log": [
+      2.2429574141375537,
+      1.2624386848169462,
+      1.5373077035820388,
+      0.8937740759615407,
+      3.072065591401245,
+      2.488253759194966,
+      2.326392033141517,
+      2.7975270204166987,
+      2.359694221795656
+     ]
+    },
+    "budget": {
+     "steps": 196444,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "obs_delay",
+    "top_weight": 1.0,
+    "map_value": 1.0,
+    "entropy0": 3.5694104113088807e-66,
+    "entropy": 6.697570990729684e-75,
+    "history": [
+     {
+      "weights": {
+       "none": 1.64837066209697e-70,
+       "mu_scale": 1.2679774323826186e-71,
+       "kinetic_ratio": 1.3739591904064865e-70,
+       "aniso": 1.267977432382907e-71,
+       "force_scale": 1.1774076157835038e-71,
+       "action_delay": 1.2679774323823303e-71,
+       "force_max": 1.2699478847919853e-71,
+       "pole_mass": 2.2479944164866135e-68,
+       "cart_damping": 4.283904630085897e-71,
+       "obs_delay": 1.0,
+       "theta_bias": 1.2679853529129963e-71
+      },
+      "entropy": 3.5694104113088807e-66,
+      "top": "obs_delay"
+     },
+     {
+      "weights": {
+       "none": 2.2383219625449046e-79,
+       "mu_scale": 1.7217861250346038e-80,
+       "kinetic_ratio": 3.642943640338219e-80,
+       "aniso": 1.7217861250346038e-80,
+       "force_scale": 1.5988014018177261e-80,
+       "action_delay": 1.7217861250346038e-80,
+       "force_max": 1.7244618016928314e-80,
+       "pole_mass": 3.7625618732150564e-77,
+       "cart_damping": 5.748772376459652e-80,
+       "obs_delay": 1.0,
+       "theta_bias": 1.7217887257842313e-80
+      },
+      "entropy": 6.697570990729684e-75,
+      "top": "obs_delay",
+      "entropy_drop": 3.5694104046113096e-66
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.17844020436757202,
+      "max_speed": 1.326173355296675,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.072065591401245,
+     "per_log": [
+      2.2429574141375537,
+      1.2624386848169462,
+      1.5373077035820388,
+      0.8937740759615407,
+      3.072065591401245,
+      2.488253759194966,
+      2.326392033141517,
+      2.7975270204166987,
+      2.359694221795656,
+      2.965522090716789
+     ]
+    },
+    "budget": {
+     "steps": 432334,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "obs_delay",
+    "top_weight": 1.0,
+    "map_value": 1.0,
+    "entropy0": 3.5694104113088807e-66,
+    "entropy": 2.1780989005456022e-75,
+    "history": [
+     {
+      "weights": {
+       "none": 1.64837066209697e-70,
+       "mu_scale": 1.2679774323826186e-71,
+       "kinetic_ratio": 1.3739591904064865e-70,
+       "aniso": 1.267977432382907e-71,
+       "force_scale": 1.1774076157835038e-71,
+       "action_delay": 1.2679774323823303e-71,
+       "force_max": 1.2699478847919853e-71,
+       "pole_mass": 2.2479944164866135e-68,
+       "cart_damping": 4.283904630085897e-71,
+       "obs_delay": 1.0,
+       "theta_bias": 1.2679853529129963e-71
+      },
+      "entropy": 3.5694104113088807e-66,
+      "top": "obs_delay"
+     },
+     {
+      "weights": {
+       "none": 3.635752222572325e-80,
+       "mu_scale": 2.796732478901889e-81,
+       "kinetic_ratio": 2.0296068511369358e-80,
+       "aniso": 2.796732478901889e-81,
+       "force_scale": 2.596965873265844e-81,
+       "action_delay": 2.796732478901889e-81,
+       "force_max": 2.8010786353171954e-81,
+       "pole_mass": 1.2213006590644877e-77,
+       "cart_damping": 9.41526428009255e-81,
+       "obs_delay": 1.0,
+       "theta_bias": 2.7967364483418254e-81
+      },
+      "entropy": 2.1780989005456022e-75,
+      "top": "obs_delay",
+      "entropy_drop": 3.569410409130782e-66
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.4,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": 4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.4,v=0.6)+pulse(+4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.17844020436757202,
+      "max_speed": 1.1413088881794629,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.072065591401245,
+     "per_log": [
+      2.2429574141375537,
+      1.2624386848169462,
+      1.5373077035820388,
+      0.8937740759615407,
+      3.072065591401245,
+      2.488253759194966,
+      2.326392033141517,
+      2.7975270204166987,
+      2.359694221795656,
+      2.965522090716789
+     ]
+    },
+    "budget": {
+     "steps": 1776334,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "obs_delay",
+    "top_weight": 1.0,
+    "map_value": 1.0,
+    "entropy0": 3.5694104113088807e-66,
+    "entropy": 3.7256882489992887e-75,
+    "history": [
+     {
+      "weights": {
+       "none": 1.64837066209697e-70,
+       "mu_scale": 1.2679774323826186e-71,
+       "kinetic_ratio": 1.3739591904064865e-70,
+       "aniso": 1.267977432382907e-71,
+       "force_scale": 1.1774076157835038e-71,
+       "action_delay": 1.2679774323823303e-71,
+       "force_max": 1.2699478847919853e-71,
+       "pole_mass": 2.2479944164866135e-68,
+       "cart_damping": 4.283904630085897e-71,
+       "obs_delay": 1.0,
+       "theta_bias": 1.2679853529129963e-71
+      },
+      "entropy": 3.5694104113088807e-66,
+      "top": "obs_delay"
+     },
+     {
+      "weights": {
+       "none": 1.340026197995001e-79,
+       "mu_scale": 1.0307893830731148e-80,
+       "kinetic_ratio": 1.3545094172345539e-80,
+       "aniso": 1.0307893830731148e-80,
+       "force_scale": 9.571615699963916e-81,
+       "action_delay": 1.0307893830731148e-80,
+       "force_max": 1.0323912423585021e-80,
+       "pole_mass": 2.0849082471271556e-77,
+       "cart_damping": 3.4968977344300615e-80,
+       "obs_delay": 1.0,
+       "theta_bias": 1.0307908343251613e-80
+      },
+      "entropy": 3.7256882489992887e-75,
+      "top": "obs_delay",
+      "entropy_drop": 3.5694104075831926e-66
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.4,
+       "speed": 0.6,
+       "kind": "none",
+       "amplitude": 0.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.4,v=0.6)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.17844020436757202,
+      "max_speed": 1.155432518979764,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [
+     0.11690678175976152
+    ],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.072065591401245,
+     "per_log": [
+      2.2429574141375537,
+      1.2624386848169462,
+      1.5373077035820388,
+      0.8937740759615407,
+      3.072065591401245,
+      2.488253759194966,
+      2.326392033141517,
+      2.7975270204166987,
+      2.359694221795656,
+      2.965522090716789
+     ]
+    },
+    "budget": {
+     "steps": 1806078,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 18.97539710998535
+ },
+ {
+  "id": "KE_sensor_latency#1",
+  "world": "KE_sensor_latency",
+  "kind": "known",
+  "truth": "obs_delay",
+  "target_condition": {
+   "mu_patch": 0.2449784360320464,
+   "patch_start": 0.8483615814453875,
+   "v_cmd": 0.9027485274665409
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "obs_delay",
+    "top_weight": 1.0,
+    "map_value": 1.0,
+    "entropy0": 7.498325726945057e-68,
+    "entropy": 7.498325726945057e-68,
+    "history": [
+     {
+      "weights": {
+       "none": 1.911115742210126e-71,
+       "mu_scale": 1.4700890324693808e-72,
+       "kinetic_ratio": 4.2805504719177154e-72,
+       "aniso": 1.4700890324693808e-72,
+       "force_scale": 1.3650826730071795e-72,
+       "action_delay": 1.4700890324693808e-72,
+       "force_max": 2.940178068089999e-72,
+       "pole_mass": 4.3189122695581317e-70,
+       "cart_damping": 3.062474110033181e-72,
+       "obs_delay": 1.0,
+       "theta_bias": 1.4700940142563656e-72
+      },
+      "entropy": 7.498325726945057e-68,
+      "top": "obs_delay"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 2.994350051386191,
+     "per_log": [
+      1.1017523095466757,
+      0.8430532320277875,
+      1.4645457810279332,
+      1.6991416258327714,
+      0.6621029688128655,
+      0.8388982149701656,
+      2.994350051386191,
+      2.906850908620937,
+      1.907392819149718
+     ]
+    },
+    "budget": {
+     "steps": 199794,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "obs_delay",
+    "top_weight": 1.0,
+    "map_value": 1.0,
+    "entropy0": 7.498325726945057e-68,
+    "entropy": 1.4660716631577946e-75,
+    "history": [
+     {
+      "weights": {
+       "none": 1.911115742210126e-71,
+       "mu_scale": 1.4700890324693808e-72,
+       "kinetic_ratio": 4.2805504719177154e-72,
+       "aniso": 1.4700890324693808e-72,
+       "force_scale": 1.3650826730071795e-72,
+       "action_delay": 1.4700890324693808e-72,
+       "force_max": 2.940178068089999e-72,
+       "pole_mass": 4.3189122695581317e-70,
+       "cart_damping": 3.062474110033181e-72,
+       "obs_delay": 1.0,
+       "theta_bias": 1.4700940142563656e-72
+      },
+      "entropy": 7.498325726945057e-68,
+      "top": "obs_delay"
+     },
+     {
+      "weights": {
+       "none": 3.3157063432139053e-79,
+       "mu_scale": 2.550543340933865e-80,
+       "kinetic_ratio": 7.426577071554636e-80,
+       "aniso": 2.550543340933865e-80,
+       "force_scale": 2.368361673724125e-80,
+       "action_delay": 2.550543340933865e-80,
+       "force_max": 5.101086687334996e-80,
+       "pole_mass": 7.610101244666791e-78,
+       "cart_damping": 4.888989621566448e-80,
+       "obs_delay": 1.0,
+       "theta_bias": 2.550545137798796e-80
+      },
+      "entropy": 1.4660716631577946e-75,
+      "top": "obs_delay",
+      "entropy_drop": 7.498325580337891e-68
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.1536948294348197,
+      "max_speed": 1.088254616468733,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 2.994350051386191,
+     "per_log": [
+      1.1017523095466757,
+      0.8430532320277875,
+      1.4645457810279332,
+      1.6991416258327714,
+      0.6621029688128655,
+      0.8388982149701656,
+      2.994350051386191,
+      2.906850908620937,
+      1.907392819149718,
+      0.9115118446215558
+     ]
+    },
+    "budget": {
+     "steps": 439034,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "obs_delay",
+    "top_weight": 1.0,
+    "map_value": 1.0,
+    "entropy0": 7.498325726945057e-68,
+    "entropy": 1.4660716631577946e-75,
+    "history": [
+     {
+      "weights": {
+       "none": 1.911115742210126e-71,
+       "mu_scale": 1.4700890324693808e-72,
+       "kinetic_ratio": 4.2805504719177154e-72,
+       "aniso": 1.4700890324693808e-72,
+       "force_scale": 1.3650826730071795e-72,
+       "action_delay": 1.4700890324693808e-72,
+       "force_max": 2.940178068089999e-72,
+       "pole_mass": 4.3189122695581317e-70,
+       "cart_damping": 3.062474110033181e-72,
+       "obs_delay": 1.0,
+       "theta_bias": 1.4700940142563656e-72
+      },
+      "entropy": 7.498325726945057e-68,
+      "top": "obs_delay"
+     },
+     {
+      "weights": {
+       "none": 3.3157063432139053e-79,
+       "mu_scale": 2.550543340933865e-80,
+       "kinetic_ratio": 7.426577071554636e-80,
+       "aniso": 2.550543340933865e-80,
+       "force_scale": 2.368361673724125e-80,
+       "action_delay": 2.550543340933865e-80,
+       "force_max": 5.101086687334996e-80,
+       "pole_mass": 7.610101244666791e-78,
+       "cart_damping": 4.888989621566448e-80,
+       "obs_delay": 1.0,
+       "theta_bias": 2.550545137798796e-80
+      },
+      "entropy": 1.4660716631577946e-75,
+      "top": "obs_delay",
+      "entropy_drop": 7.498325580337891e-68
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.3,
+       "speed": 0.6,
+       "kind": "none",
+       "amplitude": 0.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.3,v=0.6)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.1536948294348197,
+      "max_speed": 1.088254616468733,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 2.994350051386191,
+     "per_log": [
+      1.1017523095466757,
+      0.8430532320277875,
+      1.4645457810279332,
+      1.6991416258327714,
+      0.6621029688128655,
+      0.8388982149701656,
+      2.994350051386191,
+      2.906850908620937,
+      1.907392819149718,
+      0.9115118446215558
+     ]
+    },
+    "budget": {
+     "steps": 1783034,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "obs_delay",
+    "top_weight": 1.0,
+    "map_value": 1.0,
+    "entropy0": 7.498325726945057e-68,
+    "entropy": 1.4660716631577946e-75,
+    "history": [
+     {
+      "weights": {
+       "none": 1.911115742210126e-71,
+       "mu_scale": 1.4700890324693808e-72,
+       "kinetic_ratio": 4.2805504719177154e-72,
+       "aniso": 1.4700890324693808e-72,
+       "force_scale": 1.3650826730071795e-72,
+       "action_delay": 1.4700890324693808e-72,
+       "force_max": 2.940178068089999e-72,
+       "pole_mass": 4.3189122695581317e-70,
+       "cart_damping": 3.062474110033181e-72,
+       "obs_delay": 1.0,
+       "theta_bias": 1.4700940142563656e-72
+      },
+      "entropy": 7.498325726945057e-68,
+      "top": "obs_delay"
+     },
+     {
+      "weights": {
+       "none": 3.3157063432139053e-79,
+       "mu_scale": 2.550543340933865e-80,
+       "kinetic_ratio": 7.426577071554636e-80,
+       "aniso": 2.550543340933865e-80,
+       "force_scale": 2.368361673724125e-80,
+       "action_delay": 2.550543340933865e-80,
+       "force_max": 5.101086687334996e-80,
+       "pole_mass": 7.610101244666791e-78,
+       "cart_damping": 4.888989621566448e-80,
+       "obs_delay": 1.0,
+       "theta_bias": 2.550545137798796e-80
+      },
+      "entropy": 1.4660716631577946e-75,
+      "top": "obs_delay",
+      "entropy_drop": 7.498325580337891e-68
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.3,
+       "speed": 0.6,
+       "kind": "none",
+       "amplitude": 0.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.3,v=0.6)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.1536948294348197,
+      "max_speed": 1.088254616468733,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [
+     0.11690679986755517
+    ],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 2.994350051386191,
+     "per_log": [
+      1.1017523095466757,
+      0.8430532320277875,
+      1.4645457810279332,
+      1.6991416258327714,
+      0.6621029688128655,
+      0.8388982149701656,
+      2.994350051386191,
+      2.906850908620937,
+      1.907392819149718,
+      0.9115118446215558
+     ]
+    },
+    "budget": {
+     "steps": 1812778,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 19.677939414978027
+ },
+ {
+  "id": "KE_sensor_latency#2",
+  "world": "KE_sensor_latency",
+  "kind": "known",
+  "truth": "obs_delay",
+  "target_condition": {
+   "mu_patch": 0.1899906930758829,
+   "patch_start": 1.172153643805227,
+   "v_cmd": 1.22778336001376
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "obs_delay",
+    "top_weight": 1.0,
+    "map_value": 1.0,
+    "entropy0": 8.939742284110624e-66,
+    "entropy": 8.939742284110624e-66,
+    "history": [
+     {
+      "weights": {
+       "none": 1.219795099531728e-71,
+       "mu_scale": 9.383039227167476e-73,
+       "kinetic_ratio": 8.888103528903759e-73,
+       "aniso": 9.383039227167476e-73,
+       "force_scale": 8.712822139512001e-73,
+       "action_delay": 9.383039227167476e-73,
+       "force_max": 1.7557288670761872e-71,
+       "pole_mass": 5.769964428626653e-68,
+       "cart_damping": 4.483830102785087e-72,
+       "obs_delay": 1.0,
+       "theta_bias": 9.383086082516498e-73
+      },
+      "entropy": 8.939742284110624e-66,
+      "top": "obs_delay"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.992308535913217,
+     "per_log": [
+      2.764705432272234,
+      1.730188298043584,
+      2.2687584492129993,
+      3.6777681413640084,
+      2.7439367677870443,
+      1.516814512281933,
+      3.992308535913217,
+      1.7254931312074047,
+      1.8293806078274848
+     ]
+    },
+    "budget": {
+     "steps": 197248,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "obs_delay",
+    "top_weight": 1.0,
+    "map_value": 1.0,
+    "entropy0": 8.939742284110624e-66,
+    "entropy": 3.6264776362066285e-74,
+    "history": [
+     {
+      "weights": {
+       "none": 1.219795099531728e-71,
+       "mu_scale": 9.383039227167476e-73,
+       "kinetic_ratio": 8.888103528903759e-73,
+       "aniso": 9.383039227167476e-73,
+       "force_scale": 8.712822139512001e-73,
+       "action_delay": 9.383039227167476e-73,
+       "force_max": 1.7557288670761872e-71,
+       "pole_mass": 5.769964428626653e-68,
+       "cart_damping": 4.483830102785087e-72,
+       "obs_delay": 1.0,
+       "theta_bias": 9.383086082516498e-73
+      },
+      "entropy": 8.939742284110624e-66,
+      "top": "obs_delay"
+     },
+     {
+      "weights": {
+       "none": 3.461005152945948e-80,
+       "mu_scale": 2.662311656112363e-81,
+       "kinetic_ratio": 2.5719954220224616e-81,
+       "aniso": 2.662311656112363e-81,
+       "force_scale": 2.472146537818437e-81,
+       "action_delay": 2.662311656112363e-81,
+       "force_max": 4.981645407871698e-80,
+       "pole_mass": 2.079842958948434e-76,
+       "cart_damping": 1.208499059927641e-80,
+       "obs_delay": 1.0,
+       "theta_bias": 2.662313968979726e-81
+      },
+      "entropy": 3.6264776362066285e-74,
+      "top": "obs_delay",
+      "entropy_drop": 8.939742247845848e-66
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.16711263532703485,
+      "max_speed": 1.336985444641289,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.992308535913217,
+     "per_log": [
+      2.764705432272234,
+      1.730188298043584,
+      2.2687584492129993,
+      3.6777681413640084,
+      2.7439367677870443,
+      1.516814512281933,
+      3.992308535913217,
+      1.7254931312074047,
+      1.8293806078274848,
+      1.3703842160726363
+     ]
+    },
+    "budget": {
+     "steps": 433942,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "obs_delay",
+    "top_weight": 1.0,
+    "map_value": 1.0,
+    "entropy0": 8.939742284110624e-66,
+    "entropy": 7.367634375735501e-74,
+    "history": [
+     {
+      "weights": {
+       "none": 1.219795099531728e-71,
+       "mu_scale": 9.383039227167476e-73,
+       "kinetic_ratio": 8.888103528903759e-73,
+       "aniso": 9.383039227167476e-73,
+       "force_scale": 8.712822139512001e-73,
+       "action_delay": 9.383039227167476e-73,
+       "force_max": 1.7557288670761872e-71,
+       "pole_mass": 5.769964428626653e-68,
+       "cart_damping": 4.483830102785087e-72,
+       "obs_delay": 1.0,
+       "theta_bias": 9.383086082516498e-73
+      },
+      "entropy": 8.939742284110624e-66,
+      "top": "obs_delay"
+     },
+     {
+      "weights": {
+       "none": 7.85359882210428e-80,
+       "mu_scale": 6.041229863157355e-81,
+       "kinetic_ratio": 6.930916694819484e-81,
+       "aniso": 6.041229863157355e-81,
+       "force_scale": 5.609713444359979e-81,
+       "action_delay": 6.041229863157355e-81,
+       "force_max": 1.130418556993503e-79,
+       "pole_mass": 4.242530721035547e-76,
+       "cart_damping": 2.748556043013995e-80,
+       "obs_delay": 1.0,
+       "theta_bias": 6.041234674773521e-81
+      },
+      "entropy": 7.367634375735501e-74,
+      "top": "obs_delay",
+      "entropy_drop": 8.93974221043428e-66
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "sine",
+       "amplitude": 3.0,
+       "frequency": 1.0,
+       "name": "cross(mu=0.5,v=0.6)+sine(3N,1Hz)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.15739298072749994,
+      "max_speed": 1.336985444641289,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.992308535913217,
+     "per_log": [
+      2.764705432272234,
+      1.730188298043584,
+      2.2687584492129993,
+      3.6777681413640084,
+      2.7439367677870443,
+      1.516814512281933,
+      3.992308535913217,
+      1.7254931312074047,
+      1.8293806078274848,
+      2.2429574141375537
+     ]
+    },
+    "budget": {
+     "steps": 1777942,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "obs_delay",
+    "top_weight": 1.0,
+    "map_value": 1.0,
+    "entropy0": 8.939742284110624e-66,
+    "entropy": 2.936118629854259e-72,
+    "history": [
+     {
+      "weights": {
+       "none": 1.219795099531728e-71,
+       "mu_scale": 9.383039227167476e-73,
+       "kinetic_ratio": 8.888103528903759e-73,
+       "aniso": 9.383039227167476e-73,
+       "force_scale": 8.712822139512001e-73,
+       "action_delay": 9.383039227167476e-73,
+       "force_max": 1.7557288670761872e-71,
+       "pole_mass": 5.769964428626653e-68,
+       "cart_damping": 4.483830102785087e-72,
+       "obs_delay": 1.0,
+       "theta_bias": 9.383086082516498e-73
+      },
+      "entropy": 8.939742284110624e-66,
+      "top": "obs_delay"
+     },
+     {
+      "weights": {
+       "none": 4.689631137548325e-80,
+       "mu_scale": 3.607408567344995e-81,
+       "kinetic_ratio": 1.2292886375765018e-80,
+       "aniso": 3.607408567344995e-81,
+       "force_scale": 3.3497365268201007e-81,
+       "action_delay": 3.607408567344995e-81,
+       "force_max": 6.750085130932078e-80,
+       "pole_mass": 1.7286983741189243e-74,
+       "cart_damping": 1.6213583865887377e-80,
+       "obs_delay": 1.0,
+       "theta_bias": 3.6074125426939927e-81
+      },
+      "entropy": 2.936118629854259e-72,
+      "top": "obs_delay",
+      "entropy_drop": 8.939739347991994e-66
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.3,
+       "speed": 0.6,
+       "kind": "none",
+       "amplitude": 0.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.3,v=0.6)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.25740460413699207,
+      "max_speed": 1.336985444641289,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [
+     0.11690680306065938
+    ],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 3.992308535913217,
+     "per_log": [
+      2.764705432272234,
+      1.730188298043584,
+      2.2687584492129993,
+      3.6777681413640084,
+      2.7439367677870443,
+      1.516814512281933,
+      3.992308535913217,
+      1.7254931312074047,
+      1.8293806078274848,
+      2.3847547659422466
+     ]
+    },
+    "budget": {
+     "steps": 1807686,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 18.009414434432983
+ },
+ {
+  "id": "DU1_deadzone#0",
+  "world": "DU1_deadzone",
+  "kind": "unknown",
+  "truth": null,
+  "target_condition": {
+   "mu_patch": 0.19157071061244935,
+   "patch_start": 0.8198142786757938,
+   "v_cmd": 1.0652882611224173
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "pole_mass",
+    "top_weight": 0.9999999999691636,
+    "map_value": 0.3041666666666667,
+    "entropy0": 7.833641273077403e-10,
+    "entropy": 7.833641273077403e-10,
+    "history": [
+     {
+      "weights": {
+       "none": 6.317368455491122e-13,
+       "mu_scale": 4.8595141965318065e-14,
+       "kinetic_ratio": 4.513450097316636e-14,
+       "aniso": 4.8595141965318065e-14,
+       "force_scale": 4.512406039636338e-14,
+       "action_delay": 4.8595141965318065e-14,
+       "force_max": 9.74250072869331e-14,
+       "pole_mass": 0.9999999999691636,
+       "cart_damping": 2.9773879591279346e-11,
+       "obs_delay": 4.8595141965318065e-14,
+       "theta_bias": 4.8595141965318065e-14
+      },
+      "entropy": 7.833641273077403e-10,
+      "top": "pole_mass"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 13.419554301702409,
+     "per_log": [
+      13.419554301702409,
+      1.7300183249114631,
+      4.310583965058376,
+      1.3540312456929904,
+      2.5989191007393426,
+      5.637781361328456,
+      2.1516372667305497,
+      1.3742829956112481,
+      11.356781810062287
+     ]
+    },
+    "budget": {
+     "steps": 188806,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "pole_mass",
+    "top_weight": 0.9999999999999962,
+    "map_value": 0.3041666666666667,
+    "entropy0": 7.833641273077403e-10,
+    "entropy": 1.2956446644397503e-13,
+    "history": [
+     {
+      "weights": {
+       "none": 6.317368455491122e-13,
+       "mu_scale": 4.8595141965318065e-14,
+       "kinetic_ratio": 4.513450097316636e-14,
+       "aniso": 4.8595141965318065e-14,
+       "force_scale": 4.512406039636338e-14,
+       "action_delay": 4.8595141965318065e-14,
+       "force_max": 9.74250072869331e-14,
+       "pole_mass": 0.9999999999691636,
+       "cart_damping": 2.9773879591279346e-11,
+       "obs_delay": 4.8595141965318065e-14,
+       "theta_bias": 4.8595141965318065e-14
+      },
+      "entropy": 7.833641273077403e-10,
+      "top": "pole_mass"
+     },
+     {
+      "weights": {
+       "none": 1.1425246315676115e-16,
+       "mu_scale": 8.788651012058865e-18,
+       "kinetic_ratio": 8.161417967635412e-18,
+       "aniso": 8.788651012058865e-18,
+       "force_scale": 8.160890225482618e-18,
+       "action_delay": 8.788651012058865e-18,
+       "force_max": 1.7619752803752154e-17,
+       "pole_mass": 0.9999999999999962,
+       "cart_damping": 3.563417244485882e-15,
+       "obs_delay": 8.788651012058865e-18,
+       "theta_bias": 8.788651012058865e-18
+      },
+      "entropy": 1.2956446644397503e-13,
+      "top": "pole_mass",
+      "entropy_drop": 7.832345628412963e-10
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.18541016899681856,
+      "max_speed": 1.1606061063053326,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 13.419554301702409,
+     "per_log": [
+      13.419554301702409,
+      1.7300183249114631,
+      4.310583965058376,
+      1.3540312456929904,
+      2.5989191007393426,
+      5.637781361328456,
+      2.1516372667305497,
+      1.3742829956112481,
+      11.356781810062287,
+      5.428951420260938
+     ]
+    },
+    "budget": {
+     "steps": 417058,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "pole_mass",
+    "top_weight": 0.9999999999992686,
+    "map_value": 0.3041666666666667,
+    "entropy0": 7.833641273077403e-10,
+    "entropy": 2.1375430693619966e-11,
+    "history": [
+     {
+      "weights": {
+       "none": 6.317368455491122e-13,
+       "mu_scale": 4.8595141965318065e-14,
+       "kinetic_ratio": 4.513450097316636e-14,
+       "aniso": 4.8595141965318065e-14,
+       "force_scale": 4.512406039636338e-14,
+       "action_delay": 4.8595141965318065e-14,
+       "force_max": 9.74250072869331e-14,
+       "pole_mass": 0.9999999999691636,
+       "cart_damping": 2.9773879591279346e-11,
+       "obs_delay": 4.8595141965318065e-14,
+       "theta_bias": 4.8595141965318065e-14
+      },
+      "entropy": 7.833641273077403e-10,
+      "top": "pole_mass"
+     },
+     {
+      "weights": {
+       "none": 2.151613935434335e-14,
+       "mu_scale": 1.6550876426418556e-15,
+       "kinetic_ratio": 1.5403797458189262e-15,
+       "aniso": 1.6550876426418556e-15,
+       "force_scale": 1.5368670967387502e-15,
+       "action_delay": 1.6550876426418556e-15,
+       "force_max": 3.318169657032557e-15,
+       "pole_mass": 0.9999999999992686,
+       "cart_damping": 6.954902710245899e-13,
+       "obs_delay": 1.6550876426418556e-15,
+       "theta_bias": 1.6550876426418556e-15
+      },
+      "entropy": 2.1375430693619966e-11,
+      "top": "pole_mass",
+      "entropy_drop": 7.619886966141203e-10
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.4,
+       "speed": 0.6,
+       "kind": "sine",
+       "amplitude": 3.0,
+       "frequency": 1.0,
+       "name": "cross(mu=0.4,v=0.6)+sine(3N,1Hz)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.3124025334612408,
+      "max_speed": 1.9024208572059405,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 13.419554301702409,
+     "per_log": [
+      13.419554301702409,
+      1.7300183249114631,
+      4.310583965058376,
+      1.3540312456929904,
+      2.5989191007393426,
+      5.637781361328456,
+      2.1516372667305497,
+      1.3742829956112481,
+      11.356781810062287,
+      4.592737601661704
+     ]
+    },
+    "budget": {
+     "steps": 1761058,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "pole_mass",
+    "top_weight": 0.9999999999997453,
+    "map_value": 0.3041666666666667,
+    "entropy0": 7.833641273077403e-10,
+    "entropy": 7.705254712537715e-12,
+    "history": [
+     {
+      "weights": {
+       "none": 6.317368455491122e-13,
+       "mu_scale": 4.8595141965318065e-14,
+       "kinetic_ratio": 4.513450097316636e-14,
+       "aniso": 4.8595141965318065e-14,
+       "force_scale": 4.512406039636338e-14,
+       "action_delay": 4.8595141965318065e-14,
+       "force_max": 9.74250072869331e-14,
+       "pole_mass": 0.9999999999691636,
+       "cart_damping": 2.9773879591279346e-11,
+       "obs_delay": 4.8595141965318065e-14,
+       "theta_bias": 4.8595141965318065e-14
+      },
+      "entropy": 7.833641273077403e-10,
+      "top": "pole_mass"
+     },
+     {
+      "weights": {
+       "none": 7.768353229012628e-15,
+       "mu_scale": 5.975656330009929e-16,
+       "kinetic_ratio": 5.749965050561291e-16,
+       "aniso": 5.975656330009929e-16,
+       "force_scale": 5.548823735008802e-16,
+       "action_delay": 5.975656330009929e-16,
+       "force_max": 5.975656638587229e-16,
+       "pole_mass": 0.9999999999997453,
+       "cart_damping": 2.420988923208912e-13,
+       "obs_delay": 5.975656330009929e-16,
+       "theta_bias": 5.975656330009929e-16
+      },
+      "entropy": 7.705254712537715e-12,
+      "top": "pole_mass",
+      "entropy_drop": 7.756588725952026e-10
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.3,
+       "speed": 0.6,
+       "kind": "sine",
+       "amplitude": 3.0,
+       "frequency": 1.0,
+       "name": "cross(mu=0.3,v=0.6)+sine(3N,1Hz)"
+      },
+      "physical_s": 3.44,
+      "fell": true,
+      "aborted": true,
+      "max_tilt": 0.6093009497851272,
+      "max_speed": 1.5164449471709833,
+      "violation": true
+     }
+    ],
+    "n_probes": 1,
+    "eig": [
+     0.030398961572759203
+    ],
+    "safety_violations": 1,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 13.419554301702409,
+     "per_log": [
+      13.419554301702409,
+      1.7300183249114631,
+      4.310583965058376,
+      1.3540312456929904,
+      2.5989191007393426,
+      5.637781361328456,
+      2.1516372667305497,
+      1.3742829956112481,
+      11.356781810062287,
+      6.7288722424126615
+     ]
+    },
+    "budget": {
+     "steps": 1831766,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 18.73903250694275
+ },
+ {
+  "id": "DU1_deadzone#1",
+  "world": "DU1_deadzone",
+  "kind": "unknown",
+  "truth": null,
+  "target_condition": {
+   "mu_patch": 0.18067103939668241,
+   "patch_start": 0.749153448016586,
+   "v_cmd": 1.1758334924201654
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "aniso",
+    "top_weight": 0.9999998900409518,
+    "map_value": 1.0999999999999999,
+    "entropy0": 1.8718645937550638e-06,
+    "entropy": 1.8718645937550638e-06,
+    "history": [
+     {
+      "weights": {
+       "none": 1.142589806120129e-19,
+       "mu_scale": 1.1524127360642137e-12,
+       "kinetic_ratio": 8.428028636543876e-21,
+       "aniso": 0.9999998900409518,
+       "force_scale": 8.1613557580006e-21,
+       "action_delay": 8.789152354770541e-21,
+       "force_max": 1.0511940115794764e-19,
+       "pole_mass": 1.0995789588431483e-07,
+       "cart_damping": 1.3717932197828956e-18,
+       "obs_delay": 8.789152354770541e-21,
+       "theta_bias": 8.789152354770541e-21
+      },
+      "entropy": 1.8718645937550638e-06,
+      "top": "aniso"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 20.518366881221937,
+     "per_log": [
+      11.005325290123396,
+      15.608189634577489,
+      9.843517520254506,
+      14.28726727482849,
+      14.400697255343223,
+      16.551978643653722,
+      19.253949837320985,
+      2.2429574141375537,
+      20.518366881221937
+     ]
+    },
+    "budget": {
+     "steps": 196846,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "aniso",
+    "top_weight": 0.999236033013808,
+    "map_value": 1.0999999999999999,
+    "entropy0": 1.8718645937550638e-06,
+    "entropy": 0.006248216193758441,
+    "history": [
+     {
+      "weights": {
+       "none": 1.142589806120129e-19,
+       "mu_scale": 1.1524127360642137e-12,
+       "kinetic_ratio": 8.428028636543876e-21,
+       "aniso": 0.9999998900409518,
+       "force_scale": 8.1613557580006e-21,
+       "action_delay": 8.789152354770541e-21,
+       "force_max": 1.0511940115794764e-19,
+       "pole_mass": 1.0995789588431483e-07,
+       "cart_damping": 1.3717932197828956e-18,
+       "obs_delay": 8.789152354770541e-21,
+       "theta_bias": 8.789152354770541e-21
+      },
+      "entropy": 1.8718645937550638e-06,
+      "top": "aniso"
+     },
+     {
+      "weights": {
+       "none": 1.1417170307716118e-19,
+       "mu_scale": 1.6536936701406134e-07,
+       "kinetic_ratio": 8.410875675023465e-21,
+       "aniso": 0.999236033013808,
+       "force_scale": 8.155121648368335e-21,
+       "action_delay": 8.782438698243484e-21,
+       "force_max": 1.0503910495587859e-19,
+       "pole_mass": 0.0007638016168249703,
+       "cart_damping": 2.2319688578109533e-18,
+       "obs_delay": 8.782438698243484e-21,
+       "theta_bias": 8.782438698243484e-21
+      },
+      "entropy": 0.006248216193758441,
+      "top": "aniso",
+      "entropy_drop": -0.006246344329164686
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.2066607949671911,
+      "max_speed": 1.4820002691623668,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 20.518366881221937,
+     "per_log": [
+      11.005325290123396,
+      15.608189634577489,
+      9.843517520254506,
+      14.28726727482849,
+      14.400697255343223,
+      16.551978643653722,
+      19.253949837320985,
+      2.2429574141375537,
+      20.518366881221937,
+      17.9709259735401
+     ]
+    },
+    "budget": {
+     "steps": 433138,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "aniso",
+    "top_weight": 0.9744301650538562,
+    "map_value": 1.0999999999999999,
+    "entropy0": 1.8718645937550638e-06,
+    "entropy": 0.11898786260007499,
+    "history": [
+     {
+      "weights": {
+       "none": 1.142589806120129e-19,
+       "mu_scale": 1.1524127360642137e-12,
+       "kinetic_ratio": 8.428028636543876e-21,
+       "aniso": 0.9999998900409518,
+       "force_scale": 8.1613557580006e-21,
+       "action_delay": 8.789152354770541e-21,
+       "force_max": 1.0511940115794764e-19,
+       "pole_mass": 1.0995789588431483e-07,
+       "cart_damping": 1.3717932197828956e-18,
+       "obs_delay": 8.789152354770541e-21,
+       "theta_bias": 8.789152354770541e-21
+      },
+      "entropy": 1.8718645937550638e-06,
+      "top": "aniso"
+     },
+     {
+      "weights": {
+       "none": 1.8313127393356567e-18,
+       "mu_scale": 4.1582352166367207e-13,
+       "kinetic_ratio": 1.4730986845021622e-19,
+       "aniso": 0.9744301650538562,
+       "force_scale": 1.3080805280968461e-19,
+       "action_delay": 1.408702107181325e-19,
+       "force_max": 1.6848259756975416e-18,
+       "pole_mass": 0.02556983494572805,
+       "cart_damping": 3.063123542523894e-17,
+       "obs_delay": 1.408702107181325e-19,
+       "theta_bias": 1.408702107181325e-19
+      },
+      "entropy": 0.11898786260007499,
+      "top": "aniso",
+      "entropy_drop": -0.11898599073548123
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": 8.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(+8N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.2066607949671911,
+      "max_speed": 1.5224835894385926,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 20.518366881221937,
+     "per_log": [
+      11.005325290123396,
+      15.608189634577489,
+      9.843517520254506,
+      14.28726727482849,
+      14.400697255343223,
+      16.551978643653722,
+      19.253949837320985,
+      2.2429574141375537,
+      20.518366881221937,
+      11.945231111752213
+     ]
+    },
+    "budget": {
+     "steps": 1777138,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "aniso",
+    "top_weight": 0.9999989133520879,
+    "map_value": 1.0999999999999999,
+    "entropy0": 1.8718645937550638e-06,
+    "entropy": 1.603973649120305e-05,
+    "history": [
+     {
+      "weights": {
+       "none": 1.142589806120129e-19,
+       "mu_scale": 1.1524127360642137e-12,
+       "kinetic_ratio": 8.428028636543876e-21,
+       "aniso": 0.9999998900409518,
+       "force_scale": 8.1613557580006e-21,
+       "action_delay": 8.789152354770541e-21,
+       "force_max": 1.0511940115794764e-19,
+       "pole_mass": 1.0995789588431483e-07,
+       "cart_damping": 1.3717932197828956e-18,
+       "obs_delay": 8.789152354770541e-21,
+       "theta_bias": 8.789152354770541e-21
+      },
+      "entropy": 1.8718645937550638e-06,
+      "top": "aniso"
+     },
+     {
+      "weights": {
+       "none": 1.1425886901647471e-19,
+       "mu_scale": 4.795428643003914e-09,
+       "kinetic_ratio": 1.7021277082576975e-20,
+       "aniso": 0.9999989133520879,
+       "force_scale": 8.16134778689073e-21,
+       "action_delay": 8.789143770498371e-21,
+       "force_max": 1.0511929848896396e-19,
+       "pole_mass": 1.0818524835183669e-06,
+       "cart_damping": 2.1339869166651648e-18,
+       "obs_delay": 8.789143770498371e-21,
+       "theta_bias": 8.789143770498371e-21
+      },
+      "entropy": 1.603973649120305e-05,
+      "top": "aniso",
+      "entropy_drop": -1.4167871897447985e-05
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.3,
+       "speed": 0.6,
+       "kind": "none",
+       "amplitude": 0.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.3,v=0.6)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.2066607949671911,
+      "max_speed": 1.3691335044727706,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [
+     0.1007427932850052
+    ],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 20.518366881221937,
+     "per_log": [
+      11.005325290123396,
+      15.608189634577489,
+      9.843517520254506,
+      14.28726727482849,
+      14.400697255343223,
+      16.551978643653722,
+      19.253949837320985,
+      2.2429574141375537,
+      20.518366881221937,
+      13.342745594879883
+     ]
+    },
+    "budget": {
+     "steps": 1850136,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 20.02000594139099
+ },
+ {
+  "id": "DU1_deadzone#2",
+  "world": "DU1_deadzone",
+  "kind": "unknown",
+  "truth": null,
+  "target_condition": {
+   "mu_patch": 0.18593857432499547,
+   "patch_start": 1.059404961550019,
+   "v_cmd": 1.0571609137716684
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "pole_mass",
+    "top_weight": 1.0,
+    "map_value": 0.3041666666666667,
+    "entropy0": 1.5053282391615786e-18,
+    "entropy": 1.5053282391615786e-18,
+    "history": [
+     {
+      "weights": {
+       "none": 1.23884768124918e-20,
+       "mu_scale": 1.0749129876242222e-21,
+       "kinetic_ratio": 9.154593284789527e-22,
+       "aniso": 9.52959756396862e-22,
+       "force_scale": 8.848912008922366e-22,
+       "action_delay": 9.529597548070958e-22,
+       "force_max": 9.53119288773021e-22,
+       "pole_mass": 1.0,
+       "cart_damping": 1.2384814608815104e-20,
+       "obs_delay": 9.529597548070958e-22,
+       "theta_bias": 9.529597548070958e-22
+      },
+      "entropy": 1.5053282391615786e-18,
+      "top": "pole_mass"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 23.100817709698322,
+     "per_log": [
+      7.233838438148236,
+      23.100817709698322,
+      3.2120009758818515,
+      11.179748391874519,
+      16.276812658230472,
+      2.594637243406953,
+      6.917689850304615,
+      4.604563707341568,
+      12.803545377497837
+     ]
+    },
+    "budget": {
+     "steps": 202742,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "pole_mass",
+    "top_weight": 1.0,
+    "map_value": 0.3041666666666667,
+    "entropy0": 1.5053282391615786e-18,
+    "entropy": 8.664220371196385e-19,
+    "history": [
+     {
+      "weights": {
+       "none": 1.23884768124918e-20,
+       "mu_scale": 1.0749129876242222e-21,
+       "kinetic_ratio": 9.154593284789527e-22,
+       "aniso": 9.52959756396862e-22,
+       "force_scale": 8.848912008922366e-22,
+       "action_delay": 9.529597548070958e-22,
+       "force_max": 9.53119288773021e-22,
+       "pole_mass": 1.0,
+       "cart_damping": 1.2384814608815104e-20,
+       "obs_delay": 9.529597548070958e-22,
+       "theta_bias": 9.529597548070958e-22
+      },
+      "entropy": 1.5053282391615786e-18,
+      "top": "pole_mass"
+     },
+     {
+      "weights": {
+       "none": 6.802670890854273e-21,
+       "mu_scale": 5.232823762195783e-22,
+       "kinetic_ratio": 4.868930058059921e-22,
+       "aniso": 5.232823762195783e-22,
+       "force_scale": 4.85905063632429e-22,
+       "action_delay": 5.232823762195783e-22,
+       "force_max": 5.233699783584472e-22,
+       "pole_mass": 1.0,
+       "cart_damping": 7.530568397211691e-21,
+       "obs_delay": 5.232823762195783e-22,
+       "theta_bias": 5.232823762195783e-22
+      },
+      "entropy": 8.664220371196385e-19,
+      "top": "pole_mass",
+      "entropy_drop": 6.3890620204194e-19
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.18450203924793362,
+      "max_speed": 1.2838875566145285,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 23.100817709698322,
+     "per_log": [
+      7.233838438148236,
+      23.100817709698322,
+      3.2120009758818515,
+      11.179748391874519,
+      16.276812658230472,
+      2.594637243406953,
+      6.917689850304615,
+      4.604563707341568,
+      12.803545377497837,
+      21.601175803021246
+     ]
+    },
+    "budget": {
+     "steps": 444930,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "pole_mass",
+    "top_weight": 1.0,
+    "map_value": 0.3041666666666667,
+    "entropy0": 1.5053282391615786e-18,
+    "entropy": 9.812209006964578e-19,
+    "history": [
+     {
+      "weights": {
+       "none": 1.23884768124918e-20,
+       "mu_scale": 1.0749129876242222e-21,
+       "kinetic_ratio": 9.154593284789527e-22,
+       "aniso": 9.52959756396862e-22,
+       "force_scale": 8.848912008922366e-22,
+       "action_delay": 9.529597548070958e-22,
+       "force_max": 9.53119288773021e-22,
+       "pole_mass": 1.0,
+       "cart_damping": 1.2384814608815104e-20,
+       "obs_delay": 9.529597548070958e-22,
+       "theta_bias": 9.529597548070958e-22
+      },
+      "entropy": 1.5053282391615786e-18,
+      "top": "pole_mass"
+     },
+     {
+      "weights": {
+       "none": 6.885793750528403e-21,
+       "mu_scale": 2.3200840388424487e-21,
+       "kinetic_ratio": 5.147839398177584e-22,
+       "aniso": 5.296764656888012e-22,
+       "force_scale": 4.9184241075200945e-22,
+       "action_delay": 5.296764423483578e-22,
+       "force_max": 5.29765114910949e-22,
+       "pole_mass": 1.0,
+       "cart_damping": 8.044254660981183e-21,
+       "obs_delay": 5.296764423483578e-22,
+       "theta_bias": 5.296764423483578e-22
+      },
+      "entropy": 9.812209006964578e-19,
+      "top": "pole_mass",
+      "entropy_drop": 5.241073384651207e-19
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.4,
+       "speed": 0.6,
+       "kind": "sine",
+       "amplitude": 6.0,
+       "frequency": 1.0,
+       "name": "cross(mu=0.4,v=0.6)+sine(6N,1Hz)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.2081496642633435,
+      "max_speed": 1.2838875566145285,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 29.76313211517869,
+     "per_log": [
+      7.233838438148236,
+      23.100817709698322,
+      3.2120009758818515,
+      11.179748391874519,
+      16.276812658230472,
+      2.594637243406953,
+      6.917689850304615,
+      4.604563707341568,
+      12.803545377497837,
+      29.76313211517869
+     ]
+    },
+    "budget": {
+     "steps": 1788930,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "pole_mass",
+    "top_weight": 1.0,
+    "map_value": 0.3041666666666667,
+    "entropy0": 1.5053282391615786e-18,
+    "entropy": 3.9119400782309713e-19,
+    "history": [
+     {
+      "weights": {
+       "none": 1.23884768124918e-20,
+       "mu_scale": 1.0749129876242222e-21,
+       "kinetic_ratio": 9.154593284789527e-22,
+       "aniso": 9.52959756396862e-22,
+       "force_scale": 8.848912008922366e-22,
+       "action_delay": 9.529597548070958e-22,
+       "force_max": 9.53119288773021e-22,
+       "pole_mass": 1.0,
+       "cart_damping": 1.2384814608815104e-20,
+       "obs_delay": 9.529597548070958e-22,
+       "theta_bias": 9.529597548070958e-22
+      },
+      "entropy": 1.5053282391615786e-18,
+      "top": "pole_mass"
+     },
+     {
+      "weights": {
+       "none": 3.028334787859611e-21,
+       "mu_scale": 3.9897663327899856e-22,
+       "kinetic_ratio": 2.5183947586947594e-22,
+       "aniso": 2.3298283101559607e-22,
+       "force_scale": 2.163096277042494e-22,
+       "action_delay": 2.3294882983536307e-22,
+       "force_max": 2.329878275480092e-22,
+       "pole_mass": 1.0,
+       "cart_damping": 3.1158010705775526e-21,
+       "obs_delay": 2.3294882983536307e-22,
+       "theta_bias": 2.3294882983536307e-22
+      },
+      "entropy": 3.9119400782309713e-19,
+      "top": "pole_mass",
+      "entropy_drop": 1.1141342313384814e-18
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.3,
+       "speed": 0.6,
+       "kind": "sine",
+       "amplitude": 3.0,
+       "frequency": 1.0,
+       "name": "cross(mu=0.3,v=0.6)+sine(3N,1Hz)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.22254187472792017,
+      "max_speed": 1.2838875566145285,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [
+     0.029572290650613967
+    ],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 24.149536437976174,
+     "per_log": [
+      7.233838438148236,
+      23.100817709698322,
+      3.2120009758818515,
+      11.179748391874519,
+      16.276812658230472,
+      2.594637243406953,
+      6.917689850304615,
+      4.604563707341568,
+      12.803545377497837,
+      24.149536437976174
+     ]
+    },
+    "budget": {
+     "steps": 1861916,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 19.245537281036377
+ },
+ {
+  "id": "DU2_speed_friction#0",
+  "world": "DU2_speed_friction",
+  "kind": "unknown",
+  "truth": null,
+  "target_condition": {
+   "mu_patch": 0.33411486919577643,
+   "patch_start": 0.9987971979067167,
+   "v_cmd": 1.2701158012707852
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "aniso",
+    "top_weight": 1.0,
+    "map_value": 0.3,
+    "entropy0": 7.751878936666625e-38,
+    "entropy": 7.751878936666625e-38,
+    "history": [
+     {
+      "weights": {
+       "none": 8.897796737986068e-203,
+       "mu_scale": 8.618029970939231e-40,
+       "kinetic_ratio": 2.0725248309943776e-101,
+       "aniso": 1.0,
+       "force_scale": 6.355569098561228e-204,
+       "action_delay": 6.844459029220299e-204,
+       "force_max": 7.027430646769279e-204,
+       "pole_mass": 8.993203342516527e-204,
+       "cart_damping": 2.5613926314955255e-203,
+       "obs_delay": 6.844459029220299e-204,
+       "theta_bias": 6.844459029220299e-204
+      },
+      "entropy": 7.751878936666625e-38,
+      "top": "aniso"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 70.95691830154472,
+     "per_log": [
+      70.95691830154472,
+      45.8744870046782,
+      19.18880428190662,
+      18.067350135115785,
+      20.82476835647069,
+      20.28667802463508,
+      38.001413978827856,
+      47.59757301804547,
+      28.074734379993252
+     ]
+    },
+    "budget": {
+     "steps": 194300,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "aniso",
+    "top_weight": 1.0,
+    "map_value": 0.3,
+    "entropy0": 7.751878936666625e-38,
+    "entropy": 8.361135508491407e-74,
+    "history": [
+     {
+      "weights": {
+       "none": 8.897796737986068e-203,
+       "mu_scale": 8.618029970939231e-40,
+       "kinetic_ratio": 2.0725248309943776e-101,
+       "aniso": 1.0,
+       "force_scale": 6.355569098561228e-204,
+       "action_delay": 6.844459029220299e-204,
+       "force_max": 7.027430646769279e-204,
+       "pole_mass": 8.993203342516527e-204,
+       "cart_damping": 2.5613926314955255e-203,
+       "obs_delay": 6.844459029220299e-204,
+       "theta_bias": 6.844459029220299e-204
+      },
+      "entropy": 7.751878936666625e-38,
+      "top": "aniso"
+     },
+     {
+      "weights": {
+       "none": 5.298945097870229e-185,
+       "mu_scale": 4.821225623383059e-76,
+       "kinetic_ratio": 1.2342600777254546e-83,
+       "aniso": 1.0,
+       "force_scale": 3.784960784192872e-186,
+       "action_delay": 4.076111613746477e-186,
+       "force_max": 4.1850775279397465e-186,
+       "pole_mass": 5.246433591597953e-186,
+       "cart_damping": 1.5375653271525735e-185,
+       "obs_delay": 4.076111613746477e-186,
+       "theta_bias": 4.076111613746477e-186
+      },
+      "entropy": 8.361135508491407e-74,
+      "top": "aniso",
+      "entropy_drop": 7.751878936666625e-38
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.1632356229384456,
+      "max_speed": 1.3952690340257403,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 70.95691830154472,
+     "per_log": [
+      70.95691830154472,
+      45.8744870046782,
+      19.18880428190662,
+      18.067350135115785,
+      20.82476835647069,
+      20.28667802463508,
+      38.001413978827856,
+      47.59757301804547,
+      28.074734379993252,
+      5.905655977935268
+     ]
+    },
+    "budget": {
+     "steps": 428046,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "aniso",
+    "top_weight": 1.0,
+    "map_value": 0.3,
+    "entropy0": 7.751878936666625e-38,
+    "entropy": 8.361135508491407e-74,
+    "history": [
+     {
+      "weights": {
+       "none": 8.897796737986068e-203,
+       "mu_scale": 8.618029970939231e-40,
+       "kinetic_ratio": 2.0725248309943776e-101,
+       "aniso": 1.0,
+       "force_scale": 6.355569098561228e-204,
+       "action_delay": 6.844459029220299e-204,
+       "force_max": 7.027430646769279e-204,
+       "pole_mass": 8.993203342516527e-204,
+       "cart_damping": 2.5613926314955255e-203,
+       "obs_delay": 6.844459029220299e-204,
+       "theta_bias": 6.844459029220299e-204
+      },
+      "entropy": 7.751878936666625e-38,
+      "top": "aniso"
+     },
+     {
+      "weights": {
+       "none": 5.298945097870229e-185,
+       "mu_scale": 4.821225623383059e-76,
+       "kinetic_ratio": 1.2342600777254546e-83,
+       "aniso": 1.0,
+       "force_scale": 3.784960784192872e-186,
+       "action_delay": 4.076111613746477e-186,
+       "force_max": 4.1850775279397465e-186,
+       "pole_mass": 5.246433591597953e-186,
+       "cart_damping": 1.5375653271525735e-185,
+       "obs_delay": 4.076111613746477e-186,
+       "theta_bias": 4.076111613746477e-186
+      },
+      "entropy": 8.361135508491407e-74,
+      "top": "aniso",
+      "entropy_drop": 7.751878936666625e-38
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.1632356229384456,
+      "max_speed": 1.3952690340257403,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 70.95691830154472,
+     "per_log": [
+      70.95691830154472,
+      45.8744870046782,
+      19.18880428190662,
+      18.067350135115785,
+      20.82476835647069,
+      20.28667802463508,
+      38.001413978827856,
+      47.59757301804547,
+      28.074734379993252,
+      5.905655977935268
+     ]
+    },
+    "budget": {
+     "steps": 1772046,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "aniso",
+    "top_weight": 1.0,
+    "map_value": 0.3,
+    "entropy0": 7.751878936666625e-38,
+    "entropy": 8.361135508491407e-74,
+    "history": [
+     {
+      "weights": {
+       "none": 8.897796737986068e-203,
+       "mu_scale": 8.618029970939231e-40,
+       "kinetic_ratio": 2.0725248309943776e-101,
+       "aniso": 1.0,
+       "force_scale": 6.355569098561228e-204,
+       "action_delay": 6.844459029220299e-204,
+       "force_max": 7.027430646769279e-204,
+       "pole_mass": 8.993203342516527e-204,
+       "cart_damping": 2.5613926314955255e-203,
+       "obs_delay": 6.844459029220299e-204,
+       "theta_bias": 6.844459029220299e-204
+      },
+      "entropy": 7.751878936666625e-38,
+      "top": "aniso"
+     },
+     {
+      "weights": {
+       "none": 5.298945097870229e-185,
+       "mu_scale": 4.821225623383059e-76,
+       "kinetic_ratio": 1.2342600777254546e-83,
+       "aniso": 1.0,
+       "force_scale": 3.784960784192872e-186,
+       "action_delay": 4.076111613746477e-186,
+       "force_max": 4.1850775279397465e-186,
+       "pole_mass": 5.246433591597953e-186,
+       "cart_damping": 1.5375653271525735e-185,
+       "obs_delay": 4.076111613746477e-186,
+       "theta_bias": 4.076111613746477e-186
+      },
+      "entropy": 8.361135508491407e-74,
+      "top": "aniso",
+      "entropy_drop": 7.751878936666625e-38
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.1632356229384456,
+      "max_speed": 1.3952690340257403,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [
+     0.11690684557032228
+    ],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 70.95691830154472,
+     "per_log": [
+      70.95691830154472,
+      45.8744870046782,
+      19.18880428190662,
+      18.067350135115785,
+      20.82476835647069,
+      20.28667802463508,
+      38.001413978827856,
+      47.59757301804547,
+      28.074734379993252,
+      5.905655977935268
+     ]
+    },
+    "budget": {
+     "steps": 1774750,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 19.176454544067383
+ },
+ {
+  "id": "DU2_speed_friction#1",
+  "world": "DU2_speed_friction",
+  "kind": "unknown",
+  "truth": null,
+  "target_condition": {
+   "mu_patch": 0.2690329232843557,
+   "patch_start": 0.8203783580855903,
+   "v_cmd": 0.9665752880129014
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.4,
+    "entropy0": 2.4636116374082463e-95,
+    "entropy": 2.4636116374082463e-95,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 8.453143339598427e-141,
+       "aniso": 1.1035102902214055e-97,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 2.4636116374082463e-95,
+      "top": "mu_scale"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 90.54254960955028,
+     "per_log": [
+      8.771681714756127,
+      43.70356980352235,
+      17.19236518836297,
+      45.19007226364062,
+      90.54254960955028,
+      18.81250402925973,
+      38.04384985254123,
+      51.52962388989987,
+      13.624772425911438
+     ]
+    },
+    "budget": {
+     "steps": 201402,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.4,
+    "entropy0": 2.4636116374082463e-95,
+    "entropy": 9.716337084214701e-105,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 8.453143339598427e-141,
+       "aniso": 1.1035102902214055e-97,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 2.4636116374082463e-95,
+      "top": "mu_scale"
+     },
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 1.2320287388586894e-131,
+       "aniso": 3.9658700056882566e-107,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 9.716337084214701e-105,
+      "top": "mu_scale",
+      "entropy_drop": 2.4636116364366125e-95
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.1481520338159312,
+      "max_speed": 0.8872663562527218,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 90.54254960955028,
+     "per_log": [
+      8.771681714756127,
+      43.70356980352235,
+      17.19236518836297,
+      45.19007226364062,
+      90.54254960955028,
+      18.81250402925973,
+      38.04384985254123,
+      51.52962388989987,
+      13.624772425911438,
+      15.700701898962874
+     ]
+    },
+    "budget": {
+     "steps": 442250,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.4,
+    "entropy0": 2.4636116374082463e-95,
+    "entropy": 3.999984315459871e-105,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 8.453143339598427e-141,
+       "aniso": 1.1035102902214055e-97,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 2.4636116374082463e-95,
+      "top": "mu_scale"
+     },
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 7.205913806950351e-147,
+       "aniso": 1.6267370971644257e-107,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 3.999984315459871e-105,
+      "top": "mu_scale",
+      "entropy_drop": 2.463611637008248e-95
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.4,
+       "speed": 0.6,
+       "kind": "none",
+       "amplitude": 0.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.4,v=0.6)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.1481520338159312,
+      "max_speed": 0.8872663562527218,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 90.54254960955028,
+     "per_log": [
+      8.771681714756127,
+      43.70356980352235,
+      17.19236518836297,
+      45.19007226364062,
+      90.54254960955028,
+      18.81250402925973,
+      38.04384985254123,
+      51.52962388989987,
+      13.624772425911438,
+      5.081015537931094
+     ]
+    },
+    "budget": {
+     "steps": 1786250,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.4,
+    "entropy0": 2.4636116374082463e-95,
+    "entropy": 4.9574271493150615e-107,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 8.453143339598427e-141,
+       "aniso": 1.1035102902214055e-97,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 2.4636116374082463e-95,
+      "top": "mu_scale"
+     },
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 1.1767393252127728e-149,
+       "aniso": 1.9806070309242297e-109,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 4.9574271493150615e-107,
+      "top": "mu_scale",
+      "entropy_drop": 2.4636116374032888e-95
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "none",
+       "amplitude": 0.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.1481520338159312,
+      "max_speed": 0.8872663562527218,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [
+     0.11690679442176576
+    ],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 90.54254960955028,
+     "per_log": [
+      8.771681714756127,
+      43.70356980352235,
+      17.19236518836297,
+      45.19007226364062,
+      90.54254960955028,
+      18.81250402925973,
+      38.04384985254123,
+      51.52962388989987,
+      13.624772425911438,
+      13.0788829919504
+     ]
+    },
+    "budget": {
+     "steps": 1799770,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 19.98197364807129
+ },
+ {
+  "id": "DU2_speed_friction#2",
+  "world": "DU2_speed_friction",
+  "kind": "unknown",
+  "truth": null,
+  "target_condition": {
+   "mu_patch": 0.2760588142179314,
+   "patch_start": 0.757386230811725,
+   "v_cmd": 1.1437794363348632
+  },
+  "runs": {
+   "passive_abstain": {
+    "method": "passive_abstain",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.4,
+    "entropy0": 4.743934599492651e-59,
+    "entropy": 4.743934599492651e-59,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 3.4072207735000236e-61,
+       "aniso": 3.93035719505231e-195,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 4.743934599492651e-59,
+      "top": "mu_scale"
+     }
+    ],
+    "probes": [],
+    "n_probes": 0,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 86.55975799925929,
+     "per_log": [
+      40.98539018948218,
+      11.599453818352005,
+      25.146140921759,
+      86.55975799925929,
+      44.737798749228794,
+      19.909478246269295,
+      54.34551334892703,
+      30.086142043018107,
+      2.722315018337175
+     ]
+    },
+    "budget": {
+     "steps": 194032,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "fixed": {
+    "method": "fixed",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.4,
+    "entropy0": 4.743934599492651e-59,
+    "entropy": 8.756876015954315e-60,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 3.4072207735000236e-61,
+       "aniso": 3.93035719505231e-195,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 4.743934599492651e-59,
+      "top": "mu_scale"
+     },
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 6.213478417176126e-62,
+       "aniso": 5.375585739754861e-196,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 8.756876015954315e-60,
+      "top": "mu_scale",
+      "entropy_drop": 3.86824699789722e-59
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.16762510446020645,
+      "max_speed": 1.2324098384195745,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 86.55975799925929,
+     "per_log": [
+      40.98539018948218,
+      11.599453818352005,
+      25.146140921759,
+      86.55975799925929,
+      44.737798749228794,
+      19.909478246269295,
+      54.34551334892703,
+      30.086142043018107,
+      2.722315018337175,
+      5.230283224941756
+     ]
+    },
+    "budget": {
+     "steps": 427510,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "random": {
+    "method": "random",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.4,
+    "entropy0": 4.743934599492651e-59,
+    "entropy": 8.756876015954315e-60,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 3.4072207735000236e-61,
+       "aniso": 3.93035719505231e-195,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 4.743934599492651e-59,
+      "top": "mu_scale"
+     },
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 6.213478417176126e-62,
+       "aniso": 5.375585739754861e-196,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 8.756876015954315e-60,
+      "top": "mu_scale",
+      "entropy_drop": 3.86824699789722e-59
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.5,
+       "speed": 0.6,
+       "kind": "pulse",
+       "amplitude": -4.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.16762510446020645,
+      "max_speed": 1.2324098384195745,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 86.55975799925929,
+     "per_log": [
+      40.98539018948218,
+      11.599453818352005,
+      25.146140921759,
+      86.55975799925929,
+      44.737798749228794,
+      19.909478246269295,
+      54.34551334892703,
+      30.086142043018107,
+      2.722315018337175,
+      5.230283224941756
+     ]
+    },
+    "budget": {
+     "steps": 1771510,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   },
+   "active": {
+    "method": "active",
+    "top": "mu_scale",
+    "top_weight": 1.0,
+    "map_value": 0.4,
+    "entropy0": 4.743934599492651e-59,
+    "entropy": 6.284643450764537e-65,
+    "history": [
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 3.4072207735000236e-61,
+       "aniso": 3.93035719505231e-195,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 4.743934599492651e-59,
+      "top": "mu_scale"
+     },
+     {
+      "weights": {
+       "none": 0.0,
+       "mu_scale": 1.0,
+       "kinetic_ratio": 4.111387180347657e-67,
+       "aniso": 3.0663734917643097e-198,
+       "force_scale": 0.0,
+       "action_delay": 0.0,
+       "force_max": 0.0,
+       "pole_mass": 0.0,
+       "cart_damping": 0.0,
+       "obs_delay": 0.0,
+       "theta_bias": 0.0
+      },
+      "entropy": 6.284643450764537e-65,
+      "top": "mu_scale",
+      "entropy_drop": 4.7439283148492e-59
+     }
+    ],
+    "probes": [
+     {
+      "probe": {
+       "mu": 0.4,
+       "speed": 0.6,
+       "kind": "none",
+       "amplitude": 0.0,
+       "frequency": 0.0,
+       "name": "cross(mu=0.4,v=0.6)"
+      },
+      "physical_s": 3.5,
+      "fell": false,
+      "aborted": false,
+      "max_tilt": 0.16762510446020645,
+      "max_speed": 1.2228076393459517,
+      "violation": false
+     }
+    ],
+    "n_probes": 1,
+    "eig": [
+     0.11690682870800458
+    ],
+    "safety_violations": 0,
+    "status_hint": null,
+    "unknown_stat": {
+     "peak": 86.55975799925929,
+     "per_log": [
+      40.98539018948218,
+      11.599453818352005,
+      25.146140921759,
+      86.55975799925929,
+      44.737798749228794,
+      19.909478246269295,
+      54.34551334892703,
+      30.086142043018107,
+      2.722315018337175,
+      3.223534915271583
+     ]
+    },
+    "budget": {
+     "steps": 1785030,
+     "evaluations": 0,
+     "p_nominal_event": 0.0
+    }
+   }
+  },
+  "seconds": 18.01064395904541
+ }
+]

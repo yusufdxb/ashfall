@@ -1,0 +1,1 @@
+restart 2026-09-22T11:59:41-04:00: first launch was oversubscribed (load 64, 20 workers x multithreaded BLAS), stopped after 15 min with no result written; relaunched at the same commit with one BLAS thread per worker

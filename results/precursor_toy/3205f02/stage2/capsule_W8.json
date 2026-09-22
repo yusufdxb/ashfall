@@ -1,0 +1,5121 @@
+{
+  "actuator_settings": null,
+  "capsule_id": "cap_8ccf85cf962273bb34f906a356ddb79adb61e3343f553ad2f5a9f6e65a9f78f5",
+  "checkpoint_sha256": "2bb2a3bf31bef345bf7b304a5d486c418eda4aeeaedbfb10e88d598b1936e0f3",
+  "control_dt": 0.02,
+  "detector_version": null,
+  "disturbances": null,
+  "environment_metadata": null,
+  "event_descriptor": {
+    "criterion": {
+      "criterion_id": "622ee0c3283fae67c18d29452d207f42e42836ab5961a787c994060bb1fbf020",
+      "debounce_frames": 1,
+      "max_tilt_rad": 0.6,
+      "name": "toy_pole_fall_v1",
+      "stall_seconds": 1.0,
+      "stall_speed_fraction": null,
+      "use_terminal_flags": true
+    },
+    "criterion_id": "622ee0c3283fae67c18d29452d207f42e42836ab5961a787c994060bb1fbf020",
+    "onset_label_source": "explicit_review",
+    "onset_reason": "attitude",
+    "onset_timestamp_s": 2.36
+  },
+  "failure_mode": "unclassified",
+  "failure_onset_index": 117,
+  "frames": [
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.08309660609693184,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -0.15227798771062903,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.0028917934904322783,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.008461622455911325,
+        0.0,
+        0.9999641998318808
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.867747693861798,
+        -0.4970049695903769
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.02
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.17252543766032874,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -0.29216843011387306,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.008702912334391535,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.008778178486562042,
+        0.0,
+        0.999961471048989
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.9455069410871482,
+        -0.32560194157287237
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.04
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.1052763872632764,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -0.41784072714313913,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.017046497023906766,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.0058570660823571334,
+        0.0,
+        0.9999828472413449
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.9897711335489761,
+        -0.14266430244870298
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.06
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.021226426200207708,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -0.5170046581289349,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.02789491711619073,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.006606121671181208,
+        0.0,
+        0.9999781793401622
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.9989721901617349,
+        0.045327290713947185
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.08
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.015413289534806685,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -0.6737610467329676,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.041389005680572785,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.007371089395505101,
+        0.0,
+        0.999972833151543
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.9727841589077986,
+        0.23171314200546939
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.1
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.04397147647909628,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -0.793126651469317,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.05749439173941801,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.007319659065335752,
+        0.0,
+        0.9999732109367566
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.9121347638501879,
+        0.40989043972257033
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.12
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.08331386408611775,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -0.9378742945438858,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.07649588571308381,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.006129396691856746,
+        0.0,
+        0.9999812150716602
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.8191725400451269,
+        0.5735471642646445
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.14
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.16104261535628575,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -1.1294886872518424,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.09840781048422056,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.004510964429436627,
+        0.0,
+        0.9999898255481985
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.6971907206165409,
+        0.7168856945749361
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.16
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.15072405209154494,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -1.2523881335646012,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.12297008135138744,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.0008213124356568033,
+        0.0,
+        0.9999996627228847
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.5505105723308235,
+        0.8348281917568363
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.18
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.4647892516824205,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -1.4225742535388701,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.1509394690892182,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.005270185377624304,
+        0.0,
+        0.9999861124766111
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.3843283125673023,
+        0.9231964840483146
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.2
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.7002780770163756,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -1.5605366650325878,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.1822198364372847,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.008830776522656314,
+        0.0,
+        0.9999610079328128
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.20453103072703954,
+        0.978860080639585
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.22
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.7428095094663385,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -1.6848394919077758,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.216068953303022,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.01661049520112144,
+        0.0,
+        0.9998620362075827
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.01748813515583496,
+        0.9998470708707263
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.24
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.7214254588773913,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -1.6748264221920413,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.24999626139078399,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.022438658103279253,
+        0.0,
+        0.9997482216150845
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.17017428632184584,
+        0.9854139801498913
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.26
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.6132958115093973,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -1.6239281785701023,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.2823854710551808,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.03553115508535836,
+        0.0,
+        0.9993685691566951
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.35180819886744025,
+        0.9360721079113764
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.28
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.52583009289065,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -1.5328441372270254,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.3134493947070051,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.034703902465992933,
+        0.0,
+        0.9993976381569204
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.5209791305767735,
+        0.8535694145782574
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.3
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.5733529360286378,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -1.4861327016700938,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.3433195839337697,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.0452889969284824,
+        0.0,
+        0.9989739269656701
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.6716941168551225,
+        0.7408285991929692
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.32
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.5416660377995858,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -1.3533643445013543,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.37095859034375134,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.04398731414756667,
+        0.0,
+        0.99903208967184
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.7986140041757321,
+        0.6018435613466373
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.34
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.7114869022026097,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -1.2700087978628039,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.39670514840085613,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.054262997487466304,
+        0.0,
+        0.998526678213294
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.8972425922552965,
+        0.44153791529493336
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.36
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.705400944251727,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -1.1657519516927641,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.41978339019457567,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.06368339583259522,
+        0.0,
+        0.997970152406989
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.9640859141905419,
+        0.2655905684684361
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.38
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.712755002718326,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -1.0315923209335918,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.44027922873535874,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.06359954602363874,
+        0.0,
+        0.9979754995718016
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.9967760119776673,
+        0.080234543345726
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.4
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.8229943258634225,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -0.8803156968521997,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.45833019042690337,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.07894842671396878,
+        0.0,
+        0.9968787017081813
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.9941548226051568,
+        -0.10796383047534612
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.42
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.8748550295087467,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -0.7699823545237718,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.47395737131889565,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.08321253699697119,
+        0.0,
+        0.9965318227164287
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.956315203013306,
+        -0.2923375317772579
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.44
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.132118768715732,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -0.6888108558719197,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.48750248418311765,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.10190809482619305,
+        0.0,
+        0.9947938179386197
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.8845976405908191,
+        -0.4663550302732414
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.46
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.2595994394289196,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -0.582037068825678,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.4986461929525842,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.11193821250920913,
+        0.0,
+        0.9937151687381265
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.7815427657407746,
+        -0.6238516693239353
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.48
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.28877761783097,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -0.4235437804740878,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.5072036139255782,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.12149954314762144,
+        0.0,
+        0.9925914874785695
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.6508013487819828,
+        -0.7592480519721813
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.5
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.2399247555886017,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -0.30852136639042316,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.5130097900262749,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.1327420802588475,
+        0.0,
+        0.9911506142502025
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.49700496959037777,
+        -0.8677476938617974
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.52
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.2801460184892062,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -0.18589792705395838,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.5161994383549866,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.14372708555689773,
+        0.0,
+        0.9896173628616871
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.32560194157287253,
+        -0.9455069410871481
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.54
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.1747745874558693,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        -0.006144617043524227,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.5164815259489547,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.15883170675248448,
+        0.0,
+        0.9873056714767179
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.1426643024487023,
+        -0.9897711335489762
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.56
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.087436709862893,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        0.10225296127369156,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.5138057316919384,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.16902044174048744,
+        0.0,
+        0.985612545716546
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.04532729071394878,
+        -0.9989721901617348
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.58
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.0517750674903419,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        0.25562711742562055,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.5083560980474131,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.1809024653452579,
+        0.0,
+        0.9835010411951823
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.2317131420054718,
+        -0.972784158907798
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.6
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.899108706047268,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        0.46269646839057954,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.49975173335612444,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.19000583042839556,
+        0.0,
+        0.9817829619642092
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.4098904397225734,
+        -0.9121347638501864
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.62
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.6889622992725802,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        0.5699892790010216,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.4879573426447605,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.19616990063495623,
+        0.0,
+        0.9805699210586012
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.5735471642646479,
+        -0.8191725400451244
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.64
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.5523284567648652,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        0.7336112406307271,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.4730877208456563,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.19925655803023917,
+        0.0,
+        0.979947357811603
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.7168856945749397,
+        -0.6971907206165371
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.66
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.28627405597093486,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        0.9012234732232342,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.4549875646218728,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.2083802144275285,
+        0.0,
+        0.9780478956754303
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.8348281917568396,
+        -0.5505105723308185
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.68
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.0064087385242530305,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.0705671635616578,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.4334447004627576,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.20361453517054268,
+        0.0,
+        0.9790511330197641
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.9231964840483172,
+        -0.38432831256729594
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.7000000000000001
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.37936561226583965,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.2579004046322113,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.4082439979936972,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.19988462606120572,
+        0.0,
+        0.9798194406442301
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.9788600806395866,
+        -0.2045310307270319
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.72
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.7988613823967525,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.4674540510714447,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.37918538553480796,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.1945791203788915,
+        0.0,
+        0.980886826250907
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.9998470708707264,
+        -0.017488135155826263
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.74
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -1.2112510637378493,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.6082536959738116,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.34679841952300794,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.1813283611662135,
+        0.0,
+        0.9834226077515075
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.9854139801498897,
+        0.1701742863218553
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.76
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -1.4853786592948324,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.6832748770816168,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.3125392449132336,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.16146370753589223,
+        0.0,
+        0.9868786506702655
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.9360721079113727,
+        0.3518081988674501
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.78
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -1.5609535158583057,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.7183912181736616,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.27831319252747916,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.15206716559218966,
+        0.0,
+        0.9883701620085248
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.8535694145782515,
+        0.5209791305767832
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.8
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -1.6872939797448765,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.7161067199932378,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.24367296894099905,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.13535344088417012,
+        0.0,
+        0.9907973789028791
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.740828599192961,
+        0.6716941168551316
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.8200000000000001
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -1.7473271673245672,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.7702008170854462,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.20858839830415493,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.11752986107539944,
+        0.0,
+        0.9930693489155716
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.6018435613466269,
+        0.7986140041757401
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.84
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -1.834065779756471,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.8012717896342236,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.17327681501869857,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.09757589929577654,
+        0.0,
+        0.9952280863584089
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.44153791529492076,
+        0.8972425922553027
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.86
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -1.8173157645136429,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.7537346747922933,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.13809683737763606,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.08065980407116506,
+        0.0,
+        0.9967416897106297
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.2655905684684217,
+        0.9640859141905459
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.88
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -1.8248491530245106,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.7674405086133498,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.10296622636888388,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.05811325299444289,
+        0.0,
+        0.9983099968578918
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.08023454334571024,
+        0.9967760119776686
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.9
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -1.7186580457049732,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.7126933220765364,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.0684297039172753,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.047240847445962145,
+        0.0,
+        0.9988835279113313
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.10796383047536272,
+        0.994154822605155
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.92
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -1.6344636078686336,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.7502763580919674,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        -0.033749504566895704,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.023040181084198138,
+        0.0,
+        0.999734539793243
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.29233753177727473,
+        0.9563152030133009
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.9400000000000001
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -1.5265721487584039,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.718395306518556,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.0007044263904525186,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.01158641318497027,
+        0.0,
+        0.9999328752618883
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.4663550302732569,
+        0.884597640590811
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.96
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -1.3228332171899724,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.7331236747639505,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.03491088344960677,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.00383254758353593,
+        0.0,
+        0.999992655762541
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.623851669323949,
+        0.7815427657407636
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 0.98
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -1.1050435731192312,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.7272810876571478,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.06901609607423029,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.011472457075176405,
+        0.0,
+        0.9999341891987984
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.7592480519721927,
+        0.6508013487819694
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.0
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -1.0805633433954351,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.7462548908492046,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.10446102079203486,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.026154846089211294,
+        0.0,
+        0.9996579034980165
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.8677476938618062,
+        0.49700496959036256
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.02
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.7977700779360156,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.7414058787925157,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.1396447503889211,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.02812588463900112,
+        0.0,
+        0.9996043890526259
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.9455069410871538,
+        0.3256019415728559
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.04
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.5834442601430477,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.7696287376865387,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.17545724524587053,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.0351469669442126,
+        0.0,
+        0.9993821544907746
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.9897711335489787,
+        0.1426643024486849
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.06
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.49388358683191824,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.898696912698872,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.2130369600029465,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.041463369228622565,
+        0.0,
+        0.9991400247273707
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.998972190161734,
+        -0.045327290713966344
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.08
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.34959361495239755,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.9432740147011713,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.2519056812546392,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.03876274477659124,
+        0.0,
+        0.9992484423892714
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.972784158907794,
+        -0.2317131420054889
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.1
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.1638110912670079,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.9967125903654452,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.2916621530276674,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.04368790733694911,
+        0.0,
+        0.9990452275810731
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.9121347638501792,
+        -0.40989043972258943
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.12
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.01836620050040133,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        2.011788364093973,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.3325187087151951,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.05029769512677446,
+        0.0,
+        0.9987342698961191
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.8191725400451143,
+        -0.5735471642646623
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.1400000000000001
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.09276329264266782,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        2.0938745549692768,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.3745219099860978,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.04964338746450072,
+        0.0,
+        0.998767006904538
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.6971907206165245,
+        -0.7168856945749519
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.16
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.25685300954586066,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        2.1085906905495126,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.41672443670508447,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.03868886901275067,
+        0.0,
+        0.9992513054354817
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.5505105723308038,
+        -0.8348281917568493
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.18
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.4409530605342101,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        2.044887900888217,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.45860413309238834,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.039090634325375885,
+        0.0,
+        0.9992356690531217
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.3843283125672797,
+        -0.923196484048324
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.2
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.4690416833981359,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        2.113399095401992,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.5011475038183555,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.03464144363437653,
+        0.0,
+        0.9993998050744889
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.2045310307270147,
+        -0.9788600806395902
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.22
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.45033241886507974,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        2.121869152052223,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.5437395467025506,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.031215089277594907,
+        0.0,
+        0.9995126903653558
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.017488135155808687,
+        -0.9998470708707268
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.24
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.46202757454096754,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        2.116087335302797,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.5853165987845915,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.023632318187961195,
+        0.0,
+        0.9997207177692493
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.17017428632187262,
+        -0.9854139801498867
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.26
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.6009537393160557,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.9764468203122598,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.625166403593788,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.016579433336348315,
+        0.0,
+        0.999862551749112
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.3518081988674649,
+        -0.9360721079113672
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.28
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.601292096728257,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.9378928992190405,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.6640962699503252,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.01449506963965425,
+        0.0,
+        0.9998949409593698
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.5209791305767952,
+        -0.8535694145782442
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.3
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.4730440530588969,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.8972056787650786,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.7022658865264026,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.007302631743898782,
+        0.0,
+        0.9999733354293069
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.6716941168551407,
+        -0.7408285991929527
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.32
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.40896787437013515,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.8061255847998032,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.7387820334646613,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.0023230546192463046,
+        0.0,
+        0.9999973017049776
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.7986140041757464,
+        -0.6018435613466184
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.34
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.242699483271141,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.7647840705357898,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.7742569099181682,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.005275418269240457,
+        0.0,
+        0.999986084884227
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.8972425922553066,
+        -0.441537915294913
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.36
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.1263775454856091,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.670361285511493,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.8076175965390489,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.005352405918378718,
+        0.0,
+        0.9999856757728507
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.9640859141905477,
+        -0.26559056846841506
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.3800000000000001
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.028444274116129827,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.5585158120536249,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.838619259496225,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.002007291089205516,
+        0.0,
+        0.9999979853892123
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.996776011977669,
+        -0.08023454334570512
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.4000000000000001
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.007970998582958938,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.3886860253314735,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.8670751738296721,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.002385950110656607,
+        0.0,
+        0.9999971536169838
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.9941548226051546,
+        0.10796383047536608
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.42
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.025265600361203143,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.2650015744383032,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.8924169171539386,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.0010919422905665318,
+        0.0,
+        0.9999994038308393
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.9563152030133004,
+        0.2923375317772763
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.44
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.06592691927497107,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.1604007763071884,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.9158880599343118,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.002099665114976255,
+        0.0,
+        0.999997795700773
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.884597640590811,
+        0.46635503027325675
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.46
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.21934801392069297,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.1070656427519767,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.9383415517890364,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.004426586073610556,
+        0.0,
+        0.9999902026198721
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.7815427657407649,
+        0.6238516693239475
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.48
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.36569287541073486,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.0803094417199586,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.9600195561630868,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.008811588819665614,
+        0.0,
+        0.9999611771976316
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.6508013487819723,
+        0.7592480519721903
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.5
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.4528878414604271,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.0810448821486496,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        0.9814810875293861,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.008347685575991767,
+        0.0,
+        0.9999651574657611
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.49700496959036733,
+        0.8677476938618034
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.52
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.48575988123985037,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.055906014913664,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.0026575888979998,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.015334298653374092,
+        0.0,
+        0.9998824227301973
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.3256019415728628,
+        0.9455069410871514
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.54
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.5313403196625853,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.1176366645201266,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.0246318384647635,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.024016529429548808,
+        0.0,
+        0.9997115615587125
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.14266430244869385,
+        0.9897711335489774
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.56
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.8570000183921136,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.1567763114490972,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.0486502616449742,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.033831811599658874,
+        0.0,
+        0.9994275404069498
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.04532729071395551,
+        0.9989721901617344
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.58
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.7714693160093701,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.1270072785719891,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.0714986054997946,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.03920500434481336,
+        0.0,
+        0.9992311882814323
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.23171314200547663,
+        0.9727841589077969
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.6
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.6726463124366968,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.1080814623580317,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.0940843000387457,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.04512320314615335,
+        0.0,
+        0.9989814295260102
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.4098904397225763,
+        0.9121347638501851
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.62
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.6435989984994229,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.1055621406998104,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.1164393240631725,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.052813695342973914,
+        0.0,
+        0.9986043829185908
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.5735471642646491,
+        0.8191725400451236
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.6400000000000001
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.5815227376272657,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.1098821272910218,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.1385603853951225,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.0576446185834977,
+        0.0,
+        0.9983371664665015
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.7168856945749394,
+        0.6971907206165374
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.6600000000000001
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.30359316842905837,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.0897143795565583,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.159886694899112,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.0596025513122967,
+        0.0,
+        0.9982221876301213
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.8348281917568385,
+        0.5505105723308202
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.68
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        -0.14326107973319788,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.0656443054901323,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.181020161997795,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.0648877759436384,
+        0.0,
+        0.997892567630949
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.9231964840483158,
+        0.38432831256729955
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.7
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.07875717489000479,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.0441202246464933,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.2016685712548911,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.057025591520868085,
+        0.0,
+        0.9983727169307538
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.9788600806395854,
+        0.2045310307270375
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.72
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.3423821561715865,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        0.9975811784265783,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.2218878921948677,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.055616333166890436,
+        0.0,
+        0.9984522139216626
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.9998470708707263,
+        0.017488135155833737
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.74
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.6138518741661143,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.0059654199888788,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.2414889071208075,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.052324388028851816,
+        0.0,
+        0.9986301409517971
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.9854139801498912,
+        -0.17017428632184617
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.76
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.7717560225651878,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        0.9763926622721496,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.2608223439244377,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.039060075903781404,
+        0.0,
+        0.999236864046954
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.9360721079113766,
+        -0.35180819886743975
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.78
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.9463312148399698,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        0.9656375074053202,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.2799369286019697,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.033413534601902294,
+        0.0,
+        0.9994416119540989
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.8535694145782582,
+        -0.5209791305767723
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.8
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.2076138491209536,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        0.9227965895315456,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.298588961922264,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.01671530701884682,
+        0.0,
+        0.9998602894961204
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.7408285991929708,
+        -0.6716941168551208
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.82
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.3881918565005664,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        0.9227925583255089,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.316950557103806,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        -0.009123532885782683,
+        0.0,
+        0.9999583797077166
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.6018435613466399,
+        -0.7986140041757303
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.84
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.5304694693256609,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        0.9163422861156368,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.33518337553624,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.010328400486744252,
+        0.0,
+        0.9999466606491495
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.441537915294937,
+        -0.8972425922552947
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.86
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.6480316639146517,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        0.9328400578181683,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.3533249924484267,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.025184902994056194,
+        0.0,
+        0.9996828100258501
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.2655905684684409,
+        -0.9640859141905406
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.8800000000000001
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.7500267970587835,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        0.8681459633639894,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.3712367498327374,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.039203897855564475,
+        0.0,
+        0.9992312316941112
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.08023454334573187,
+        -0.9967760119776669
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.9000000000000001
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.8263196235266295,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        0.8764252601357656,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.3892696188899947,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.05524106551735134,
+        0.0,
+        0.9984730465468298
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.1079638304753394,
+        -0.9941548226051575
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.92
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.6645917582013778,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        0.9513741648125371,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.4079192193988581,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.07809193329353174,
+        0.0,
+        0.996946162014017
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.2923375317772506,
+        -0.9563152030133083
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.94
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.6737682521422563,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        0.9546958797231977,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.4268377633001534,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.09460745890458387,
+        0.0,
+        0.995514655200825
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.46635503027323305,
+        -0.8845976405908236
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.96
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.6296830622425091,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        0.9454449299277969,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.4459784536309188,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.10652592638614604,
+        0.0,
+        0.9943099250271886
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.6238516693239265,
+        -0.7815427657407816
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 1.98
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.5813788398337933,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        0.991448794046519,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.4655623471071246,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.12675575100143813,
+        0.0,
+        0.991933959287644
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.7592480519721728,
+        -0.6508013487819926
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 2.0
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.546903341378341,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.0045907104922147,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.4855674165253572,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.1424335209100348,
+        0.0,
+        0.9898043706314752
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.8677476938617901,
+        -0.4970049695903906
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 2.02
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.3819644728720686,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.008566687344023,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.5062659105865457,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.15436415950066734,
+        0.0,
+        0.9880140212879838
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.9455069410871427,
+        -0.3256019415728882
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 2.04
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.224604182751609,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.0784195853197664,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.5276387665767943,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.16921361940393606,
+        0.0,
+        0.9855793986322056
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.9897711335489735,
+        -0.14266430244872041
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 2.06
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.0163826774184845,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.1268873761453906,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.5497040412878786,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.17507640184153572,
+        0.0,
+        0.9845548504365925
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.9989721901617357,
+        0.04532729071392871
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 2.08
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.9571252606544698,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.122548154711097,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.5722210264945573,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.18278181845122154,
+        0.0,
+        0.9831535011602536
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.9727841589078031,
+        0.23171314200545054
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 2.1
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.8418892483079345,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.1527340923821316,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.5953046017070653,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.1952275878959278,
+        0.0,
+        0.980757966536259
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.9121347638501961,
+        0.40989043972255185
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 2.12
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.7371890122559552,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.1747375652490233,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.6188568554158809,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.19839647036754757,
+        0.0,
+        0.9801218498460785
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.819172540045139,
+        0.5735471642646272
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 2.14
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.6921551110627324,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.2177473572085857,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.6427787442563064,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.20995852016056643,
+        0.0,
+        0.9777102944185384
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.6971907206165566,
+        0.7168856945749207
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 2.16
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.5784146299019013,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.2183105047418132,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.6671390970890458,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.21661160311292757,
+        0.0,
+        0.9762578621434235
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.5505105723308427,
+        0.8348281917568238
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 2.18
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.5651023512573716,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.2620763214038244,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.6917969285351209,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.22126191846144994,
+        0.0,
+        0.975214419211877
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.3843283125673243,
+        0.9231964840483055
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 2.2
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.5594991560318991,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.2063176559925002,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.7166542459677023,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.22456166774843359,
+        0.0,
+        0.9744598798196066
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.20453103072706375,
+        0.97886008063958
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 2.22
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.5940510245034598,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.2434020807391457,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.7416921719989322,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.2306513910321402,
+        0.0,
+        0.9730364514317739
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        -0.017488135155860562,
+        0.9998470708707259
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 2.24
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        0.7651059466638732,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.2654213065811415,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.7665570475428096,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.23386523459073982,
+        0.0,
+        0.9722690224674538
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.17017428632181975,
+        0.9854139801498959
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 2.2600000000000002
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.0644764863577532,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.2065354256590481,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.7909491861765519,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.24790856086171698,
+        0.0,
+        0.9687834357850429
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.35180819886741466,
+        0.9360721079113861
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 2.2800000000000002
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.3376821604843383,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.2146576276736594,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.8149619061860998,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.2601782683163431,
+        0.0,
+        0.9655605981479924
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.5209791305767494,
+        0.8535694145782722
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 2.3000000000000003
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.5747194039748182,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.1877919372549017,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.8387213254306822,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.27903845745009237,
+        0.0,
+        0.9602799275543944
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.6716941168551009,
+        0.7408285991929888
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 2.32
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        1.9366959293172812,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.1834139238832897,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.8618154529311184,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.295428773556193,
+        0.0,
+        0.9553647679054758
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.7986140041757142,
+        0.6018435613466613
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 2.34
+    },
+    {
+      "action": null,
+      "base_ang_vel_body": [
+        0.0,
+        2.2555215126995267,
+        0.0
+      ],
+      "base_lin_vel_body": [
+        1.1161518137970077,
+        0.0,
+        0.0
+      ],
+      "base_pos": [
+        1.8844675693199198,
+        0.0,
+        0.3
+      ],
+      "base_quat": [
+        0.0,
+        0.3193671225411715,
+        0.0,
+        0.9476310680005021
+      ],
+      "command_vel": [
+        1.2,
+        0.0,
+        0.0
+      ],
+      "contact_forces": null,
+      "imu_acceleration": null,
+      "imu_angular_velocity": null,
+      "joint_pos": [
+        0.8972425922552828,
+        0.4415379152949611
+      ],
+      "joint_torque": null,
+      "joint_vel": [
+        0.0,
+        0.0
+      ],
+      "motor_current": null,
+      "timestamp_s": 2.36
+    }
+  ],
+  "intervention": null,
+  "onset_window": null,
+  "payload": null,
+  "phenotype_label": null,
+  "policy_id": "2bb2a3bf31bef345bf7b304a5d486c418eda4aeeaedbfb10e88d598b1936e0f3",
+  "post_failure_end_index": 117,
+  "pre_failure_start_index": 67,
+  "provenance": null,
+  "robot": "slip_cartpole",
+  "schema_version": "1.0",
+  "source": "toy_deployment_world",
+  "surface_terrain_metadata": {
+    "patch_friction": null,
+    "patch_length_m": 1.0,
+    "patch_start_m": 1.15
+  },
+  "threshold_config_version": null,
+  "timestamp": null,
+  "trajectory_sha256": null
+}

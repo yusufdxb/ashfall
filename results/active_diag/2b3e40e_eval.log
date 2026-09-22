@@ -1,0 +1,146 @@
+  KD_action_latency#1: passive_abstain=action_delay/1.00/p0, fixed=action_delay/1.00/p0, random=action_delay/1.00/p0, active=action_delay/1.00/p0
+  KD_action_latency#2: passive_abstain=action_delay/1.00/p0, fixed=action_delay/1.00/p0, random=action_delay/1.00/p0, active=action_delay/1.00/p0
+  KD_action_latency#0: passive_abstain=action_delay/1.00/p0, fixed=action_delay/1.00/p0, random=action_delay/1.00/p0, active=action_delay/1.00/p0
+  KD_action_latency#3: passive_abstain=action_delay/1.00/p0, fixed=action_delay/1.00/p0, random=action_delay/1.00/p0, active=action_delay/1.00/p0
+  KB_sliding_friction#2: passive_abstain=kinetic_ratio/1.00/p0, fixed=kinetic_ratio/1.00/p1, random=kinetic_ratio/1.00/p1, active=kinetic_ratio/1.00/p1
+  KC_braking_friction#5: passive_abstain=kinetic_ratio/0.34/p0, fixed=aniso/1.00/p1, random=aniso/1.00/p1, active=aniso/1.00/p1
+  KA_patch_friction#2: passive_abstain=mu_scale/1.00/p0, fixed=mu_scale/1.00/p1, random=mu_scale/1.00/p1, active=mu_scale/1.00/p1
+  KC_braking_friction#0: passive_abstain=aniso/1.00/p0, fixed=aniso/1.00/p1, random=aniso/1.00/p1, active=aniso/1.00/p1
+  KA_patch_friction#5: passive_abstain=mu_scale/1.00/p0, fixed=mu_scale/1.00/p1, random=mu_scale/1.00/p1, active=mu_scale/1.00/p1
+  KC_braking_friction#1: passive_abstain=kinetic_ratio/1.00/p0, fixed=aniso/1.00/p1, random=aniso/1.00/p1, active=aniso/1.00/p1
+  KB_sliding_friction#0: passive_abstain=kinetic_ratio/1.00/p0, fixed=kinetic_ratio/1.00/p1, random=kinetic_ratio/1.00/p1, active=kinetic_ratio/1.00/p1
+  KB_sliding_friction#4: passive_abstain=aniso/0.80/p0, fixed=kinetic_ratio/1.00/p1, random=kinetic_ratio/1.00/p1, active=kinetic_ratio/1.00/p1
+  KC_braking_friction#3: passive_abstain=kinetic_ratio/0.40/p0, fixed=aniso/1.00/p1, random=aniso/1.00/p1, active=aniso/1.00/p1
+  KC_braking_friction#2: passive_abstain=aniso/1.00/p0, fixed=aniso/1.00/p1, random=aniso/1.00/p1, active=aniso/1.00/p1
+  KA_patch_friction#0: passive_abstain=kinetic_ratio/1.00/p0, fixed=mu_scale/1.00/p1, random=mu_scale/1.00/p1, active=mu_scale/1.00/p1
+  KC_braking_friction#4: passive_abstain=aniso/1.00/p0, fixed=aniso/1.00/p1, random=aniso/1.00/p1, active=aniso/1.00/p1
+  KA_patch_friction#4: passive_abstain=mu_scale/1.00/p0, fixed=mu_scale/1.00/p1, random=mu_scale/1.00/p1, active=mu_scale/1.00/p1
+  KA_patch_friction#3: passive_abstain=mu_scale/0.50/p0, fixed=mu_scale/1.00/p1, random=mu_scale/1.00/p1, active=mu_scale/1.00/p1
+  KB_sliding_friction#5: passive_abstain=kinetic_ratio/1.00/p0, fixed=kinetic_ratio/1.00/p1, random=kinetic_ratio/1.00/p1, active=kinetic_ratio/1.00/p1
+  KB_sliding_friction#3: passive_abstain=kinetic_ratio/1.00/p0, fixed=kinetic_ratio/1.00/p1, random=kinetic_ratio/1.00/p1, active=kinetic_ratio/1.00/p1
+  KB_sliding_friction#1: passive_abstain=mu_scale/0.42/p0, fixed=kinetic_ratio/1.00/p1, random=kinetic_ratio/1.00/p1, active=kinetic_ratio/1.00/p1
+  KA_patch_friction#1: passive_abstain=aniso/0.35/p0, fixed=mu_scale/1.00/p2, random=mu_scale/1.00/p2, active=mu_scale/1.00/p1
+  KD_action_latency#4: passive_abstain=action_delay/1.00/p0, fixed=action_delay/1.00/p0, random=action_delay/1.00/p0, active=action_delay/1.00/p0
+  KD_action_latency#5: passive_abstain=action_delay/1.00/p0, fixed=action_delay/1.00/p0, random=action_delay/1.00/p0, active=action_delay/1.00/p0
+  KE_sensor_latency#1: passive_abstain=obs_delay/1.00/p0, fixed=obs_delay/1.00/p1, random=obs_delay/1.00/p1, active=obs_delay/1.00/p1
+  KE_sensor_latency#5: passive_abstain=obs_delay/1.00/p0, fixed=obs_delay/1.00/p1, random=obs_delay/1.00/p1, active=obs_delay/1.00/p1
+  KE_sensor_latency#2: passive_abstain=obs_delay/1.00/p0, fixed=obs_delay/1.00/p1, random=obs_delay/1.00/p1, active=obs_delay/1.00/p1
+  KE_sensor_latency#3: passive_abstain=obs_delay/1.00/p0, fixed=obs_delay/1.00/p1, random=obs_delay/1.00/p1, active=obs_delay/1.00/p1
+  KE_sensor_latency#4: passive_abstain=obs_delay/1.00/p0, fixed=obs_delay/1.00/p1, random=obs_delay/1.00/p1, active=obs_delay/1.00/p1
+  KE_sensor_latency#0: passive_abstain=aniso/0.44/p0, fixed=obs_delay/1.00/p1, random=obs_delay/1.00/p1, active=obs_delay/1.00/p1
+  U1_strip#1: passive_abstain=pole_mass/0.70/p0, fixed=pole_mass/0.95/p1, random=pole_mass/0.95/p1, active=pole_mass/0.95/p1
+  U2_dropout#4: passive_abstain=kinetic_ratio/0.97/p0, fixed=kinetic_ratio/0.97/p1, random=kinetic_ratio/0.97/p1, active=kinetic_ratio/0.91/p1
+  U2_dropout#3: passive_abstain=kinetic_ratio/1.00/p0, fixed=kinetic_ratio/1.00/p1, random=kinetic_ratio/1.00/p1, active=mu_scale/0.99/p1
+  U1_strip#0: passive_abstain=kinetic_ratio/0.35/p0, fixed=none/0.33/p3, random=pole_mass/1.00/p1, active=pole_mass/1.00/p1
+  U1_strip#2: passive_abstain=pole_mass/0.61/p0, fixed=pole_mass/0.61/p0, random=pole_mass/0.94/p1, active=aniso/1.00/p2
+  U2_dropout#5: passive_abstain=mu_scale/0.34/p0, fixed=force_max/1.00/p2, random=force_max/0.86/p1, active=aniso/1.00/p1
+  U2_dropout#0: passive_abstain=pole_mass/0.28/p0, fixed=pole_mass/0.67/p3, random=pole_mass/0.99/p2, active=mu_scale/0.96/p1
+  U2_dropout#2: passive_abstain=mu_scale/0.81/p0, fixed=aniso/0.94/p2, random=mu_scale/0.99/p2, active=mu_scale/0.92/p2
+  U2_dropout#1: passive_abstain=none/0.30/p0, fixed=pole_mass/1.00/p2, random=kinetic_ratio/1.00/p1, active=kinetic_ratio/0.92/p1
+  U1_strip#3: passive_abstain=pole_mass/0.68/p0, fixed=pole_mass/0.93/p3, random=pole_mass/1.00/p3, active=pole_mass/0.98/p1
+  U1_strip#4: passive_abstain=kinetic_ratio/0.55/p0, fixed=kinetic_ratio/0.58/p3, random=pole_mass/1.00/p3, active=pole_mass/0.95/p3
+  U1_strip#5: passive_abstain=none/0.34/p0, fixed=none/0.34/p3, random=none/0.36/p3, active=pole_mass/0.66/p3
+{
+ "gates": {
+  "A1_known_non_inferior": true,
+  "A2_unknown_gain": false,
+  "A3_false_unknown": true,
+  "A4_safety": false,
+  "A5_probe_budget": true,
+  "A6_beats_random": false,
+  "A7_beats_fixed": false
+ },
+ "GO": false,
+ "known_correct": {
+  "passive": 22,
+  "passive_abstain": 17,
+  "fixed": 28,
+  "random": 28,
+  "active": 27
+ },
+ "unknown_rejected": {
+  "passive": 0,
+  "passive_abstain": 10,
+  "fixed": 10,
+  "random": 9,
+  "active": 11
+ },
+ "false_unknown": {
+  "passive": 0,
+  "passive_abstain": 6,
+  "fixed": 2,
+  "random": 2,
+  "active": 3
+ },
+ "unresolved": {
+  "passive": 0,
+  "passive_abstain": 8,
+  "fixed": 1,
+  "random": 0,
+  "active": 0
+ },
+ "abort": {
+  "passive": 0,
+  "passive_abstain": 0,
+  "fixed": 1,
+  "random": 1,
+  "active": 0
+ },
+ "total_correct": {
+  "passive": 22,
+  "passive_abstain": 27,
+  "fixed": 38,
+  "random": 37,
+  "active": 38
+ },
+ "n_known": 30,
+ "n_unknown": 12,
+ "mcnemar_active_vs": {
+  "passive_abstain": {
+   "a_only": 11,
+   "b_only": 0,
+   "p": 0.0009765625
+  },
+  "fixed": {
+   "a_only": 1,
+   "b_only": 1,
+   "p": 1.0
+  },
+  "random": {
+   "a_only": 2,
+   "b_only": 1,
+   "p": 1.0
+  }
+ },
+ "safety_violations": {
+  "passive_abstain": 0,
+  "fixed": 3,
+  "random": 4,
+  "active": 4
+ },
+ "max_probes": {
+  "passive_abstain": 0,
+  "fixed": 3,
+  "random": 3,
+  "active": 3
+ },
+ "mean_probes": {
+  "passive_abstain": 0.0,
+  "fixed": 1.1666666666666667,
+  "random": 1.0714285714285714,
+  "active": 1.0
+ },
+ "mean_entropy_known": {
+  "passive_abstain": 0.21719906841931,
+  "fixed": 4.34537782784584e-18,
+  "random": 8.37807884167738e-08,
+  "active": 2.4815734123896865e-15
+ },
+ "mean_steps": {
+  "passive_abstain": 15327.047619047618,
+  "fixed": 120802.09523809524,
+  "random": 3366341.095238095,
+  "active": 3530648.6428571427
+ },
+ "oracle_any_correct": 35
+}

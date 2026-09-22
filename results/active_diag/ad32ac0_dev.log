@@ -1,0 +1,461 @@
+  KB_sliding_friction#2: passive_abstain=kinetic_ratio/1.00/p0, fixed=kinetic_ratio/1.00/p1, random=kinetic_ratio/1.00/p1, active=kinetic_ratio/1.00/p1
+  KD_action_latency#1: passive_abstain=action_delay/1.00/p0, fixed=action_delay/1.00/p0, random=action_delay/1.00/p0, active=action_delay/1.00/p0
+  KD_action_latency#2: passive_abstain=action_delay/1.00/p0, fixed=action_delay/1.00/p0, random=action_delay/1.00/p0, active=action_delay/1.00/p0
+  KD_action_latency#0: passive_abstain=action_delay/1.00/p0, fixed=action_delay/1.00/p0, random=action_delay/1.00/p0, active=action_delay/1.00/p0
+  KE_sensor_latency#2: passive_abstain=obs_delay/1.00/p0, fixed=obs_delay/1.00/p1, random=obs_delay/1.00/p1, active=obs_delay/1.00/p1
+  DU2_speed_friction#2: passive_abstain=mu_scale/1.00/p0, fixed=mu_scale/1.00/p1, random=mu_scale/1.00/p1, active=mu_scale/1.00/p1
+  DU1_deadzone#0: passive_abstain=pole_mass/1.00/p0, fixed=pole_mass/1.00/p1, random=pole_mass/1.00/p1, active=pole_mass/1.00/p1
+  KC_braking_friction#1: passive_abstain=aniso/1.00/p0, fixed=aniso/1.00/p1, random=aniso/1.00/p1, active=aniso/1.00/p1
+  KE_sensor_latency#0: passive_abstain=obs_delay/1.00/p0, fixed=obs_delay/1.00/p1, random=obs_delay/1.00/p1, active=obs_delay/1.00/p1
+  KC_braking_friction#2: passive_abstain=aniso/1.00/p0, fixed=aniso/1.00/p1, random=aniso/1.00/p1, active=aniso/1.00/p1
+  DU2_speed_friction#0: passive_abstain=aniso/1.00/p0, fixed=aniso/1.00/p1, random=aniso/1.00/p1, active=aniso/1.00/p1
+  DU1_deadzone#2: passive_abstain=pole_mass/1.00/p0, fixed=pole_mass/1.00/p1, random=pole_mass/1.00/p1, active=pole_mass/1.00/p1
+  KE_sensor_latency#1: passive_abstain=obs_delay/1.00/p0, fixed=obs_delay/1.00/p1, random=obs_delay/1.00/p1, active=obs_delay/1.00/p1
+  KA_patch_friction#2: passive_abstain=mu_scale/1.00/p0, fixed=mu_scale/1.00/p1, random=mu_scale/1.00/p1, active=mu_scale/1.00/p1
+  DU2_speed_friction#1: passive_abstain=mu_scale/1.00/p0, fixed=mu_scale/1.00/p1, random=mu_scale/1.00/p1, active=mu_scale/1.00/p1
+  KB_sliding_friction#0: passive_abstain=kinetic_ratio/1.00/p0, fixed=kinetic_ratio/1.00/p1, random=kinetic_ratio/1.00/p1, active=kinetic_ratio/1.00/p1
+  DU1_deadzone#1: passive_abstain=aniso/1.00/p0, fixed=aniso/1.00/p1, random=aniso/0.97/p1, active=aniso/1.00/p1
+  KA_patch_friction#1: passive_abstain=mu_scale/1.00/p0, fixed=mu_scale/1.00/p1, random=mu_scale/1.00/p1, active=mu_scale/1.00/p1
+  KC_braking_friction#0: passive_abstain=aniso/1.00/p0, fixed=aniso/1.00/p1, random=aniso/1.00/p1, active=aniso/1.00/p1
+  KB_sliding_friction#1: passive_abstain=kinetic_ratio/1.00/p0, fixed=kinetic_ratio/1.00/p1, random=kinetic_ratio/1.00/p1, active=kinetic_ratio/1.00/p1
+  KA_patch_friction#0: passive_abstain=mu_scale/1.00/p0, fixed=mu_scale/1.00/p1, random=mu_scale/1.00/p1, active=mu_scale/1.00/p1
+{
+ "temperature": 3.0,
+ "temperature_losses": {
+  "1.0": 0.0,
+  "3.0": 0.0,
+  "10.0": 8.030713918891487e-07,
+  "30.0": 0.001363256503811768,
+  "100.0": 0.045966212021176386,
+  "300.0": 0.6150862411664852
+ },
+ "fixed_probe": {
+  "mu": 0.5,
+  "speed": 0.6,
+  "kind": "pulse",
+  "amplitude": -4.0,
+  "frequency": 0.0,
+  "name": "cross(mu=0.5,v=0.6)+pulse(-4N)"
+ },
+ "fixed_probe_dev_scores": {
+  "cross(mu=0.3,v=0.6)": {
+   "score": 6,
+   "threshold": 3.992308535913217,
+   "cost": 0.0
+  },
+  "cross(mu=0.3,v=0.6)+sine(3N,1Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.00375
+  },
+  "cross(mu=0.3,v=0.6)+sine(3N,3Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.00375
+  },
+  "cross(mu=0.3,v=0.6)+sine(6N,1Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0075
+  },
+  "cross(mu=0.3,v=0.6)+sine(6N,3Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0075
+  },
+  "cross(mu=0.3,v=0.6)+pulse(+4N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.005
+  },
+  "cross(mu=0.3,v=0.6)+pulse(+8N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.01
+  },
+  "cross(mu=0.3,v=0.6)+pulse(-4N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.005
+  },
+  "cross(mu=0.3,v=0.6)+pulse(-8N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.01
+  },
+  "cross(mu=0.3,v=0.8)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0
+  },
+  "cross(mu=0.3,v=0.8)+sine(3N,1Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.00375
+  },
+  "cross(mu=0.3,v=0.8)+sine(3N,3Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.00375
+  },
+  "cross(mu=0.3,v=0.8)+sine(6N,1Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0075
+  },
+  "cross(mu=0.3,v=0.8)+sine(6N,3Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0075
+  },
+  "cross(mu=0.3,v=0.8)+pulse(+4N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.005
+  },
+  "cross(mu=0.3,v=0.8)+pulse(+8N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.01
+  },
+  "cross(mu=0.3,v=0.8)+pulse(-4N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.005
+  },
+  "cross(mu=0.3,v=0.8)+pulse(-8N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.01
+  },
+  "cross(mu=0.3,v=1.0)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0
+  },
+  "cross(mu=0.3,v=1.0)+sine(3N,1Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.00375
+  },
+  "cross(mu=0.3,v=1.0)+sine(3N,3Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.00375
+  },
+  "cross(mu=0.3,v=1.0)+sine(6N,1Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0075
+  },
+  "cross(mu=0.3,v=1.0)+sine(6N,3Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0075
+  },
+  "cross(mu=0.3,v=1.0)+pulse(+4N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.005
+  },
+  "cross(mu=0.3,v=1.0)+pulse(+8N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.01
+  },
+  "cross(mu=0.3,v=1.0)+pulse(-4N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.005
+  },
+  "cross(mu=0.3,v=1.0)+pulse(-8N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.01
+  },
+  "cross(mu=0.4,v=0.6)": {
+   "score": 17,
+   "threshold": 5.382977888091969,
+   "cost": 0.0
+  },
+  "cross(mu=0.4,v=0.6)+sine(3N,1Hz)": {
+   "score": 6,
+   "threshold": 5.382977888091969,
+   "cost": 0.00375
+  },
+  "cross(mu=0.4,v=0.6)+sine(3N,3Hz)": {
+   "score": 12,
+   "threshold": 5.382977888091969,
+   "cost": 0.00375
+  },
+  "cross(mu=0.4,v=0.6)+sine(6N,1Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0075
+  },
+  "cross(mu=0.4,v=0.6)+sine(6N,3Hz)": {
+   "score": 6,
+   "threshold": 5.382977888091969,
+   "cost": 0.0075
+  },
+  "cross(mu=0.4,v=0.6)+pulse(+4N)": {
+   "score": 12,
+   "threshold": 5.382977888091969,
+   "cost": 0.005
+  },
+  "cross(mu=0.4,v=0.6)+pulse(+8N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.01
+  },
+  "cross(mu=0.4,v=0.6)+pulse(-4N)": {
+   "score": 15,
+   "threshold": 5.382977888091969,
+   "cost": 0.005
+  },
+  "cross(mu=0.4,v=0.6)+pulse(-8N)": {
+   "score": 6,
+   "threshold": 4.36872571434669,
+   "cost": 0.01
+  },
+  "cross(mu=0.4,v=0.8)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0
+  },
+  "cross(mu=0.4,v=0.8)+sine(3N,1Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.00375
+  },
+  "cross(mu=0.4,v=0.8)+sine(3N,3Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.00375
+  },
+  "cross(mu=0.4,v=0.8)+sine(6N,1Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0075
+  },
+  "cross(mu=0.4,v=0.8)+sine(6N,3Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0075
+  },
+  "cross(mu=0.4,v=0.8)+pulse(+4N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.005
+  },
+  "cross(mu=0.4,v=0.8)+pulse(+8N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.01
+  },
+  "cross(mu=0.4,v=0.8)+pulse(-4N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.005
+  },
+  "cross(mu=0.4,v=0.8)+pulse(-8N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.01
+  },
+  "cross(mu=0.4,v=1.0)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0
+  },
+  "cross(mu=0.4,v=1.0)+sine(3N,1Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.00375
+  },
+  "cross(mu=0.4,v=1.0)+sine(3N,3Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.00375
+  },
+  "cross(mu=0.4,v=1.0)+sine(6N,1Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0075
+  },
+  "cross(mu=0.4,v=1.0)+sine(6N,3Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0075
+  },
+  "cross(mu=0.4,v=1.0)+pulse(+4N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.005
+  },
+  "cross(mu=0.4,v=1.0)+pulse(+8N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.01
+  },
+  "cross(mu=0.4,v=1.0)+pulse(-4N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.005
+  },
+  "cross(mu=0.4,v=1.0)+pulse(-8N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.01
+  },
+  "cross(mu=0.5,v=0.6)": {
+   "score": 17,
+   "threshold": 5.382977888091969,
+   "cost": 0.0
+  },
+  "cross(mu=0.5,v=0.6)+sine(3N,1Hz)": {
+   "score": 12,
+   "threshold": 5.382977888091969,
+   "cost": 0.00375
+  },
+  "cross(mu=0.5,v=0.6)+sine(3N,3Hz)": {
+   "score": 17,
+   "threshold": 5.382977888091969,
+   "cost": 0.00375
+  },
+  "cross(mu=0.5,v=0.6)+sine(6N,1Hz)": {
+   "score": 6,
+   "threshold": 5.382977888091969,
+   "cost": 0.0075
+  },
+  "cross(mu=0.5,v=0.6)+sine(6N,3Hz)": {
+   "score": 15,
+   "threshold": 5.382977888091969,
+   "cost": 0.0075
+  },
+  "cross(mu=0.5,v=0.6)+pulse(+4N)": {
+   "score": 14,
+   "threshold": 5.382977888091969,
+   "cost": 0.005
+  },
+  "cross(mu=0.5,v=0.6)+pulse(+8N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.01
+  },
+  "cross(mu=0.5,v=0.6)+pulse(-4N)": {
+   "score": 18,
+   "threshold": 5.382977888091969,
+   "cost": 0.005
+  },
+  "cross(mu=0.5,v=0.6)+pulse(-8N)": {
+   "score": 9,
+   "threshold": 5.382977888091969,
+   "cost": 0.01
+  },
+  "cross(mu=0.5,v=0.8)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0
+  },
+  "cross(mu=0.5,v=0.8)+sine(3N,1Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.00375
+  },
+  "cross(mu=0.5,v=0.8)+sine(3N,3Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.00375
+  },
+  "cross(mu=0.5,v=0.8)+sine(6N,1Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0075
+  },
+  "cross(mu=0.5,v=0.8)+sine(6N,3Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0075
+  },
+  "cross(mu=0.5,v=0.8)+pulse(+4N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.005
+  },
+  "cross(mu=0.5,v=0.8)+pulse(+8N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.01
+  },
+  "cross(mu=0.5,v=0.8)+pulse(-4N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.005
+  },
+  "cross(mu=0.5,v=0.8)+pulse(-8N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.01
+  },
+  "cross(mu=0.5,v=1.0)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0
+  },
+  "cross(mu=0.5,v=1.0)+sine(3N,1Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.00375
+  },
+  "cross(mu=0.5,v=1.0)+sine(3N,3Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.00375
+  },
+  "cross(mu=0.5,v=1.0)+sine(6N,1Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0075
+  },
+  "cross(mu=0.5,v=1.0)+sine(6N,3Hz)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.0075
+  },
+  "cross(mu=0.5,v=1.0)+pulse(+4N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.005
+  },
+  "cross(mu=0.5,v=1.0)+pulse(+8N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.01
+  },
+  "cross(mu=0.5,v=1.0)+pulse(-4N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.005
+  },
+  "cross(mu=0.5,v=1.0)+pulse(-8N)": {
+   "score": 0,
+   "threshold": Infinity,
+   "cost": 0.01
+  }
+ },
+ "thresholds": {
+  "passive_abstain": 22.308291216429257,
+  "fixed": 5.382977888091969,
+  "random": 5.382977888091969,
+  "active": 5.382977888091969
+ },
+ "dev_scores": {
+  "passive_abstain": 19,
+  "fixed": 18,
+  "random": 18,
+  "active": 18
+ },
+ "dev_instances": 21,
+ "wall_seconds": 127.06403088569641
+}

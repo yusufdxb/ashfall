@@ -15,7 +15,7 @@ and produces:
   permutations, asymptotic tests do not apply).
 
 The output is consumed by ``results/legacy_row0_curriculum/multiseed_n7_verdict.md``
-and the ``docs/methodology/ff_sweep_rigor.md`` update.
+and the ``docs/legacy/methodology/ff_sweep_rigor.md`` update.
 
 Pure numpy. No torch import. Safe to call from no-sim CI.
 """

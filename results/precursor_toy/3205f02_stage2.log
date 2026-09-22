@@ -1,0 +1,203 @@
+setup W7: onset 2.62 s, Rsel lead 0.78 s
+setup W8: onset 2.36 s, Rsel lead 0.66 s
+setup W9: onset 2.40 s, Rsel lead 0.64 s
+setup W10: onset 2.98 s, Rsel lead 1.10 s
+setup W11: onset 2.44 s, Rsel lead 0.72 s
+setup W12: onset 2.30 s, Rsel lead 0.60 s
+  seed 151 world W7: 6 arms
+  seed 151 world W12: 6 arms
+  seed 151 world W10: 6 arms
+  seed 151 world W11: 6 arms
+  seed 157 world W8: 6 arms
+  seed 151 world W9: 6 arms
+  seed 151 world W8: 6 arms
+  seed 157 world W7: 6 arms
+  seed 157 world W10: 6 arms
+  seed 157 world W11: 6 arms
+  seed 157 world W12: 6 arms
+  seed 157 world W9: 6 arms
+  seed 163 world W10: 6 arms
+  seed 167 world W8: 6 arms
+  seed 163 world W9: 6 arms
+  seed 163 world W7: 6 arms
+  seed 167 world W7: 6 arms
+  seed 163 world W8: 6 arms
+  seed 163 world W12: 6 arms
+  seed 163 world W11: 6 arms
+  seed 167 world W12: 6 arms
+  seed 167 world W10: 6 arms
+  seed 167 world W9: 6 arms
+  seed 173 world W8: 6 arms
+  seed 173 world W7: 6 arms
+  seed 173 world W9: 6 arms
+  seed 167 world W11: 6 arms
+  seed 173 world W10: 6 arms
+  seed 173 world W12: 6 arms
+  seed 179 world W7: 6 arms
+  seed 181 world W8: 6 arms
+  seed 179 world W8: 6 arms
+  seed 179 world W12: 6 arms
+  seed 173 world W11: 6 arms
+  seed 179 world W10: 6 arms
+  seed 181 world W7: 6 arms
+  seed 179 world W9: 6 arms
+  seed 179 world W11: 6 arms
+  seed 181 world W9: 6 arms
+  seed 181 world W10: 6 arms
+  seed 191 world W7: 6 arms
+  seed 181 world W11: 6 arms
+  seed 191 world W9: 6 arms
+  seed 181 world W12: 6 arms
+  seed 191 world W8: 6 arms
+  seed 191 world W12: 6 arms
+  seed 191 world W11: 6 arms
+  seed 191 world W10: 6 arms
+  seed 193 world W7: 6 arms
+  seed 193 world W8: 6 arms
+  seed 197 world W7: 6 arms
+  seed 193 world W10: 6 arms
+  seed 193 world W12: 6 arms
+  seed 193 world W9: 6 arms
+  seed 193 world W11: 6 arms
+  seed 197 world W8: 6 arms
+  seed 197 world W10: 6 arms
+  seed 197 world W9: 6 arms
+  seed 197 world W11: 6 arms
+  seed 199 world W8: 6 arms
+  seed 197 world W12: 6 arms
+  seed 199 world W7: 6 arms
+  seed 199 world W9: 6 arms
+  seed 199 world W11: 6 arms
+  seed 199 world W10: 6 arms
+  seed 211 world W7: 6 arms
+  seed 199 world W12: 6 arms
+  seed 211 world W8: 6 arms
+  seed 211 world W10: 6 arms
+  seed 211 world W9: 6 arms
+  seed 211 world W11: 6 arms
+  seed 211 world W12: 6 arms
+{
+ "P_star": "d1.5",
+ "GO": false,
+ "gates": {
+  "G1_beats_T0": true,
+  "G2_beats_entry_C_match_sim": false,
+  "G2_detail": {
+   "real_entry": true,
+   "C": false,
+   "match_d1.5": false,
+   "sim_d1.5": false
+  },
+  "G3_beats_B_ADR": true,
+  "G3_detail": {
+   "B": true,
+   "ADR": true,
+   "margin_pp": -10.95920138888889
+  },
+  "G4_non_degradation": true,
+  "G4_detail": {
+   "nominal_success": {
+    "metric": "nominal_success",
+    "seeds": [
+     151,
+     157,
+     163,
+     167,
+     173,
+     179,
+     181,
+     191,
+     193,
+     197,
+     199,
+     211
+    ],
+    "deltas": [
+     -0.02311197916666663,
+     -0.01399739583333337,
+     -0.01009114583333337,
+     -0.00748697916666663,
+     -0.02018229166666663,
+     -0.01171875,
+     -0.0068359375,
+     -0.02604166666666663,
+     0.0013020833333333703,
+     -0.01725260416666663,
+     -0.005859375,
+     -0.01692708333333337
+    ],
+    "mean": -0.013183593749999991,
+    "sd": 0.007931809734297914,
+    "sem": 0.0022897162426288972,
+    "ci_low": -0.017295660389276435,
+    "ci_high": -0.009071527110723548,
+    "confidence": 0.9,
+    "p_exact_two_sided": 0.0009765625,
+    "p_floor": 0.00048828125,
+    "sign_carrying_seeds": 12,
+    "inference_unit": "training_seed",
+    "interval_method": "student_t_paired"
+   },
+   "tracking": {
+    "metric": "nominal_tracking_rmse",
+    "seeds": [
+     151,
+     157,
+     163,
+     167,
+     173,
+     179,
+     181,
+     191,
+     193,
+     197,
+     199,
+     211
+    ],
+    "deltas": [
+     0.02418235959808157,
+     0.028596529621089495,
+     0.02715820453944684,
+     0.02747715105513404,
+     0.024671141905302507,
+     0.03311604037055893,
+     0.024196394248007347,
+     0.030811865047493114,
+     0.02574821259650928,
+     0.023644511337616136,
+     0.02532757894866411,
+     0.029946777578650496
+    ],
+    "mean": 0.02707306390387949,
+    "sd": 0.0030181791981412636,
+    "sem": 0.0008712732862546938,
+    "ci_low": 0.02550835743615263,
+    "ci_high": 0.02863777037160635,
+    "confidence": 0.9,
+    "p_exact_two_sided": 0.00048828125,
+    "p_floor": 0.00048828125,
+    "sign_carrying_seeds": 12,
+    "inference_unit": "training_seed",
+    "interval_method": "student_t_paired"
+   }
+  },
+  "G5_per_world": false,
+  "G5_detail": {
+   "real_T0": 6,
+   "B": 6,
+   "sim_d1.5": 3
+  }
+ },
+ "means_held_out_failure": {
+  "A": 0.4971788194444444,
+  "B": 0.3712112991898149,
+  "ADR": 0.38525390625000006,
+  "C": 0.2614926938657407,
+  "match_d1.5": 0.25991934317129634,
+  "real_Rsel": 0.3489945023148148,
+  "real_T0": 0.39691840277777785,
+  "real_d1.5": 0.261619285300926,
+  "real_entry": 0.3402235243055555,
+  "sim_d1.5": 0.2569715711805555
+ }
+}

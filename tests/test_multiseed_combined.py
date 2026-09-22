@@ -368,7 +368,7 @@ def test_published_n7_headline_reproduces_from_committed_results() -> None:
 def test_published_n11_headline_reproduces_from_committed_results() -> None:
     """The n=11 pooled result is the repo's current headline and had no guard.
 
-    Values from README.md and docs/phase2/HYPOTHESIS.md: slippery mean
+    Values from README.md and docs/legacy/phase2/HYPOTHESIS.md: slippery mean
     -0.4155 pp with exact sign-flip p=0.726562; rough +0.5485 pp with
     p=0.767578, over seeds 7, 42, 99, 123, 314, 1618, 1729, 2024, 2718, 4096,
     6022.
