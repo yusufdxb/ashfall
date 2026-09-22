@@ -76,3 +76,40 @@ The legacy runner (`ashfall.experiment.runner`) now refuses
 `seed_row_strategy: first` unless a config carries the tag
 `legacy_row0_reproduction`, which exists only to regenerate the archived
 commands.
+
+## Archived design documents
+
+Moved here unchanged when the study was simplified around Failure-Boundary Replay
+(`docs/legacy/audits/ASHFALL_SIMPLIFICATION_AUDIT.md`):
+
+- `phase2/PREREGISTRATION.md`, `phase2/HYPOTHESIS.md`, `phase2/INPUTS.md`: the H0 to H4
+  preregistration of the causal-reproduction design. Superseded by
+  `docs/research/PREREGISTRATION.md`. Never run.
+- `methodology_v3_causal.md`: the v3 methodology (six phenotypes, D1/D2/D3, H0 to H4).
+  Superseded by the FBR methodology, itself archived as `methodology_fbr.md`.
+
+Their contents are byte-identical to the originals, so relative links inside them point to
+their old locations (for example `claims_ledger.md` means `docs/claims_ledger.md`).
+
+## Moved here at the program archive (2026-09-22)
+
+Moved unchanged (byte-identical, only their paths differ) when the program was archived after five
+NO-GO studies. None of them describes a result of those studies; relative links inside them
+point to their old locations. The final record is [`../ARCHIVE.md`](../ARCHIVE.md).
+
+| Now under `docs/legacy/` | Was | What it is |
+|---|---|---|
+| `architecture/` | `docs/architecture/` | architecture notes and diagrams for v2, v3 and the FBR GO2 design |
+| `audits/` | `docs/audits/`, `docs/research/ASHFALL_SIMPLIFICATION_AUDIT.md` | code and design audits of earlier Ashfall versions |
+| `detector/` | `docs/detector/` | event-detector labeling and validation protocol; never validated |
+| `experiments/low_friction_protocol.md` | `docs/experiments/` | the v2 counterexample protocol, already superseded before the archive |
+| `hardware/controlled_failure_protocol.md` | `docs/hardware/` | GO2 low-friction protocol; never run |
+| `runbooks/` | `docs/runbooks/` | FBR and Isaac Lab H0 runbooks |
+| `methodology_fbr.md` | `docs/methodology.md` | FBR methodology with its planned GO2 steps |
+| `methodology/ff_sweep_rigor.md` | `docs/methodology/` | Phase-I failure-fraction sweep methodology |
+| `go2_field_notes.md` | `docs/go2_field_notes.md` | measured GO2 platform notes, not an Ashfall result |
+| `limitations_pre_archive.md` | `docs/limitations.md` | the limitations list as it stood before the archive |
+
+Three planning documents from the FBR phase (a paper outline, a hardware demo plan and a note on
+paper structure) are not part of the public archive. They contained plans, not evidence.
+

@@ -4,12 +4,18 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ashfall"
-version = "0.3.0"
-description = "Causal failure reproduction and phenotype-conditioned policy repair for quadruped locomotion"
+version = "0.4.0"
+description = "Archived research program on failure-driven policy repair and simulator diagnosis; five preregistered toy studies produced negative results against strong baselines."
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [{name = "Yusuf Guenena", email = "yusuf.a.guenena@gmail.com"}]
+classifiers = [
+    "Development Status :: 7 - Inactive",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+]
 
 dependencies = [
     "numpy>=1.24",
@@ -69,6 +75,10 @@ files = [
     "src/ashfall/backends/phoenix_compat.py",
     "src/ashfall/counterfactual.py",
     "src/ashfall/gates.py",
+    "src/ashfall/fbr/criterion.py",
+    "src/ashfall/fbr/capsule.py",
+    "src/ashfall/fbr/boundary.py",
+    "src/ashfall/fbr/acceptance.py",
     "src/ashfall/h0.py",
     "src/ashfall/datasets.py",
     "src/ashfall/config_guard.py",

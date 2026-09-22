@@ -1,3 +1,5 @@
+> Supporting infrastructure. The current architecture is [`ashfall_fbr.md`](ashfall_fbr.md); the matched-pair, D1/D2/D3 and H0 machinery described here is retained as supporting and appendix-level validation.
+
 # Ashfall architecture (v3)
 
 ![Ashfall v3 architecture](architecture.svg)

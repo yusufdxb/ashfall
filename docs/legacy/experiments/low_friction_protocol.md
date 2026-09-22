@@ -1,5 +1,5 @@
 > Superseded. This v2 protocol compared arms A to E and used "recurrence" for what is episode
-> incidence. The Phase-II design is [PREREGISTRATION.md](../phase2/PREREGISTRATION.md): arms A to D
+> incidence. The Phase-II design is [PREREGISTRATION.md](../legacy/phase2/PREREGISTRATION.md): arms A to D
 > under an enforced compute budget, with H0 causal delivery required first. Kept as a record of
 > the v2 design.
 

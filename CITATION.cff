@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you refer to these negative results or reuse the study code, please cite this repository."
+type: software
+title: "Ashfall: a negative-results study of failure-driven robot learning and simulator diagnosis"
+abstract: >-
+  Archived research program on failure-driven policy repair and simulator diagnosis. Five
+  preregistered CPU toy studies (failure-boundary replay, precursor replay, recoverability-guided
+  replay, failure-critical system identification, active simulator diagnosis) each returned
+  NO-GO against strong baselines. No method was run in Isaac Lab or on quadruped hardware.
+authors:
+  - family-names: Guenena
+    given-names: Yusuf
+version: 0.4.0
+date-released: 2026-09-22
+license: MIT
+repository-code: "https://github.com/yusufdxb/ashfall"
+keywords:
+  - negative results
+  - preregistration
+  - curriculum learning
+  - domain randomization
+  - system identification
+  - fault diagnosis
+  - robot learning

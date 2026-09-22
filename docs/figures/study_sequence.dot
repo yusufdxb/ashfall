@@ -1,0 +1,21 @@
+// Ashfall: five preregistered studies, each stopped at its gate.
+// Render: dot -Tsvg study_sequence.dot -o study_sequence.svg
+digraph ashfall {
+  rankdir=TB;
+  graph [fontname="Helvetica", fontsize=11, nodesep=0.25, ranksep=0.28, bgcolor="white", pad=0.2];
+  node  [fontname="Helvetica", fontsize=10, shape=box, style="rounded,filled", fillcolor="#f4f1ea", color="#5a5347", width=4.6];
+  edge  [fontname="Helvetica", fontsize=9, color="#5a5347"];
+
+  s1 [label=<<b>1. Failure-Boundary Replay</b><br/>Does a curriculum at a real failure beat broad domain randomization?<br/><font color="#9a3412"><b>NO-GO</b></font>: an ordinary entry state beat the failure state>];
+  s2 [label=<<b>2. Precursor replay</b><br/>Does replay from before the failure make the real failure valuable?<br/><font color="#9a3412"><b>NO-GO</b></font>: timing mattered; simulator and success states matched it>];
+  s3 [label=<<b>3. Recoverability</b><br/>Is recoverability the hidden variable behind repair value?<br/><font color="#9a3412"><b>NO-GO</b></font>: time before failure predicted repair value better>];
+  s4 [label=<<b>4. Failure-critical system identification</b><br/>Does conditioning on the failure event find the missing physics?<br/><font color="#9a3412"><b>NO-GO</b></font>: multiple shooting named 14/18, FCSI 7/18>];
+  s5 [label=<<b>5. Active simulator diagnosis</b><br/>Does a chosen safe probe detect unknown mechanisms better?<br/><font color="#9a3412"><b>NO-GO</b></font>: a fixed probe matched it; certified probes caused falls>];
+  arch [label=<<b>ARCHIVED</b><br/>no Isaac Lab or GO2 study run for any of the five>, fillcolor="#e7e5e4", width=3.6];
+
+  s1 -> s2 [label="  provenance fails; is timing the issue?"];
+  s2 -> s3 [label="  timing matters; is recoverability the cause?"];
+  s3 -> s4 [label="  replay line closed; can a failure diagnose the simulator?"];
+  s4 -> s5 [label="  closed-set works, open-set does not; can probing help?"];
+  s5 -> arch [label="  no further hypothesis"];
+}

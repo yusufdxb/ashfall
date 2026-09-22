@@ -1,95 +1,41 @@
-# Current limitations
+# Limitations
 
-Kept current with the claims ledger. Each item says what is limited, why, and
-what would lift it.
+Final list at archive (2026-09-22). The pre-archive list, including the limitations of the
+earlier Isaac Lab machinery, is kept at
+[`legacy/limitations_pre_archive.md`](legacy/limitations_pre_archive.md).
 
-## Evidence
+## Scope of all five studies
 
-- **No simulator H0 pass exists for any pathway.** The matched-pair path is
-  verified on the toy surrogate (mock evidence) and its simulator status is
-  recorded in `docs/claims_ledger.md`. Until H0 passes on simulator evidence
-  for every retained phenotype, no adaptation experiment may run.
-- **No detector validation exists.** The mutation suite catches five
-  deliberate defects on the fixture dataset; accuracy on independently
-  labelled physics or hardware data is unmeasured. D3, and therefore every
-  DELIVERED verdict, inherits that.
-- **No Phase-II training, selection or held-out evaluation has run.** The
-  protocol, budget, selection and ledger machinery are tested as software
-  only.
-- **Phase I is uninformative.** See `docs/legacy/README.md`.
+- **Toys only.** Every result comes from a CPU cart-pole with a low-friction patch. The "real"
+  system is a hidden simulator configuration; no physical failure data was used.
+- **One hazard family.** Low-friction traverse failure (plus, for the diagnosis toys, a library of
+  friction, latency, braking, mass and sensing mechanisms). Other failure families are untested.
+- **One baseline policy per toy.** Seeds generalize over training randomness, not over policies.
+- **Evolution strategies, not PPO**, trained the replay arms. A gradient-based learner could
+  weigh replay states differently.
+- **The toys were chosen to be cheap and favourable to the proposed methods.** A NO-GO here means
+  the method did not earn a more expensive test. It does not show the method fails everywhere,
+  and it says nothing about quadrupeds.
 
-## Scope
+## Per study
 
-- **Two phenotypes are excluded from the first study.** `contact_loss` has no
-  supported inducing intervention and no gait-phase ground truth; `stumble`
-  needs a terrain geometry intervention the backend cannot apply. They are
-  marked unsupported, not validated by omission.
-- **Hardware is out of scope for collapse, slip and contact loss.** The GO2
-  capture path has no validated ground-relative height and no calibrated
-  per-foot contact. Attitude loss and command mismatch are observable there.
-- **Friction is a robot-shape material coefficient**, verified by readback in
-  the simulator. It is not a measurement of surface friction, and the
-  intensity axis `1 - dynamic_friction` is a simulator axis.
-- **Terrain geometry cannot be intervened per environment** on the Isaac Lab
-  task Phoenix uses; terrain is fixed by the task id.
+- **FBR.** One capsule per world. Reconstruction is not identification: frictions from 0.04 to
+  0.24 reproduced the same toy v1 failure, and the hidden friction fell inside the reproduced
+  range in only 1 of 6 toy v2 worlds.
+- **Precursor.** The optimum at T-1.5 s is a property of this toy's speeds and patch geometry. The
+  stage-1 sweep that chose it was not charged to the replay arms, as registered.
+- **Recoverability.** Exploratory: it reused outcomes already seen, so it could refute but not
+  confirm. Its candidate states were built around time offsets, which may favour the time model,
+  and its high-recoverability states are confounded with position past the hazard.
+- **FCSI.** 29 instances; three known-mechanism families; unknown mechanisms from a small set. The
+  exploratory sparse selector was never preregistered and has no abstention.
+- **Active diagnosis.** A small probe family of full slow crossings (the toy policy cannot stand
+  still); 12 unknown-mechanism instances from two families. A finer, lower-energy probe space
+  could behave differently. No probe was admissible on the latency instances.
 
-## Simulator stack
+## Reproduction
 
-- **The baseline policy predates the current environment.** v3b was trained in
-  April; actuator latency, motor-strength randomisation and an action rate
-  limiter were wired into Phoenix's environment builder in June and are active
-  today. Matched pairs share the environment, so causal delivery is still a fair
-  comparison, but nominal behaviour is not the trained behaviour. Lifting this
-  needs either a baseline retrained on the current builder or a builder flag that
-  reproduces the April environment, recorded in provenance.
-- **Robot-shape friction combines with the terrain material** under the PhysX
-  combine mode of the task. D1 verifies the robot-shape coefficient by readback;
-  the effective contact friction is not measured.
-- **Checkpoints carry no observation-normalizer statistics**, so the actor runs
-  with an identity normalizer; the backend now resolves this from the checkpoint
-  instead of trusting the train YAML.
-
-- **A contact-sensor read right after a reset can carry the previous episode's
-  contact.** Phoenix measured this in its harvest loop: reading contact data
-  after `_reset_idx` but before a physics step stored the pre-reset base contact
-  and fired a spurious illegal-contact termination one step later. The H0 backend
-  reads contact only in the snapshot after `env.step`, and no episode in the
-  Isaac smoke ended before frame 38, so the smoke shows no sign of it. That is
-  INFERRED from the code path and the episode lengths; it has not been tested for
-  the backend directly.
-
-## Method
-
-- **A restored row is a state-only seed.** `last_action`, the rate limiter
-  and the actuator delay buffer are re-initialised by the reset unless
-  controller history is supplied; the Phoenix reset telemetry names this.
-- **D2 near its margin is regularisation-sensitive.** In the Isaac Lab smoke
-  (friction reduction to slip, v3b, 4 pairs, margin ratio 1.5), the sensitivity
-  sweep over shrinkage intensities and diagonal floors changed the D2 verdict
-  for at least one pair whose primary ratio sat close to the margin. The CLI now
-  sweeps every pair by default and records the agreement fraction per pair. How
-  an unstable pair counts toward H0 is a decision the preregistration has to make
-  before a confirmatory run; it is not made in code.
-- **D2 depends on the number of nominal replicates.** With K replicates there
-  are K(K-1)/2 null pairs; the ratio to the null maximum, not the empirical p,
-  is the discriminating quantity at the small K a simulator budget allows,
-  and both are reported. The regularisation floor's influence is reported by
-  the sensitivity sweep rather than assumed away.
-- **Startup-mode domain randomisation is drawn once per scene** from the
-  first pair's seed and shared by every arm; it is recorded, not varied.
-- **The exact McNemar test needs at least six pairs** to reach alpha 0.05 and
-  the H0 result says so when a design cannot.
-- **Frontier crossings are fitted, not observed.** A plateau at the target
-  quantile identifies an interval; a fit with no monotone support is
-  unidentifiable; nothing is extrapolated.
-
-## Engineering
-
-- **Phoenix is a moving sibling.** Ashfall pins the interface, not the commit,
-  and records the revision used. A Phoenix change that keeps the interface
-  but changes semantics (for example what a reset randomises) would not be
-  caught by the pin.
-- **The Isaac paths are exercised by one implementation smoke**, whose status
-  is in the claims ledger. CPU tests use fakes for every simulator call.
-- **Coverage of the legacy analysis modules is unchanged** and they remain
-  tied to the archived directory layout.
+- Three full runs were not repeated during archiving (FBR toy v2, the precursor sweep, FCSI);
+  their `--quick` software checks were. See [`../EVIDENCE.md`](../EVIDENCE.md#reproduction-checks).
+- The recoverability provenance permutation p varies slightly with Python's hash seed
+  (0.070 to 0.078 observed); the gate outcome does not.

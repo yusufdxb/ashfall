@@ -1,0 +1,20 @@
+digraph fbr {
+  rankdir=TB;
+  graph [fontname="Helvetica", fontsize=11, nodesep=0.3, ranksep=0.35, bgcolor="white"];
+  node  [fontname="Helvetica", fontsize=10, shape=box, style="rounded,filled", fillcolor="#f4f1ea", color="#5a5347", width=3.6];
+  edge  [fontname="Helvetica", fontsize=9, color="#5a5347"];
+
+  fail    [label="REAL GO2 FAILURE\ntraverse failure on a low-friction patch\n(Phoenix deployment, bridge log, video)", fillcolor="#f6d8c4"];
+  capsule [label="FAILURE CAPSULE\nfbr.capsule.extract_capsule, fbr.criterion\npolicy hash, command, pre-onset history, onset"];
+  recon   [label="LOCAL SIM RECONSTRUCTION\nrestore seed states; matched control vs treated\nfbr.acceptance: delivered, trajectory match, failure match", fillcolor="#fbe9d7"];
+  bound   [label="FAILURE-BOUNDARY CURRICULUM\nfbr.boundary: per-seed boundary (frontier.py)\nBoundarySampler: band around boundary + nominal fraction"];
+  ppo     [label="PPO FINE-TUNE (Phoenix)\ntraining.run_repair, scenario resets\nequal compute: protocol.budget"];
+  heldout [label="HELD-OUT EVALUATION\nsix frozen cells, common random numbers\nstats.primary (exact sign-flip), non-degradation", fillcolor="#e3ebe0"];
+  redeploy[label="GO2 REDEPLOYMENT\nsame patch, moved patch, changed severity", fillcolor="#f6d8c4"];
+
+  fail -> capsule -> recon -> bound -> ppo -> heldout -> redeploy;
+  ppo -> bound [label=" boundary refresh", style=dashed];
+
+  evidence [label="evidence: provenance.EvidenceBundle, selection.HeldOutLedger, datasets", shape=note, fillcolor="#ffffff", width=2.8];
+  evidence -> heldout [style=dotted, arrowhead=none];
+}
